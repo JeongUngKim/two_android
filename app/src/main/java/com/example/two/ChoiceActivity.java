@@ -27,7 +27,7 @@ public class ChoiceActivity extends AppCompatActivity {
         btnFilter = findViewById(R.id.btnFilter);
         btnMy = findViewById(R.id.btnMy);
 
-        // 메인 액티비티 넘어가기
+        // 메인 액티비티 넘어가기 1
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
