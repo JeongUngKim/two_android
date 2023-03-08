@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="find">
+        <item>본인이 가장 좋아하는 동물은?</item>
+        <item>본인이 가장 좋아하는 색깔은?</item>
+        <item>본인이 가장 좋아하는 숫자는?</item>
+    </string-array>
+</resources>
