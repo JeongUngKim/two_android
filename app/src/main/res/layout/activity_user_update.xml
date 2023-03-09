@@ -39,14 +39,27 @@
                 android:textSize="30sp" />
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imageView15"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circle_iv"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/baseline_person_outline_24"
+            app:civ_border_color="#000000"
+            app:civ_border_overlay="true"
+            app:civ_border_width="5dp" />
+
+        <TextView
+            android:id="@+id/textView68"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="5dp"
-            app:srcCompat="@drawable/baseline_person_outline_24" />
+            android:text="이메일 주소"
+            android:textSize="22sp" />
 
         <EditText
             android:id="@+id/editTextTextPersonName4"

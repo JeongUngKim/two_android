@@ -154,7 +154,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="#000000"
-                android:text="필터검색"
+                android:text="검색"
                 android:textColor="#FFFFFF"
                 android:textSize="12sp" />
 

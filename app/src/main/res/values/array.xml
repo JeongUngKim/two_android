@@ -5,4 +5,15 @@
         <item>본인이 가장 좋아하는 색깔은?</item>
         <item>본인이 가장 좋아하는 숫자는?</item>
     </string-array>
+    <string-array name="ott">
+        <item>넷플릭스</item>
+        <item>훌루</item>
+        <item>아마존 프라임</item>
+        <item>디즈니 플러스</item>
+    </string-array>
+    <string-array name="gender">
+        <item>남자</item>
+        <item>여자</item>
+    </string-array>
+
 </resources>

@@ -20,17 +20,46 @@
             android:text="회원 가입"
             android:textSize="30sp" />
 
-        <EditText
-            android:id="@+id/editTextTextEmailAddress"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circle_iv"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:src="@drawable/baseline_person_outline_24"
+            app:civ_border_color="#000000"
+            app:civ_border_overlay="true"
+            app:civ_border_width="5dp" />
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="5dp"
-            android:ems="10"
-            android:hint="이메일 입력"
-            android:inputType="textEmailAddress"
-            android:textSize="22sp" />
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editTextTextEmailAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|center_vertical"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:ems="10"
+                android:hint="이메일 입력"
+                android:inputType="textEmailAddress"
+                android:textSize="22sp" />
+
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|center_vertical"
+                android:backgroundTint="#FF0000"
+                android:text="중복확인"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
 
         <EditText
             android:id="@+id/editTextTextPassword"
@@ -44,17 +73,36 @@
             android:inputType="textPassword"
             android:textSize="22sp" />
 
-        <EditText
-            android:id="@+id/editTextTextPersonName5"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="5dp"
-            android:ems="10"
-            android:hint="닉네임 입력"
-            android:inputType="textPersonName"
-            android:textSize="22sp" />
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editTextTextPersonName5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:ems="10"
+                android:hint="닉네임 입력"
+                android:inputType="textPersonName"
+                android:textSize="22sp" />
+
+            <Button
+                android:id="@+id/button6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:backgroundTint="#FF0000"
+                android:text="중복확인"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
 
         <EditText
             android:id="@+id/editTextNumber"
@@ -64,46 +112,58 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="5dp"
             android:ems="10"
-            android:hint="나이 입력"
+            android:hint="이름을 입력하세요"
             android:inputType="number"
             android:textSize="22sp" />
-
-        <TextView
-            android:id="@+id/textView24"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="5dp"
-            android:text="성별"
-            android:textSize="20dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="5dp"
             android:orientation="horizontal">
 
-            <CheckBox
-                android:id="@+id/checkBox"
+            <EditText
+                android:id="@+id/editTextTextPersonName9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:text="male" />
+                android:ems="10"
+                android:hint="나이를 입력하세요"
+                android:inputType="textPersonName" />
 
-            <CheckBox
-                android:id="@+id/checkBox2"
-                android:layout_width="wrap_content"
+            <Spinner
+                android:id="@+id/spinner4"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:text="female" />
+                android:entries="@array/gender" />
         </LinearLayout>
+
+        <Spinner
+            android:id="@+id/spinner5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="5dp"
+            android:entries="@array/find" />
+
+        <EditText
+            android:id="@+id/editTextTextPersonName10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="5dp"
+            android:ems="10"
+            android:hint="본인 확인 질문 답변"
+            android:inputType="textPersonName" />
 
         <Button
             android:id="@+id/button7"
