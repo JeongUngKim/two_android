@@ -24,55 +24,30 @@
                 android:text="커뮤니티"
                 android:textSize="22sp" />
 
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="인기 키워드"
-                android:textSize="22sp" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/button15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:text="Button"
-                    android:textSize="12sp" />
+                <ImageView
+                    android:id="@+id/btntitleSearch"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    app:srcCompat="@drawable/baseline_search_24" />
 
-                <Button
-                    android:id="@+id/button16"
+                <EditText
+                    android:id="@+id/txtSearch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
+                    android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:text="Button"
-                    android:textSize="12sp" />
+                    android:ems="10"
+                    android:hint="검색어입력"
+                    android:inputType="textPersonName"
+                    android:textSize="20sp" />
 
-                <Button
-                    android:id="@+id/button17"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:text="Button"
-                    android:textSize="12sp" />
-
-                <Button
-                    android:id="@+id/button18"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:text="Button"
-                    android:textSize="12sp" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
