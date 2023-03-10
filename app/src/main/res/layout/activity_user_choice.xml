@@ -29,102 +29,94 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView41"
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:id="@+id/actionView"
+                        android:layout_width="130dp"
+                        android:layout_height="150dp"
                         android:layout_gravity="center_horizontal"
+                        android:background="@drawable/square_background_border_black"
+                        android:padding="2dp"
+                        android:scaleType="fitXY"
                         app:srcCompat="@drawable/baseline_person_outline_24" />
 
                     <TextView
                         android:id="@+id/textView69"
-                        android:layout_width="match_parent"
+                        android:layout_width="130dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
+                        android:background="@drawable/square_background_border_black"
                         android:gravity="center"
                         android:text="액션"
                         android:textSize="18sp" />
+
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_margin="5dp"
+
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView42"
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:id="@+id/comedyView"
+                        android:layout_width="130dp"
+                        android:layout_height="150dp"
                         android:layout_gravity="center_horizontal"
-                        app:srcCompat="@drawable/baseline_person_outline_24" />
-
-                    <TextView
-                        android:id="@+id/textView70"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="어드밴쳐"
-                        android:textSize="18sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/imageView43"
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
-                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/square_background_border_black"
+                        android:padding="2dp"
+                        android:scaleType="fitXY"
                         app:srcCompat="@drawable/baseline_person_outline_24" />
 
                     <TextView
                         android:id="@+id/textView71"
-                        android:layout_width="match_parent"
+                        android:layout_width="130dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
+                        android:background="@drawable/square_background_border_black"
                         android:gravity="center"
                         android:text="코미디"
                         android:textSize="18sp" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_margin="5dp"
+
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView44"
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:id="@+id/adventureView"
+                        android:layout_width="130dp"
+                        android:layout_height="150dp"
                         android:layout_gravity="center_horizontal"
+                        android:background="@drawable/square_background_border_black"
+                        android:padding="2dp"
+                        android:scaleType="fitXY"
                         app:srcCompat="@drawable/baseline_person_outline_24" />
 
                     <TextView
-                        android:id="@+id/textView72"
-                        android:layout_width="match_parent"
+                        android:id="@+id/textView70"
+                        android:layout_width="130dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
+                        android:background="@drawable/square_background_border_black"
                         android:gravity="center"
-                        android:text="다큐멘터리"
+                        android:text="어드밴쳐"
                         android:textSize="18sp" />
                 </LinearLayout>
 
@@ -133,52 +125,34 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="5dp"
+
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView45"
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:id="@+id/fantasyView"
+                        android:layout_width="130dp"
+                        android:layout_height="150dp"
                         android:layout_gravity="center_horizontal"
-                        app:srcCompat="@drawable/baseline_person_outline_24" />
-
-                    <TextView
-                        android:id="@+id/textView73"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="드라마"
-                        android:textSize="18sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/imageView46"
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
-                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/square_background_border_black"
+                        android:padding="2dp"
+                        android:scaleType="fitXY"
                         app:srcCompat="@drawable/baseline_person_outline_24" />
 
                     <TextView
                         android:id="@+id/textView74"
-                        android:layout_width="match_parent"
+                        android:layout_width="130dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
+                        android:background="@drawable/square_background_border_black"
                         android:gravity="center"
                         android:text="판타지"
                         android:textSize="18sp" />
@@ -187,46 +161,56 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="5dp"
+
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView47"
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:id="@+id/crimeView"
+                        android:layout_width="130dp"
+                        android:layout_height="150dp"
                         android:layout_gravity="center_horizontal"
+                        android:background="@drawable/square_background_border_black"
+                        android:padding="2dp"
+                        android:scaleType="fitXY"
                         app:srcCompat="@drawable/baseline_person_outline_24" />
 
                     <TextView
-                        android:id="@+id/textView75"
-                        android:layout_width="match_parent"
+                        android:id="@+id/textView78"
+                        android:layout_width="130dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
+                        android:background="@drawable/square_background_border_black"
                         android:gravity="center"
-                        android:text="역사"
+                        android:text="범죄"
                         android:textSize="18sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="5dp"
+
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView48"
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:id="@+id/horrorView"
+                        android:layout_width="130dp"
+                        android:layout_height="150dp"
                         android:layout_gravity="center_horizontal"
+                        android:background="@drawable/square_background_border_black"
+                        android:padding="2dp"
+                        android:scaleType="fitXY"
                         app:srcCompat="@drawable/baseline_person_outline_24" />
 
                     <TextView
                         android:id="@+id/textView76"
-                        android:layout_width="match_parent"
+                        android:layout_width="130dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
+                        android:background="@drawable/square_background_border_black"
                         android:gravity="center"
                         android:text="호러"
                         android:textSize="18sp" />
@@ -237,28 +221,34 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="5dp"
+
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView49"
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:id="@+id/mysteryView"
+                        android:layout_width="130dp"
+                        android:layout_height="150dp"
                         android:layout_gravity="center_horizontal"
+                        android:background="@drawable/square_background_border_black"
+                        android:padding="2dp"
+                        android:scaleType="fitXY"
                         app:srcCompat="@drawable/baseline_person_outline_24" />
 
                     <TextView
                         android:id="@+id/textView77"
-                        android:layout_width="match_parent"
+                        android:layout_width="130dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
+                        android:background="@drawable/square_background_border_black"
                         android:gravity="center"
                         android:text="미스테리"
                         android:textSize="18sp" />
@@ -267,72 +257,58 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="5dp"
+
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView50"
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:id="@+id/historyView"
+                        android:layout_width="130dp"
+                        android:layout_height="150dp"
                         android:layout_gravity="center_horizontal"
+                        android:background="@drawable/square_background_border_black"
+                        android:padding="2dp"
+                        android:scaleType="fitXY"
                         app:srcCompat="@drawable/baseline_person_outline_24" />
 
                     <TextView
-                        android:id="@+id/textView78"
-                        android:layout_width="match_parent"
+                        android:id="@+id/textView75"
+                        android:layout_width="130dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
+                        android:background="@drawable/square_background_border_black"
                         android:gravity="center"
-                        android:text="범죄"
+                        android:text="역사"
                         android:textSize="18sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="5dp"
+
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView51"
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:id="@+id/warView"
+                        android:layout_width="130dp"
+                        android:layout_height="150dp"
                         android:layout_gravity="center_horizontal"
+                        android:background="@drawable/square_background_border_black"
+                        android:padding="2dp"
+                        android:scaleType="fitXY"
                         app:srcCompat="@drawable/baseline_person_outline_24" />
 
                     <TextView
-                        android:id="@+id/textView79"
-                        android:layout_width="match_parent"
+                        android:id="@+id/textView82"
+                        android:layout_width="130dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
+                        android:background="@drawable/square_background_border_black"
                         android:gravity="center"
-                        android:text="로맨스"
-                        android:textSize="18sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/imageView52"
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
-                        android:layout_gravity="center_horizontal"
-                        app:srcCompat="@drawable/baseline_person_outline_24" />
-
-                    <TextView
-                        android:id="@+id/textView80"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="SF"
+                        android:text="전쟁"
                         android:textSize="18sp" />
                 </LinearLayout>
 
@@ -341,28 +317,35 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
+
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="5dp"
+
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView53"
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:id="@+id/thrillerView"
+                        android:layout_width="130dp"
+                        android:layout_height="150dp"
                         android:layout_gravity="center_horizontal"
+                        android:background="@drawable/square_background_border_black"
+                        android:padding="2dp"
+                        android:scaleType="fitXY"
                         app:srcCompat="@drawable/baseline_person_outline_24" />
 
                     <TextView
                         android:id="@+id/textView81"
-                        android:layout_width="match_parent"
+                        android:layout_width="130dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
+                        android:background="@drawable/square_background_border_black"
                         android:gravity="center"
                         android:text="스릴러"
                         android:textSize="18sp" />
@@ -371,46 +354,122 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="5dp"
+
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView54"
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:id="@+id/romanceView"
+                        android:layout_width="130dp"
+                        android:layout_height="150dp"
                         android:layout_gravity="center_horizontal"
+                        android:background="@drawable/square_background_border_black"
+                        android:padding="2dp"
+                        android:scaleType="fitXY"
                         app:srcCompat="@drawable/baseline_person_outline_24" />
 
                     <TextView
-                        android:id="@+id/textView82"
-                        android:layout_width="match_parent"
+                        android:id="@+id/textView79"
+                        android:layout_width="130dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
+                        android:background="@drawable/square_background_border_black"
                         android:gravity="center"
-                        android:text="전쟁"
+                        android:text="로맨스"
                         android:textSize="18sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="5dp"
+
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView55"
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:id="@+id/scienceView"
+                        android:layout_width="130dp"
+                        android:layout_height="150dp"
                         android:layout_gravity="center_horizontal"
+                        android:background="@drawable/square_background_border_black"
+                        android:padding="2dp"
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/baseline_person_outline_24" />
+
+                    <TextView
+                        android:id="@+id/textView80"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/square_background_border_black"
+                        android:gravity="center"
+                        android:text="SF"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/familyView"
+                        android:layout_width="130dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/square_background_border_black"
+                        android:padding="2dp"
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/baseline_person_outline_24" />
+
+                    <TextView
+                        android:id="@+id/textView86"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/square_background_border_black"
+                        android:gravity="center"
+                        android:text="가족"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/westernView"
+                        android:layout_width="130dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/square_background_border_black"
+                        android:padding="2dp"
+                        android:scaleType="fitXY"
                         app:srcCompat="@drawable/baseline_person_outline_24" />
 
                     <TextView
                         android:id="@+id/textView83"
-                        android:layout_width="match_parent"
+                        android:layout_width="130dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
+                        android:background="@drawable/square_background_border_black"
                         android:gravity="center"
                         android:text="서부극"
                         android:textSize="18sp" />
@@ -419,22 +478,27 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="5dp"
+
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView56"
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:id="@+id/musicView"
+                        android:layout_width="130dp"
+                        android:layout_height="150dp"
                         android:layout_gravity="center_horizontal"
+                        android:background="@drawable/square_background_border_black"
+                        android:padding="2dp"
+                        android:scaleType="fitXY"
                         app:srcCompat="@drawable/baseline_person_outline_24" />
 
                     <TextView
                         android:id="@+id/textView84"
-                        android:layout_width="match_parent"
+                        android:layout_width="130dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
+                        android:background="@drawable/square_background_border_black"
                         android:gravity="center"
                         android:text="음악"
                         android:textSize="18sp" />
@@ -445,76 +509,129 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="5dp"
+
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView57"
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:id="@+id/kidsView"
+                        android:layout_width="130dp"
+                        android:layout_height="150dp"
                         android:layout_gravity="center_horizontal"
+                        android:background="@drawable/square_background_border_black"
+                        android:padding="2dp"
+                        android:scaleType="fitXY"
                         app:srcCompat="@drawable/baseline_person_outline_24" />
 
                     <TextView
                         android:id="@+id/textView85"
-                        android:layout_width="match_parent"
+                        android:layout_width="130dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
+                        android:background="@drawable/square_background_border_black"
                         android:gravity="center"
                         android:text="어린이"
                         android:textSize="18sp" />
+
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="5dp"
+
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView58"
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:id="@+id/dramaView"
+                        android:layout_width="130dp"
+                        android:layout_height="150dp"
                         android:layout_gravity="center_horizontal"
+                        android:background="@drawable/square_background_border_black"
+                        android:padding="2dp"
+                        android:scaleType="fitXY"
                         app:srcCompat="@drawable/baseline_person_outline_24" />
 
                     <TextView
-                        android:id="@+id/textView86"
-                        android:layout_width="match_parent"
+                        android:id="@+id/textView73"
+                        android:layout_width="130dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
+                        android:background="@drawable/square_background_border_black"
                         android:gravity="center"
-                        android:text="가족"
+                        android:text="드라마"
                         android:textSize="18sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="5dp"
+
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView59"
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:id="@+id/documentaryView"
+                        android:layout_width="130dp"
+                        android:layout_height="150dp"
                         android:layout_gravity="center_horizontal"
+                        android:background="@drawable/square_background_border_black"
+                        android:padding="2dp"
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/baseline_person_outline_24" />
+
+                    <TextView
+                        android:id="@+id/textView72"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/square_background_border_black"
+                        android:gravity="center"
+                        android:text="다큐멘터리"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/animationView"
+                        android:layout_width="130dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/square_background_border_black"
+                        android:padding="2dp"
+                        android:scaleType="fitXY"
                         app:srcCompat="@drawable/baseline_person_outline_24" />
 
                     <TextView
                         android:id="@+id/textView690"
-                        android:layout_width="match_parent"
+                        android:layout_width="130dp"
+                        android:layout_gravity="center"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:background="@drawable/square_background_border_black"
                         android:gravity="center"
                         android:text="애니메이션"
                         android:textSize="18sp" />
@@ -523,28 +640,41 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="5dp"
+
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView60"
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:id="@+id/realityView"
+                        android:layout_width="130dp"
+                        android:layout_height="150dp"
                         android:layout_gravity="center_horizontal"
+                        android:background="@drawable/square_background_border_black"
+                        android:padding="2dp"
+                        android:scaleType="fitXY"
                         app:srcCompat="@drawable/baseline_person_outline_24" />
 
                     <TextView
                         android:id="@+id/textView680"
-                        android:layout_width="match_parent"
+                        android:layout_width="130dp"
+                        android:layout_gravity="center"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:background="@drawable/square_background_border_black"
                         android:gravity="center"
                         android:text="예능"
                         android:textSize="18sp" />
-                </LinearLayout>
 
+                </LinearLayout>
             </LinearLayout>
+
+            <Button
+                android:id="@+id/btnGenreChoice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#111011"
+                android:text="선택완료"
+                android:textColor="@color/white" />
 
         </LinearLayout>
     </ScrollView>

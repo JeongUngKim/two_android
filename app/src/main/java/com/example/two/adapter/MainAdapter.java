@@ -44,8 +44,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         holder.textView11.setText(movie.getVote_average());
 
         Glide.with(context)
-                .load("https://image.tmdb.org/t/p/w92"+movie.getPoster_path())
+                .load("https://image.tmdb.org/t/p/w342"+movie.getPoster_path())
                 .placeholder(R.drawable.baseline_person_outline_24)
+                .override(300,300)
                 .into(holder.imageView6);
 
     }
