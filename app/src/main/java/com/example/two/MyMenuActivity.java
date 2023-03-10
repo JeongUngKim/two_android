@@ -29,7 +29,7 @@ public class MyMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_menu);
 
         cvChoice = findViewById(R.id.cvChoice);
-        cvDisLike = findViewById(R.id.cvDisLike);
+//        cvDisLike = findViewById(R.id.cvDisLike);
         cvMyReview = findViewById(R.id.cvMyReview);
         cvUseOTT = findViewById(R.id.cvUseOTT);
 
@@ -93,8 +93,8 @@ public class MyMenuActivity extends AppCompatActivity {
         cvDisLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MyMenuActivity.this,DisLikeActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(MyMenuActivity.this,DisLikeActivity.class);
+//                startActivity(intent);
             }
         });
 

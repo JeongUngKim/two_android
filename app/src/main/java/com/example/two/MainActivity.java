@@ -61,8 +61,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        editTitle = findViewById(R.id.editTitle);
-        imgSearch = findViewById(R.id.imgSearch);
 
         btnCommunity = findViewById(R.id.btnCommunity);
         btnHome = findViewById(R.id.btnHome);
@@ -113,23 +111,23 @@ public class MainActivity extends AppCompatActivity {
 
 
         // 검색화면으로 넘어가기
-        editTitle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+//        editTitle.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+////                Log.i("keyword",input);
+////                Intent intent = new Intent(MainActivity.this,SearchActivity.class);
+////                startActivity(intent);
+//            }
+//        });
 
-                Log.i("keyword",input);
-                Intent intent = new Intent(MainActivity.this,SearchActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        imgSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,SearchActivity.class);
-                startActivity(intent);
-            }
-        });
+//        imgSearch.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity.this,SearchActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         // 커뮤니티 액티비티 넘어가기
         btnCommunity.setOnClickListener(new View.OnClickListener() {
