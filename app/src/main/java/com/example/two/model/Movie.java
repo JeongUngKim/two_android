@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Movie {
 
-   private int Id;
+   private int id;
    private String title;
    private String genre;
    private String content;
@@ -15,11 +15,11 @@ public class Movie {
    private String type;
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getTitle() {

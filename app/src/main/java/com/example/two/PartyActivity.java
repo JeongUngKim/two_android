@@ -16,6 +16,8 @@ public class PartyActivity extends AppCompatActivity {
     Button btnParty;
     Button btnMy;
 
+    Button partyBtn;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,16 @@ public class PartyActivity extends AppCompatActivity {
         btnParty = findViewById(R.id.btnParty);
         btnFilter = findViewById(R.id.btnFilter);
         btnMy = findViewById(R.id.btnMy);
+        partyBtn = findViewById(R.id.partyBtn);
+
+        partyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PartyActivity.this,PartyAddActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         // 메인 액티비티 넘어가기
         btnHome.setOnClickListener(new View.OnClickListener() {

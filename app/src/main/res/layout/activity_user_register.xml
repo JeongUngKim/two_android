@@ -29,7 +29,9 @@
             android:src="@drawable/baseline_person_outline_24"
             app:civ_border_color="#000000"
             app:civ_border_overlay="true"
-            app:civ_border_width="5dp" />
+            app:civ_border_width="5dp"
+            android:clickable="true"
+            android:onClick="clickImage"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -82,7 +84,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/editTextTextPersonName5"
+                android:id="@+id/editTextTextNickName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

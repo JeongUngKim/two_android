@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.two.Api.NetworkClient;
+import com.example.two.Api.NetworkClient1;
 import com.example.two.config.Config;
 import com.example.two.config.SearchApi;
 import com.example.two.model.Seach;
@@ -178,7 +178,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void getNetworkSearchTvData(String Keyword) {
-        Retrofit retrofit = NetworkClient.getRetrofitClient(SearchActivity.this);
+        Retrofit retrofit = NetworkClient1.getRetrofitClient(SearchActivity.this);
 
         SearchApi api = retrofit.create(SearchApi.class);
 
@@ -234,7 +234,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void getNetworkSearchMovieData(String Keyword) {
-        Retrofit retrofit = NetworkClient.getRetrofitClient(SearchActivity.this);
+        Retrofit retrofit = NetworkClient1.getRetrofitClient(SearchActivity.this);
 
         SearchApi api = retrofit.create(SearchApi.class);
 
