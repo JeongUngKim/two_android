@@ -11,7 +11,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class NetworkClient {
+public class NetworkClient2 {
 
     public static Retrofit retrofit;
 
@@ -34,7 +34,7 @@ public class NetworkClient {
             //레트로핏 라이브러리 관련 코드
 
             retrofit = new Retrofit.Builder()
-                    .baseUrl(Config.DOMAIN)
+                    .baseUrl(Config.DOMAIN2)
                     .client(httpClient)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();

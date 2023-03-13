@@ -1,6 +1,7 @@
 package com.example.two.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.two.MainActivity;
 import com.example.two.R;
 import com.example.two.model.Movie;
 
@@ -69,6 +71,15 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
             textView10 = itemView.findViewById(R.id.textView10);
             textView11 = itemView.findViewById(R.id.textView11);
             imageView6 = itemView.findViewById(R.id.imageView6);
+
+            imageView6.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int index = getAdapterPosition();
+                    Log.i("INDEX", String.valueOf(index));
+                    ((MainActivity)context).isDetail(index);
+                }
+            });
         }
     }
 }

@@ -45,7 +45,7 @@
             android:entries="@array/ott" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName7"
+            android:id="@+id/txtPartyName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -54,7 +54,7 @@
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/txtOttName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -63,7 +63,7 @@
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/editTextTextPassword7"
+            android:id="@+id/txtOttPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -72,14 +72,14 @@
             android:inputType="textPassword" />
 
         <TextView
-            android:id="@+id/textView64"
+            android:id="@+id/txtEndDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="종료 일자 선택" />
 
         <Button
-            android:id="@+id/button28"
+            android:id="@+id/btnCreateParty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"

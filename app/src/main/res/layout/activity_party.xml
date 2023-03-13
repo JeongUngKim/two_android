@@ -58,7 +58,7 @@
                 android:layout_margin="10dp" />
 
             <Button
-                android:id="@+id/button27"
+                android:id="@+id/partyBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="파티 생성" />

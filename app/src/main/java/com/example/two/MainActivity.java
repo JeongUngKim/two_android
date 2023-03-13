@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,7 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.two.Api.NetworkClient;
+import com.example.two.Api.NetworkClient1;
 import com.example.two.adapter.MainAdapter;
 import com.example.two.config.Config;
 import com.example.two.config.MovieApi;
@@ -53,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     String input;
 
+    private Movie selectedMovie;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getNetworkData() {
-        Retrofit retrofit = NetworkClient.getRetrofitClient(MainActivity.this);
+        Retrofit retrofit = NetworkClient1.getRetrofitClient(MainActivity.this);
 
         MovieApi api = retrofit.create(MovieApi.class);
 
@@ -217,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addNetworkData() {
-        Retrofit retrofit = NetworkClient.getRetrofitClient(MainActivity.this);
+        Retrofit retrofit = NetworkClient1.getRetrofitClient(MainActivity.this);
 
         MovieApi api = retrofit.create(MovieApi.class);
 
@@ -262,6 +262,16 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
+    }
+
+    public void isDetail(int index){
+        selectedMovie = movieArrayList.get(index);
+        int Id = movieArrayList.get(index).getId();
+        Log.i("ID",String.valueOf(Id));
+        Intent intent = new Intent(MainActivity.this,MovieContentActivity.class);
+        intent.putExtra("id",Id);
+        startActivity(intent);
+
     }
 
     // 액션바 활성화
