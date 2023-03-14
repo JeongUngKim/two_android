@@ -40,7 +40,7 @@ public class PartyActivity extends AppCompatActivity {
                 User user = new User();
                 user.setImgUrl("https://ungjk-test.s3.ap-northeast-2.amazonaws.com/rrc0777@naver.com_profileImg.jpg");
                 user.setEmail("dayeon@naver.com");
-                user.setNickname("대연님");
+                user.setNickname("대연님123");
                 user.setPassword("1234");
 
 

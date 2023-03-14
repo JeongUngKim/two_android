@@ -55,7 +55,15 @@ public class PartyAddActivity extends AppCompatActivity {
         btnCreateParty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveData();
+
+                int partyBoardId = 1;
+                Intent intent = new Intent(PartyAddActivity.this , PartyChatActivity.class);
+                intent.putExtra("user",user);
+                intent.putExtra("partyBoardId",partyBoardId);
+
+                startActivity(intent);
+                finish();
+                //saveData();
 
 
             }
