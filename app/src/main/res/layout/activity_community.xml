@@ -8,7 +8,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#000000">
 
         <LinearLayout
             android:id="@+id/layoutTop"
@@ -20,13 +21,21 @@
                 android:id="@+id/textView5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
                 android:gravity="center"
                 android:text="커뮤니티"
+                android:textColor="#FFFFFF"
                 android:textSize="22sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="#3C3C3C"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -35,7 +44,7 @@
                     android:layout_height="45dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
-                    app:srcCompat="@drawable/baseline_search_24" />
+                    app:srcCompat="@drawable/search" />
 
                 <EditText
                     android:id="@+id/txtSearch"
@@ -46,6 +55,8 @@
                     android:ems="10"
                     android:hint="검색어입력"
                     android:inputType="textPersonName"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -57,61 +68,52 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layoutBottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="#000000"
             android:orientation="horizontal">
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnHome"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:backgroundTint="#000000"
-                android:text="홈"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp" />
+                android:layout_width="82dp"
+                android:layout_height="50dp"
+                android:background="#000000"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/home" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnCommunity"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:backgroundTint="#000000"
-                android:text="커뮤니티"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp" />
+                android:layout_width="82dp"
+                android:layout_height="50dp"
+                android:background="#000000"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/chat" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnParty"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_width="82dp"
+                android:layout_height="50dp"
                 android:backgroundTint="#000000"
-                android:text="파티매칭"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp" />
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/party" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnFilter"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_width="82dp"
+                android:layout_height="50dp"
                 android:backgroundTint="#000000"
-                android:text="검색"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp" />
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/search" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnMy"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_width="82dp"
+                android:layout_height="50dp"
                 android:backgroundTint="#000000"
-                android:text="내 정보"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp" />
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/mymenu" />
         </LinearLayout>
 
     </RelativeLayout>

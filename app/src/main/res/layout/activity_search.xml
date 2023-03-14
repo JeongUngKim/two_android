@@ -12,64 +12,56 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="#000000">
 
         <LinearLayout
+            android:id="@+id/layoutBottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="#000000"
             android:orientation="horizontal">
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnHome"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:backgroundTint="#000000"
-                android:text="홈"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp" />
+                android:layout_width="82dp"
+                android:layout_height="50dp"
+                android:background="#000000"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/home" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnCommunity"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:backgroundTint="#000000"
-                android:text="커뮤니티"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp" />
+                android:layout_width="82dp"
+                android:layout_height="50dp"
+                android:background="#000000"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/chat" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnParty"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_width="82dp"
+                android:layout_height="50dp"
                 android:backgroundTint="#000000"
-                android:text="파티매칭"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp" />
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/party" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnFilter"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_width="82dp"
+                android:layout_height="50dp"
                 android:backgroundTint="#000000"
-                android:text="검색"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp" />
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/search" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnMy"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_width="82dp"
+                android:layout_height="50dp"
                 android:backgroundTint="#000000"
-                android:text="내 정보"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp" />
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/mymenu" />
         </LinearLayout>
 
         <LinearLayout
@@ -82,6 +74,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/shape2"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -90,7 +84,7 @@
                     android:layout_height="45dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
-                    app:srcCompat="@drawable/baseline_search_24" />
+                    app:srcCompat="@drawable/search" />
 
                 <EditText
                     android:id="@+id/txtSearch"
@@ -101,6 +95,8 @@
                     android:ems="10"
                     android:hint="검색어입력"
                     android:inputType="textPersonName"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
                     android:textSize="20sp" />
 
                 <ImageView
@@ -108,7 +104,7 @@
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
-                    app:srcCompat="@drawable/baseline_dehaze_24" />
+                    app:srcCompat="@drawable/baseline_more_vert_24" />
             </LinearLayout>
 
             <LinearLayout
@@ -121,10 +117,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:layout_weight="1"
                     android:text="영화"
+                    android:textColor="#FFFFFF"
                     android:textSize="22sp" />
 
                 <ImageView
@@ -167,6 +165,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:text="영화 제목"
+                            android:textColor="#FFFFFF"
                             android:textSize="20sp"
                             app:layout_constrainedWidth="true" />
 
@@ -185,7 +184,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:text="평점"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:textColor="#FFFFFF"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -201,6 +201,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="10dp"
                             android:text="장르"
+                            android:textColor="#FFFFFF"
                             android:textSize="20sp" />
 
                         <TextView
@@ -210,6 +211,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="10dp"
                             android:text="출시년도"
+                            android:textColor="#FFFFFF"
                             android:textSize="20sp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -245,10 +247,11 @@
                             android:id="@+id/textView111"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:layout_constrainedWidth="true"
                             android:layout_gravity="center_vertical"
                             android:text="영화 제목"
-                            android:textSize="20sp" />
+                            android:textColor="#FFFFFF"
+                            android:textSize="20sp"
+                            app:layout_constrainedWidth="true" />
 
                         <ImageView
                             android:id="@+id/imageView5"
@@ -265,7 +268,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:text="평점"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:textColor="#FFFFFF"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -281,6 +285,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="10dp"
                             android:text="장르"
+                            android:textColor="#FFFFFF"
                             android:textSize="20sp" />
 
                         <TextView
@@ -290,6 +295,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="10dp"
                             android:text="출시년도"
+                            android:textColor="#FFFFFF"
                             android:textSize="20sp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -325,10 +331,11 @@
                             android:id="@+id/textView112"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:layout_constrainedWidth="true"
                             android:layout_gravity="center_vertical"
                             android:text="영화 제목"
-                            android:textSize="20sp" />
+                            android:textColor="#FFFFFF"
+                            android:textSize="20sp"
+                            app:layout_constrainedWidth="true" />
 
                         <ImageView
                             android:id="@+id/imageView6"
@@ -345,7 +352,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:text="평점"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:textColor="#FFFFFF"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -361,6 +369,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="10dp"
                             android:text="장르"
+                            android:textColor="#FFFFFF"
                             android:textSize="20sp" />
 
                         <TextView
@@ -370,6 +379,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="10dp"
                             android:text="출시년도"
+                            android:textColor="#FFFFFF"
                             android:textSize="20sp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -386,10 +396,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:layout_weight="1"
                     android:text="드라마"
+                    android:textColor="#FFFFFF"
                     android:textSize="22sp" />
 
                 <ImageView
@@ -432,7 +444,8 @@
                             app:layout_constrainedWidth="true"
                             android:layout_gravity="center_vertical"
                             android:text="드라마 제목"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:textColor="#FFFFFF"/>
 
                         <ImageView
                             android:id="@+id/imageView7"
@@ -449,7 +462,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:text="평점"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:textColor="#FFFFFF"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -465,7 +479,8 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="10dp"
                             android:text="장르"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:textColor="#FFFFFF"/>
 
                         <TextView
                             android:id="@+id/textView49"
@@ -474,7 +489,8 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="10dp"
                             android:text="출시년도"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:textColor="#FFFFFF"/>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -512,7 +528,8 @@
                             app:layout_constrainedWidth="true"
                             android:layout_gravity="center_vertical"
                             android:text="드라마 제목"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:textColor="#FFFFFF"/>
 
                         <ImageView
                             android:id="@+id/imageView8"
@@ -529,7 +546,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:text="평점"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:textColor="#FFFFFF"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -545,7 +563,8 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="10dp"
                             android:text="장르"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:textColor="#FFFFFF"/>
 
                         <TextView
                             android:id="@+id/textView50"
@@ -554,7 +573,8 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="10dp"
                             android:text="출시년도"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:textColor="#FFFFFF"/>
                     </LinearLayout>
                 </LinearLayout>
 

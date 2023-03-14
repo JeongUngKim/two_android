@@ -8,17 +8,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class MyMenuActivity extends AppCompatActivity {
 
-    Button btnCommunity;
-    Button btnHome;
-    Button btnFilter;
-    Button btnParty;
-    Button btnMy;
+    ImageButton btnCommunity;
+    ImageButton btnHome;
+    ImageButton btnFilter;
+    ImageButton btnParty;
+    ImageButton btnMy;
 
     CardView cvChoice;
-    CardView cvDisLike;
     CardView cvMyReview;
     CardView cvUseOTT;
 
@@ -29,7 +29,6 @@ public class MyMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_menu);
 
         cvChoice = findViewById(R.id.cvChoice);
-//        cvDisLike = findViewById(R.id.cvDisLike);
         cvMyReview = findViewById(R.id.cvMyReview);
         cvUseOTT = findViewById(R.id.cvUseOTT);
 
@@ -60,11 +59,11 @@ public class MyMenuActivity extends AppCompatActivity {
         });
 
 
-        // 필터검색 액티비티 넘어가기
+        // 검색 액티비티 넘어가기
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MyMenuActivity.this,FilterSearchActivity.class);
+                Intent intent = new Intent(MyMenuActivity.this,SearchActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -86,15 +85,6 @@ public class MyMenuActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MyMenuActivity.this,ChoiceActivity.class);
                 startActivity(intent);
-            }
-        });
-
-        // 관심없는 작품 관리 넘어가기
-        cvDisLike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Intent intent = new Intent(MyMenuActivity.this,DisLikeActivity.class);
-//                startActivity(intent);
             }
         });
 

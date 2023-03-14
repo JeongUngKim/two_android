@@ -13,12 +13,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.squareup.picasso.Picasso;
 
 import com.example.two.Api.NetworkClient2;
 import com.example.two.config.Config;
 import com.example.two.config.RegisterApi;
 import com.example.two.model.Res;
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.regex.Pattern;

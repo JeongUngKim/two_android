@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#000000"
     tools:context=".MainActivity">
 
     <RelativeLayout
@@ -22,13 +23,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
                 android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    app:srcCompat="@drawable/baseline_data_usage_24" />
 
                 <TextView
                     android:id="@+id/textView"
@@ -36,14 +32,11 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="TWO"
-                    android:textSize="30sp" />
+                    android:textColor="#FF0000"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -54,10 +47,11 @@
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="43dp"
                     android:layout_weight="4"
                     android:gravity="center"
                     android:text="통합 랭킹"
-                    android:textColor="@color/black"
+                    android:textColor="#FFFFFF"
                     android:textSize="22sp" />
 
                 <ImageView
@@ -75,6 +69,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="#000000"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -89,6 +84,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="영화 제목"
+                        android:textColor="#FFFFFF"
                         app:layout_constrainedWidth="true" />
 
                     <ImageView
@@ -105,7 +101,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="평점" />
+                        android:text="평점"
+                        android:textColor="#FFFFFF" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -116,6 +113,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="#000000"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -130,6 +128,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="영화 제목"
+                        android:textColor="#FFFFFF"
                         app:layout_constrainedWidth="true" />
 
                     <ImageView
@@ -146,17 +145,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="평점" />
+                        android:text="평점"
+                        android:textColor="#FFFFFF" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="#000000"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -171,7 +172,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="영화 제목"
-                        app:layout_constrainedWidth="true"/>
+                        android:textColor="#FFFFFF"
+                        app:layout_constrainedWidth="true" />
 
                     <ImageView
                         android:id="@+id/imageView36"
@@ -187,7 +189,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="평점" />
+                        android:text="평점"
+                        android:textColor="#FFFFFF" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -198,7 +201,7 @@
                 android:layout_marginTop="15dp"
                 android:gravity="center"
                 android:text="맞춤 추천"
-                android:textColor="@color/black"
+                android:textColor="#FFFFFF"
                 android:textSize="22sp" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -217,6 +220,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:text="OTT 서비스 별 점유율"
+                android:textColor="#FFFFFF"
                 android:textSize="22sp" />
 
             <LinearLayout
@@ -273,7 +277,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="15dp"
-                        android:layout_marginRight="5dp" />
+                        android:layout_marginRight="5dp"
+                        android:backgroundTint="#FFFFFF"
+                        android:indeterminateTint="#FFFFFF"
+                        android:progressTint="#FFEB3B" />
 
                     <ProgressBar
                         android:id="@+id/progressBar6"
@@ -282,7 +289,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="17dp"
-                        android:layout_marginRight="5dp" />
+                        android:layout_marginRight="5dp"
+                        android:backgroundTint="#FFFFFF"
+                        android:indeterminateTint="#FFFFFF"
+                        android:progressTint="#FFEB3B" />
 
                     <ProgressBar
                         android:id="@+id/progressBar7"
@@ -291,7 +301,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="17dp"
-                        android:layout_marginRight="5dp" />
+                        android:layout_marginRight="5dp"
+                        android:backgroundTint="#FFFFFF"
+                        android:indeterminateTint="#FFFFFF"
+                        android:progressTint="#FFEB3B" />
 
                     <ProgressBar
                         android:id="@+id/progressBar8"
@@ -300,7 +313,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="17dp"
-                        android:layout_marginRight="5dp" />
+                        android:layout_marginRight="5dp"
+                        android:backgroundTint="#FFFFFF"
+                        android:indeterminateTint="#FFFFFF"
+                        android:progressTint="#FFEB3B" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -313,55 +329,45 @@
             android:background="#000000"
             android:orientation="horizontal">
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnHome"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:backgroundTint="#000000"
-                android:text="홈"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp" />
+                android:layout_width="82dp"
+                android:layout_height="50dp"
+                android:background="#000000"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/home" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnCommunity"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:backgroundTint="#000000"
-                android:text="커뮤니티"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp" />
+                android:layout_width="82dp"
+                android:layout_height="50dp"
+                android:background="#000000"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/chat" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnParty"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_width="82dp"
+                android:layout_height="50dp"
                 android:backgroundTint="#000000"
-                android:text="파티매칭"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp" />
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/party" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnFilter"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_width="82dp"
+                android:layout_height="50dp"
                 android:backgroundTint="#000000"
-                android:text="필터검색"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp" />
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/search" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnMy"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_width="82dp"
+                android:layout_height="50dp"
                 android:backgroundTint="#000000"
-                android:text="내 정보"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp" />
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/mymenu" />
         </LinearLayout>
 
     </RelativeLayout>

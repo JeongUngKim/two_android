@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,11 +37,9 @@ public class MovieContentActivity extends AppCompatActivity {
     TextView txtContent;
     TextView txtDate;
     TextView txtRate;
-    TextView txtScore;
 
-    Button btnChoice;
-    Button btnDisLike;
-    Button btnReview;
+    ImageButton btnChoice;
+    ImageButton btnReview;
 
     CircleImageView circle1;
 
@@ -58,7 +57,7 @@ public class MovieContentActivity extends AppCompatActivity {
 
     int index;
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,9 +68,7 @@ public class MovieContentActivity extends AppCompatActivity {
         txtContent = findViewById(R.id.txtContent);
         txtDate = findViewById(R.id.txtDate);
         txtRate = findViewById(R.id.txtRate);
-        txtScore = findViewById(R.id.txtScore);
         btnChoice = findViewById(R.id.btnChoice);
-        btnDisLike = findViewById(R.id.btnDisLike);
         btnReview = findViewById(R.id.btnReview);
         circle1 = findViewById(R.id.circle1);
         circle2 = findViewById(R.id.circle2);
@@ -93,13 +90,7 @@ public class MovieContentActivity extends AppCompatActivity {
             }
         });
 
-        // 관심없어요 버튼 클릭 처리
-        btnDisLike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });
 
         // 리뷰작성 버튼 클릭 처리
         btnReview.setOnClickListener(new View.OnClickListener() {
@@ -124,7 +115,7 @@ public class MovieContentActivity extends AppCompatActivity {
 
         call.enqueue(new Callback<DetailList>() {
             @Override
-             public void onResponse(Call<DetailList> call, Response<DetailList> response) {
+            public void onResponse(Call<DetailList> call, Response<DetailList> response) {
 
                 if (response.isSuccessful()) {
                     // getNetworkData는 항상처음에 데이터를 가져오는 동작 이므로
@@ -135,7 +126,6 @@ public class MovieContentActivity extends AppCompatActivity {
                     txtDate.setText(detail.getDate());
                     txtContent.setText(detail.getContent());
                     txtRate.setText(detail.getRate());
-                    txtScore.setText(detail.getScore());
                     Glide.with(MovieContentActivity.this)
                             .load("https://image.tmdb.org/t/p/w500"+detail.getPoster_path())
                             .placeholder(R.drawable.baseline_person_outline_24)

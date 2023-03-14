@@ -6,14 +6,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class CommunityActivity extends AppCompatActivity {
 
-    Button btnCommunity;
-    Button btnHome;
-    Button btnFilter;
-    Button btnParty;
-    Button btnMy;
+    ImageButton btnCommunity;
+    ImageButton btnHome;
+    ImageButton btnFilter;
+    ImageButton btnParty;
+    ImageButton btnMy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +37,11 @@ public class CommunityActivity extends AppCompatActivity {
             }
         });
 
-        // 필터검색 액티비티 넘어가기
+        // 검색 액티비티 넘어가기
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CommunityActivity.this,FilterSearchActivity.class);
+                Intent intent = new Intent(CommunityActivity.this,SearchActivity.class);
                 startActivity(intent);
                 finish();
             }

@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -33,11 +34,11 @@ public class MainActivity extends AppCompatActivity {
 
     EditText editTitle;
     ImageView imgSearch;
-    Button btnCommunity;
-    Button btnHome;
-    Button btnFilter;
-    Button btnParty;
-    Button btnMy;
+    ImageButton btnCommunity;
+    ImageButton btnHome;
+    ImageButton btnFilter;
+    ImageButton btnParty;
+    ImageButton btnMy;
 
     RecyclerView recyclerView;
 
@@ -75,29 +76,29 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         getNetworkData();
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                                             @Override
-                                             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                                                 super.onScrollStateChanged(recyclerView, newState);
-                                             }
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
 
-                                             @Override
-                                             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                                                 super.onScrolled(recyclerView, dx, dy);
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
 
-                                                 // 맨 마지막 데이터가 화면에 보이면!!!!
-                                                 // 네트워크 통해서 데이터를 추가로 받아와라!!
-                                                 int lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
-                                                 int totalCount = recyclerView.getAdapter().getItemCount();
+                // 맨 마지막 데이터가 화면에 보이면!!!!
+                // 네트워크 통해서 데이터를 추가로 받아와라!!
+                int lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
+                int totalCount = recyclerView.getAdapter().getItemCount();
 
-                                                 // 스크롤을 데이터 맨 끝까지 한 상태.
-                                                 if (lastPosition + 1 == totalCount) {
-                                                     // 네트워크 통해서 데이터를 받아오고, 화면에 표시!
-                                                     if(page != -1) {
-                                                         addNetworkData();
-                                                     }
-                                                 }
-                                             }
-                                         });
+                // 스크롤을 데이터 맨 끝까지 한 상태.
+                if (lastPosition + 1 == totalCount) {
+                    // 네트워크 통해서 데이터를 받아오고, 화면에 표시!
+                    if(page != -1) {
+                        addNetworkData();
+                    }
+                }
+            }
+        });
 
 
 
@@ -149,11 +150,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // 필터검색 액티비티 넘어가기
+        // 검색 액티비티 넘어가기
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,FilterSearchActivity.class);
+                Intent intent = new Intent(MainActivity.this,SearchActivity.class);
                 startActivity(intent);
                 finish();
             }

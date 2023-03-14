@@ -2,6 +2,7 @@ package com.example.two;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ public class PartyAddActivity extends AppCompatActivity {
     boolean isFirst= true; // 첫 실행을 구분하기위한 멤버변수
     boolean isChanged= false; //프로필 변경 확인을 위한 멤버변수
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
