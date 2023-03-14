@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.example.two.model.User;
+import com.example.two.model.UserRes;
 import com.squareup.picasso.Picasso;
 
 import com.example.two.Api.NetworkClient2;
