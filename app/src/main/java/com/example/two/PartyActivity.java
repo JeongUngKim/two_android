@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.example.two.model.User;
+
 public class PartyActivity extends AppCompatActivity {
 
     ImageButton btnCommunity;
@@ -35,8 +37,19 @@ public class PartyActivity extends AppCompatActivity {
         partyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                User user = new User();
+                user.setImgUrl("https://ungjk-test.s3.ap-northeast-2.amazonaws.com/rrc0777@naver.com_profileImg.jpg");
+                user.setEmail("dayeon@naver.com");
+                user.setNickname("대연님123");
+                user.setPassword("1234");
+
+
+
                 Intent intent = new Intent(PartyActivity.this,PartyAddActivity.class);
+                intent.putExtra("user",user);
+
                 startActivity(intent);
+
                 finish();
             }
         });

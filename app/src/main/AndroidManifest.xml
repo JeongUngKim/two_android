@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:targetSandboxVersion="1">
 
+
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -107,5 +109,8 @@
             </intent-filter>
         </activity>
     </application>
+
+
+
 
 </manifest>
