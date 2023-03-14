@@ -8,5 +8,6 @@ public class Config {
 
     public static final String PREFERENCE_NAME ="TWO";
 
+    public static final String ACCESS_TOKEN ="access_token";
     public static final String key = "ed885de901f9f30f8d5467da6c596eba";
 }

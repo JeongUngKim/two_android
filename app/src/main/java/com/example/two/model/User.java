@@ -8,6 +8,16 @@ public class User implements Serializable {
     private String password;
     private String nickname;
 
+    private String imgUrl;
+
+    public User(String email, String password, String nickname, String imgUrl) {
+        this.email = email;
+        this.password = password;
+        this.nickname = nickname;
+        this.imgUrl = imgUrl;
+    }
+
+
     public User(String email, String password, String nickname) {
         this.email = email;
         this.password = password;
@@ -43,6 +53,13 @@ public class User implements Serializable {
         this.nickname = nickname;
     }
 
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
     public User(){
 
     }
