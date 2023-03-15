@@ -293,6 +293,7 @@ public class SearchActivity extends AppCompatActivity {
                             genreSearchTv1.setText("장르없음");
                             break;
                     }
+                    //제발
 //                    if (T=="10759.0"){
 //                        genreSearchTv1.setText("액션&어드벤쳐");
 //                    }else if (T=="16.0") {
