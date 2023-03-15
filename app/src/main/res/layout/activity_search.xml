@@ -161,9 +161,11 @@
 
                         <TextView
                             android:id="@+id/titleSearchMovie1"
-                            android:layout_width="wrap_content"
+                            android:layout_width="180dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:text="영화 제목"
                             android:textColor="#FFFFFF"
                             android:textSize="20sp"
@@ -174,7 +176,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="170dp"
+                            android:layout_marginLeft="60dp"
                             android:layout_marginRight="10dp"
                             app:srcCompat="@drawable/baseline_star_rate_24" />
 
@@ -202,7 +204,8 @@
                             android:layout_marginRight="10dp"
                             android:text="장르"
                             android:textColor="#FFFFFF"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:visibility="gone" />
 
                         <TextView
                             android:id="@+id/dateSearchMovie1"
@@ -245,9 +248,11 @@
 
                         <TextView
                             android:id="@+id/titleSearchMovie2"
-                            android:layout_width="wrap_content"
+                            android:layout_width="180dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:text="영화 제목"
                             android:textColor="#FFFFFF"
                             android:textSize="20sp"
@@ -258,7 +263,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="170dp"
+                            android:layout_marginLeft="60dp"
                             android:layout_marginRight="10dp"
                             app:srcCompat="@drawable/baseline_star_rate_24" />
 
@@ -286,7 +291,8 @@
                             android:layout_marginRight="10dp"
                             android:text="장르"
                             android:textColor="#FFFFFF"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:visibility="gone" />
 
                         <TextView
                             android:id="@+id/dateSearchMovie2"
@@ -329,9 +335,11 @@
 
                         <TextView
                             android:id="@+id/titleSearchMovie3"
-                            android:layout_width="wrap_content"
+                            android:layout_width="180dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:text="영화 제목"
                             android:textColor="#FFFFFF"
                             android:textSize="20sp"
@@ -342,7 +350,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="170dp"
+                            android:layout_marginLeft="60dp"
                             android:layout_marginRight="10dp"
                             app:srcCompat="@drawable/baseline_star_rate_24" />
 
@@ -370,7 +378,8 @@
                             android:layout_marginRight="10dp"
                             android:text="장르"
                             android:textColor="#FFFFFF"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:visibility="gone" />
 
                         <TextView
                             android:id="@+id/dateSearchMovie3"
@@ -439,20 +448,22 @@
 
                         <TextView
                             android:id="@+id/titleSearchTv1"
-                            android:layout_width="wrap_content"
+                            android:layout_width="180dp"
                             android:layout_height="wrap_content"
-                            app:layout_constrainedWidth="true"
                             android:layout_gravity="center_vertical"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:text="드라마 제목"
+                            android:textColor="#FFFFFF"
                             android:textSize="20sp"
-                            android:textColor="#FFFFFF"/>
+                            app:layout_constrainedWidth="true" />
 
                         <ImageView
                             android:id="@+id/imageView7"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="152dp"
+                            android:layout_marginLeft="60dp"
                             android:layout_marginRight="10dp"
                             app:srcCompat="@drawable/baseline_star_rate_24" />
 
@@ -479,8 +490,9 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="10dp"
                             android:text="장르"
+                            android:textColor="#FFFFFF"
                             android:textSize="20sp"
-                            android:textColor="#FFFFFF"/>
+                            android:visibility="gone" />
 
                         <TextView
                             android:id="@+id/dateSearchTv1"
@@ -523,20 +535,22 @@
 
                         <TextView
                             android:id="@+id/titleSearchTv2"
-                            android:layout_width="wrap_content"
+                            android:layout_width="180dp"
                             android:layout_height="wrap_content"
-                            app:layout_constrainedWidth="true"
                             android:layout_gravity="center_vertical"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:text="드라마 제목"
+                            android:textColor="#FFFFFF"
                             android:textSize="20sp"
-                            android:textColor="#FFFFFF"/>
+                            app:layout_constrainedWidth="true" />
 
                         <ImageView
                             android:id="@+id/imageView8"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="152dp"
+                            android:layout_marginLeft="60dp"
                             android:layout_marginRight="10dp"
                             app:srcCompat="@drawable/baseline_star_rate_24" />
 
@@ -563,8 +577,9 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="10dp"
                             android:text="장르"
+                            android:textColor="#FFFFFF"
                             android:textSize="20sp"
-                            android:textColor="#FFFFFF"/>
+                            android:visibility="gone" />
 
                         <TextView
                             android:id="@+id/dateSearchTv2"
