@@ -14,14 +14,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.disklrucache.DiskLruCache;
 import com.example.two.Api.NetworkClient1;
+import com.example.two.Api.NetworkClient2;
 import com.example.two.adapter.MainAdapter;
 import com.example.two.config.Config;
 import com.example.two.config.MovieApi;
+import com.example.two.config.SearchApi;
 import com.example.two.model.Movie;
 import com.example.two.model.MovieList;
+import com.example.two.model.MovieRank;
+import com.example.two.model.MovieRankList;
+import com.example.two.model.SeachList;
 
 import java.util.ArrayList;
 
@@ -40,11 +48,28 @@ public class MainActivity extends AppCompatActivity {
     ImageButton btnParty;
     ImageButton btnMy;
 
+    ImageView rankPoster1;
+    ImageView rankPoster2;
+    ImageView rankPoster3;
+
+    TextView rankTitle1;
+    TextView rankTitle2;
+    TextView rankTitle3;
+
+    TextView rankRate1;
+    TextView rankRate2;
+    TextView rankRate3;
+
+
+
+
     RecyclerView recyclerView;
 
     MainAdapter adapter;
 
     ArrayList<Movie> movieArrayList = new ArrayList<>();
+
+    ArrayList<MovieRank> movierankArrayList = new ArrayList<>();
 
     int page;
 
@@ -69,12 +94,26 @@ public class MainActivity extends AppCompatActivity {
         btnFilter = findViewById(R.id.btnFilter);
         btnMy = findViewById(R.id.btnMy);
 
+        rankPoster1 = findViewById(R.id.rankPoster1);
+        rankPoster2 = findViewById(R.id.rankPoster2);
+        rankPoster3 = findViewById(R.id.rankPoster3);
+
+        rankTitle1 = findViewById(R.id.rankTitle1);
+        rankTitle2 = findViewById(R.id.rankTitle2);
+        rankTitle3 = findViewById(R.id.rankTitle3);
+
+        rankRate1 = findViewById(R.id.rankRate1);
+        rankRate2 = findViewById(R.id.rankRate2);
+        rankRate3 = findViewById(R.id.rankRate3);
+
+        getrankMovieData();
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.this,LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         getNetworkData();
+
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -273,6 +312,70 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("id",Id);
         startActivity(intent);
 
+    }
+
+    private void getrankMovieData() {
+        Retrofit retrofit = NetworkClient2.getRetrofitClient(MainActivity.this);
+
+        MovieApi api = retrofit.create(MovieApi.class);
+
+//        Log.i("AAA", api.toString());
+
+        Call<MovieRankList> call = api.getrankMovie();
+        Log.i("CCC", call.toString());
+        call.enqueue(new Callback<MovieRankList>() {
+
+            @Override
+            public void onResponse(Call<MovieRankList> call, Response<MovieRankList> response) {
+
+                if (response.isSuccessful()) {
+
+                    // getNetworkData는 항상처음에 데이터를 가져오는 동작 이므로
+
+                    // 데이터를 받았으니 리사이클러 표시
+
+                    movierankArrayList.addAll(response.body().getRank());
+                    Log.i("AAA", movierankArrayList.toString());
+                    // 오프셋 처리하는 코드
+                    Glide.with(MainActivity.this)
+                            .load(movierankArrayList.get(0).getImgUrl())
+                            .placeholder(R.drawable.baseline_person_outline_24)
+                            .into(rankPoster1);
+                    rankTitle1.setText(movierankArrayList.get(0).getTitle());
+                    rankRate1.setText(movierankArrayList.get(0).getContentRating());
+
+                    Glide.with(MainActivity.this)
+                            .load(movierankArrayList.get(1).getImgUrl())
+                            .placeholder(R.drawable.baseline_person_outline_24)
+                            .into(rankPoster2);
+                    rankTitle2.setText(movierankArrayList.get(1).getTitle());
+                    rankRate2.setText(movierankArrayList.get(1).getContentRating());
+
+                    Glide.with(MainActivity.this)
+                            .load(movierankArrayList.get(2).getImgUrl())
+                            .placeholder(R.drawable.baseline_person_outline_24)
+                            .into(rankPoster3);
+                    rankTitle3.setText(movierankArrayList.get(2).getTitle());
+                    rankRate3.setText(movierankArrayList.get(2).getContentRating());
+
+
+
+
+                } else {
+                    Toast.makeText(MainActivity.this, "문제가 있습니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MovieRankList> call, Throwable t) {
+                Log.i("DDD", String.valueOf(t));
+
+
+            }
+
+
+        });
     }
 
     // 액션바 활성화

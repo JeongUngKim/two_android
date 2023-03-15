@@ -11,12 +11,12 @@ import retrofit2.http.Query;
 
 public interface SearchApi {
 
-    @POST("search/movie")
+    @GET("search/movie")
     Call<SeachList> getSeachMovie(@Query("api_key") String keys,
                                   @Query("language")String language,
                                   @Query("query")String keyword);
 
-    @POST("search/tv")
+    @GET("search/tv")
     Call<SeachList> getSeachTv(@Query("api_key") String keys,
                                   @Query("language")String language,
                                   @Query("query")String keyword);

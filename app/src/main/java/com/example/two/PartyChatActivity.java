@@ -42,6 +42,10 @@ public class PartyChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_party_chat);
+        if(getSupportActionBar()!=null) {
+
+            getSupportActionBar().setTitle("ㅇㅇ");
+        }
 
         Intent intent = getIntent();
 

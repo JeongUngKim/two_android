@@ -1,6 +1,7 @@
 package com.example.two.config;
 
 import com.example.two.model.MovieList;
+import com.example.two.model.MovieRankList;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -14,6 +15,9 @@ public interface MovieApi {
                             @Query("language")String language,
                             @Query("page")int page,
                             @Query("sort_by")String desc);
+
+    @GET("rank")
+    Call<MovieRankList>getrankMovie();
 
 
 }
