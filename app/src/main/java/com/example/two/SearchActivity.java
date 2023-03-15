@@ -289,7 +289,7 @@ public class SearchActivity extends AppCompatActivity {
                         case "37.0":
                             genreSearchTv1.setText("서부");
                             break;
-                        default:
+                        case "none":
                             genreSearchTv1.setText("장르없음");
                             break;
                     }
@@ -407,7 +407,7 @@ public class SearchActivity extends AppCompatActivity {
                         case "37.0":
                             genreSearchTv2.setText("서부");
                             break;
-                        default:
+                        case "none":
                             genreSearchTv2.setText("장르없음");
                             break;
                     }
@@ -527,7 +527,7 @@ public class SearchActivity extends AppCompatActivity {
                         case "37.0":
                             genreSearchMovie1.setText("서부");
                             break;
-                        default:
+                        case "none":
                             genreSearchMovie1.setText("장르없음");
                             break;
                     }
@@ -600,7 +600,7 @@ public class SearchActivity extends AppCompatActivity {
                         case "37.0":
                             genreSearchMovie2.setText("서부");
                             break;
-                        default:
+                        case "none":
                             genreSearchMovie2.setText("장르없음");
                             break;
                     }
@@ -673,7 +673,7 @@ public class SearchActivity extends AppCompatActivity {
                         case "37.0":
                             genreSearchMovie3.setText("서부");
                             break;
-                        default:
+                        case "none":
                             genreSearchMovie3.setText("장르없음");
                             break;
                     }
