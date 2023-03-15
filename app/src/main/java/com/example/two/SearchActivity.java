@@ -532,6 +532,7 @@ public class SearchActivity extends AppCompatActivity {
 //                            genreSearchMovie1.setText("장르없음");
 //                            break;
                     }
+                    //좀돠라
                     dateSearchMovie1.setText(seachArrayList2.get(0).getRelease_date().substring(0,4));
 
                     Glide.with(SearchActivity.this)
