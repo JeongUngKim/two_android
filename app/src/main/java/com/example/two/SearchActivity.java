@@ -274,7 +274,7 @@ public class SearchActivity extends AppCompatActivity {
                         case "37.0":
                             genreSearchTv1.setText("장르없음");
                         case "none":
-                            genreSearchTv2.setText("장르없음");
+                            genreSearchTv1.setText("장르없음");
                     }
 //                    if (T=="10759.0"){
 //                        genreSearchTv1.setText("액션&어드벤쳐");
