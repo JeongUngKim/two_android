@@ -103,7 +103,13 @@
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true">
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/splash"
+            android:exported="true"
+
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
