@@ -272,7 +272,7 @@ public class SearchActivity extends AppCompatActivity {
                         case "10768.0":
                             genreSearchTv1.setText("전쟁&정치");
                         case "37.0":
-                            genreSearchTv1.setText("장르없음");
+                            genreSearchTv1.setText("서부");
                         case "none":
                             genreSearchTv1.setText("장르없음");
                     }
