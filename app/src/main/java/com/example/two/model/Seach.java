@@ -1,5 +1,7 @@
 package com.example.two.model;
 
+import java.util.List;
+
 public class Seach {
 
     private String title;
@@ -12,6 +14,9 @@ public class Seach {
 
     private String release_date;
 
+    private List genre_ids;
+
+    private String first_air_date;
     public String getTitle() {
         return title;
     }
@@ -50,5 +55,21 @@ public class Seach {
 
     public void setRelease_date(String release_date) {
         this.release_date = release_date;
+    }
+
+    public List getGenre_ids() {
+        return genre_ids;
+    }
+
+    public void setGenre_ids(List genre_ids) {
+        this.genre_ids = genre_ids;
+    }
+
+    public String getFirst_air_date() {
+        return first_air_date;
+    }
+
+    public void setFirst_air_date(String first_air_date) {
+        this.first_air_date = first_air_date;
     }
 }
