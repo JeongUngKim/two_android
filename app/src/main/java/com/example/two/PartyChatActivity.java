@@ -44,7 +44,7 @@ public class PartyChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_party_chat);
         if(getSupportActionBar()!=null) {
 
-            getSupportActionBar().setTitle("ㅇㅇ");
+            getSupportActionBar().setTitle("넷플릭스 채팅방");
         }
 
         Intent intent = getIntent();
