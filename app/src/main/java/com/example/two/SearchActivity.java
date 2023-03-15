@@ -290,7 +290,7 @@ public class SearchActivity extends AppCompatActivity {
                             genreSearchTv1.setText("서부");
                             break;
                         default:
-                            genreSearchTv2.setText("장르없음");
+                            genreSearchTv1.setText("장르없음");
                             break;
                     }
 //                    if (T=="10759.0"){
