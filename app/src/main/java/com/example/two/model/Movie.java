@@ -14,6 +14,10 @@ public class Movie {
    private int tmdbcontentId;
    private String type;
 
+    private String imgUrl;
+
+    private int contentRating;
+
     public int getId() {
         return id;
     }
@@ -84,5 +88,21 @@ public class Movie {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public int getContentRating() {
+        return contentRating;
+    }
+
+    public void setContentRating(int contentRating) {
+        this.contentRating = contentRating;
     }
 }

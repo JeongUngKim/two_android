@@ -155,9 +155,9 @@ public class UserRegisterActivity extends AppCompatActivity {
 
         Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-        Uri fileProvider = FileProvider.getUriForFile(UserRegisterActivity.this,
-                "com.blockent.postingapp.fileprovider", photoFile);
-        i.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
+//        Uri fileProvider = FileProvider.getUriForFile(UserRegisterActivity.this,
+//                "com.blockent.postingapp.fileprovider", photoFile);
+//        i.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
 
         //Firebase storage에 저장하기
         FirebaseStorage firebaseStorage= FirebaseStorage.getInstance();

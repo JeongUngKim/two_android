@@ -71,7 +71,8 @@
             android:exported="false" />
         <activity
             android:name=".PartyChatActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
         <activity
             android:name=".PartyAddActivity"
             android:exported="false" />

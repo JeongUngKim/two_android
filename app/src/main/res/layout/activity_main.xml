@@ -73,16 +73,18 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/imageView33"
+                        android:id="@+id/rankPoster1"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
                         app:srcCompat="@drawable/baseline_person_outline_24" />
 
                     <TextView
-                        android:id="@+id/textView22"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/rankTitle1"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
+                        android:ellipsize="end"
+                        android:maxLines="1"
                         android:text="영화 제목"
                         android:textColor="#FFFFFF"
                         app:layout_constrainedWidth="true" />
@@ -92,12 +94,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="250dp"
+                        android:layout_marginLeft="150dp"
                         android:layout_marginRight="10dp"
                         app:srcCompat="@drawable/baseline_star_rate_24" />
 
                     <TextView
-                        android:id="@+id/textView60"
+                        android:id="@+id/rankRate1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -117,16 +119,18 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/imageView340"
+                        android:id="@+id/rankPoster2"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
                         app:srcCompat="@drawable/baseline_person_outline_24" />
 
                     <TextView
-                        android:id="@+id/textView23"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/rankTitle2"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
+                        android:ellipsize="end"
+                        android:maxLines="1"
                         android:text="영화 제목"
                         android:textColor="#FFFFFF"
                         app:layout_constrainedWidth="true" />
@@ -136,12 +140,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="250dp"
+                        android:layout_marginLeft="150dp"
                         android:layout_marginRight="10dp"
                         app:srcCompat="@drawable/baseline_star_rate_24" />
 
                     <TextView
-                        android:id="@+id/textView61"
+                        android:id="@+id/rankRate2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -161,16 +165,18 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/imageView35"
+                        android:id="@+id/rankPoster3"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
                         app:srcCompat="@drawable/baseline_person_outline_24" />
 
                     <TextView
-                        android:id="@+id/textView24"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/rankTitle3"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
+                        android:ellipsize="end"
+                        android:maxLines="1"
                         android:text="영화 제목"
                         android:textColor="#FFFFFF"
                         app:layout_constrainedWidth="true" />
@@ -180,12 +186,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="250dp"
+                        android:layout_marginLeft="150dp"
                         android:layout_marginRight="10dp"
                         app:srcCompat="@drawable/baseline_star_rate_24" />
 
                     <TextView
-                        android:id="@+id/textView62"
+                        android:id="@+id/rankRate3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"

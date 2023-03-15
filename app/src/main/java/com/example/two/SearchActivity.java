@@ -84,24 +84,24 @@ public class SearchActivity extends AppCompatActivity {
         btnMy = findViewById(R.id.btnMy);
 
         poster1=findViewById(R.id.poster1);
-//        poster2=findViewById(R.id.poster2);
-//        poster3=findViewById(R.id.poster3);
-//        poster4=findViewById(R.id.poster4);
-//        poster5=findViewById(R.id.poster5);
-//
-//        titleSearchMovie1 = findViewById(R.id.titleSearchMovie1);
-//        titleSearchMovie2 = findViewById(R.id.titleSearchMovie2);
-//        titleSearchMovie3 = findViewById(R.id.titleSearchMovie3);
-//
-//        rateSearchMovie1 = findViewById(R.id.rateSearchMovie1);
-//        rateSearchMovie2 = findViewById(R.id.rateSearchMovie2);
-//        rateSearchMovie3 = findViewById(R.id.rateSearchMovie3);
-//
-//        titleSearchTv1 = findViewById(R.id.titleSearchTv1);
-//        titleSearchTv2 = findViewById(R.id.titleSearchTv2);
-//
-//        rateSearchTv1 = findViewById(R.id.rateSearchTv1);
-//        rateSearchTv2 = findViewById(R.id.rateSearchTv2);
+        poster2=findViewById(R.id.poster2);
+        poster3=findViewById(R.id.poster3);
+        poster4=findViewById(R.id.poster4);
+        poster5=findViewById(R.id.poster5);
+
+        titleSearchMovie1 = findViewById(R.id.titleSearchMovie1);
+        titleSearchMovie2 = findViewById(R.id.titleSearchMovie2);
+        titleSearchMovie3 = findViewById(R.id.titleSearchMovie3);
+
+        rateSearchMovie1 = findViewById(R.id.rateSearchMovie1);
+        rateSearchMovie2 = findViewById(R.id.rateSearchMovie2);
+        rateSearchMovie3 = findViewById(R.id.rateSearchMovie3);
+
+        titleSearchTv1 = findViewById(R.id.titleSearchTv1);
+        titleSearchTv2 = findViewById(R.id.titleSearchTv2);
+
+        rateSearchTv1 = findViewById(R.id.rateSearchTv1);
+        rateSearchTv2 = findViewById(R.id.rateSearchTv2);
 
         txtSearch = findViewById(R.id.txtSearch);
 
@@ -132,7 +132,7 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(SearchActivity.this,MainActivity.class);
                 startActivity(intent);
-                finish();
+
             }
         });
 
