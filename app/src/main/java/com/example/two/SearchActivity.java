@@ -494,7 +494,7 @@ public class SearchActivity extends AppCompatActivity {
                         case "37.0":
                             genreSearchMovie1.setText("서부");
 
-                        default:
+                        case "none":
                             genreSearchMovie1.setText("장르없음");
                     }
                     dateSearchMovie1.setText(seachArrayList2.get(0).getRelease_date().substring(0,4));
