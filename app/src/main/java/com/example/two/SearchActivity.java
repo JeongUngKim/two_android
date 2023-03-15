@@ -235,7 +235,7 @@ public class SearchActivity extends AppCompatActivity {
                             .placeholder(R.drawable.baseline_person_outline_24)
                             .into(poster4);
                     titleSearchTv1.setText(seachArrayList1.get(0).getName());
-                    rateSearchTv1.setText(seachArrayList1.get(0).getVote_average().substring(0,2));
+                    rateSearchTv1.setText(seachArrayList1.get(0).getVote_average());
                     List tvgenre1 = seachArrayList1.get(0).getGenre_ids();
                     T1=String.valueOf(tvgenre1.get(0));
                     Log.i("TEN",T1);
@@ -354,7 +354,7 @@ public class SearchActivity extends AppCompatActivity {
                             .placeholder(R.drawable.baseline_person_outline_24)
                             .into(poster5);
                     titleSearchTv2.setText(seachArrayList1.get(1).getName());
-                    rateSearchTv2.setText(seachArrayList1.get(1).getVote_average().substring(0,2));
+                    rateSearchTv2.setText(seachArrayList1.get(1).getVote_average());
                     List tvgenre2 = seachArrayList1.get(1).getGenre_ids();
                     String T2=String.valueOf(tvgenre2.get(0));
                     switch (T2) {
@@ -465,7 +465,7 @@ public class SearchActivity extends AppCompatActivity {
                             .placeholder(R.drawable.baseline_person_outline_24)
                             .into(poster1);
                     titleSearchMovie1.setText(seachArrayList2.get(0).getTitle());
-                    rateSearchMovie1.setText(seachArrayList2.get(0).getVote_average().substring(0,2));
+                    rateSearchMovie1.setText(seachArrayList2.get(0).getVote_average());
                     List genre1 = seachArrayList2.get(0).getGenre_ids();
                     String G1 = String.valueOf((genre1.get(0)));
                     Log.i("GEN", G1.getClass().getName());
@@ -528,9 +528,9 @@ public class SearchActivity extends AppCompatActivity {
                         case "37.0":
                             genreSearchMovie1.setText("서부");
                             break;
-//                        case "none":
-//                            genreSearchMovie1.setText("장르없음");
-//                            break;
+                        case "none":
+                            genreSearchMovie1.setText("장르없음");
+                            break;
                     }
                     //좀돠라
                     dateSearchMovie1.setText(seachArrayList2.get(0).getRelease_date().substring(0,4));
