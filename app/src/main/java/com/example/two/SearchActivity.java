@@ -20,6 +20,8 @@ import com.example.two.config.SearchApi;
 import com.example.two.model.Seach;
 import com.example.two.model.SeachList;
 
+import java.lang.reflect.Type;
+import java.net.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -432,7 +434,7 @@ public class SearchActivity extends AppCompatActivity {
                     rateSearchMovie1.setText(seachArrayList2.get(0).getVote_average());
                     List genre1 = seachArrayList2.get(0).getGenre_ids();
                     String G1 = String.valueOf((genre1.get(0)));
-                    Log.i("GEN", G1);
+                    Log.i("GEN", G1.getClass().getName());
                     switch (G1) {
                         case "28.0":
                             genreSearchMovie1.setText("액션");
@@ -494,7 +496,7 @@ public class SearchActivity extends AppCompatActivity {
                         case "none":
                             genreSearchMovie1.setText("장르없음");
                     }
-                    dateSearchMovie2.setText(seachArrayList2.get(0).getRelease_date().substring(0,4));
+                    dateSearchMovie1.setText(seachArrayList2.get(0).getRelease_date().substring(0,4));
 
                     Glide.with(SearchActivity.this)
                             .load("https://image.tmdb.org/t/p/w92"+seachArrayList2.get(1).getPoster_path())
@@ -638,7 +640,7 @@ public class SearchActivity extends AppCompatActivity {
                         case "none":
                             genreSearchMovie3.setText("장르없음");
                     }
-                    dateSearchMovie3.setText(seachArrayList2.get(3).getRelease_date().substring(0,4));
+                    dateSearchMovie3.setText(seachArrayList2.get(2).getRelease_date().substring(0,4));
 
 
                 } else {
