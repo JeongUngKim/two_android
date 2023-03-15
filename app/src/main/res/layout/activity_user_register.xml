@@ -139,10 +139,11 @@
                     android:backgroundTint="#FF0000"
                     android:text="중복확인"
                     android:textColor="#FFFFFF" />
+
             </LinearLayout>
 
             <EditText
-                android:id="@+id/editTextNumber"
+                android:id="@+id/editName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -151,7 +152,7 @@
                 android:background="@drawable/editborder"
                 android:ems="10"
                 android:hint="이름을 입력하세요"
-                android:inputType="number"
+                android:inputType="textPersonName"
                 android:textColor="#000000"
                 android:textColorHint="#000000"
                 android:textSize="22sp" />
@@ -165,7 +166,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName9"
+                    android:id="@+id/editAge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -174,7 +175,7 @@
                     android:background="@drawable/editborder"
                     android:ems="10"
                     android:hint="나이를 입력하세요"
-                    android:inputType="textPersonName"
+                    android:inputType="number"
                     android:textColor="#000000"
                     android:textColorHint="#000000" />
 
