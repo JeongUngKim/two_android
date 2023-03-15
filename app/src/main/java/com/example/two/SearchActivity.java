@@ -21,6 +21,7 @@ import com.example.two.model.Seach;
 import com.example.two.model.SeachList;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,11 +54,25 @@ public class SearchActivity extends AppCompatActivity {
     TextView rateSearchMovie2;
     TextView rateSearchMovie3;
 
+    TextView genreSearchMovie1;
+    TextView genreSearchMovie2;
+    TextView genreSearchMovie3;
+
+    TextView dateSearchMovie1;
+    TextView dateSearchMovie2;
+    TextView dateSearchMovie3;
+
     TextView titleSearchTv1;
     TextView titleSearchTv2;
 
     TextView rateSearchTv1;
     TextView rateSearchTv2;
+
+    TextView genreSearchTv1;
+    TextView genreSearchTv2;
+
+    TextView dateSearchTv1;
+    TextView dateSearchTv2;
 
     EditText txtSearch;
 
@@ -66,12 +81,12 @@ public class SearchActivity extends AppCompatActivity {
     String desc = "popularity.desc";
 
     String Keyword;
-    int index;
+
 
     ImageView btntitleSearch;
 
 
-
+    String T1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,11 +112,25 @@ public class SearchActivity extends AppCompatActivity {
         rateSearchMovie2 = findViewById(R.id.rateSearchMovie2);
         rateSearchMovie3 = findViewById(R.id.rateSearchMovie3);
 
+        genreSearchMovie1 = findViewById(R.id.genreSearchMovie1);
+        genreSearchMovie2 = findViewById(R.id.genreSearchMovie2);
+        genreSearchMovie3 = findViewById(R.id.genreSearchMovie3);
+
+        dateSearchMovie1 = findViewById(R.id.dateSearchMovie1);
+        dateSearchMovie2 = findViewById(R.id.dateSearchMovie2);
+        dateSearchMovie3 = findViewById(R.id.dateSearchMovie3);
+
         titleSearchTv1 = findViewById(R.id.titleSearchTv1);
         titleSearchTv2 = findViewById(R.id.titleSearchTv2);
 
         rateSearchTv1 = findViewById(R.id.rateSearchTv1);
         rateSearchTv2 = findViewById(R.id.rateSearchTv2);
+
+        genreSearchTv1 = findViewById(R.id.genreSearchTv1);
+        genreSearchTv2 = findViewById(R.id.genreSearchTv2);
+
+        dateSearchTv1 = findViewById(R.id.dateSearchTv1);
+        dateSearchTv2 = findViewById(R.id.dateSearchTv2);
 
         txtSearch = findViewById(R.id.txtSearch);
 
@@ -132,7 +161,7 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(SearchActivity.this,MainActivity.class);
                 startActivity(intent);
-
+                finish();
             }
         });
 
@@ -205,6 +234,100 @@ public class SearchActivity extends AppCompatActivity {
                             .into(poster4);
                     titleSearchTv1.setText(seachArrayList1.get(0).getName());
                     rateSearchTv1.setText(seachArrayList1.get(0).getVote_average());
+                    List tvgenre1 = seachArrayList1.get(0).getGenre_ids();
+                    T1=String.valueOf(tvgenre1.get(0));
+                    Log.i("TEN",T1);
+
+                    switch (T1) {
+                        case "10759.0":
+                            genreSearchTv1.setText("액션&어드벤쳐");
+                        case "16.0":
+                            genreSearchTv1.setText("애니메이션");
+                        case "35.0":
+                            genreSearchTv1.setText("코미디");
+                        case "80.0":
+                            genreSearchTv1.setText("범죄");
+                        case "99.0":
+                            genreSearchTv1.setText("다큐멘터리");
+                        case "18.0":
+                            genreSearchTv1.setText("드라마");
+                        case"10751.0":
+                            genreSearchTv1.setText("가족");
+                        case"10762.0":
+                            genreSearchTv1.setText("어린이");
+                        case"9648.0":
+                            genreSearchTv1.setText("미스터리");
+                        case"10763.0":
+                            genreSearchTv1.setText("뉴스");
+                        case "10764.0":
+                            genreSearchTv1.setText("리얼리티");
+                        case"10765.0":
+                            genreSearchTv1.setText("SF&판타지");
+                        case"10766.0":
+                            genreSearchTv1.setText("Soap");
+                        case"10767.0":
+                            genreSearchTv1.setText("토크쇼");
+                        case "10768.0":
+                            genreSearchTv1.setText("전쟁&정치");
+                        case "37.0":
+                            genreSearchTv1.setText("서부");
+                        case "none":
+                            genreSearchTv2.setText("장르없음");
+                    }
+//                    if (T=="10759.0"){
+//                        genreSearchTv1.setText("액션&어드벤쳐");
+//                    }else if (T=="16.0") {
+//                        genreSearchTv1.setText("애니메이션");
+//                        Log.i("TEN",T);
+//                    }
+//                    else if (T=="35.0") {
+//                        genreSearchTv1.setText("코미디");
+//                    }
+//                    else if (tvgenre1.get(0)=="80") {
+//                        genreSearchTv1.setText("범죄");
+//                    }
+//                    else if (tvgenre1.get(0)=="99") {
+//                        genreSearchTv1.setText("다큐멘터리");
+//                    }
+//                    else if (tvgenre1.get(0)=="18") {
+//                        genreSearchTv1.setText("애니메이션");
+//                    }
+//                    else if (tvgenre1.get(0)=="16") {
+//                        genreSearchTv1.setText("드라마");
+//                    }
+//
+//                    else if (tvgenre1.get(0)=="10751") {
+//                        genreSearchTv1.setText("가족");
+//                    }
+//                    else if (tvgenre1.get(0)=="10762") {
+//                        genreSearchTv1.setText("어린이");
+//                    }
+//                    else if (tvgenre1.get(0)=="9648") {
+//                        genreSearchTv1.setText("뉴스");
+//                    }
+//                    else if (tvgenre1.get(0)=="10764") {
+//                        genreSearchTv1.setText("리얼리티");
+//                    }
+//                    else if (tvgenre1.get(0)=="10765") {
+//                        genreSearchTv1.setText("SF&판타지");
+//                    }
+//                    else if (tvgenre1.get(0)=="10766") {
+//                        genreSearchTv1.setText("Soap");
+//                    }
+//                    else if (tvgenre1.get(0)=="10767") {
+//                        genreSearchTv1.setText("토크쇼");
+//                    }
+//                    else if (tvgenre1.get(0)=="10768") {
+//                        genreSearchTv1.setText("전쟁&정치");
+//                    }
+//                    else if (tvgenre1.get(0)=="37") {
+//                        genreSearchTv1.setText("서부");
+//                    }
+//                    else {
+//                        genreSearchTv1.setText("장르없음");
+//                    }
+
+                    dateSearchTv1.setText(seachArrayList1.get(0).getFirst_air_date().substring(0,4));
 
                     Glide.with(SearchActivity.this)
                             .load("https://image.tmdb.org/t/p/w92"+seachArrayList1.get(1).getPoster_path())
@@ -212,6 +335,49 @@ public class SearchActivity extends AppCompatActivity {
                             .into(poster5);
                     titleSearchTv2.setText(seachArrayList1.get(1).getName());
                     rateSearchTv2.setText(seachArrayList1.get(1).getVote_average());
+                    List tvgenre2 = seachArrayList1.get(1).getGenre_ids();
+                    String T2=String.valueOf(tvgenre2.get(0));
+                    switch (T2) {
+                        case "10759.0":
+                            genreSearchTv2.setText("액션&어드벤쳐");
+
+                        case "16.0":
+                            genreSearchTv2.setText("애니메이션");
+
+                        case "35.0":
+                            genreSearchTv2.setText("코미디");
+                        case "80.0":
+                            genreSearchTv2.setText("범죄");
+                        case "99.0":
+                            genreSearchTv2.setText("다큐멘터리");
+                        case "18.0":
+                            genreSearchTv2.setText("드라마");
+                        case"10751.0":
+                            genreSearchTv2.setText("가족");
+                        case"10762.0":
+                            genreSearchTv2.setText("어린이");
+
+                        case"9648.0":
+                            genreSearchTv2.setText("미스터리");
+                        case"10763.0":
+                            genreSearchTv2.setText("뉴스");
+                        case "10764.0":
+                            genreSearchTv2.setText("리얼리티");
+                        case"10765.0":
+                            genreSearchTv2.setText("SF&판타지");
+                        case"10766.0":
+                            genreSearchTv2.setText("Soap");
+                        case"10767.0":
+                            genreSearchTv2.setText("토크쇼");
+                        case "10768.0":
+                            genreSearchTv2.setText("전쟁&정치");
+                        case "37.0":
+                            genreSearchTv2.setText("서부");
+                        case "none":
+                            genreSearchTv2.setText("장르없음");
+                    }
+
+                    dateSearchMovie2.setText(seachArrayList1.get(1).getFirst_air_date().substring(0,4));
 
 
 
@@ -256,6 +422,7 @@ public class SearchActivity extends AppCompatActivity {
 
                     seachArrayList2.addAll(response.body().getResults());
 
+
                     // 오프셋 처리하는 코드
                     Glide.with(SearchActivity.this)
                             .load("https://image.tmdb.org/t/p/w92"+seachArrayList2.get(0).getPoster_path())
@@ -263,6 +430,71 @@ public class SearchActivity extends AppCompatActivity {
                             .into(poster1);
                     titleSearchMovie1.setText(seachArrayList2.get(0).getTitle());
                     rateSearchMovie1.setText(seachArrayList2.get(0).getVote_average());
+                    List genre1 = seachArrayList2.get(0).getGenre_ids();
+                    String G1 = String.valueOf((genre1.get(0)));
+                    Log.i("GEN", G1);
+                    switch (G1) {
+                        case "28.0":
+                            genreSearchMovie1.setText("액션");
+
+                        case "12.0":
+                            genreSearchMovie1.setText("모험");
+
+                        case "16.0":
+                            genreSearchMovie1.setText("애니메이션");
+
+                        case "35.0":
+                            genreSearchMovie1.setText("코미디");
+
+                        case "80.0":
+                            genreSearchMovie1.setText("범죄");
+
+                        case "99":
+                            genreSearchMovie1.setText("다큐멘터리");
+
+                        case "18.0":
+                            genreSearchMovie1.setText("드라마");
+
+                        case "10751.0":
+                            genreSearchMovie1.setText("가족");
+
+                        case "14.0":
+                            genreSearchMovie1.setText("판타지");
+
+                        case "36.0":
+                            genreSearchMovie1.setText("역사");
+
+                        case "27.0":
+                            genreSearchMovie1.setText("공포");
+
+                        case "10402.0":
+                            genreSearchMovie1.setText("음악");
+
+                        case "9648.0":
+                            genreSearchMovie1.setText("미스터리");
+
+                        case "10749.0":
+                            genreSearchMovie1.setText("로맨스");
+
+                        case "878.0":
+                            genreSearchMovie1.setText("SF");
+
+                        case "10770.0":
+                            genreSearchMovie1.setText("TV 영화");
+
+                        case "53.0":
+                            genreSearchMovie1.setText("스릴러");
+
+                        case "10752.0":
+                            genreSearchMovie1.setText("전쟁");
+
+                        case "37.0":
+                            genreSearchMovie1.setText("서부");
+
+                        case "none":
+                            genreSearchMovie1.setText("장르없음");
+                    }
+                    dateSearchMovie2.setText(seachArrayList2.get(0).getRelease_date().substring(0,4));
 
                     Glide.with(SearchActivity.this)
                             .load("https://image.tmdb.org/t/p/w92"+seachArrayList2.get(1).getPoster_path())
@@ -270,6 +502,71 @@ public class SearchActivity extends AppCompatActivity {
                             .into(poster2);
                     titleSearchMovie2.setText(seachArrayList2.get(1).getTitle());
                     rateSearchMovie2.setText(seachArrayList2.get(1).getVote_average());
+                    List genre2 = seachArrayList2.get(1).getGenre_ids();
+                    String G2 = String.valueOf((genre2.get(0)));
+                    Log.i("GEN", G2);
+                    switch (G2) {
+                        case "28.0":
+                            genreSearchMovie2.setText("액션");
+
+                        case "12.0":
+                            genreSearchMovie2.setText("모험");
+
+                        case "16.0":
+                            genreSearchMovie2.setText("애니메이션");
+
+                        case "35.0":
+                            genreSearchMovie2.setText("코미디");
+
+                        case "80.0":
+                            genreSearchMovie2.setText("범죄");
+
+                        case "99":
+                            genreSearchMovie2.setText("다큐멘터리");
+
+                        case "18.0":
+                            genreSearchMovie2.setText("드라마");
+
+                        case "10751.0":
+                            genreSearchMovie2.setText("가족");
+
+                        case "14.0":
+                            genreSearchMovie2.setText("판타지");
+
+                        case "36.0":
+                            genreSearchMovie2.setText("역사");
+
+                        case "27.0":
+                            genreSearchMovie2.setText("공포");
+
+                        case "10402.0":
+                            genreSearchMovie2.setText("음악");
+
+                        case "9648.0":
+                            genreSearchMovie2.setText("미스터리");
+
+                        case "10749.0":
+                            genreSearchMovie2.setText("로맨스");
+
+                        case "878.0":
+                            genreSearchMovie2.setText("SF");
+
+                        case "10770.0":
+                            genreSearchMovie2.setText("TV 영화");
+
+                        case "53.0":
+                            genreSearchMovie2.setText("스릴러");
+
+                        case "10752.0":
+                            genreSearchMovie2.setText("전쟁");
+
+                        case "37.0":
+                            genreSearchMovie2.setText("서부");
+
+                        case "none":
+                            genreSearchMovie2.setText("장르없음");
+                    }
+                    dateSearchMovie2.setText(seachArrayList2.get(1).getRelease_date().substring(0,4));
 
                     Glide.with(SearchActivity.this)
                             .load("https://image.tmdb.org/t/p/w92"+seachArrayList2.get(2).getPoster_path())
@@ -277,6 +574,71 @@ public class SearchActivity extends AppCompatActivity {
                             .into(poster3);
                     titleSearchMovie3.setText(seachArrayList2.get(2).getTitle());
                     rateSearchMovie3.setText(seachArrayList2.get(2).getVote_average());
+                    List genre3 = seachArrayList2.get(2).getGenre_ids();
+                    String G3 = String.valueOf((genre3.get(0)));
+                    Log.i("GEN", G3);
+                    switch (G3) {
+                        case "28.0":
+                            genreSearchMovie3.setText("액션");
+
+                        case "12.0":
+                            genreSearchMovie3.setText("모험");
+
+                        case "16.0":
+                            genreSearchMovie3.setText("애니메이션");
+
+                        case "35.0":
+                            genreSearchMovie3.setText("코미디");
+
+                        case "80.0":
+                            genreSearchMovie3.setText("범죄");
+
+                        case "99":
+                            genreSearchMovie3.setText("다큐멘터리");
+
+                        case "18.0":
+                            genreSearchMovie3.setText("드라마");
+
+                        case "10751.0":
+                            genreSearchMovie3.setText("가족");
+
+                        case "14.0":
+                            genreSearchMovie3.setText("판타지");
+
+                        case "36.0":
+                            genreSearchMovie3.setText("역사");
+
+                        case "27.0":
+                            genreSearchMovie3.setText("공포");
+
+                        case "10402.0":
+                            genreSearchMovie3.setText("음악");
+
+                        case "9648.0":
+                            genreSearchMovie3.setText("미스터리");
+
+                        case "10749.0":
+                            genreSearchMovie3.setText("로맨스");
+
+                        case "878.0":
+                            genreSearchMovie3.setText("SF");
+
+                        case "10770.0":
+                            genreSearchMovie3.setText("TV 영화");
+
+                        case "53.0":
+                            genreSearchMovie3.setText("스릴러");
+
+                        case "10752.0":
+                            genreSearchMovie3.setText("전쟁");
+
+                        case "37.0":
+                            genreSearchMovie3.setText("서부");
+
+                        case "none":
+                            genreSearchMovie3.setText("장르없음");
+                    }
+                    dateSearchMovie3.setText(seachArrayList2.get(3).getRelease_date().substring(0,4));
 
 
                 } else {
