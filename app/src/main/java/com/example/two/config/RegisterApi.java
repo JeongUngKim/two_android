@@ -1,7 +1,9 @@
 package com.example.two.config;
 
+import com.example.two.R;
 import com.example.two.model.User;
 import com.example.two.model.UserRes;
+import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
 
@@ -22,8 +24,20 @@ public interface RegisterApi {
 
     @Multipart
     @POST("register")
-    Call<UserRes> resgister(@PartMap JSONObject data,
+    Call<UserRes> resgister(@Part("data") RequestBody jsonObject  ,
                             @Part MultipartBody.Part profileImg);
+
+//    @Multipart
+//    @POST("register")
+//    Call<JsonObject> resgister(@Part("name") RequestBody name,
+//                               @Part("nickname") RequestBody nickname,
+//                               @Part("userEmail") RequestBody email,
+//                               @Part("password") RequestBody password,
+//                               @Part("gender") RequestBody gender,
+//                               @Part("age") RequestBody age,
+//                               @Part("questionNum") RequestBody questionNum,
+//                               @Part("questionAnswer") RequestBody answer,
+//                               @Part MultipartBody.Part profileImg);
 
     @POST("/user/login")
     Call<UserRes> login(@Body User user);

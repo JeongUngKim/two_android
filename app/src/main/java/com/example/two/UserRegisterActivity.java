@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -25,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
 import com.example.two.Api.NetworkClient2;
@@ -53,6 +55,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class UserRegisterActivity extends AppCompatActivity {
+    public static Context context;
     Button buttonRegister;
 
 
@@ -89,10 +92,13 @@ public class UserRegisterActivity extends AppCompatActivity {
     Spinner genderSp;
     Spinner questionSp;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_register);
+
+        context = getApplicationContext();
 
         editTextTextEmailAddress = findViewById(R.id.editTextTextEmailAddress);
         editTextTextPassword = findViewById(R.id.editTextTextPassword);
@@ -165,17 +171,13 @@ public class UserRegisterActivity extends AppCompatActivity {
             Toast.makeText(UserRegisterActivity.this, "닉네임을 입력하세요", Toast.LENGTH_SHORT).show();
             return;
         }
+
         String name = editName.getText().toString().trim();
         String age = editAge.getText().toString().trim();
         String answer = editAnswer.getText().toString().trim();
-        String genderSelect = genderSp.getSelectedItem().toString();
+        int gender = genderSp.getSelectedItemPosition();
 
 
-        if(genderSelect == "남자"){
-            gender = 1;
-        }else if(genderSelect == "여자"){
-            gender = 0;
-        }
 
         int questionNum = questionSp.getSelectedItemPosition();
 
@@ -190,6 +192,15 @@ public class UserRegisterActivity extends AppCompatActivity {
 
         fileName = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         photoFile = getPhotoFile(fileName);
+        String imgUrl = String.valueOf(photoFile);
+
+        SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("nickname",nickname);
+        editor.putString("imgUrl",imgUrl);// 저장
+//        editor.putString(nickname,"nickname"+"");// 저장
+//        editor.putString(imgUrl,"imgUrl"+"");
+//        editor.apply(); // 저장e
 
 
         Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -202,14 +213,27 @@ public class UserRegisterActivity extends AppCompatActivity {
 
 
 
-        RequestBody nameBody = RequestBody.create(name, MediaType.parse("text/plain"));
-        RequestBody emailBody = RequestBody.create(email, MediaType.parse("text/plain"));
-        RequestBody passwordBody = RequestBody.create(password, MediaType.parse("text/plain"));
-        RequestBody nicknameBody = RequestBody.create(nickname, MediaType.parse("text/plain"));
-        RequestBody genderBody = RequestBody.create(String.valueOf(gender),MediaType.parse("text/plain"));
-        RequestBody ageBody = RequestBody.create(age, MediaType.parse("text/plain"));
-        RequestBody questionNumBody = RequestBody.create(String.valueOf(questionNum+1), MediaType.parse("text/plain"));
-        RequestBody answerBody = RequestBody.create(answer, MediaType.parse("text/plain"));
+//        RequestBody nameBody = RequestBody.create(name, MediaType.parse("text/plain"));
+//        RequestBody emailBody = RequestBody.create(email, MediaType.parse("text/plain"));
+//        RequestBody passwordBody = RequestBody.create(password, MediaType.parse("text/plain"));
+//        RequestBody nicknameBody = RequestBody.create(nickname, MediaType.parse("text/plain"));
+//        RequestBody genderBody = RequestBody.create(String.valueOf(gender),MediaType.parse("text/plain"));
+//        RequestBody ageBody = RequestBody.create(age, MediaType.parse("text/plain"));
+//        RequestBody questionNumBody = RequestBody.create(String.valueOf(questionNum+1), MediaType.parse("text/plain"));
+//        RequestBody answerBody = RequestBody.create(answer, MediaType.parse("text/plain"));
+
+//        Map<String, RequestBody> body = new HashMap<>();
+//        body.put("name", nameBody);
+//        body.put("email", emailBody);
+//        body.put("password", passwordBody);
+//        body.put("nickname", nicknameBody);
+//        body.put("gender", genderBody);
+//        body.put("age", ageBody );
+//        body.put("questionNum", questionNumBody);
+//        body.put("answer", answerBody);
+//
+//        Log.i("HASH",String.valueOf(body));
+
 //        User user = new User(name,nickname,email,password,gender,questionNum+1,answer);
 
 //        RequestBody userBody = RequestBody.create(String.valueOf(user),MediaType.parse("text/plain"));
@@ -217,13 +241,13 @@ public class UserRegisterActivity extends AppCompatActivity {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("name", name);
-            jsonObject.put("email", email);
-            jsonObject.put("password", password);
             jsonObject.put("nickname", nickname);
-            jsonObject.put("gender", String.valueOf(gender));
+            jsonObject.put("userEmail", email);
+            jsonObject.put("password", password);
+            jsonObject.put("gender", gender);
             jsonObject.put("age", age );
-            jsonObject.put("questionNum", String.valueOf(questionNum+1));
-            jsonObject.put("answer", answer);
+            jsonObject.put("questionNum", questionNum+1);
+            jsonObject.put("questionAnswer", answer);
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
@@ -233,16 +257,14 @@ public class UserRegisterActivity extends AppCompatActivity {
 
 
 //        RequestBody profileImgBody = RequestBody.create(profileImg, MediaType.parse("image/jpg"));
-
+        RequestBody jsonBody = RequestBody.create(String.valueOf(jsonObject), MediaType.parse("text/plain"));
         RequestBody fileBody = RequestBody.create(photoFile, MediaType.parse("image/jpg"));
         MultipartBody.Part profileImg = MultipartBody.Part.createFormData("profileImg", photoFile.getName(), fileBody);
 
 
         // 헤더에 들어갈 억세스토큰 가져온다.
-        SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
-        String accessToken = "Bearer " + sp.getString(Config.ACCESS_TOKEN, "");
 
-        Call<UserRes> call = api.resgister(jsonObject,profileImg);
+        Call<UserRes> call = api.resgister(jsonBody,profileImg);
 
         call.enqueue(new Callback<UserRes>() {
             @Override

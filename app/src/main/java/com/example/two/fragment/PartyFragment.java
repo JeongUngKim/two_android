@@ -1,23 +1,49 @@
 package com.example.two.fragment;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
+import com.example.two.Api.NetworkClient1;
+import com.example.two.Api.NetworkClient2;
 import com.example.two.MainActivity;
 import com.example.two.PartyAddActivity;
 import com.example.two.R;
+import com.example.two.UserRegisterActivity;
+import com.example.two.adapter.ChatRoomAdapter;
+import com.example.two.adapter.MainAdapter;
+import com.example.two.config.ChatApi;
+import com.example.two.config.Config;
+import com.example.two.config.MovieApi;
+import com.example.two.model.Chat;
+import com.example.two.model.ChatRoomList;
+import com.example.two.model.Movie;
+import com.example.two.model.MovieList;
 import com.example.two.model.User;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,13 +52,21 @@ import com.example.two.model.User;
  */
 public class PartyFragment extends Fragment {
     MainActivity activity;
-
+    SharedPreferences sp;
+    SharedPreferences.Editor editor;
     ImageButton btnCommunity;
     ImageButton btnHome;
     ImageButton btnFilter;
     ImageButton btnParty;
     ImageButton btnMy;
     Button partyBtn;
+
+    RecyclerView recyclerView;
+    ChatRoomAdapter adapter;
+
+    ArrayList<Chat> chatArrayList = new ArrayList<>();
+
+    Context context;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -103,15 +137,23 @@ public class PartyFragment extends Fragment {
         btnMy = view.findViewById(R.id.btnMy);
         partyBtn = view.findViewById(R.id.partyBtn);
 
+
+        recyclerView = view.findViewById(R.id.recyclerView);
+        getChatNetworkData();
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        context = UserRegisterActivity.context;
+        sp = context.getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
+        User user = new User();
+        user.setImgUrl(sp.getString("imgUrl",""));
+        user.setNickname(sp.getString("nickname",""));
+
         partyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                User user = new User();
-                user.setImgUrl("https://ungjk-test.s3.ap-northeast-2.amazonaws.com/rrc0777@naver.com_profileImg.jpg");
-                user.setEmail("dayeon@naver.com");
-                user.setNickname("김대연");
-                user.setPassword("1234");
+
 
 
 
@@ -168,4 +210,50 @@ public class PartyFragment extends Fragment {
 
 
     }
+
+    private void getChatNetworkData() {
+        Retrofit retrofit = NetworkClient2.getRetrofitClient(getActivity());
+
+        ChatApi api = retrofit.create(ChatApi.class);
+
+        Log.i("AAA", api.toString());
+
+        Call<ChatRoomList> call = api.getChatingList(0);
+
+        call.enqueue(new Callback<ChatRoomList>() {
+            @Override
+            public void onResponse(Call<ChatRoomList> call, Response<ChatRoomList> response) {
+
+                if (response.isSuccessful()) {
+                    // getNetworkData는 항상처음에 데이터를 가져오는 동작 이므로
+                    // 초기화 코드가 필요
+                    chatArrayList.clear();
+
+                    // 데이터를 받았으니 리사이클러 표시
+
+                    chatArrayList.addAll(response.body().getPartyBoard());
+
+                    // 오프셋 처리하는 코드
+
+
+                    adapter = new ChatRoomAdapter(getActivity(),chatArrayList);
+                    recyclerView.setAdapter(adapter);
+                    Log.i("RECYCLE", adapter.toString());
+
+                } else {
+                    Toast.makeText(getActivity(), "문제가 있습니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ChatRoomList> call, Throwable t) {
+
+
+            }
+
+
+        });
+    }
+
 }
