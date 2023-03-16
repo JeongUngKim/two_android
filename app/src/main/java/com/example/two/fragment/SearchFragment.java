@@ -1,12 +1,17 @@
-package com.example.two;
+package com.example.two.fragment;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -15,13 +20,13 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.two.Api.NetworkClient1;
+import com.example.two.MainActivity;
+import com.example.two.R;
 import com.example.two.config.Config;
 import com.example.two.config.SearchApi;
 import com.example.two.model.Seach;
 import com.example.two.model.SeachList;
 
-import java.lang.reflect.Type;
-import java.net.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +35,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class SearchActivity extends AppCompatActivity {
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link SearchFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class SearchFragment extends Fragment {
+
+    MainActivity activity;
 
     ImageButton btnCommunity;
     ImageButton btnHome;
@@ -38,7 +50,7 @@ public class SearchActivity extends AppCompatActivity {
     ImageButton btnParty;
     ImageButton btnMy;
 
-    ArrayList<Seach>seachArrayList1 = new ArrayList<>();
+    ArrayList<Seach> seachArrayList1 = new ArrayList<>();
 
     ArrayList<Seach>seachArrayList2 = new ArrayList<>();
 
@@ -89,57 +101,111 @@ public class SearchActivity extends AppCompatActivity {
 
 
     String T1;
+
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+
+    public SearchFragment() {
+        // Required empty public constructor
+    }
+
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment SearchFragment.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static SearchFragment newInstance(String param1, String param2) {
+        SearchFragment fragment = new SearchFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        activity = (MainActivity) getActivity();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+
+        activity = null;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
 
-        btnCommunity = findViewById(R.id.btnCommunity);
-        btnHome = findViewById(R.id.btnHome);
-        btnParty = findViewById(R.id.btnParty);
-        btnFilter = findViewById(R.id.btnFilter);
-        btnMy = findViewById(R.id.btnMy);
+    @SuppressLint("MissingInflatedId")
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_search, container, false);
 
-        poster1=findViewById(R.id.poster1);
-        poster2=findViewById(R.id.poster2);
-        poster3=findViewById(R.id.poster3);
-        poster4=findViewById(R.id.poster4);
-        poster5=findViewById(R.id.poster5);
+        btnCommunity = view.findViewById(R.id.btnCommunity);
+        btnHome = view.findViewById(R.id.btnHome);
+        btnParty = view.findViewById(R.id.btnParty);
+        btnFilter = view.findViewById(R.id.btnFilter);
+        btnMy = view.findViewById(R.id.btnMy);
 
-        titleSearchMovie1 = findViewById(R.id.titleSearchMovie1);
-        titleSearchMovie2 = findViewById(R.id.titleSearchMovie2);
-        titleSearchMovie3 = findViewById(R.id.titleSearchMovie3);
+        poster1 = view.findViewById(R.id.poster1);
+        poster2 = view.findViewById(R.id.poster2);
+        poster3 = view.findViewById(R.id.poster3);
+        poster4 = view.findViewById(R.id.poster4);
+        poster5 = view.findViewById(R.id.poster5);
 
-        rateSearchMovie1 = findViewById(R.id.rateSearchMovie1);
-        rateSearchMovie2 = findViewById(R.id.rateSearchMovie2);
-        rateSearchMovie3 = findViewById(R.id.rateSearchMovie3);
+        titleSearchMovie1 = view.findViewById(R.id.titleSearchMovie1);
+        titleSearchMovie2 = view.findViewById(R.id.titleSearchMovie2);
+        titleSearchMovie3 = view.findViewById(R.id.titleSearchMovie3);
 
-        genreSearchMovie1 = findViewById(R.id.genreSearchMovie1);
-        genreSearchMovie2 = findViewById(R.id.genreSearchMovie2);
-        genreSearchMovie3 = findViewById(R.id.genreSearchMovie3);
+        rateSearchMovie1 = view.findViewById(R.id.rateSearchMovie1);
+        rateSearchMovie2 = view.findViewById(R.id.rateSearchMovie2);
+        rateSearchMovie3 = view.findViewById(R.id.rateSearchMovie3);
 
-        dateSearchMovie1 = findViewById(R.id.dateSearchMovie1);
-        dateSearchMovie2 = findViewById(R.id.dateSearchMovie2);
-        dateSearchMovie3 = findViewById(R.id.dateSearchMovie3);
+        genreSearchMovie1 = view.findViewById(R.id.genreSearchMovie1);
+        genreSearchMovie2 = view.findViewById(R.id.genreSearchMovie2);
+        genreSearchMovie3 = view.findViewById(R.id.genreSearchMovie3);
 
-        titleSearchTv1 = findViewById(R.id.titleSearchTv1);
-        titleSearchTv2 = findViewById(R.id.titleSearchTv2);
+        dateSearchMovie1 = view.findViewById(R.id.dateSearchMovie1);
+        dateSearchMovie2 = view.findViewById(R.id.dateSearchMovie2);
+        dateSearchMovie3 = view.findViewById(R.id.dateSearchMovie3);
 
-        rateSearchTv1 = findViewById(R.id.rateSearchTv1);
-        rateSearchTv2 = findViewById(R.id.rateSearchTv2);
+        titleSearchTv1 = view.findViewById(R.id.titleSearchTv1);
+        titleSearchTv2 = view.findViewById(R.id.titleSearchTv2);
 
-        genreSearchTv1 = findViewById(R.id.genreSearchTv1);
-        genreSearchTv2 = findViewById(R.id.genreSearchTv2);
+        rateSearchTv1 = view.findViewById(R.id.rateSearchTv1);
+        rateSearchTv2 = view.findViewById(R.id.rateSearchTv2);
 
-        dateSearchTv1 = findViewById(R.id.dateSearchTv1);
-        dateSearchTv2 = findViewById(R.id.dateSearchTv2);
+        genreSearchTv1 = view.findViewById(R.id.genreSearchTv1);
+        genreSearchTv2 = view.findViewById(R.id.genreSearchTv2);
 
-        txtSearch = findViewById(R.id.txtSearch);
+        dateSearchTv1 = view.findViewById(R.id.dateSearchTv1);
+        dateSearchTv2 = view.findViewById(R.id.dateSearchTv2);
 
-        btntitleSearch = findViewById(R.id.btntitleSearch);
+        txtSearch = view.findViewById(R.id.txtSearch);
 
-
-
+        btntitleSearch = view.findViewById(R.id.btntitleSearch);
 
         btntitleSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,9 +227,9 @@ public class SearchActivity extends AppCompatActivity {
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SearchActivity.this,MainActivity.class);
+                Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
-                finish();
+                getActivity().finish();
             }
         });
 
@@ -171,30 +237,19 @@ public class SearchActivity extends AppCompatActivity {
         btnCommunity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SearchActivity.this,CommunityActivity.class);
-                startActivity(intent);
-                finish();
+
+                activity.onFragmentChange(0);
+
             }
         });
 
-
-        // 검색 액티비티 넘어가기
-        btnFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SearchActivity.this,SearchActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
 
         // 파티매칭 액티비티 넘어가기
         btnParty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SearchActivity.this,PartyActivity.class);
-                startActivity(intent);
-                finish();
+
+                activity.onFragmentChange(1);
             }
         });
 
@@ -202,15 +257,20 @@ public class SearchActivity extends AppCompatActivity {
         btnMy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SearchActivity.this,MyMenuActivity.class);
-                startActivity(intent);
-                finish();
+                activity.onFragmentChange(3);
             }
         });
+
+
+
+        return view;
+
+
+
     }
 
     private void getNetworkSearchTvData(String Keyword) {
-        Retrofit retrofit = NetworkClient1.getRetrofitClient(SearchActivity.this);
+        Retrofit retrofit = NetworkClient1.getRetrofitClient(getActivity());
 
         SearchApi api = retrofit.create(SearchApi.class);
 
@@ -230,7 +290,7 @@ public class SearchActivity extends AppCompatActivity {
                     // 데이터를 받았으니 리사이클러 표시
 
                     seachArrayList1.addAll(response.body().getResults());
-                    Glide.with(SearchActivity.this)
+                    Glide.with(SearchFragment.this)
                             .load("https://image.tmdb.org/t/p/w92"+seachArrayList1.get(0).getPoster_path())
                             .placeholder(R.drawable.baseline_person_outline_24)
                             .into(poster4);
@@ -293,63 +353,11 @@ public class SearchActivity extends AppCompatActivity {
                             genreSearchTv1.setText("장르없음");
                             break;
                     }
-                    //제발
-//                    if (T=="10759.0"){
-//                        genreSearchTv1.setText("액션&어드벤쳐");
-//                    }else if (T=="16.0") {
-//                        genreSearchTv1.setText("애니메이션");
-//                        Log.i("TEN",T);
-//                    }
-//                    else if (T=="35.0") {
-//                        genreSearchTv1.setText("코미디");
-//                    }
-//                    else if (tvgenre1.get(0)=="80") {
-//                        genreSearchTv1.setText("범죄");
-//                    }
-//                    else if (tvgenre1.get(0)=="99") {
-//                        genreSearchTv1.setText("다큐멘터리");
-//                    }
-//                    else if (tvgenre1.get(0)=="18") {
-//                        genreSearchTv1.setText("애니메이션");
-//                    }
-//                    else if (tvgenre1.get(0)=="16") {
-//                        genreSearchTv1.setText("드라마");
-//                    }
-//
-//                    else if (tvgenre1.get(0)=="10751") {
-//                        genreSearchTv1.setText("가족");
-//                    }
-//                    else if (tvgenre1.get(0)=="10762") {
-//                        genreSearchTv1.setText("어린이");
-//                    }
-//                    else if (tvgenre1.get(0)=="9648") {
-//                        genreSearchTv1.setText("뉴스");
-//                    }
-//                    else if (tvgenre1.get(0)=="10764") {
-//                        genreSearchTv1.setText("리얼리티");
-//                    }
-//                    else if (tvgenre1.get(0)=="10765") {
-//                        genreSearchTv1.setText("SF&판타지");
-//                    }
-//                    else if (tvgenre1.get(0)=="10766") {
-//                        genreSearchTv1.setText("Soap");
-//                    }
-//                    else if (tvgenre1.get(0)=="10767") {
-//                        genreSearchTv1.setText("토크쇼");
-//                    }
-//                    else if (tvgenre1.get(0)=="10768") {
-//                        genreSearchTv1.setText("전쟁&정치");
-//                    }
-//                    else if (tvgenre1.get(0)=="37") {
-//                        genreSearchTv1.setText("서부");
-//                    }
-//                    else {
-//                        genreSearchTv1.setText("장르없음");
-//                    }
+
 
                     dateSearchTv1.setText(seachArrayList1.get(0).getFirst_air_date().substring(0,4));
 
-                    Glide.with(SearchActivity.this)
+                    Glide.with(SearchFragment.this)
                             .load("https://image.tmdb.org/t/p/w92"+seachArrayList1.get(1).getPoster_path())
                             .placeholder(R.drawable.baseline_person_outline_24)
                             .into(poster5);
@@ -421,7 +429,7 @@ public class SearchActivity extends AppCompatActivity {
                     // 오프셋 처리하는 코드
 
                 } else {
-                    Toast.makeText(SearchActivity.this, "문제가 있습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "문제가 있습니다.", Toast.LENGTH_SHORT).show();
                     return;
                 }
             }
@@ -437,7 +445,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void getNetworkSearchMovieData(String Keyword) {
-        Retrofit retrofit = NetworkClient1.getRetrofitClient(SearchActivity.this);
+        Retrofit retrofit = NetworkClient1.getRetrofitClient(getActivity());
 
         SearchApi api = retrofit.create(SearchApi.class);
 
@@ -460,7 +468,7 @@ public class SearchActivity extends AppCompatActivity {
 
 
                     // 오프셋 처리하는 코드
-                    Glide.with(SearchActivity.this)
+                    Glide.with(SearchFragment.this)
                             .load("https://image.tmdb.org/t/p/w92"+seachArrayList2.get(0).getPoster_path())
                             .placeholder(R.drawable.baseline_person_outline_24)
                             .into(poster1);
@@ -535,7 +543,7 @@ public class SearchActivity extends AppCompatActivity {
                     //좀돠라
                     dateSearchMovie1.setText(seachArrayList2.get(0).getRelease_date().substring(0,4));
 
-                    Glide.with(SearchActivity.this)
+                    Glide.with(SearchFragment.this)
                             .load("https://image.tmdb.org/t/p/w92"+seachArrayList2.get(1).getPoster_path())
                             .placeholder(R.drawable.baseline_person_outline_24)
                             .into(poster2);
@@ -608,7 +616,7 @@ public class SearchActivity extends AppCompatActivity {
                     }
                     dateSearchMovie2.setText(seachArrayList2.get(1).getRelease_date().substring(0,4));
 
-                    Glide.with(SearchActivity.this)
+                    Glide.with(SearchFragment.this)
                             .load("https://image.tmdb.org/t/p/w92"+seachArrayList2.get(2).getPoster_path())
                             .placeholder(R.drawable.baseline_person_outline_24)
                             .into(poster3);
@@ -683,7 +691,7 @@ public class SearchActivity extends AppCompatActivity {
 
 
                 } else {
-                    Toast.makeText(SearchActivity.this, "문제가 있습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "문제가 있습니다.", Toast.LENGTH_SHORT).show();
                     return;
                 }
             }

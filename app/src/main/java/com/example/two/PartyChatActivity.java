@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.two.adapter.ChatAdapter;
+import com.example.two.fragment.PartyFragment;
 import com.example.two.model.MessageItem;
 import com.example.two.model.User;
 import com.google.android.gms.tasks.Task;
@@ -27,6 +28,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class PartyChatActivity extends AppCompatActivity {
+
+
     EditText editMsg;
     ListView listView;
 
@@ -111,5 +114,16 @@ public class PartyChatActivity extends AppCompatActivity {
             }
         });
 
+
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        //TODO : 현재는 파티채팅방에서 백 버튼을 누르면 메인 액티비티로 가짐 파티 프래그먼트로 가지게 바꿔야함
+        Intent intent = new Intent(PartyChatActivity.this,MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyMenuActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.MyFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -50,8 +50,7 @@
                     android:layout_height="45dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
-                    android:src="@drawable/baseline_settings_24"
-                    app:srcCompat="@drawable/baseline_settings_24" />
+                    android:src="@drawable/baseline_settings_24" />
 
             </LinearLayout>
 
@@ -168,45 +167,44 @@
 
             <ImageButton
                 android:id="@+id/btnHome"
+                android:src="@drawable/home"
                 android:layout_width="82dp"
                 android:layout_height="50dp"
                 android:background="#000000"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/home" />
+                android:scaleType="fitCenter" />
 
             <ImageButton
                 android:id="@+id/btnCommunity"
+                android:src="@drawable/chat"
                 android:layout_width="82dp"
                 android:layout_height="50dp"
                 android:background="#000000"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/chat" />
+                android:scaleType="fitCenter" />
 
             <ImageButton
                 android:id="@+id/btnParty"
+                android:src="@drawable/party"
                 android:layout_width="82dp"
                 android:layout_height="50dp"
                 android:backgroundTint="#000000"
-                android:scaleType="centerCrop"
-                app:srcCompat="@drawable/party" />
+                android:scaleType="centerCrop" />
 
             <ImageButton
                 android:id="@+id/btnFilter"
+                android:src="@drawable/search"
                 android:layout_width="82dp"
                 android:layout_height="50dp"
                 android:backgroundTint="#000000"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/search" />
+                android:scaleType="fitCenter" />
 
             <ImageButton
                 android:id="@+id/btnMy"
+                android:src="@drawable/mymenu"
                 android:layout_width="82dp"
                 android:layout_height="50dp"
                 android:backgroundTint="#000000"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/mymenu" />
+                android:scaleType="fitXY" />
         </LinearLayout>
 
     </RelativeLayout>
-
 </FrameLayout>

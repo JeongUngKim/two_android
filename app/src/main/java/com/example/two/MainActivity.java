@@ -2,6 +2,8 @@ package com.example.two;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,6 +27,10 @@ import com.example.two.adapter.MainAdapter;
 import com.example.two.config.Config;
 import com.example.two.config.MovieApi;
 import com.example.two.config.SearchApi;
+import com.example.two.fragment.CommunityFragment;
+import com.example.two.fragment.MyFragment;
+import com.example.two.fragment.PartyFragment;
+import com.example.two.fragment.SearchFragment;
 import com.example.two.model.Movie;
 import com.example.two.model.MovieList;
 import com.example.two.model.MovieRank;
@@ -59,6 +65,12 @@ public class MainActivity extends AppCompatActivity {
     TextView rankRate1;
     TextView rankRate2;
     TextView rankRate3;
+
+    // 프래그먼트 관련 멤버변수
+    PartyFragment partyFragment;
+    CommunityFragment communityFragment;
+    SearchFragment searchFragment;
+    MyFragment myFragment;
 
 
 
@@ -106,6 +118,28 @@ public class MainActivity extends AppCompatActivity {
         rankRate2 = findViewById(R.id.rankRate2);
         rankRate3 = findViewById(R.id.rankRate3);
 
+
+        // 파티 프래그먼트 생성
+        partyFragment = new PartyFragment();
+        // 커뮤니티 프래그먼트 생성
+        communityFragment = new CommunityFragment();
+        // 검색 프래그먼트 생성
+        searchFragment = new SearchFragment();
+        // 내 정보 프래그먼트 생성
+        myFragment = new MyFragment();
+
+        //프래그먼트 매니저 획득
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        //프래그먼트 Transaction 획득 프래그먼트를 실행하거나 교체 작업할때 사용
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        // 프래그먼트를 FragmentFrame의 자식으로 등록
+        fragmentTransaction.add(R.id.fragmentFrame,communityFragment);
+        fragmentTransaction.add(R.id.fragmentFrame,partyFragment);
+        fragmentTransaction.add(R.id.fragmentFrame,searchFragment);
+        fragmentTransaction.add(R.id.fragmentFrame,myFragment);
+
         getrankMovieData();
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -113,6 +147,9 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.this,LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         getNetworkData();
+
+
+
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -141,41 +178,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-//        ActionBar ab = getSupportActionBar();
-//        // 액션바 타이틀
-//        ab.setTitle("    TWO");
-//        // 액션바 아이콘
-//        ab.setIcon(R.drawable._915979_logo_media_social_viddler_icon) ;
-//        ab.setDisplayUseLogoEnabled(true) ;
-//        ab.setDisplayShowHomeEnabled(true) ;
 
 
-        // 검색화면으로 넘어가기
-//        editTitle.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-////                Log.i("keyword",input);
-////                Intent intent = new Intent(MainActivity.this,SearchActivity.class);
-////                startActivity(intent);
-//            }
-//        });
-
-//        imgSearch.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(MainActivity.this,SearchActivity.class);
-//                startActivity(intent);
-//            }
-//        });
 
         // 커뮤니티 액티비티 넘어가기
         btnCommunity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,CommunityActivity.class);
-                startActivity(intent);
-                finish();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, communityFragment).commit();
             }
         });
 
@@ -183,9 +193,7 @@ public class MainActivity extends AppCompatActivity {
         btnParty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,PartyActivity.class);
-                startActivity(intent);
-                finish();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, partyFragment).commit();
             }
         });
 
@@ -193,9 +201,8 @@ public class MainActivity extends AppCompatActivity {
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,SearchActivity.class);
-                startActivity(intent);
-                finish();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, searchFragment).commit();
+
             }
         });
 
@@ -203,9 +210,8 @@ public class MainActivity extends AppCompatActivity {
         btnMy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,MyMenuActivity.class);
-                startActivity(intent);
-                finish();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, myFragment).commit();
+
             }
         });
     }
@@ -378,18 +384,20 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // 액션바 활성화
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu, menu);
-//        return true;
-//    }
+    public void onFragmentChange(int index){
+        if (index == 0){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame,CommunityFragment.class, null).setReorderingAllowed(true).commit();
+        }
+        if (index == 1){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame,PartyFragment.class, null).setReorderingAllowed(true).addToBackStack(null).commit();
+        }
+        if (index == 2){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame,SearchFragment.class,null).setReorderingAllowed(true).commit();
+        }
+        if (index == 3){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, MyFragment.class,null).setReorderingAllowed(true).commit();
+        }
+    }
 
-    // 액션바 클릭 이벤트 처리
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-//        startActivity(intent);
-//        return super.onOptionsItemSelected(item);
-//    }
+
 }

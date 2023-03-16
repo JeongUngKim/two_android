@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".SearchActivity">
+    android:layout_height="match_parent"
+    tools:context=".fragment.SearchFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="#000000">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/layoutBottom"
@@ -29,7 +29,7 @@
                 android:layout_height="50dp"
                 android:background="#000000"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/home" />
+                android:src="@drawable/home" />
 
             <ImageButton
                 android:id="@+id/btnCommunity"
@@ -37,7 +37,7 @@
                 android:layout_height="50dp"
                 android:background="#000000"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/chat" />
+                android:src="@drawable/chat" />
 
             <ImageButton
                 android:id="@+id/btnParty"
@@ -45,7 +45,7 @@
                 android:layout_height="50dp"
                 android:backgroundTint="#000000"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/party" />
+                android:src="@drawable/party" />
 
             <ImageButton
                 android:id="@+id/btnFilter"
@@ -53,7 +53,7 @@
                 android:layout_height="50dp"
                 android:backgroundTint="#000000"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/search" />
+                android:src="@drawable/search" />
 
             <ImageButton
                 android:id="@+id/btnMy"
@@ -61,7 +61,7 @@
                 android:layout_height="50dp"
                 android:backgroundTint="#000000"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/mymenu" />
+                android:src="@drawable/mymenu" />
         </LinearLayout>
 
         <LinearLayout
@@ -84,7 +84,7 @@
                     android:layout_height="45dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
-                    app:srcCompat="@drawable/search" />
+                    android:src="@drawable/search" />
 
                 <EditText
                     android:id="@+id/txtSearch"
@@ -145,7 +145,7 @@
                     android:id="@+id/poster1"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    app:srcCompat="@drawable/baseline_person_outline_24" />
+                    android:src="@drawable/baseline_person_outline_24" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -178,7 +178,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="50dp"
                             android:layout_marginRight="10dp"
-                            app:srcCompat="@drawable/baseline_star_rate_24" />
+                            android:src="@drawable/baseline_star_rate_24" />
 
                         <TextView
                             android:id="@+id/rateSearchMovie1"
@@ -233,7 +233,7 @@
                     android:id="@+id/poster2"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    app:srcCompat="@drawable/baseline_person_outline_24" />
+                    android:src="@drawable/baseline_person_outline_24" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -266,7 +266,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="50dp"
                             android:layout_marginRight="10dp"
-                            app:srcCompat="@drawable/baseline_star_rate_24" />
+                            android:src="@drawable/baseline_star_rate_24" />
 
                         <TextView
                             android:id="@+id/rateSearchMovie2"
@@ -321,7 +321,7 @@
                     android:id="@+id/poster3"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    app:srcCompat="@drawable/baseline_person_outline_24" />
+                    android:src="@drawable/baseline_person_outline_24" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -354,7 +354,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="50dp"
                             android:layout_marginRight="10dp"
-                            app:srcCompat="@drawable/baseline_star_rate_24" />
+                            android:src="@drawable/baseline_star_rate_24" />
 
                         <TextView
                             android:id="@+id/rateSearchMovie3"
@@ -435,7 +435,7 @@
                     android:id="@+id/poster4"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    app:srcCompat="@drawable/baseline_person_outline_24" />
+                    android:src="@drawable/baseline_person_outline_24" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -468,7 +468,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="50dp"
                             android:layout_marginRight="10dp"
-                            app:srcCompat="@drawable/baseline_star_rate_24" />
+                            android:src="@drawable/baseline_star_rate_24" />
 
                         <TextView
                             android:id="@+id/rateSearchTv1"
@@ -505,8 +505,8 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="10dp"
                             android:text="출시년도"
-                            android:textSize="20sp"
-                            android:textColor="#FFFFFF"/>
+                            android:textColor="#FFFFFF"
+                            android:textSize="20sp" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -523,7 +523,7 @@
                     android:id="@+id/poster5"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    app:srcCompat="@drawable/baseline_person_outline_24" />
+                    android:src="@drawable/baseline_person_outline_24" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -556,7 +556,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="50dp"
                             android:layout_marginRight="10dp"
-                            app:srcCompat="@drawable/baseline_star_rate_24" />
+                            android:src="@drawable/baseline_star_rate_24" />
 
                         <TextView
                             android:id="@+id/rateSearchTv2"
@@ -593,8 +593,8 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="10dp"
                             android:text="출시년도"
-                            android:textSize="20sp"
-                            android:textColor="#FFFFFF"/>
+                            android:textColor="#FFFFFF"
+                            android:textSize="20sp" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -603,5 +603,4 @@
         </LinearLayout>
 
     </RelativeLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

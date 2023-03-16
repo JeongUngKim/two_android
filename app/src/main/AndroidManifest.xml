@@ -53,18 +53,6 @@
             android:name=".UseOTTActivity"
             android:exported="false" />
         <activity
-            android:name=".MyMenuActivity"
-            android:exported="false" />
-        <activity
-            android:name=".FilterSearchActivity"
-            android:exported="false" />
-        <activity
-            android:name=".PartyActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CommunityActivity"
-            android:exported="false" />
-        <activity
             android:name=".NewsActivity"
             android:exported="false" />
         <activity
@@ -97,9 +85,6 @@
             android:exported="false" />
         <activity
             android:name=".MyReviewActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SearchActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
