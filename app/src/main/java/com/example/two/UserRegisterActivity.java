@@ -270,7 +270,7 @@ public class UserRegisterActivity extends AppCompatActivity {
         RegisterApi api = retrofit.create(RegisterApi.class);
 
         // 멀티파트로 파일을 보내는 경우, 파일 파라미터를 만든다.
-
+        //되라
 
 
 //        RequestBody nameBody = RequestBody.create(name, MediaType.parse("text/plain"));

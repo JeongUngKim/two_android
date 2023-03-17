@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.two.Api.ChatApi;
 import com.example.two.Api.NetworkClient2;
 import com.example.two.MainActivity;
 import com.example.two.PartyAddActivity;
