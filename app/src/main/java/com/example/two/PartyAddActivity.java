@@ -2,6 +2,9 @@ package com.example.two;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -83,14 +86,6 @@ public class PartyAddActivity extends AppCompatActivity {
 
 
 
-        imgBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(PartyAddActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
 
 
         txtEndDate.setOnClickListener(new View.OnClickListener() {
@@ -157,6 +152,13 @@ public class PartyAddActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    public void replaceFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
     }
 
 
