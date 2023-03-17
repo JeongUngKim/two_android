@@ -23,7 +23,6 @@ import com.example.two.Api.NetworkClient1;
 import com.example.two.MainActivity;
 import com.example.two.R;
 import com.example.two.config.Config;
-import com.example.two.config.SearchApi;
 import com.example.two.model.Seach;
 import com.example.two.model.SeachList;
 

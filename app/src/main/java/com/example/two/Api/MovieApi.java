@@ -1,11 +1,10 @@
-package com.example.two.config;
+package com.example.two.Api;
 
 import com.example.two.model.MovieList;
 import com.example.two.model.MovieRankList;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.Query;
 
 public interface MovieApi {
