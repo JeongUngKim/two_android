@@ -177,20 +177,16 @@ public class PartyFragment extends Fragment {
             }
         });
 
-        // 커뮤니티 액티비티 넘어가기
+        // 커뮤니티 프래그먼트 넘어가기
         btnCommunity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(getActivity(), CommunityFragment.class);
-//                startActivity(intent);
-//                getActivity().finish();
-
                 activity.onFragmentChange(0);
             }
         });
 
 
-        // 검색 액티비티 넘어가기
+        // 검색 프래그먼트 넘어가기
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -198,7 +194,7 @@ public class PartyFragment extends Fragment {
             }
         });
 
-        // 내 정보 액티비티 넘어가기
+        // 내 정보 프래그먼트 넘어가기
         btnMy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

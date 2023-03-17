@@ -258,7 +258,7 @@ public class SearchFragment extends Fragment {
             }
         });
 
-        // 커뮤니티 액티비티 넘어가기
+        // 커뮤니티 프래그먼트 넘어가기
         btnCommunity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -269,7 +269,7 @@ public class SearchFragment extends Fragment {
         });
 
 
-        // 파티매칭 액티비티 넘어가기
+        // 파티매칭 프래그먼트 넘어가기
         btnParty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -278,7 +278,7 @@ public class SearchFragment extends Fragment {
             }
         });
 
-        // 내정보 액티비티 넘어가기
+        // 내정보 프래그먼트 넘어가기
         btnMy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

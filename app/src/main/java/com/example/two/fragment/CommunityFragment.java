@@ -104,7 +104,7 @@ public class CommunityFragment extends Fragment {
             }
         });
 
-        // 검색 액티비티 넘어가기
+        // 검색 프래그먼트 넘어가기
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,7 +113,7 @@ public class CommunityFragment extends Fragment {
         });
 
 
-        // 내 정보 액티비티 넘어가기
+        // 내 정보 프래그먼트 넘어가기
         btnMy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,13 +121,10 @@ public class CommunityFragment extends Fragment {
             }
         });
 
-        // 파티매칭 액티비티 넘어가기
+        // 파티매칭 프래그먼트 넘어가기
         btnParty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(getActivity(), PartyActivity.class);
-//                startActivity(intent);
-//                getActivity().finish();
 
                 activity.onFragmentChange(1);
             }
