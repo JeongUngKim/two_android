@@ -12,7 +12,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -20,13 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.disklrucache.DiskLruCache;
 import com.example.two.Api.NetworkClient1;
 import com.example.two.Api.NetworkClient2;
 import com.example.two.adapter.MainAdapter;
 import com.example.two.config.Config;
-import com.example.two.config.MovieApi;
-import com.example.two.config.SearchApi;
 import com.example.two.fragment.CommunityFragment;
 import com.example.two.fragment.MyFragment;
 import com.example.two.fragment.PartyFragment;
@@ -35,7 +31,6 @@ import com.example.two.model.Movie;
 import com.example.two.model.MovieList;
 import com.example.two.model.MovieRank;
 import com.example.two.model.MovieRankList;
-import com.example.two.model.SeachList;
 
 import java.util.ArrayList;
 
