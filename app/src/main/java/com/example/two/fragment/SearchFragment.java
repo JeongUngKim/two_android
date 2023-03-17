@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +24,7 @@ import com.example.two.Api.NetworkClient1;
 import com.example.two.MainActivity;
 import com.example.two.R;
 import com.example.two.config.Config;
-import com.example.two.config.SearchApi;
+import com.example.two.Api.SearchApi;
 import com.example.two.model.Seach;
 import com.example.two.model.SeachList;
 
@@ -98,6 +99,15 @@ public class SearchFragment extends Fragment {
 
 
     ImageView btntitleSearch;
+
+    LinearLayout layoutMovie;
+    LinearLayout layoutMovie1;
+    LinearLayout layoutMovie2;
+    LinearLayout layoutMovie3;
+    LinearLayout layoutDrama;
+    LinearLayout layoutDrama1;
+    LinearLayout layoutDrama2;
+    LinearLayout layoutDrama3;
 
 
     String T1;
@@ -207,10 +217,26 @@ public class SearchFragment extends Fragment {
 
         btntitleSearch = view.findViewById(R.id.btntitleSearch);
 
+        layoutMovie = view.findViewById(R.id.layoutMovie);
+        layoutMovie1 = view.findViewById(R.id.layoutMovie1);
+        layoutMovie2 = view.findViewById(R.id.layoutMovie2);
+        layoutMovie3 = view.findViewById(R.id.layoutMovie3);
+        layoutDrama = view.findViewById(R.id.layoutDrama);
+        layoutDrama1 = view.findViewById(R.id.layoutDrama1);
+        layoutDrama2 = view.findViewById(R.id.layoutDrama2);
+
         btntitleSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Keyword = txtSearch.getText().toString().trim();
+                layoutMovie.setVisibility(View.VISIBLE);
+                layoutMovie1.setVisibility(View.VISIBLE);
+                layoutMovie2.setVisibility(View.VISIBLE);
+                layoutMovie3.setVisibility(View.VISIBLE);
+                layoutDrama.setVisibility(View.VISIBLE);
+                layoutDrama1.setVisibility(View.VISIBLE);
+                layoutDrama2.setVisibility(View.VISIBLE);
+
                 getNetworkSearchMovieData(Keyword);
                 getNetworkSearchTvData(Keyword);
 

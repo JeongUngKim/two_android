@@ -108,9 +108,11 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layoutMovie"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="invisible">
 
                 <TextView
                     android:id="@+id/textView4"
@@ -135,11 +137,13 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layoutMovie1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="invisible">
 
                 <ImageView
                     android:id="@+id/poster1"
@@ -223,11 +227,13 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layoutMovie2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="invisible">
 
                 <ImageView
                     android:id="@+id/poster2"
@@ -311,11 +317,13 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layoutMovie3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="invisible">
 
                 <ImageView
                     android:id="@+id/poster3"
@@ -399,9 +407,11 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layoutDrama"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="invisible">
 
                 <TextView
                     android:id="@+id/textView100"
@@ -425,11 +435,13 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layoutDrama1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="invisible">
 
                 <ImageView
                     android:id="@+id/poster4"
@@ -513,11 +525,13 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layoutDrama2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="invisible">
 
                 <ImageView
                     android:id="@+id/poster5"

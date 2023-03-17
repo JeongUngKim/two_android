@@ -4,15 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.two.fragment.PartyFragment;
 import com.example.two.model.User;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -22,14 +28,19 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class PartyAddActivity extends AppCompatActivity {
     EditText txtPartyName;
     EditText txtOttName;
     EditText txtOttPassword;
+    TextView txtEndDate;
 
     Button btnCreateParty;
+    ImageView imgBack;
+
+    String date = "";
 
     User user;
 
@@ -47,6 +58,60 @@ public class PartyAddActivity extends AppCompatActivity {
         txtOttName=findViewById(R.id.txtOttName);
         txtOttPassword=findViewById(R.id.txtOttPassword);
         btnCreateParty=findViewById(R.id.btnCreateParty);
+        txtEndDate = findViewById(R.id.txtEndDate);
+        imgBack = findViewById(R.id.imgBack);
+
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PartyAddActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
+        txtEndDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Calendar current = Calendar.getInstance();
+
+                new DatePickerDialog(
+                        PartyAddActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                                Log.i("MEMO_APP", "년도 : " + i + ", 월 :"+i1+", 일 :"+i2);
+                                // i : 년도, i1 : 월(0~11) , i2 : 일
+
+                                int month = i1 + 1;
+                                String strMonth;
+                                if(month < 10){
+                                    strMonth = "0"+month;
+                                }else{
+                                    strMonth = ""+month;
+                                }
+
+                                String strDay;
+                                if(i2 < 10){
+                                    strDay = "0"+i2;
+                                }else{
+                                    strDay= ""+i2;
+                                }
+
+                                date = i + "-" + strMonth + "-" + strDay;
+                                txtEndDate.setText(date);
+
+                            }
+                        },
+                        current.get(Calendar.YEAR),
+                        current.get(Calendar.MONTH),
+                        current.get(Calendar.DAY_OF_MONTH)
+                ).show();
+
+            }
+        });
 
 
 

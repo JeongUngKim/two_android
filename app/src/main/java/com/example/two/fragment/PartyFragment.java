@@ -21,21 +21,16 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.example.two.Api.NetworkClient1;
 import com.example.two.Api.NetworkClient2;
 import com.example.two.MainActivity;
 import com.example.two.PartyAddActivity;
 import com.example.two.R;
 import com.example.two.UserRegisterActivity;
 import com.example.two.adapter.ChatRoomAdapter;
-import com.example.two.adapter.MainAdapter;
-import com.example.two.config.ChatApi;
+import com.example.two.Api.ChatApi;
 import com.example.two.config.Config;
-import com.example.two.config.MovieApi;
 import com.example.two.model.Chat;
 import com.example.two.model.ChatRoomList;
-import com.example.two.model.Movie;
-import com.example.two.model.MovieList;
 import com.example.two.model.User;
 
 import java.util.ArrayList;

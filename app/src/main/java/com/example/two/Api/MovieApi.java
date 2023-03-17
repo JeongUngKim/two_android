@@ -1,4 +1,4 @@
-package com.example.two.config;
+package com.example.two.Api;
 
 import com.example.two.model.MovieList;
 import com.example.two.model.MovieRankList;
