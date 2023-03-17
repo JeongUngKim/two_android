@@ -180,7 +180,7 @@
                     android:textColorHint="#000000" />
 
                 <Spinner
-                    android:id="@+id/sp1"
+                    android:id="@+id/genderSp"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -191,7 +191,7 @@
             </LinearLayout>
 
             <Spinner
-                android:id="@+id/sp2"
+                android:id="@+id/questionSp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -201,7 +201,7 @@
                 android:entries="@array/find" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName10"
+                android:id="@+id/editAnswer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"

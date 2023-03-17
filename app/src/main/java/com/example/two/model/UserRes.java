@@ -7,6 +7,8 @@ public class UserRes implements Serializable {
     private String result;
     private String access_token;
 
+
+
     public String getResult() {
         return result;
     }
