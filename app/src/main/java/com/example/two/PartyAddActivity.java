@@ -87,7 +87,6 @@ public class PartyAddActivity extends AppCompatActivity {
 
 
 
-
         txtEndDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
