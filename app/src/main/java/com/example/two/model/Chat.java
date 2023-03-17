@@ -17,6 +17,14 @@ public class Chat {
 
    private String finishedAt;
 
+    public Chat(String service, String title, String serviceId, int servicePassword, String finishedAt) {
+        this.service = service;
+        this.title = title;
+        this.serviceId = serviceId;
+        this.servicePassword = servicePassword;
+        this.finishedAt = finishedAt;
+    }
+
     public int getPartyBoardId() {
         return partyBoardId;
     }
