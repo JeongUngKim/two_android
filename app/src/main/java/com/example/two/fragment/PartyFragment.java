@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -137,6 +138,7 @@ public class PartyFragment extends Fragment {
         getChatNetworkData();
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
 
         context = UserRegisterActivity.context;
         sp = context.getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.two.Api.DetailApi;
 import com.example.two.Api.NetworkClient1;
 import com.example.two.config.Config;
 import com.example.two.model.Actor;

@@ -1,6 +1,10 @@
 package com.example.two.adapter;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +17,17 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.two.MainActivity;
+import com.example.two.PartyChatActivity;
 import com.example.two.R;
+import com.example.two.config.Config;
 import com.example.two.fragment.PartyFragment;
 import com.example.two.model.Chat;
 import com.example.two.model.Movie;
+import com.example.two.model.User;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -25,6 +36,7 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
     Context context;
 
     ArrayList<Chat> chatArrayList;
+
 
     public ChatRoomAdapter(Context context, ArrayList<Chat> chatArrayList) {
         this.context = context;
@@ -66,9 +78,47 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
             partyName = itemView.findViewById(R.id.partyName);
             cardView = itemView.findViewById(R.id.cardView);
 
+            cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int index = getAdapterPosition();
+                    Chat chat = chatArrayList.get(index);
+                    String partyName = chat.getTitle();
+                    SharedPreferences sp = context.getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+                    User user = new User();
+                    user.setImgUrl(sp.getString("imgUrl", ""));
+                    user.setNickname(sp.getString("nickname", ""));
+                    Log.i("SPA1",sp.getString("imgUrl", ""));
+                    Log.i("SPA2",sp.getString("nickname", ""));
+                    String imgUri = user.getImgUrl();
+                    String nickname = user.getNickname();
+                    //파일 업로드
+                    //1. Firebase Database에 nickName, profileUrl을 저장
+                    //firebase DB관리자 객체 생성
+                    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                    //'profiles'라는 객체 생성
+                    DatabaseReference profileRef = firebaseDatabase.getReference("chatroom");
+
+                    //닉네임을 key 식별자로 하고 프로필 이미지의 주소를 값으로 저장
+                    profileRef.child(partyName).setValue(partyName);
+                    profileRef.child(partyName).setValue(imgUri);
+                    profileRef.child(partyName).setValue(nickname);
+
+                    Intent intent = new Intent(context, PartyChatActivity.class);
+                    intent.putExtra("partyBoardId",chat.getPartyBoardId());
+                    intent.putExtra("index", index);
+                    context.startActivity(intent);
+
+
+                }
+
+            });
 
         }
     }
+
+
+
 
 }
 
