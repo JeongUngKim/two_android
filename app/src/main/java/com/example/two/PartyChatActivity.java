@@ -1,11 +1,14 @@
 package com.example.two;
 
+import static com.example.two.UserRegisterActivity.context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -14,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.two.adapter.ChatAdapter;
+import com.example.two.config.Config;
 import com.example.two.fragment.PartyFragment;
 import com.example.two.model.MessageItem;
 import com.example.two.model.User;
@@ -39,7 +43,7 @@ public class PartyChatActivity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference chatRef;
 
-
+    int index;
     User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +53,13 @@ public class PartyChatActivity extends AppCompatActivity {
 
             getSupportActionBar().setTitle("넷플릭스 채팅방");
         }
-
         Intent intent = getIntent();
 
-        user = (User) intent.getSerializableExtra("user");
+        SharedPreferences sp = context.getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+        user = new User();
+        user.setImgUrl(sp.getString("imgUrl", ""));
+        user.setNickname(sp.getString("nickname", ""));
+
 
         editMsg = findViewById(R.id.editMsg);
         listView = findViewById(R.id.listview);
@@ -61,7 +68,7 @@ public class PartyChatActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         firebaseDatabase= firebaseDatabase.getInstance();
-        chatRef = firebaseDatabase.getReference("대연님"+"/"+intent.getIntExtra("partyBoardId",0));
+        chatRef = firebaseDatabase.getReference("chatroom"+"/"+intent.getIntExtra("partyBoardId",0));
         chatRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -97,6 +104,7 @@ public class PartyChatActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 String nickName= user.getNickname();
                 String message= editMsg.getText().toString();
                 String pofileUrl= user.getImgUrl();
@@ -106,7 +114,7 @@ public class PartyChatActivity extends AppCompatActivity {
 
                 MessageItem messageItem= new MessageItem(nickName,message,time,pofileUrl);
                 //'char'노드에 MessageItem객체를 통해
-                chatRef.push().setValue(messageItem );
+                chatRef.push().setValue(messageItem);
                 editMsg.setText("");
 
                 InputMethodManager imm=(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

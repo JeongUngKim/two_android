@@ -44,6 +44,8 @@ public class PartyAddActivity extends AppCompatActivity {
 
     User user;
 
+    String partyName;
+
 
     boolean isFirst= true; // 첫 실행을 구분하기위한 멤버변수
     boolean isChanged= false; //프로필 변경 확인을 위한 멤버변수
@@ -120,15 +122,15 @@ public class PartyAddActivity extends AppCompatActivity {
         btnCreateParty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                int partyBoardId = 1;
+                saveData();
+//                int partyBoardId = 1;
                 Intent intent = new Intent(PartyAddActivity.this , PartyChatActivity.class);
                 intent.putExtra("user",user);
-                intent.putExtra("partyBoardId",partyBoardId);
+                intent.putExtra("partyBoardId",1);
 
                 startActivity(intent);
                 finish();
-                //saveData();
+
 
 
             }
@@ -140,25 +142,24 @@ public class PartyAddActivity extends AppCompatActivity {
 
     void saveData(){
         //EditText의 닉네임 가져오기
-        String partyName = txtPartyName.getText().toString().trim();
+        partyName = txtPartyName.getText().toString().trim();
         String imgUri =user.getImgUrl();
         String nickname=user.getNickname();
         //이미지 미선택 예외처리
         if(imgUri==null) return;
 
         //Firebase storage에 이미지 저장하기 위해 날짜 형식으로 파일이름 바꾸기
-        SimpleDateFormat sdf= new SimpleDateFormat("yyyyMMddhhmmss"); //20191024111224
-        String fileName= sdf.format(new Date())+".png";
-
-
-
-        Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        SimpleDateFormat sdf= new SimpleDateFormat("yyyyMMddhhmmss"); //20191024111224
+//        String fileName= sdf.format(new Date())+".png";
+//
+//
+//
+//        Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
 
 
         //Firebase storage에 저장하기
-        FirebaseStorage firebaseStorage= FirebaseStorage.getInstance();
-        final StorageReference imgRef= firebaseStorage.getReference("profileImages/"+fileName);
+
 
         //파일 업로드
 
@@ -170,9 +171,9 @@ public class PartyAddActivity extends AppCompatActivity {
         DatabaseReference profileRef= firebaseDatabase.getReference("chatroom");
 
         //닉네임을 key 식별자로 하고 프로필 이미지의 주소를 값으로 저장
-        profileRef.child("1").setValue(partyName);
-        profileRef.child("1").setValue(imgUri);
-        profileRef.child("1").setValue(nickname);
+        profileRef.child(partyName).setValue(partyName);
+        profileRef.child(partyName).setValue(imgUri);
+        profileRef.child(partyName).setValue(nickname);
 
                         //2. 내 phone에 nickName, profileUrl을 저장
 
