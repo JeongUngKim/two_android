@@ -22,18 +22,10 @@
             android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/imgBack"
-                android:layout_width="45dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                app:srcCompat="@drawable/baseline_arrow_back_ios_24" />
-
             <TextView
                 android:id="@+id/textView34"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
                 android:gravity="center"
                 android:text="파티 생성"
                 android:textColor="#FFFFFF"

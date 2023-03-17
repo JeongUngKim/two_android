@@ -38,7 +38,7 @@ public class PartyAddActivity extends AppCompatActivity {
     TextView txtEndDate;
 
     Button btnCreateParty;
-    ImageView imgBack;
+
 
     String date = "";
 
@@ -61,16 +61,8 @@ public class PartyAddActivity extends AppCompatActivity {
         txtOttPassword=findViewById(R.id.txtOttPassword);
         btnCreateParty=findViewById(R.id.btnCreateParty);
         txtEndDate = findViewById(R.id.txtEndDate);
-        imgBack = findViewById(R.id.imgBack);
 
-        imgBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(PartyAddActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+
 
 
         txtEndDate.setOnClickListener(new View.OnClickListener() {

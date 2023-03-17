@@ -57,6 +57,7 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             Chat chat = chatArrayList.get(position);
             holder.partyName.setText(chat.getTitle());
+            holder.tag.setText(chat.getService());
     }
 
     @Override
@@ -69,14 +70,20 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
 
 
         TextView partyName;
+        TextView headCount;
+        TextView tag;
 
         CardView cardView;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             partyName = itemView.findViewById(R.id.partyName);
             cardView = itemView.findViewById(R.id.cardView);
+            headCount = itemView.findViewById(R.id.headCount);
+            tag = itemView.findViewById(R.id.tag);
+
 
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
