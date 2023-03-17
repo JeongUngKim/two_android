@@ -19,11 +19,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.two.Api.MovieApi;
 import com.example.two.Api.NetworkClient1;
 import com.example.two.Api.NetworkClient2;
 import com.example.two.adapter.MainAdapter;
 import com.example.two.config.Config;
-import com.example.two.Api.MovieApi;
 import com.example.two.fragment.CommunityFragment;
 import com.example.two.fragment.MyFragment;
 import com.example.two.fragment.PartyFragment;
