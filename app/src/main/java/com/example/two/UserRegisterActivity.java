@@ -32,7 +32,6 @@ import com.squareup.picasso.Picasso;
 import com.example.two.Api.NetworkClient2;
 import com.example.two.config.Config;
 import com.example.two.Api.RegisterApi;
-import com.example.two.model.Res;
 
 import org.json.JSONException;
 import org.json.JSONObject;
