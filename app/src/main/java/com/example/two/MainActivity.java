@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.two.Api.MovieApi;
 import com.example.two.Api.NetworkClient1;
 import com.example.two.Api.NetworkClient2;
 import com.example.two.adapter.MainAdapter;
