@@ -83,26 +83,18 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
                 public void onClick(View view) {
                     int index = getAdapterPosition();
                     Chat chat = chatArrayList.get(index);
-                    String partyName = chat.getTitle();
-                    SharedPreferences sp = context.getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
-                    User user = new User();
-                    user.setImgUrl(sp.getString("imgUrl", ""));
-                    user.setNickname(sp.getString("nickname", ""));
-                    Log.i("SPA1",sp.getString("imgUrl", ""));
-                    Log.i("SPA2",sp.getString("nickname", ""));
-                    String imgUri = user.getImgUrl();
-                    String nickname = user.getNickname();
+
                     //파일 업로드
                     //1. Firebase Database에 nickName, profileUrl을 저장
                     //firebase DB관리자 객체 생성
-                    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                    //'profiles'라는 객체 생성
-                    DatabaseReference profileRef = firebaseDatabase.getReference("chatroom");
-
-                    //닉네임을 key 식별자로 하고 프로필 이미지의 주소를 값으로 저장
-                    profileRef.child(partyName).setValue(partyName);
-                    profileRef.child(partyName).setValue(imgUri);
-                    profileRef.child(partyName).setValue(nickname);
+//                    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+//                    //'profiles'라는 객체 생성
+//                    DatabaseReference profileRef = firebaseDatabase.getReference("chatroom");
+//
+//                    //닉네임을 key 식별자로 하고 프로필 이미지의 주소를 값으로 저장
+//                    profileRef.child(partyName).setValue(partyName);
+//                    profileRef.child(partyName).setValue(imgUri);
+//                    profileRef.child(partyName).setValue(nickname);
 
                     Intent intent = new Intent(context, PartyChatActivity.class);
                     intent.putExtra("partyBoardId",chat.getPartyBoardId());
