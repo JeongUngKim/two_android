@@ -73,7 +73,7 @@ public class ChatAdapter extends BaseAdapter {
         tvMsg.setText(item.getMessage());
         tvTime.setText(item.getTime());
 
-        Glide.with(itemView).load(item.getPofileUrl()).into(iv);
+        Glide.with(itemView).load(item.getProfileUrl()).into(iv);
 
         return itemView;
     }

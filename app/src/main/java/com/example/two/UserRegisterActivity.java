@@ -92,6 +92,8 @@ public class UserRegisterActivity extends AppCompatActivity {
     Spinner genderSp;
     Spinner questionSp;
 
+    String firefileUrl;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,8 +120,8 @@ public class UserRegisterActivity extends AppCompatActivity {
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                saveData();
+                    saveNick();
+//                saveData();
 //                addNetworkdata();
                 Intent intent = new Intent(UserRegisterActivity.this, UserChoiceActivity.class);
                 startActivity(intent);
@@ -149,6 +151,69 @@ public class UserRegisterActivity extends AppCompatActivity {
                 }
                 break;
         }
+    }
+
+    void saveNick(){
+        nickname = editTextTextNickName.getText().toString().trim();
+        if (nickname.isEmpty()) {
+            Toast.makeText(UserRegisterActivity.this, "닉네임을 입력하세요", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        SimpleDateFormat sdf= new SimpleDateFormat("yyyMMddhhmmss"); //20191024111224
+        String fileName= sdf.format(new Date())+".png";
+
+        //Firebase storage에 저장하기
+        FirebaseStorage firebaseStorage= FirebaseStorage.getInstance();
+        final StorageReference imgRef= firebaseStorage.getReference("profileImages/"+fileName);
+
+        UploadTask uploadTask=imgRef.putFile(imgUri);
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                //이미지 업로드가 성공되었으므로...
+                //곧바로 firebase storage의 이미지 파일 다운로드 URL을 얻어오기
+                imgRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        //파라미터로 firebase의 저장소에 저장되어 있는
+                        //이미지에 대한 다운로드 주소(URL)을 문자열로 얻어오기
+                        firefileUrl= uri.toString();
+                        Log.i("FIREVIEW",firefileUrl);
+
+
+                        //1. Firebase Database에 nickName, profileUrl을 저장
+                        //firebase DB관리자 객체 소환
+                        FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+                        //'profiles'라는 이름의 자식 노드 참조 객체 얻어오기
+                        DatabaseReference profileRef= firebaseDatabase.getReference("profiles");
+
+                        //닉네임을 key 식별자로 하고 프로필 이미지의 주소를 값으로 저장
+                        profileRef.child(nickname).setValue(firefileUrl);
+
+                        //2. 내 phone에 nickName, profileUrl을 저장
+                        SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sp.edit();
+                        editor.putString("nickname",nickname);
+                        editor.putString("imgUrl", firefileUrl);
+                        editor.commit();
+                        Log.i("SPAP",sp.getString("imgUrl",""));
+
+
+
+                    }
+                });
+            }
+        });
+
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss"); //20191024111224
+//        String fileName = sdf.format(new Date()) +".png";
+
+
+
+
+
+
+
     }
 
     void saveData() {

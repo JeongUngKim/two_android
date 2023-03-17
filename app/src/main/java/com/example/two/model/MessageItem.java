@@ -7,11 +7,12 @@ public class MessageItem {
     String time;
     String profileUrl;
 
-    public MessageItem(String nickname, String message, String time, String pofileUrl) {
-        this.nickname=nickname;
+
+    public MessageItem(String nickname, String message, String time, String profileUrl) {
+        this.nickname = nickname;
         this.message = message;
         this.time = time;
-        this.profileUrl = pofileUrl;
+        this.profileUrl = profileUrl;
     }
 
     //firebase DB에 객체로 값을 읽어올 때..
@@ -44,11 +45,11 @@ public class MessageItem {
         this.time = time;
     }
 
-    public String getPofileUrl() {
+    public String getProfileUrl() {
         return profileUrl;
     }
 
-    public void setPofileUrl(String pofileUrl) {
-        this.profileUrl = pofileUrl;
+    public void setProfileUrl(String profileUrl) {
+        this.profileUrl = profileUrl;
     }
 }
