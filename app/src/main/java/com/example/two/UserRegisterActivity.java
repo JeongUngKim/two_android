@@ -2,6 +2,7 @@ package com.example.two;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,7 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
+import com.example.two.model.User;
 import com.example.two.model.UserRes;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -25,11 +26,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
 import com.example.two.Api.NetworkClient2;
 import com.example.two.config.Config;
-import com.example.two.Api.RegisterApi;
+import com.example.two.config.RegisterApi;
+import com.example.two.model.Res;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,6 +41,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import de.hdodenhof.circleimageview.CircleImageView;
