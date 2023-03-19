@@ -145,10 +145,10 @@ public class PartyFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-        context = UserRegisterActivity.context;
+        context = getActivity().getApplicationContext();
         sp = context.getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
         User user = new User();
-        user.setImgUrl(sp.getString("imgUrl",""));
+        user.setProfileImgUrl(sp.getString("imgUrl",""));
         user.setNickname(sp.getString("nickname",""));
 
         partyBtn.setOnClickListener(new View.OnClickListener() {

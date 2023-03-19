@@ -3,6 +3,9 @@ package com.example.two.Api;
 import com.example.two.model.User;
 import com.example.two.model.UserRes;
 
+import java.util.HashMap;
+import java.util.List;
+
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -16,7 +19,7 @@ public interface RegisterApi {
 
     @Multipart
     @POST("register")
-    Call<UserRes> resgister(@Part("data") RequestBody jsonObject  ,
+    Call<UserRes> resgister(@Part("data") RequestBody data  ,
                             @Part MultipartBody.Part profileImg);
 
 //    @Multipart
@@ -31,11 +34,11 @@ public interface RegisterApi {
 //                               @Part("questionAnswer") RequestBody answer,
 //                               @Part MultipartBody.Part profileImg);
 
-    @POST("/user/login")
-    Call<UserRes> login(@Body User user);
+    @POST("isEmail")
+    Call<HashMap<String,String>> IsEmail(@Body User user);
 
-    // 로그아웃 API
-    @POST("/user/logout")
-    Call<UserRes> logout(@Header("Authorization") String token);
+    @POST("isNickname")
+    Call<HashMap<String,String>> IsNickname(@Body User user);
+
 
 }

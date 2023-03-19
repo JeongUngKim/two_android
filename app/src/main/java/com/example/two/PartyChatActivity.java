@@ -1,6 +1,5 @@
 package com.example.two;
 
-import static com.example.two.UserRegisterActivity.context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -55,9 +54,9 @@ public class PartyChatActivity extends AppCompatActivity {
         }
         Intent intent = getIntent();
 
-        SharedPreferences sp = context.getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+        SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
         user = new User();
-        user.setImgUrl(sp.getString("imgUrl", ""));
+        user.setProfileImgUrl(sp.getString("imgUrl", ""));
         user.setNickname(sp.getString("nickname", ""));
 
 
@@ -107,7 +106,7 @@ public class PartyChatActivity extends AppCompatActivity {
 
                 String nickName= user.getNickname();
                 String message= editMsg.getText().toString();
-                String pofileUrl= user.getImgUrl();
+                String pofileUrl= user.getProfileImgUrl();
 
                 Calendar calendar= Calendar.getInstance(); //현재 시간을 가지고 있는 객체
                 String time=calendar.get(Calendar.HOUR_OF_DAY)+":"+calendar.get(Calendar.MINUTE); //14:16

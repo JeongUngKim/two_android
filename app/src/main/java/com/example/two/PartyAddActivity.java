@@ -164,7 +164,7 @@ public class PartyAddActivity extends AppCompatActivity {
         //EditText의 닉네임 가져오기
         String service = serviceSp.getSelectedItem().toString();
         partyName = txtPartyName.getText().toString().trim();
-        String imgUri =user.getImgUrl();
+        String imgUri =user.getProfileImgUrl();
         String nickname=user.getNickname();
         String serviceEmail = txtOttName.getText().toString().trim();
         int servicePassword = Integer.parseInt(txtOttPassword.getText().toString().trim());

@@ -9,44 +9,66 @@ public class User implements Serializable {
 
     private String nickname;
 
-    private String email;
+    private String userEmail;
     private String password;
 
     private int gender;
 
+    private int age;
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
     private int questionNum;
 
-    private String answer;
+    private String questionAnswer;
 
-    private String imgUrl;
+    private String profileImgUrl;
 
-    public User(String email, String password, String nickname, String imgUrl) {
-        this.email = email;
+    private String createdAt;
+
+    public User(String userEmail, String password, String nickname, String profileImgUrl) {
+        this.userEmail = userEmail;
         this.password = password;
         this.nickname = nickname;
-        this.imgUrl = imgUrl;
+        this.profileImgUrl = profileImgUrl;
     }
 
 
-    public User(String email, String password, String nickname) {
-        this.email = email;
+    public User(String userEmail, String password, String nickname) {
+        this.userEmail = userEmail;
         this.password = password;
         this.nickname = nickname;
     }
 
-    public User(String email, String password) {
-        this.email = email;
+    public User(String userEmail, String password) {
+        this.userEmail = userEmail;
         this.password = password;
     }
 
-    public User(String name, String nickname, String email, String password, int gender, int questionNum, String answer) {
+    public User(String name, String nickname, String userEmail, String password, int gender, int questionNum, String questionAnswer) {
         this.name = name;
         this.nickname = nickname;
-        this.email = email;
+        this.userEmail = userEmail;
         this.password = password;
         this.gender = gender;
         this.questionNum = questionNum;
-        this.answer = answer;
+        this.questionAnswer = questionAnswer;
+    }
+
+    public User(String name, int questionNum, String questionAnswer) {
+        this.name = name;
+        this.questionNum = questionNum;
+        this.questionAnswer = questionAnswer;
+    }
+
+    public User(){
+
     }
 
     public String getName() {
@@ -55,6 +77,30 @@ public class User implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getGender() {
@@ -73,46 +119,27 @@ public class User implements Serializable {
         this.questionNum = questionNum;
     }
 
-    public String getAnswer() {
-        return answer;
+    public String getQuestionAnswer() {
+        return questionAnswer;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
+    public void setQuestionAnswer(String questionAnswer) {
+        this.questionAnswer = questionAnswer;
     }
 
-    public String getEmail() {
-        return email;
+    public String getProfileImgUrl() {
+        return profileImgUrl;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setProfileImgUrl(String profileImgUrl) {
+        this.profileImgUrl = profileImgUrl;
     }
 
-    public String getPassword() {
-        return password;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
-    public User(){
-
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 }
