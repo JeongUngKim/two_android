@@ -107,11 +107,11 @@ public class PartyChatActivity extends AppCompatActivity {
                 String nickName= user.getNickname();
                 String message= editMsg.getText().toString();
                 String pofileUrl= user.getProfileImgUrl();
-
+                int Id = intent.getIntExtra("Id",0);
                 Calendar calendar= Calendar.getInstance(); //현재 시간을 가지고 있는 객체
                 String time=calendar.get(Calendar.HOUR_OF_DAY)+":"+calendar.get(Calendar.MINUTE); //14:16
 
-                MessageItem messageItem= new MessageItem(nickName,message,time,pofileUrl);
+                MessageItem messageItem= new MessageItem(nickName,message,time,pofileUrl,Id);
                 //'char'노드에 MessageItem객체를 통해
                 chatRef.push().setValue(messageItem);
                 editMsg.setText("");
