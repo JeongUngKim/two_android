@@ -4,12 +4,16 @@ package com.example.two;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -51,9 +55,14 @@ public class PartyChatActivity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference chatRef;
 
+    // 사이드바 관련 멤버 변수
+    DrawerLayout drawerLayout;
+    View drawerView;
+
 
     int index;
     User user;
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +81,11 @@ public class PartyChatActivity extends AppCompatActivity {
 
         editMsg = findViewById(R.id.editMsg);
         listView = findViewById(R.id.listview);
+
+        // 사이드 바 연결
+        drawerLayout = findViewById(R.id.drawer_layout);
+        drawerView = findViewById(R.id.drawer);
+
         btn = findViewById(R.id.btn);
         adapter = new ChatAdapter(messageItems,getLayoutInflater(),user);
         listView.setAdapter(adapter);
@@ -134,6 +148,25 @@ public class PartyChatActivity extends AppCompatActivity {
 
 
 
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+
+        if (item.getItemId() == R.id.btnCheck){
+            drawerLayout.openDrawer(drawerView);
+        }
+
+
+        return super.onOptionsItemSelected(item);
 
     }
 
