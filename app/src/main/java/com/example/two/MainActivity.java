@@ -24,6 +24,7 @@ import com.example.two.Api.LoginApi;
 import com.example.two.Api.MovieApi;
 import com.example.two.Api.NetworkClient1;
 import com.example.two.Api.NetworkClient2;
+import com.example.two.Api.UserApi;
 import com.example.two.adapter.MainAdapter;
 import com.example.two.config.Config;
 import com.example.two.Api.MovieApi;
@@ -36,6 +37,7 @@ import com.example.two.model.MovieList;
 import com.example.two.model.MovieRank;
 import com.example.two.model.MovieRankList;
 import com.example.two.model.User;
+import com.example.two.model.UserList;
 import com.example.two.model.UserRes;
 
 import java.util.ArrayList;
@@ -90,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Movie> movieArrayList = new ArrayList<>();
 
     ArrayList<MovieRank> movierankArrayList = new ArrayList<>();
+
+    ArrayList<User> userArrayList = new ArrayList<>();
 
     int page;
 
@@ -432,6 +436,39 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
+        });
+    }
+
+    void getUserData(){
+        Retrofit retrofit = NetworkClient2.getRetrofitClient(MainActivity.this);
+
+        UserApi api = retrofit.create(UserApi.class);
+
+//        Log.i("AAA", api.toString());
+        SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
+
+        AccessToken = sp.getString("AccessToken","");
+
+        Call<UserList> call = api.getUserInfo("Bearer "+AccessToken);
+
+        call.enqueue(new Callback<UserList>() {
+            @Override
+            public void onResponse(Call<UserList> call, Response<UserList> response) {
+                userArrayList.addAll(response.body().getUser());
+                Log.i("UUU", userArrayList.toString());
+
+                SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putString("imgUrl",userArrayList.get(0).getProfileImgUrl());
+                editor.putString("nickname",userArrayList.get(0).getNickname());
+                editor.apply();
+
+            }
+
+            @Override
+            public void onFailure(Call<UserList> call, Throwable t) {
+
+            }
         });
     }
 
