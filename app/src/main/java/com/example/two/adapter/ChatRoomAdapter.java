@@ -106,7 +106,7 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
                     Intent intent = new Intent(context, PartyChatActivity.class);
                     intent.putExtra("partyBoardId",chat.getPartyBoardId());
                     intent.putExtra("index", index);
-                    intent.putExtra("Id",chat.getUserId());
+                    intent.putExtra("title",chat.getTitle());
                     context.startActivity(intent);
 
 

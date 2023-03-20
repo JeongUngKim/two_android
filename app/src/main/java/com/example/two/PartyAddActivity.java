@@ -141,7 +141,7 @@ public class PartyAddActivity extends AppCompatActivity {
                 Intent intent = new Intent(PartyAddActivity.this , PartyChatActivity.class);
                 intent.putExtra("user",user);
                 intent.putExtra("partyBoardId",partyBoardId);
-
+                intent.putExtra("title",partyName);
                 finish();
 
 
