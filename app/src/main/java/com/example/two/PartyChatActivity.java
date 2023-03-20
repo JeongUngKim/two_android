@@ -9,17 +9,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.example.two.Api.NetworkClient2;
+import com.example.two.Api.UserApi;
 import com.example.two.adapter.ChatAdapter;
 import com.example.two.config.Config;
 import com.example.two.fragment.PartyFragment;
 import com.example.two.model.MessageItem;
 import com.example.two.model.User;
+import com.example.two.model.UserList;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -29,6 +33,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class PartyChatActivity extends AppCompatActivity {
 
@@ -41,6 +50,7 @@ public class PartyChatActivity extends AppCompatActivity {
     ChatAdapter adapter;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference chatRef;
+
 
     int index;
     User user;
@@ -120,6 +130,8 @@ public class PartyChatActivity extends AppCompatActivity {
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
             }
         });
+
+
 
 
 
