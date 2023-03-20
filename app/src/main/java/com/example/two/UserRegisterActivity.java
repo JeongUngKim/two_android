@@ -31,6 +31,7 @@ import android.widget.Toast;
 import com.example.two.model.User;
 import com.example.two.model.UserRes;
 
+import com.google.android.gms.common.util.IOUtils;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -69,7 +70,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import org.apache.commons.io.IOUtils;
+//import org.apache.commons.io.IOUtils;
 public class UserRegisterActivity extends AppCompatActivity {
     Button buttonRegister;
 
@@ -435,7 +436,7 @@ public class UserRegisterActivity extends AppCompatActivity {
         FileInputStream inputStream = new FileInputStream( parcelFileDescriptor.getFileDescriptor( ) );
         profileImg = new File( this.getCacheDir( ), filename );
         FileOutputStream outputStream = new FileOutputStream( profileImg );
-        IOUtils.copy( inputStream, outputStream );
+        IOUtils.copyStream( inputStream, outputStream);
 
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);

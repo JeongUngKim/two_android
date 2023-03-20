@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.two.Api.LoginApi;
 import com.example.two.Api.MovieApi;
 import com.example.two.Api.NetworkClient1;
 import com.example.two.Api.NetworkClient2;
@@ -34,8 +35,11 @@ import com.example.two.model.Movie;
 import com.example.two.model.MovieList;
 import com.example.two.model.MovieRank;
 import com.example.two.model.MovieRankList;
+import com.example.two.model.User;
+import com.example.two.model.UserRes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -73,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
     SearchFragment searchFragment;
     MyFragment myFragment;
 
+    String UserEmail;
+    String password;
 
 
 
@@ -198,9 +204,7 @@ public class MainActivity extends AppCompatActivity {
         imgLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
+                getLogout();
             }
         });
 
@@ -234,6 +238,30 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, myFragment).commit();
+
+            }
+        });
+    }
+
+    public void getLogout(){
+        Retrofit retrofit = NetworkClient2.getRetrofitClient(MainActivity.this);
+        LoginApi api = retrofit.create(LoginApi.class);
+
+        Call<UserRes> call = api.Logout("Bearer "+AccessToken);
+        call.enqueue(new Callback<UserRes>() {
+            @Override
+            public void onResponse(Call<UserRes> call, Response<UserRes> response) {
+                SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putString("AccessToken",null);
+                editor.apply();
+                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<UserRes> call, Throwable t) {
 
             }
         });
@@ -406,6 +434,9 @@ public class MainActivity extends AppCompatActivity {
 
         });
     }
+
+
+
 
     // 프래그먼트 간 화면 전환 시켜주기위한 함수
     public void onFragmentChange(int index){

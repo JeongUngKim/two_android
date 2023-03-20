@@ -16,8 +16,8 @@ public interface LoginApi {
     @POST("login")
     Call<UserRes> Login(@Body User user);
 
-    @POST("Logout")
-    Call<HashMap<String,String>> Logout(@Header("Authorization") String token);
+    @POST("logout")
+    Call<UserRes> Logout(@Header("Authorization") String token);
 
     @POST("isId")
     Call<HashMap<String,String>> IsId(@Body User user);
