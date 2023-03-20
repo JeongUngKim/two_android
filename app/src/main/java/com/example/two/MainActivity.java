@@ -168,6 +168,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.this,LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         getNetworkData();
+        getUserData();
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
