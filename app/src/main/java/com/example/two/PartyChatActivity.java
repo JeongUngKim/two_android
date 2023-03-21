@@ -37,6 +37,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.HashSet;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -59,7 +61,8 @@ public class PartyChatActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     View drawerView;
 
-
+    public static Context context;
+    HashSet<HashMap<String,String>> set=new HashSet<>();;
     int index;
     User user;
     @SuppressLint("WrongViewCast")
@@ -74,6 +77,9 @@ public class PartyChatActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+
+        context = this;
+
         user = new User();
         user.setProfileImgUrl(sp.getString("imgUrl", ""));
         user.setNickname(sp.getString("nickname", ""));
@@ -90,6 +96,12 @@ public class PartyChatActivity extends AppCompatActivity {
         adapter = new ChatAdapter(messageItems,getLayoutInflater(),user);
         listView.setAdapter(adapter);
 
+        for( int i = 0 ; i < messageItems.size();i++){
+            HashMap<String,String> data = new HashMap<>();
+            data.put("nickname",messageItems.get(i).getNickname());
+            data.put("profileUrl",messageItems.get(i).getProfileUrl());
+            set.add(data);
+        }
         firebaseDatabase= firebaseDatabase.getInstance();
         chatRef = firebaseDatabase.getReference("chatroom"+"/"+intent.getIntExtra("partyBoardId",0));
         chatRef.addChildEventListener(new ChildEventListener() {
@@ -99,7 +111,10 @@ public class PartyChatActivity extends AppCompatActivity {
                 messageItems.add(messageItem);
                 adapter.notifyDataSetChanged();
                 listView.setSelection(messageItems.size()-1); //리스트뷰의 마지막 위치로 스크롤 위치 이동
-
+                HashMap<String,String> data = new HashMap<>();
+                data.put("nickname",messageItem.getNickname());
+                data.put("profileUrl",messageItem.getProfileUrl());
+                set.add(data);
 
             }
 
@@ -159,15 +174,10 @@ public class PartyChatActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-
         if (item.getItemId() == R.id.btnCheck){
             drawerLayout.openDrawer(drawerView);
         }
-
-
         return super.onOptionsItemSelected(item);
-
     }
 
     @Override
