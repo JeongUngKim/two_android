@@ -60,6 +60,8 @@ public class PartyChatActivity extends AppCompatActivity {
     View drawerView;
 
 
+
+
     int index;
     User user;
     @SuppressLint("WrongViewCast")
@@ -85,6 +87,7 @@ public class PartyChatActivity extends AppCompatActivity {
         // 사이드 바 연결
         drawerLayout = findViewById(R.id.drawer_layout);
         drawerView = findViewById(R.id.drawer);
+
 
         btn = findViewById(R.id.btn);
         adapter = new ChatAdapter(messageItems,getLayoutInflater(),user);

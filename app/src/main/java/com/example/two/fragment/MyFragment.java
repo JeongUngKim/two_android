@@ -1,24 +1,44 @@
 package com.example.two.fragment;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.two.Api.NetworkClient2;
+import com.example.two.Api.UserApi;
 import com.example.two.ChoiceActivity;
 import com.example.two.MainActivity;
 import com.example.two.MyReviewActivity;
 import com.example.two.R;
 import com.example.two.UseOTTActivity;
+import com.example.two.config.Config;
+import com.example.two.model.User;
+import com.example.two.model.UserList;
+
+import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,10 +54,13 @@ public class MyFragment extends Fragment {
     ImageButton btnFilter;
     ImageButton btnParty;
     ImageButton btnMy;
+    CircleImageView imgProfile;
+    TextView txtNickname;
 
     CardView cvChoice;
     CardView cvMyReview;
     CardView cvUseOTT;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -76,6 +99,8 @@ public class MyFragment extends Fragment {
 
         activity = (MainActivity) getActivity();
 
+
+
     }
 
     @Override
@@ -110,6 +135,24 @@ public class MyFragment extends Fragment {
         btnParty = view.findViewById(R.id.btnParty);
         btnFilter = view.findViewById(R.id.btnFilter);
         btnMy = view.findViewById(R.id.btnMy);
+        txtNickname = view.findViewById(R.id.txtNickname);
+        imgProfile = view.findViewById(R.id.imgProfile);
+
+
+
+        // 메인 액티비티 유저 데이터 가져오는 메서드 호출
+        ((MainActivity) getActivity()).getUserData();
+
+        // 쉐어드 객체 생성
+        SharedPreferences sp = activity.getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
+
+        // 닉네임과 프로필 주소 가져옴
+        String pofileUrl = sp.getString("imgUrl","");
+        String nickName = sp.getString("nickname","");
+
+        // 프로필 사진과 닉네임 세팅
+        Glide.with(getActivity()).load(pofileUrl).into(imgProfile);
+        txtNickname.setText(nickName);
 
         // 메인 액티비티 넘어가기
         btnHome.setOnClickListener(new View.OnClickListener() {
@@ -175,4 +218,6 @@ public class MyFragment extends Fragment {
 
         return view;
     }
+
+
 }
