@@ -31,7 +31,7 @@ public class SeachAdapter extends RecyclerView.Adapter<SeachAdapter.ViewHolder> 
     @Override
     public SeachAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.serach_row,parent,false);
+                .inflate(R.layout.searchmovie_row,parent,false);
 
         return new SeachAdapter.ViewHolder(view);
     }
@@ -39,13 +39,15 @@ public class SeachAdapter extends RecyclerView.Adapter<SeachAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull SeachAdapter.ViewHolder holder, int position) {
         Seach seach = seachArrayList.get(position);
-        holder.textView10.setText(seach.getTitle());
-        holder.textView11.setText(seach.getVote_average());
-
         Glide.with(context)
                 .load("https://image.tmdb.org/t/p/w92"+seach.getPoster_path())
                 .placeholder(R.drawable.baseline_person_outline_24)
-                .into(holder.imageView6);
+                .into(holder.searchMoviePoster);
+
+        holder.titleSearchMovie1.setText(seach.getTitle());
+        holder.rateSearchMovie1.setText(seach.getVote_average());
+        holder.genreSearchMovie1.setText(seach.getGenre_ids().toString());
+        holder.dateSearchMovie1.setText(seach.getRelease_date());
 
     }
 
@@ -56,16 +58,21 @@ public class SeachAdapter extends RecyclerView.Adapter<SeachAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView imageView6;
-        TextView textView10;
-        TextView textView11;
+        ImageView searchMoviePoster ;
+        TextView titleSearchMovie1;
+        TextView rateSearchMovie1;
+        TextView genreSearchMovie1;
+        TextView dateSearchMovie1;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            textView10 = itemView.findViewById(R.id.textView10);
-            textView11 = itemView.findViewById(R.id.textView11);
-            imageView6 = itemView.findViewById(R.id.imageView6);
+            searchMoviePoster = itemView.findViewById(R.id.searchMoviePoster);
+            titleSearchMovie1 = itemView.findViewById(R.id.titleSearchMovie1);
+            rateSearchMovie1 = itemView.findViewById(R.id.rateSearchMovie1);
+            genreSearchMovie1 = itemView.findViewById(R.id.genreSearchTv1);
+            dateSearchMovie1 = itemView.findViewById(R.id.dateSearchMovie1);
+
         }
     }
 }

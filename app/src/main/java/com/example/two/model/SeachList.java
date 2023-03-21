@@ -5,13 +5,13 @@ import java.util.PrimitiveIterator;
 
 public class SeachList {
 
-    private List<Seach> results;
+    private List<Seach> movie;
 
-    public List<Seach> getResults() {
-        return results;
+    public List<Seach> getMovie() {
+        return movie;
     }
 
-    public void setResults(List<Seach> results) {
-        this.results = results;
+    public void setMovie(List<Seach> movie) {
+        this.movie = movie;
     }
 }

@@ -4,19 +4,28 @@ import java.util.List;
 
 public class Seach {
 
+    private int Id;
+
     private String title;
 
-    private String name;
+    private String genre;
 
-    private String poster_path;
+    private String content;
 
-    private String vote_average;
+    private String imgUrl;
 
-    private String release_date;
+    private List contentRating;
 
-    private List genre_ids;
+    private String createdYear;
 
-    private String first_air_date;
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -25,51 +34,43 @@ public class Seach {
         this.title = title;
     }
 
-    public String getName() {
-        return name;
+    public String getGenre() {
+        return genre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
-    public String getPoster_path() {
-        return poster_path;
+    public String getContent() {
+        return content;
     }
 
-    public void setPoster_path(String poster_path) {
-        this.poster_path = poster_path;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getVote_average() {
-        return vote_average;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
-    public void setVote_average(String vote_average) {
-        this.vote_average = vote_average;
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
-    public String getRelease_date() {
-        return release_date;
+    public List getContentRating() {
+        return contentRating;
     }
 
-    public void setRelease_date(String release_date) {
-        this.release_date = release_date;
+    public void setContentRating(List contentRating) {
+        this.contentRating = contentRating;
     }
 
-    public List getGenre_ids() {
-        return genre_ids;
+    public String getCreatedYear() {
+        return createdYear;
     }
 
-    public void setGenre_ids(List genre_ids) {
-        this.genre_ids = genre_ids;
-    }
-
-    public String getFirst_air_date() {
-        return first_air_date;
-    }
-
-    public void setFirst_air_date(String first_air_date) {
-        this.first_air_date = first_air_date;
+    public void setCreatedYear(String createdYear) {
+        this.createdYear = createdYear;
     }
 }
