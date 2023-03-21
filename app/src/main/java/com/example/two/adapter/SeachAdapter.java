@@ -1,6 +1,7 @@
 package com.example.two.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,15 +40,16 @@ public class SeachAdapter extends RecyclerView.Adapter<SeachAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull SeachAdapter.ViewHolder holder, int position) {
         Seach seach = seachArrayList.get(position);
+        Log.i("SIGN","OK");
         Glide.with(context)
-                .load("https://image.tmdb.org/t/p/w92"+seach.getPoster_path())
+                .load(seach.getImgUrl())
                 .placeholder(R.drawable.baseline_person_outline_24)
                 .into(holder.searchMoviePoster);
 
         holder.titleSearchMovie1.setText(seach.getTitle());
-        holder.rateSearchMovie1.setText(seach.getVote_average());
-        holder.genreSearchMovie1.setText(seach.getGenre_ids().toString());
-        holder.dateSearchMovie1.setText(seach.getRelease_date());
+        holder.rateSearchMovie1.setText(seach.getContentRating().toString());
+        holder.genreSearchMovie1.setText(seach.getGenre());
+        holder.dateSearchMovie1.setText(seach.getCreatedYear());
 
     }
 
@@ -70,7 +72,7 @@ public class SeachAdapter extends RecyclerView.Adapter<SeachAdapter.ViewHolder> 
             searchMoviePoster = itemView.findViewById(R.id.searchMoviePoster);
             titleSearchMovie1 = itemView.findViewById(R.id.titleSearchMovie1);
             rateSearchMovie1 = itemView.findViewById(R.id.rateSearchMovie1);
-            genreSearchMovie1 = itemView.findViewById(R.id.genreSearchTv1);
+            genreSearchMovie1 = itemView.findViewById(R.id.genreSearchMovie1);
             dateSearchMovie1 = itemView.findViewById(R.id.dateSearchMovie1);
 
         }

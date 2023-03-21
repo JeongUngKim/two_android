@@ -14,9 +14,13 @@ public class Seach {
 
     private String imgUrl;
 
-    private List contentRating;
+    private String contentRating;
 
     private String createdYear;
+
+    private int tmdbcontentId;
+
+    private String type;
 
     public int getId() {
         return Id;
@@ -58,11 +62,11 @@ public class Seach {
         this.imgUrl = imgUrl;
     }
 
-    public List getContentRating() {
+    public String getContentRating() {
         return contentRating;
     }
 
-    public void setContentRating(List contentRating) {
+    public void setContentRating(String contentRating) {
         this.contentRating = contentRating;
     }
 
@@ -72,5 +76,21 @@ public class Seach {
 
     public void setCreatedYear(String createdYear) {
         this.createdYear = createdYear;
+    }
+
+    public int getTmdbcontentId() {
+        return tmdbcontentId;
+    }
+
+    public void setTmdbcontentId(int tmdbcontentId) {
+        this.tmdbcontentId = tmdbcontentId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

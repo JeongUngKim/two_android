@@ -8,33 +8,33 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.Adapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.example.two.Api.NetworkClient1;
+import com.example.two.Api.NetworkClient2;
 import com.example.two.Api.SearchApi;
 import com.example.two.MainActivity;
 import com.example.two.R;
-import com.example.two.config.Config;
-import com.example.two.Api.SearchApi;
-import com.example.two.model.Movie;
+import com.example.two.adapter.SeachAdapter;
 import com.example.two.model.Seach;
+import com.example.two.model.SeachData;
 import com.example.two.model.SeachList;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -62,13 +62,16 @@ public class SearchFragment extends Fragment {
 
     String Keyword;
 
+    SeachAdapter adapter;
 
     ImageView btntitleSearch;
 
     TextView txtSearch;
 
-    ListView movieListView;
-    ListView dramaListView;
+    RecyclerView movieListView;
+    RecyclerView dramaListView;
+
+    SeachData seachData;
     Layout layoutMovie;
     Layout layoutDrama;
 
@@ -144,11 +147,12 @@ public class SearchFragment extends Fragment {
         btntitleSearch = view.findViewById(R.id.btntitleSearch);
         txtSearch = view.findViewById(R.id.txtSearch);
         movieListView = view.findViewById(R.id.movieListView);
-        dramaListView = view.findViewById(R.id.dramaListView);
+//        dramaListView = view.findViewById(R.id.dramaListView);
 //        layoutMovie = view.findViewById(R.id.layoutMovie);
 //        layoutDrama = view.findViewById(R.id.layoutDrama);
 
-
+        movieListView.setHasFixedSize(true);
+        movieListView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
         btntitleSearch.setOnClickListener(new View.OnClickListener() {
@@ -172,7 +176,7 @@ public class SearchFragment extends Fragment {
 
 
 
-        movieListView.setLa(new LinearLayoutManager(getActivity()));
+
 
 
 
@@ -400,13 +404,29 @@ public class SearchFragment extends Fragment {
 //    }
 
     private void getNetworkSearchMovieData(String Keyword) {
-        Retrofit retrofit = NetworkClient1.getRetrofitClient(getActivity());
+        Retrofit retrofit = NetworkClient2.getRetrofitClient(getActivity());
 
         SearchApi api = retrofit.create(SearchApi.class);
 
         Log.i("AAA", api.toString());
+
         String type = "movie";
-        Call<SeachList> call = api.getSeachMovie(type,Keyword);
+
+
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("keyword", Keyword);
+        map.put("genre", "");
+        map.put("limit", "");
+        map.put("rating","");
+        map.put("year","");
+        map.put("offset","0");
+        map.put("filtering","");
+        map.put("sort","");
+
+
+
+
+        Call<SeachList> call = api.getSeach(type,map);
 
         call.enqueue(new Callback<SeachList>() {
             @Override
@@ -415,11 +435,19 @@ public class SearchFragment extends Fragment {
                 if (response.isSuccessful()) {
                     // getNetworkData는 항상처음에 데이터를 가져오는 동작 이므로
                     // 초기화 코드가 필요
-                    seachArrayList1.clear();
+                    Log.i("SIGN","OK");
 
                     // 데이터를 받았으니 리사이클러 표시
 
                     seachArrayList1.addAll(response.body().getMovie());
+
+
+
+
+                    adapter = new SeachAdapter(getActivity(),seachArrayList1);
+
+                    movieListView.setAdapter(adapter);
+
 
 
                     //
@@ -648,7 +676,7 @@ public class SearchFragment extends Fragment {
 
             @Override
             public void onFailure(Call<SeachList> call, Throwable t) {
-
+            Log.i("ERRER", String.valueOf(t));
 
             }
 
