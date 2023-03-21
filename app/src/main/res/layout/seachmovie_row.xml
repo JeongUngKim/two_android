@@ -33,7 +33,6 @@
 
                 <TextView
                     android:id="@+id/titleSearchMovie1"
-                    app:layout_constrainedWidth="true"
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
