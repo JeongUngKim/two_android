@@ -37,8 +37,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.HashSet;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -174,10 +172,15 @@ public class PartyChatActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+
         if (item.getItemId() == R.id.btnCheck){
             drawerLayout.openDrawer(drawerView);
         }
+
+
         return super.onOptionsItemSelected(item);
+
     }
 
     @Override
