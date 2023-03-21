@@ -19,4 +19,30 @@
         android:text="결제 확인"
         android:textColor="#FFFFFF"
         android:textSize="25sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/btnId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:backgroundTint="#FFC107"
+        android:text="공유 아이디 보기"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btnPay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:backgroundTint="#000000"
+        android:text="결제하기"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
 </LinearLayout>

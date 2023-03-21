@@ -440,7 +440,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    void getUserData(){
+    public void getUserData(){
         Retrofit retrofit = NetworkClient2.getRetrofitClient(MainActivity.this);
 
         UserApi api = retrofit.create(UserApi.class);
