@@ -1,8 +1,11 @@
 package com.example.two;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.os.Bundle;
@@ -13,6 +16,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
+import com.example.two.Api.LoginApi;
+import com.example.two.Api.NetworkClient2;
+import com.example.two.config.Config;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 
 public class UserChoiceActivity extends AppCompatActivity {
@@ -39,9 +55,9 @@ public class UserChoiceActivity extends AppCompatActivity {
 
     Button btnGenreChoice;
 
-    int count  ;
+    int count = 0;
 
-
+    ArrayList<String> genre = new ArrayList<>();
 
 
     @Override
@@ -80,23 +96,16 @@ public class UserChoiceActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 view.setSelected(!view.isSelected());
+
                 if(view.isSelected()){
                     actionView.setColorFilter(Color.parseColor("#B3000000"));
-                    if(count == 0){
-
-                        count = 1;
-                        Log.i("count", String.valueOf(count));
-                    }
-                    else{
-                        count = count+1;
-                        Log.i("count", String.valueOf(count));
-                    }
-
+                    count+=1;
+                    genre.add("0");
                 }
                 else {
                     actionView.setColorFilter(Color.parseColor("#00000000"));
                     count = count - 1;
-                    Log.i("count", String.valueOf(count));
+                    genre.remove("0");
                 }
 
             }
@@ -114,20 +123,15 @@ public class UserChoiceActivity extends AppCompatActivity {
                 view.setSelected(!view.isSelected());
                 if(view.isSelected()){
                     adventureView.setColorFilter(Color.parseColor("#B3000000"));
-                    if(count == 0){
+                    count+=1;
+                    genre.add("1");
 
-                        count = 1;
-                        Log.i("count", String.valueOf(count));
-                    }
-                    else{
-                        count = count+1;
-                        Log.i("count", String.valueOf(count));
-                    }
                 }
                 else {
                     adventureView.setColorFilter(Color.parseColor("#00000000"));
                     count = count - 1;
                     Log.i("count", String.valueOf(count));
+                    genre.remove("1");
                 }
 
             }
@@ -145,12 +149,13 @@ public class UserChoiceActivity extends AppCompatActivity {
                 view.setSelected(!view.isSelected());
                 if(view.isSelected()){
                     comedyView.setColorFilter(Color.parseColor("#B3000000"));
-                    int count = 1;
-                    Log.i("count", String.valueOf(count));
+                    count+=1;
+                    genre.add("3");
                 }
                 else {
                     comedyView.setColorFilter(Color.parseColor("#00000000"));
-                    int count = 0;
+                    count = count - 1;
+                    genre.remove("3");
                 }
 
             }
@@ -167,12 +172,13 @@ public class UserChoiceActivity extends AppCompatActivity {
                 view.setSelected(!view.isSelected());
                 if(view.isSelected()){
                     documentaryView.setColorFilter(Color.parseColor("#B3000000"));
-                    int count = 1;
-                    Log.i("count", String.valueOf(count));
+                    count+=1;
+                    genre.add("5");
                 }
                 else {
                     documentaryView.setColorFilter(Color.parseColor("#00000000"));
-                    int count = 0;
+                    count = count - 1;
+                    genre.remove("5");
                 }
 
             }
@@ -189,12 +195,13 @@ public class UserChoiceActivity extends AppCompatActivity {
                 view.setSelected(!view.isSelected());
                 if(view.isSelected()){
                     dramaView.setColorFilter(Color.parseColor("#B3000000"));
-                    int count = 1;
-                    Log.i("count", String.valueOf(count));
+                    count+=1;
+                    genre.add("6");
                 }
                 else {
                     dramaView.setColorFilter(Color.parseColor("#00000000"));
-                    int count = 0;
+                    count = count - 1;
+                    genre.remove("6");
                 }
 
             }
@@ -211,12 +218,13 @@ public class UserChoiceActivity extends AppCompatActivity {
                 view.setSelected(!view.isSelected());
                 if(view.isSelected()){
                     fantasyView.setColorFilter(Color.parseColor("#B3000000"));
-                    int count = 1;
-                    Log.i("count", String.valueOf(count));
+                    count+=1;
+                    genre.add("8");
                 }
                 else {
                     fantasyView.setColorFilter(Color.parseColor("#00000000"));
-                    int count = 0;
+                    count = count - 1;
+                    genre.remove("8");
                 }
 
             }
@@ -233,12 +241,13 @@ public class UserChoiceActivity extends AppCompatActivity {
                 view.setSelected(!view.isSelected());
                 if(view.isSelected()){
                     historyView.setColorFilter(Color.parseColor("#B3000000"));
-                    int count = 1;
-                    Log.i("count", String.valueOf(count));
+                    count+=1;
+                    genre.add("9");
                 }
                 else {
                     historyView.setColorFilter(Color.parseColor("#00000000"));
-                    int count = 0;
+                    count = count - 1;
+                    genre.remove("9");
                 }
 
             }
@@ -255,12 +264,13 @@ public class UserChoiceActivity extends AppCompatActivity {
                 view.setSelected(!view.isSelected());
                 if(view.isSelected()){
                     horrorView.setColorFilter(Color.parseColor("#B3000000"));
-                    int count = 1;
-                    Log.i("count", String.valueOf(count));
+                    count+=1;
+                    genre.add("10");
                 }
                 else {
                     horrorView.setColorFilter(Color.parseColor("#00000000"));
-                    int count = 0;
+                    count = count - 1;
+                    genre.remove("10");
                 }
 
             }
@@ -277,12 +287,13 @@ public class UserChoiceActivity extends AppCompatActivity {
                 view.setSelected(!view.isSelected());
                 if(view.isSelected()){
                     mysteryView.setColorFilter(Color.parseColor("#B3000000"));
-                    int count = 1;
-                    Log.i("count", String.valueOf(count));
+                    count+=1;
+                    genre.add("12");
                 }
                 else {
                     mysteryView.setColorFilter(Color.parseColor("#00000000"));
-                    int count = 0;
+                    count = count - 1;
+                    genre.remove("12");
                 }
 
             }
@@ -299,12 +310,13 @@ public class UserChoiceActivity extends AppCompatActivity {
                 view.setSelected(!view.isSelected());
                 if(view.isSelected()){
                     crimeView.setColorFilter(Color.parseColor("#B3000000"));
-                    int count = 1;
-                    Log.i("count", String.valueOf(count));
+                    count+=1;
+                    genre.add("4");
                 }
                 else {
                     crimeView.setColorFilter(Color.parseColor("#00000000"));
-                    int count = 0;
+                    count = count - 1;
+                    genre.remove("4");
                 }
 
             }
@@ -321,12 +333,13 @@ public class UserChoiceActivity extends AppCompatActivity {
                 view.setSelected(!view.isSelected());
                 if(view.isSelected()){
                     romanceView.setColorFilter(Color.parseColor("#B3000000"));
-                    int count = 1;
-                    Log.i("count", String.valueOf(count));
+                    count+=1;
+                    genre.add("13");
                 }
                 else {
                     romanceView.setColorFilter(Color.parseColor("#00000000"));
-                    int count = 0;
+                    count = count - 1;
+                    genre.remove("13");
                 }
 
             }
@@ -343,12 +356,13 @@ public class UserChoiceActivity extends AppCompatActivity {
                 view.setSelected(!view.isSelected());
                 if(view.isSelected()){
                     scienceView.setColorFilter(Color.parseColor("#B3000000"));
-                    int count = 1;
-                    Log.i("count", String.valueOf(count));
+                    count+=1;
+                    genre.add("14");
                 }
                 else {
                     scienceView.setColorFilter(Color.parseColor("#00000000"));
-                    int count = 0;
+                    count = count - 1;
+                    genre.remove("14");
                 }
 
             }
@@ -365,12 +379,13 @@ public class UserChoiceActivity extends AppCompatActivity {
                 view.setSelected(!view.isSelected());
                 if(view.isSelected()){
                     warView.setColorFilter(Color.parseColor("#B3000000"));
-                    int count = 1;
-                    Log.i("count", String.valueOf(count));
+                    count+=1;
+                    genre.add("17");
                 }
                 else {
                     warView.setColorFilter(Color.parseColor("#00000000"));
-                    int count = 0;
+                    count = count - 1;
+                    genre.remove("17");
                 }
 
             }
@@ -387,12 +402,13 @@ public class UserChoiceActivity extends AppCompatActivity {
                 view.setSelected(!view.isSelected());
                 if(view.isSelected()){
                     westernView.setColorFilter(Color.parseColor("#B3000000"));
-                    int count = 1;
-                    Log.i("count", String.valueOf(count));
+                    count+=1;
+                    genre.add("18");
                 }
                 else {
                     westernView.setColorFilter(Color.parseColor("#00000000"));
-                    int count = 0;
+                    count = count - 1;
+                    genre.remove("18");
                 }
 
             }
@@ -409,12 +425,13 @@ public class UserChoiceActivity extends AppCompatActivity {
                 view.setSelected(!view.isSelected());
                 if(view.isSelected()){
                     musicView.setColorFilter(Color.parseColor("#B3000000"));
-                    int count = 1;
-                    Log.i("count", String.valueOf(count));
+                    count+=1;
+                    genre.add("11");
                 }
                 else {
                     musicView.setColorFilter(Color.parseColor("#00000000"));
-                    int count = 0;
+                    count = count - 1;
+                    genre.remove("11");
                 }
 
             }
@@ -431,12 +448,13 @@ public class UserChoiceActivity extends AppCompatActivity {
                 view.setSelected(!view.isSelected());
                 if(view.isSelected()){
                     kidsView.setColorFilter(Color.parseColor("#B3000000"));
-                    int count = 1;
-                    Log.i("count", String.valueOf(count));
+                    count+=1;
+                    genre.add("26");
                 }
                 else {
                     kidsView.setColorFilter(Color.parseColor("#00000000"));
-                    int count = 0;
+                    count = count - 1;
+                    genre.remove("26");
                 }
 
             }
@@ -453,12 +471,13 @@ public class UserChoiceActivity extends AppCompatActivity {
                 view.setSelected(!view.isSelected());
                 if(view.isSelected()){
                     familyView.setColorFilter(Color.parseColor("#B3000000"));
-                    int count = 1;
-                    Log.i("count", String.valueOf(count));
+                    count+=1;
+                    genre.add("7");
                 }
                 else {
                     familyView.setColorFilter(Color.parseColor("#00000000"));
-                    int count = 0;
+                    count = count - 1;
+                    genre.remove("7");
                 }
 
             }
@@ -475,12 +494,13 @@ public class UserChoiceActivity extends AppCompatActivity {
                 view.setSelected(!view.isSelected());
                 if(view.isSelected()){
                     animationView.setColorFilter(Color.parseColor("#B3000000"));
-                    int count = 1;
-                    Log.i("count", String.valueOf(count));
+                    count+=1;
+                    genre.add("2");
                 }
                 else {
                     animationView.setColorFilter(Color.parseColor("#00000000"));
-                    int count = 0;
+                    count = count - 1;
+                    genre.remove("2");
                 }
 
             }
@@ -497,12 +517,13 @@ public class UserChoiceActivity extends AppCompatActivity {
                 view.setSelected(!view.isSelected());
                 if(view.isSelected()){
                     realityView.setColorFilter(Color.parseColor("#B3000000"));
-                    int count = 1;
-                    Log.i("count", String.valueOf(count));
+                    count+=1;
+                    genre.add("29");
                 }
                 else {
                     realityView.setColorFilter(Color.parseColor("#00000000"));
-                    int count = 0;
+                    count = count - 1;
+                    genre.remove("29");
                 }
 
             }
@@ -519,12 +540,13 @@ public class UserChoiceActivity extends AppCompatActivity {
                 view.setSelected(!view.isSelected());
                 if(view.isSelected()){
                     thrillerView.setColorFilter(Color.parseColor("#B3000000"));
-                    int count = 1;
-                    Log.i("count", String.valueOf(count));
+                    count+=1;
+                    genre.add("16");
                 }
                 else {
                     thrillerView.setColorFilter(Color.parseColor("#00000000"));
-                    int count = 0;
+                    count = count - 1;
+                    genre.remove("16");
                 }
 
             }
@@ -533,21 +555,57 @@ public class UserChoiceActivity extends AppCompatActivity {
         btnGenreChoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(UserChoiceActivity.this,MainActivity.class);
-                startActivity(intent);
-            }
+                    Log.i("genresize", String.valueOf(genre.size()));
+                if(genre.size() != 3){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(UserChoiceActivity.this);
+                    builder.setTitle("장르 선택");
+                    builder.setMessage("장르 3가지 선택해주세요.");
+                    builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
 
+                        }
+                    });
+
+                    AlertDialog ad = builder.create();
+                    ad.show();
+                }else {
+
+                    setgenre();
+                }
+            }
         });
 
+    }
 
+    public void setgenre(){
+        SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
 
+        String AccessToken = sp.getString("AccessToken","");
 
+        Log.i("Accesstoken",AccessToken);
 
+        Retrofit retrofit = NetworkClient2.getRetrofitClient(UserChoiceActivity.this);
 
+        LoginApi api = retrofit.create(LoginApi.class);
+        HashMap<String,ArrayList<String>> dataset = new HashMap<>();
+        dataset.put("genre",genre);
+        Call<HashMap<String,String>> call = api.userGenre("Bearer "+AccessToken,
+                dataset);
 
+        call.enqueue(new Callback<HashMap<String, String>>() {
+            @Override
+            public void onResponse(Call<HashMap<String, String>> call, Response<HashMap<String, String>> response) {
+                if(response.code()==200){
+                    Intent intent = new Intent(UserChoiceActivity.this,MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
 
-
-
-
+            @Override
+            public void onFailure(Call<HashMap<String, String>> call, Throwable t) {
+                Log.i("userChoice_genre","fail");
+            }
+        });
     }
 }
