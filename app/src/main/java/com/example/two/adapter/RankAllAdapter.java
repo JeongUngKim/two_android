@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.two.R;
 import com.example.two.model.Movie;
+import com.example.two.model.MovieRank;
+import com.example.two.model.MovieRankList;
 
 import java.util.ArrayList;
 
@@ -21,10 +23,10 @@ public class RankAllAdapter extends RecyclerView.Adapter<RankAllAdapter.ViewHold
 
 
     Context context;
-    ArrayList<Movie> movieArrayList;
+    ArrayList<MovieRank> movieArrayList;
 
 
-    public RankAllAdapter(Context context, ArrayList<Movie> movieArrayList) {
+    public RankAllAdapter(Context context, ArrayList<MovieRank> movieArrayList) {
         this.context = context;
         this.movieArrayList = movieArrayList;
     }
@@ -36,19 +38,24 @@ public class RankAllAdapter extends RecyclerView.Adapter<RankAllAdapter.ViewHold
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.rank_row,parent,false);
 
-        return null;
+        return new RankAllAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RankAllAdapter.ViewHolder holder, int position) {
-        Movie movie = movieArrayList.get(position);
-//        Glide.with(context).load(holder.)
+        MovieRank movieRank = movieArrayList.get(position);
+        Glide.with(context).load(movieRank.getImgUrl()).into(holder.poster1);
+        holder.titleSearchMovie1.setText(movieRank.getTitle());
+        holder.rateSearchMovie1.setText(movieRank.getContentRating());
+        holder.textView7.setText(movieRank.getGenre().substring(2,11));
+        holder.textView46.setText(movieRank.getCreatedYear().substring(0,4));
+
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return movieArrayList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

@@ -7,6 +7,25 @@ public class MovieRank {
 
     private String contentRating;
 
+    private String genre;
+    private String createdYear;
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public String getCreatedYear() {
+        return createdYear;
+    }
+
+    public void setCreatedYear(String createdYear) {
+        this.createdYear = createdYear;
+    }
+
     public String getTitle() {
         return title;
     }
