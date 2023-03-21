@@ -53,9 +53,6 @@ public class ChatAdapter extends BaseAdapter {
 
         //메세지가 내 메세지인지??
 
-        Log.i("test",item.getNickname());
-        Log.i("test_2",user.getNickname());
-        Log.i("test_3", String.valueOf(item.getNickname().equals(user.getNickname())));
         if(item.getNickname().equals(user.getNickname())){
 
             itemView= layoutInflater.inflate(R.layout.my_msgbox,viewGroup,false);

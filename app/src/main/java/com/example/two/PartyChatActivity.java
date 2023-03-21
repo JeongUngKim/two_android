@@ -5,6 +5,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -23,6 +25,7 @@ import android.widget.ListView;
 import com.example.two.Api.NetworkClient2;
 import com.example.two.Api.UserApi;
 import com.example.two.adapter.ChatAdapter;
+import com.example.two.adapter.DrawerAdapter;
 import com.example.two.config.Config;
 import com.example.two.fragment.PartyFragment;
 import com.example.two.model.MessageItem;
@@ -37,6 +40,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.HashSet;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -60,9 +65,19 @@ public class PartyChatActivity extends AppCompatActivity {
     View drawerView;
 
     public static Context context;
-    HashSet<HashMap<String,String>> set=new HashSet<>();;
+    HashSet<HashMap<String,String>> set = new HashSet<>();
+
     int index;
     User user;
+
+
+    Button btnPay;
+    Button btnId;
+
+    RecyclerView recyclerView;
+    DrawerAdapter Draweradapter;
+
+
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,14 +109,9 @@ public class PartyChatActivity extends AppCompatActivity {
         adapter = new ChatAdapter(messageItems,getLayoutInflater(),user);
         listView.setAdapter(adapter);
 
-        for( int i = 0 ; i < messageItems.size();i++){
-            HashMap<String,String> data = new HashMap<>();
-            data.put("nickname",messageItems.get(i).getNickname());
-            data.put("profileUrl",messageItems.get(i).getProfileUrl());
-            set.add(data);
-        }
         firebaseDatabase= firebaseDatabase.getInstance();
         chatRef = firebaseDatabase.getReference("chatroom"+"/"+intent.getIntExtra("partyBoardId",0));
+
         chatRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -113,7 +123,6 @@ public class PartyChatActivity extends AppCompatActivity {
                 data.put("nickname",messageItem.getNickname());
                 data.put("profileUrl",messageItem.getProfileUrl());
                 set.add(data);
-
             }
 
             @Override
@@ -160,8 +169,6 @@ public class PartyChatActivity extends AppCompatActivity {
 
 
 
-
-
     }
 
     @Override
@@ -173,14 +180,11 @@ public class PartyChatActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-
         if (item.getItemId() == R.id.btnCheck){
             drawerLayout.openDrawer(drawerView);
         }
 
-
         return super.onOptionsItemSelected(item);
-
     }
 
     @Override

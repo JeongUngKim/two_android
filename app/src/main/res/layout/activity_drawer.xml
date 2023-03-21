@@ -20,12 +20,18 @@
         android:textColor="#FFFFFF"
         android:textSize="25sp" />
 
-    <androidx.recyclerview.widget.RecyclerView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_height="wrap_content">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/drawerRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </FrameLayout>
 
     <Button
         android:id="@+id/btnId"
