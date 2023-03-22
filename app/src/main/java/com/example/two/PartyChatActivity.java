@@ -176,7 +176,6 @@ public class PartyChatActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        //TODO : 현재는 파티채팅방에서 백 버튼을 누르면 메인 액티비티로 가짐 파티 프래그먼트로 가지게 바꿔야함
         Intent intent = new Intent();
         setResult(100,intent);
         finish();
