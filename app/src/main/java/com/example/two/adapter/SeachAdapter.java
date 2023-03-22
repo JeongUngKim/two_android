@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -48,7 +49,7 @@ public class SeachAdapter extends RecyclerView.Adapter<SeachAdapter.ViewHolder> 
 
         holder.titleSearchMovie1.setText(seach.getTitle());
         holder.rateSearchMovie1.setText(seach.getContentRating().toString());
-        String[] splitText = seach.getGenre().split(",");
+        String[] splitText = seach.getGenre().replace("'","").split(",");
         holder.genreSearchMovie1.setText(splitText[0]);
         String[] splitText2 = seach.getCreatedYear().split("-");
         holder.dateSearchMovie1.setText(splitText2[0]);
@@ -68,6 +69,8 @@ public class SeachAdapter extends RecyclerView.Adapter<SeachAdapter.ViewHolder> 
         TextView genreSearchMovie1;
         TextView dateSearchMovie1;
 
+        LinearLayout layoutMovie1;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -76,6 +79,14 @@ public class SeachAdapter extends RecyclerView.Adapter<SeachAdapter.ViewHolder> 
             rateSearchMovie1 = itemView.findViewById(R.id.rateSearchMovie1);
             genreSearchMovie1 = itemView.findViewById(R.id.genreSearchMovie1);
             dateSearchMovie1 = itemView.findViewById(R.id.dateSearchMovie1);
+            layoutMovie1 = itemView.findViewById(R.id.layoutMovie1);
+
+            layoutMovie1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
 
         }
     }
