@@ -3,6 +3,7 @@ package com.example.two;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +22,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toolbar;
 
 import com.example.two.Api.NetworkClient2;
 import com.example.two.Api.UserApi;
@@ -50,7 +52,6 @@ import retrofit2.Retrofit;
 
 public class PartyChatActivity extends AppCompatActivity {
 
-
     EditText editMsg;
     ListView listView;
 
@@ -64,15 +65,13 @@ public class PartyChatActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     View drawerView;
 
-    int index;
-    User user;
-
-    Button btnPay;
-    Button btnId;
     RecyclerView drawerRecyclerView;
     DrawerAdapter drawerAdapter;
 
-    HashSet<HashMap<String,String>> hashdata = new HashSet<>();
+    HashSet<HashMap<String,String>> hash = new HashSet<>();
+
+    int index;
+    User user;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -83,6 +82,7 @@ public class PartyChatActivity extends AppCompatActivity {
 
             getSupportActionBar().setTitle(getIntent().getStringExtra("title"));
         }
+
         Intent intent = getIntent();
 
         SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
@@ -90,6 +90,10 @@ public class PartyChatActivity extends AppCompatActivity {
         user = new User();
         user.setProfileImgUrl(sp.getString("imgUrl", ""));
         user.setNickname(sp.getString("nickname", ""));
+        HashMap<String,String> data = new HashMap<>();
+        data.put("nickname",user.getNickname());
+        data.put("profileUrl",user.getProfileImgUrl());
+        hash.add(data);
 
         editMsg = findViewById(R.id.editMsg);
         listView = findViewById(R.id.listview);
@@ -98,28 +102,11 @@ public class PartyChatActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         drawerView = findViewById(R.id.drawer);
 
-        btnId = findViewById(R.id.btnId);
-        btnPay = findViewById(R.id.btnPay);
-
         drawerRecyclerView = findViewById(R.id.drawerRecyclerView);
         drawerRecyclerView.setHasFixedSize(true);
         drawerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        HashMap<String, String> data = new HashMap<>();
-        data.put("nickname","바봉");
-        data.put("profileUrl","https://ungjk-test.s3.ap-northeast-2.amazonaws.com/rrc0777@naver.com_profileImg.jpg");
-        hashdata.add(data);
-        drawerAdapter = new DrawerAdapter(PartyChatActivity.this,hashdata);
+        drawerAdapter = new DrawerAdapter(PartyChatActivity.this,hash);
         drawerRecyclerView.setAdapter(drawerAdapter);
-        drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                drawerAdapter.notifyDataSetChanged();
-            }
-        });
-
-
 
         btn = findViewById(R.id.btn);
         adapter = new ChatAdapter(messageItems,getLayoutInflater(),user);
@@ -136,6 +123,11 @@ public class PartyChatActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
                 listView.setSelection(messageItems.size()-1); //리스트뷰의 마지막 위치로 스크롤 위치 이동
 
+                HashMap<String,String> data = new HashMap<>();
+                data.put("nickname",messageItem.getNickname());
+                data.put("profileUrl",messageItem.getProfileUrl());
+                hash.add(data);
+                drawerAdapter.updatedata(hash);
             }
 
             @Override
@@ -180,20 +172,6 @@ public class PartyChatActivity extends AppCompatActivity {
             }
         });
 
-        btnId.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.i("btnId","정상작동됩니다.");
-            }
-        });
-
-        btnPay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.i("btnPay","정상작동됩니다.");
-            }
-        });
-
     }
 
     @Override
@@ -206,7 +184,6 @@ public class PartyChatActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.btnCheck){
             drawerLayout.openDrawer(drawerView);
-
         }
         return super.onOptionsItemSelected(item);
     }

@@ -8,7 +8,7 @@
     android:layout_gravity="end"
     android:background="#3C3C3C"
     android:orientation="vertical"
-    tools:context=".PartyChatActivity">
+    tools:context=".drawerActivity">
 
 
     <TextView
@@ -23,7 +23,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/drawerRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
     </androidx.recyclerview.widget.RecyclerView>
 
