@@ -140,7 +140,7 @@ public class PartyAddActivity extends AppCompatActivity {
             public void onClick(View view) {
                 saveData();
 //                getPartyData();
-                Intent intent = new Intent(PartyAddActivity.this , PartyFragment.class);
+                Intent intent = new Intent();
                 setResult(100,intent);
                 finish();
 
