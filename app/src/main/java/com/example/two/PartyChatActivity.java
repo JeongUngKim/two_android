@@ -65,17 +65,16 @@ public class PartyChatActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     View drawerView;
 
+
     int partyBoardId;
-    RecyclerView drawerRecyclerView;
-    DrawerAdapter drawerAdapter;
-
-    HashSet<HashMap<String,String>> hash = new HashSet<>();
-
 
 
     int index;
     User user;
+    RecyclerView drawerRecyclerView;
+    DrawerAdapter drawerAdapter;
 
+    HashSet<HashMap<String,String>> hash = new HashSet<>();
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
