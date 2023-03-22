@@ -13,32 +13,31 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.two.R;
-import com.example.two.model.Movie;
 import com.example.two.model.Seach;
 
 import java.util.ArrayList;
 
-public class SeachAdapter extends RecyclerView.Adapter<SeachAdapter.ViewHolder> {
+public class SeachAdapter2 extends RecyclerView.Adapter<SeachAdapter2.ViewHolder> {
     Context context;
 
     ArrayList<Seach> seachArrayList;
 
-    public SeachAdapter(Context context, ArrayList<Seach> seachArrayList) {
+    public SeachAdapter2(Context context, ArrayList<Seach> seachArrayList) {
         this.context = context;
         this.seachArrayList = seachArrayList;
     }
 
     @NonNull
     @Override
-    public SeachAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SeachAdapter2.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.searchmovie_row,parent,false);
 
-        return new SeachAdapter.ViewHolder(view);
+        return new SeachAdapter2.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SeachAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SeachAdapter2.ViewHolder holder, int position) {
         Seach seach = seachArrayList.get(position);
         Log.i("SIGN","OK");
         Glide.with(context)

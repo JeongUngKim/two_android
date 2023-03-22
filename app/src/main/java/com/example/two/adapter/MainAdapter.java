@@ -70,7 +70,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
             textView10 = itemView.findViewById(R.id.textView10);
             textView11 = itemView.findViewById(R.id.textView11);
-            imageView6 = itemView.findViewById(R.id.imageView6);
+            imageView6 = itemView.findViewById(R.id.searchPoster);
 
             imageView6.setOnClickListener(new View.OnClickListener() {
                 @Override
