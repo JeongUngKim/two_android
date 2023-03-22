@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
@@ -26,11 +27,14 @@ import android.widget.Toast;
 import com.example.two.Api.NetworkClient2;
 import com.example.two.Api.SearchApi;
 import com.example.two.MainActivity;
+import com.example.two.MovieALLActivity;
 import com.example.two.R;
+import com.example.two.TvALLActivity;
 import com.example.two.adapter.SeachAdapter;
 import com.example.two.model.Seach;
 import com.example.two.model.SeachData;
 import com.example.two.model.SeachList;
+import com.example.two.model.SeachList2;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -70,6 +74,9 @@ public class SearchFragment extends Fragment {
 
     RecyclerView movieListView;
     RecyclerView dramaListView;
+
+    ImageView btnIntoMovie;
+    ImageView btnIntoTv;
 
     SeachData seachData;
     Layout layoutMovie;
@@ -147,12 +154,16 @@ public class SearchFragment extends Fragment {
         btntitleSearch = view.findViewById(R.id.btntitleSearch);
         txtSearch = view.findViewById(R.id.txtSearch);
         movieListView = view.findViewById(R.id.movieListView);
-//        dramaListView = view.findViewById(R.id.dramaListView);
+        dramaListView = view.findViewById(R.id.dramaListView);
+        btnIntoMovie = view.findViewById(R.id.btnIntoMovie);
+        btnIntoTv = view.findViewById(R.id.btnIntoTv);
 //        layoutMovie = view.findViewById(R.id.layoutMovie);
 //        layoutDrama = view.findViewById(R.id.layoutDrama);
 
         movieListView.setHasFixedSize(true);
         movieListView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        dramaListView.setHasFixedSize(true);
+        dramaListView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
         btntitleSearch.setOnClickListener(new View.OnClickListener() {
@@ -167,14 +178,30 @@ public class SearchFragment extends Fragment {
 //                layoutDrama1.setVisibility(View.VISIBLE);
 //                layoutDrama2.setVisibility(View.VISIBLE);
                 getNetworkSearchMovieData(Keyword);
-//                getNetworkSearchTvData(Keyword);
+                getNetworkSearchDramaData(Keyword);
 
 
 
             }
         });
 
+        btnIntoMovie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MovieALLActivity.class);
+                intent.putExtra("keyword",Keyword);
+                startActivity(intent);
+            }
+        });
 
+        btnIntoTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), TvALLActivity.class);
+                intent.putExtra("keyword",Keyword);
+                startActivity(intent);
+            }
+        });
 
 
 
@@ -228,180 +255,7 @@ public class SearchFragment extends Fragment {
 
     }
 
-//    private void getNetworkSearchTvData(String Keyword) {
-//        Retrofit retrofit = NetworkClient1.getRetrofitClient(getActivity());
-//
-//        SearchApi api = retrofit.create(SearchApi.class);
-//
-//        Log.i("AAA", api.toString());
-//
-//        Call<SeachList> call = api.getSeachTv(Config.key,language,Keyword);
-//
-//        call.enqueue(new Callback<SeachList>() {
-//            @Override
-//            public void onResponse(Call<SeachList> call, Response<SeachList> response) {
-//
-//                if (response.isSuccessful()) {
-//                    // getNetworkData는 항상처음에 데이터를 가져오는 동작 이므로
-//                    // 초기화 코드가 필요
-//                    seachArrayList1.clear();
-//
-//                    // 데이터를 받았으니 리사이클러 표시
-//
-//                    seachArrayList1.addAll(response.body().getResults());
-//                    Glide.with(SearchFragment.this)
-//                            .load("https://image.tmdb.org/t/p/w92"+seachArrayList1.get(0).getPoster_path())
-//                            .placeholder(R.drawable.baseline_person_outline_24)
-//                            .into(poster4);
-//                    titleSearchTv1.setText(seachArrayList1.get(0).getName());
-//                    rateSearchTv1.setText(seachArrayList1.get(0).getVote_average());
-//                    List tvgenre1 = seachArrayList1.get(0).getGenre_ids();
-//                    T1=String.valueOf(tvgenre1.get(0));
-//                    Log.i("TEN",T1);
-//
-//                    switch (T1) {
-//                        case "10759.0":
-//                            genreSearchTv1.setText("액션&어드벤쳐");
-//                            break;
-//                        case "16.0":
-//                            genreSearchTv1.setText("애니메이션");
-//                            break;
-//                        case "35.0":
-//                            genreSearchTv1.setText("코미디");
-//                            break;
-//                        case "80.0":
-//                            genreSearchTv1.setText("범죄");
-//                            break;
-//                        case "99.0":
-//                            genreSearchTv1.setText("다큐멘터리");
-//                            break;
-//                        case "18.0":
-//                            genreSearchTv1.setText("드라마");
-//                            break;
-//                        case"10751.0":
-//                            genreSearchTv1.setText("가족");
-//                            break;
-//                        case"10762.0":
-//                            genreSearchTv1.setText("어린이");
-//                            break;
-//                        case"9648.0":
-//                            genreSearchTv1.setText("미스터리");
-//                            break;
-//                        case"10763.0":
-//                            genreSearchTv1.setText("뉴스");
-//                            break;
-//                        case "10764.0":
-//                            genreSearchTv1.setText("리얼리티");
-//                            break;
-//                        case"10765.0":
-//                            genreSearchTv1.setText("SF&판타지");
-//                            break;
-//                        case"10766.0":
-//                            genreSearchTv1.setText("Soap");
-//                            break;
-//                        case"10767.0":
-//                            genreSearchTv1.setText("토크쇼");
-//                            break;
-//                        case "10768.0":
-//                            genreSearchTv1.setText("전쟁&정치");
-//                            break;
-//                        case "37.0":
-//                            genreSearchTv1.setText("서부");
-//                            break;
-//                        case "none":
-//                            genreSearchTv1.setText("장르없음");
-//                            break;
-//                    }
-//
-//
-//                    dateSearchTv1.setText(seachArrayList1.get(0).getFirst_air_date().substring(0,4));
-//
-//                    Glide.with(SearchFragment.this)
-//                            .load("https://image.tmdb.org/t/p/w92"+seachArrayList1.get(1).getPoster_path())
-//                            .placeholder(R.drawable.baseline_person_outline_24)
-//                            .into(poster5);
-//                    titleSearchTv2.setText(seachArrayList1.get(1).getName());
-//                    rateSearchTv2.setText(seachArrayList1.get(1).getVote_average());
-//                    List tvgenre2 = seachArrayList1.get(1).getGenre_ids();
-//                    String T2=String.valueOf(tvgenre2.get(0));
-//                    switch (T2) {
-//                        case "10759.0":
-//                            genreSearchTv2.setText("액션&어드벤쳐");
-//                            break;
-//
-//                        case "16.0":
-//                            genreSearchTv2.setText("애니메이션");
-//                            break;
-//                        case "35.0":
-//                            genreSearchTv2.setText("코미디");
-//                            break;
-//                        case "80.0":
-//                            genreSearchTv2.setText("범죄");
-//                            break;
-//                        case "99.0":
-//                            genreSearchTv2.setText("다큐멘터리");
-//                            break;
-//                        case "18.0":
-//                            genreSearchTv2.setText("드라마");
-//                            break;
-//                        case"10751.0":
-//                            genreSearchTv2.setText("가족");
-//                            break;
-//                        case"10762.0":
-//                            genreSearchTv2.setText("어린이");
-//                            break;
-//
-//                        case"9648.0":
-//                            genreSearchTv2.setText("미스터리");
-//                            break;
-//                        case"10763.0":
-//                            genreSearchTv2.setText("뉴스");
-//                            break;
-//                        case "10764.0":
-//                            genreSearchTv2.setText("리얼리티");
-//                            break;
-//                        case"10765.0":
-//                            genreSearchTv2.setText("SF&판타지");
-//                            break;
-//                        case"10766.0":
-//                            genreSearchTv2.setText("Soap");
-//                            break;
-//                        case"10767.0":
-//                            genreSearchTv2.setText("토크쇼");
-//                            break;
-//                        case "10768.0":
-//                            genreSearchTv2.setText("전쟁&정치");
-//                            break;
-//                        case "37.0":
-//                            genreSearchTv2.setText("서부");
-//                            break;
-//                        case "none":
-//                            genreSearchTv2.setText("장르없음");
-//                            break;
-//                    }
-//
-//                    dateSearchTv2.setText(seachArrayList1.get(1).getFirst_air_date().substring(0,4));
-//
-//
-//
-//
-//                    // 오프셋 처리하는 코드
-//
-//                } else {
-//                    Toast.makeText(getActivity(), "문제가 있습니다.", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<SeachList> call, Throwable t) {
-//
-//
-//            }
-//
-//
-//        });
-//    }
+
 
     private void getNetworkSearchMovieData(String Keyword) {
         Retrofit retrofit = NetworkClient2.getRetrofitClient(getActivity());
@@ -416,7 +270,7 @@ public class SearchFragment extends Fragment {
         Map<String, String> map = new LinkedHashMap<>();
         map.put("keyword", Keyword);
         map.put("genre", "");
-        map.put("limit", "");
+        map.put("limit", "3");
         map.put("rating","");
         map.put("year","");
         map.put("offset","0");
@@ -435,6 +289,8 @@ public class SearchFragment extends Fragment {
                 if (response.isSuccessful()) {
                     // getNetworkData는 항상처음에 데이터를 가져오는 동작 이므로
                     // 초기화 코드가 필요
+                    seachArrayList1.clear();
+
                     Log.i("SIGN","OK");
 
                     // 데이터를 받았으니 리사이클러 표시
@@ -677,6 +533,73 @@ public class SearchFragment extends Fragment {
             @Override
             public void onFailure(Call<SeachList> call, Throwable t) {
             Log.i("ERRER", String.valueOf(t));
+
+            }
+
+
+        });
+    }
+
+    private void getNetworkSearchDramaData(String Keyword) {
+        Retrofit retrofit = NetworkClient2.getRetrofitClient(getActivity());
+
+        SearchApi api = retrofit.create(SearchApi.class);
+
+        Log.i("AAA", api.toString());
+
+        String type = "tv";
+
+
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("keyword", Keyword);
+        map.put("genre", "");
+        map.put("limit", "2");
+        map.put("rating","");
+        map.put("year","");
+        map.put("offset","0");
+        map.put("filtering","");
+        map.put("sort","");
+
+
+
+
+        Call<SeachList2> call = api.getSeachTv(type,map);
+
+        call.enqueue(new Callback<SeachList2>() {
+            @Override
+            public void onResponse(Call<SeachList2> call, Response<SeachList2> response) {
+
+                if (response.isSuccessful()) {
+                    // getNetworkData는 항상처음에 데이터를 가져오는 동작 이므로
+                    // 초기화 코드가 필요
+
+                    seachArrayList2.clear();
+                    Log.i("SIGN","OK");
+
+                    // 데이터를 받았으니 리사이클러 표시
+
+                    seachArrayList2.addAll(response.body().getTv());
+
+
+
+
+                    adapter = new SeachAdapter(getActivity(),seachArrayList2);
+
+                    dramaListView.setAdapter(adapter);
+
+
+
+
+
+                } else {
+                    Toast.makeText(getActivity(), "문제가 있습니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SeachList2> call, Throwable t) {
+                Log.i("ERRER", String.valueOf(t));
 
             }
 

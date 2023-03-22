@@ -78,7 +78,7 @@
                     android:textSize="22sp" />
 
                 <ImageView
-                    android:id="@+id/imageView30"
+                    android:id="@+id/btnIntoMovie"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
@@ -111,7 +111,7 @@
                     android:textSize="22sp" />
 
                 <ImageView
-                    android:id="@+id/imageView3"
+                    android:id="@+id/btnIntoTv"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
