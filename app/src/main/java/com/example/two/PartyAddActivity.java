@@ -143,11 +143,6 @@ public class PartyAddActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 setResult(100,intent);
                 finish();
-
-
-
-
-
             }
         });
 
