@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 import com.example.two.Api.ChatApi;
 import com.example.two.Api.NetworkClient2;
 import com.example.two.adapter.ChatRoomAdapter;
+import com.example.two.config.Config;
 import com.example.two.fragment.PartyFragment;
 import com.example.two.model.Chat;
 import com.example.two.model.ChatRoomList;
@@ -64,7 +66,7 @@ public class PartyAddActivity extends AppCompatActivity {
 
     ArrayList<Chat> chatArrayList = new ArrayList<>();
     int partyBoardId;
-    String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3ODk0NzUxOSwianRpIjoiZGNmZjQzZjUtMTY3Yi00N2QzLWIxYzAtNDViZDUzZDI3YWRmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MTAsIm5iZiI6MTY3ODk0NzUxOX0.ZiLYXedNLnVjfXMnOQrR8ZuUKiZpUEZxfKG-GuGMvo0";
+    String token;
 
 
     boolean isFirst= true; // 첫 실행을 구분하기위한 멤버변수
@@ -138,11 +140,11 @@ public class PartyAddActivity extends AppCompatActivity {
             public void onClick(View view) {
                 saveData();
 //                getPartyData();
-                Intent intent = new Intent(PartyAddActivity.this , PartyChatActivity.class);
-                intent.putExtra("user",user);
-                intent.putExtra("partyBoardId",partyBoardId);
-                intent.putExtra("title",partyName);
+                Intent intent = new Intent(PartyAddActivity.this , PartyFragment.class);
+                setResult(100,intent);
                 finish();
+
+
 
 
 
@@ -174,7 +176,8 @@ public class PartyAddActivity extends AppCompatActivity {
         ChatApi api = retrofit.create(ChatApi.class);
 
         Log.i("AAA", api.toString());
-
+        SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
+        token = sp.getString("AccessToken","");
         Call<ChatRoomList> call =api.makeChating("Bearer "+token,chat);
 
         call.enqueue(new Callback<ChatRoomList>() {
@@ -182,7 +185,7 @@ public class PartyAddActivity extends AppCompatActivity {
             public void onResponse(Call<ChatRoomList> call, Response<ChatRoomList> response) {
                 if (response.isSuccessful()) {
 
-                    finish();
+                    return;
 
 
 
@@ -208,9 +211,7 @@ public class PartyAddActivity extends AppCompatActivity {
         DatabaseReference profileRef= firebaseDatabase.getReference("chatroom");
 
         //닉네임을 key 식별자로 하고 프로필 이미지의 주소를 값으로 저장
-        profileRef.child(partyName).setValue(partyName);
-        profileRef.child(partyName).setValue(imgUri);
-        profileRef.child(partyName).setValue(nickname);
+
 
                         //2. 내 phone에 nickName, profileUrl을 저장
                         //저장이 완료되었으니 ChatActivity로 전
