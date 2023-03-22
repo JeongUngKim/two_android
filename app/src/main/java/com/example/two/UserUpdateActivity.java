@@ -18,13 +18,12 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.two.Api.NetworkClient2;
 import com.example.two.Api.RegisterApi;
-import com.example.two.Api.UpdateApi;
+import com.example.two.Api.UserApi;
 import com.example.two.config.Config;
 import com.example.two.model.User;
 import com.example.two.model.UserRes;
@@ -70,6 +69,7 @@ public class UserUpdateActivity extends AppCompatActivity {
     Boolean nicknamecheck = false;
     String AccessToken;
 
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +89,7 @@ public class UserUpdateActivity extends AppCompatActivity {
         userEmail = getIntent().getStringExtra("email");
         nickname = getIntent().getStringExtra("nickname");
         password = getIntent().getStringExtra("password");
+        AccessToken = getIntent().getStringExtra("token");
 
         Glide.with(UserUpdateActivity.this).load(profile).into(imgProfile);
         txtEmail.setText(userEmail);
@@ -100,6 +101,23 @@ public class UserUpdateActivity extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
                 startActivityForResult(intent,0);
+            }
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(UserUpdateActivity.this);
+                builder.setTitle("회원탈퇴");
+                builder.setMessage("정말 탈퇴하시겠습니까?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        deleteId();
+                    }
+                });
+                builder.setNegativeButton("No",null);
+                builder.show();
             }
         });
 
@@ -236,7 +254,7 @@ public class UserUpdateActivity extends AppCompatActivity {
         RequestBody requestBodyData = RequestBody.create(String.valueOf(data),MediaType.parse("text/plain"));
 
         Retrofit retrofit = NetworkClient2.getRetrofitClient(UserUpdateActivity.this);
-        UpdateApi api = retrofit.create(UpdateApi.class);
+        UserApi api = retrofit.create(UserApi.class);
 
         Call<UserRes> call = api.update("Bearer "+ AccessToken,requestBodyData,uploadImgFile);
         call.enqueue(new Callback<UserRes>() {
@@ -282,7 +300,7 @@ public class UserUpdateActivity extends AppCompatActivity {
         RequestBody requestBodyData = RequestBody.create(String.valueOf(data),MediaType.parse("text/plain"));
 
         Retrofit retrofit = NetworkClient2.getRetrofitClient(UserUpdateActivity.this);
-        UpdateApi api = retrofit.create(UpdateApi.class);
+        UserApi api = retrofit.create(UserApi.class);
 
         Call<UserRes> call = api.updateNotChangeProfile("Bearer "+ AccessToken,requestBodyData);
         call.enqueue(new Callback<UserRes>() {
@@ -307,6 +325,35 @@ public class UserUpdateActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void deleteId(){
+        Retrofit retrofit = NetworkClient2.getRetrofitClient(UserUpdateActivity.this);
+        UserApi api = retrofit.create(UserApi.class);
+
+        Call<UserRes> call = api.delete("Bearer "+ AccessToken);
+
+        call.enqueue(new Callback<UserRes>() {
+            @Override
+            public void onResponse(Call<UserRes> call, Response<UserRes> response) {
+                if(response.code()==200){
+                    SharedPreferences pref = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.clear();
+                    editor.commit();
+                    Intent intent = new Intent(UserUpdateActivity.this,LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserRes> call, Throwable t) {
+
+            }
+        });
+    }
+
+
     public void getIsNickname(){
         user.setNickname(nickname);
         Retrofit retrofit = NetworkClient2.getRetrofitClient(this);
