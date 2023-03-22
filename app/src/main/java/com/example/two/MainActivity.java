@@ -1,5 +1,9 @@
 package com.example.two;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -104,6 +108,18 @@ public class MainActivity extends AppCompatActivity {
 
     private Movie selectedMovie;
 
+
+    public ActivityResultLauncher<Intent> launcher =
+            registerForActivityResult( new ActivityResultContracts.StartActivityForResult(),
+                    new ActivityResultCallback<ActivityResult>(){
+                        @Override
+                        public void onActivityResult(ActivityResult result){
+                            if(result.getResultCode() == 100){
+                                onFragmentChange(1);
+                            }
+                        }
+                    }
+            );
     String AccessToken;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -462,6 +478,8 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString("imgUrl",userArrayList.get(0).getProfileImgUrl());
                 editor.putString("nickname",userArrayList.get(0).getNickname());
+                editor.putString("email",userArrayList.get(0).getUserEmail());
+                editor.putString("password",userArrayList.get(0).getPassword());
                 editor.apply();
 
             }
@@ -491,6 +509,7 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, MyFragment.class,null).setReorderingAllowed(true).commit();
         }
     }
+
 
 
 }
