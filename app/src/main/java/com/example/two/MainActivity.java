@@ -80,12 +80,9 @@ public class MainActivity extends AppCompatActivity {
         getUserData();
 
         navigationView = findViewById(R.id.bottomNavigationView);
-        navigationView.setSelectedItemId(R.id.partyMenu);
         navigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-
 
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("user",user);
@@ -124,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        navigationView.setSelectedItemId(R.id.homeMenu);
     }
 
     private boolean loadFragment(Fragment fragment){
