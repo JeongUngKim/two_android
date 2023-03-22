@@ -168,10 +168,12 @@ public class MyFragment extends Fragment {
 
         // 닉네임과 프로필 주소 가져옴
         String pofileUrl = sp.getString("imgUrl","");
-        Log.i("bb",sp.getString("imgUrl",""));
+
         String nickName = sp.getString("nickname","");
         String password = sp.getString("password","");
         String email = sp.getString("email","");
+        String token = sp.getString("AccessToken","");
+        Log.i("bb",sp.getString("AccessToken",""));
 
         // 프로필 사진과 닉네임 세팅
         Glide.with(getActivity()).load(pofileUrl).into(imgProfile);
@@ -186,6 +188,7 @@ public class MyFragment extends Fragment {
                 intent.putExtra("nickname",nickName);
                 intent.putExtra("password",password);
                 intent.putExtra("email",email);
+                intent.putExtra("token",token);
                 launcher.launch(intent);
 
 
