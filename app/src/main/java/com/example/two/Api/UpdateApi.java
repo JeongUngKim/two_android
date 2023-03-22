@@ -16,4 +16,8 @@ public interface UpdateApi {
     @PUT("user")
     Call<UserRes> update( @Header("Authorization") String token, @Part("data") RequestBody data, @Part MultipartBody.Part profileImg );
 
+    @Multipart
+    @PUT("user")
+    Call<UserRes> updateNotChangeProfile( @Header("Authorization") String token, @Part("data") RequestBody data );
+
 }

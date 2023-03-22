@@ -141,7 +141,12 @@ public class UserUpdateActivity extends AppCompatActivity {
                     alert("패스워드");
                     return;
                 }try {
-                    getUpdate();
+                    if (profileImg == null){
+                    getUpdate2();
+                }else {
+                        getUpdate();
+                }
+
                 }catch (JSONException e){
                     throw new RuntimeException(e);
                 }
@@ -223,6 +228,7 @@ public class UserUpdateActivity extends AppCompatActivity {
         AccessToken = sp.getString("AccessToken","");
 
 
+
         RequestBody requestBody = RequestBody.create(profileImg, MediaType.parse("image/jpg"));
         MultipartBody.Part uploadImgFile = MultipartBody.Part.createFormData("profileImg", profileImg.getName(),requestBody);
 
@@ -255,7 +261,52 @@ public class UserUpdateActivity extends AppCompatActivity {
             }
         });
     }
+    public void getUpdate2() throws JSONException {
 
+
+        // {"nickname" : "테스터바보",
+        // "password" : "1234",
+        // "userEmail":"abc1234@naver.com"}
+
+        JSONObject data = new JSONObject();
+        data.put("nickname",nickname);
+        data.put("password",password);
+        data.put("userEmail",userEmail);
+
+        SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
+        AccessToken = sp.getString("AccessToken","");
+
+
+
+
+        RequestBody requestBodyData = RequestBody.create(String.valueOf(data),MediaType.parse("text/plain"));
+
+        Retrofit retrofit = NetworkClient2.getRetrofitClient(UserUpdateActivity.this);
+        UpdateApi api = retrofit.create(UpdateApi.class);
+
+        Call<UserRes> call = api.updateNotChangeProfile("Bearer "+ AccessToken,requestBodyData);
+        call.enqueue(new Callback<UserRes>() {
+            @Override
+            public void onResponse(Call<UserRes> call, Response<UserRes> response) {
+                if(response.code()==200){
+                    String token = response.body().getAccess_token();
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString("AccessToken",token);
+                    editor.apply();
+                    Log.i("userUpdate","success");
+                    editor.putString("AccessToken","");
+                    Intent intent = new Intent(UserUpdateActivity.this,LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserRes> call, Throwable t) {
+                Log.i("userUpdate update","method fail");
+            }
+        });
+    }
     public void getIsNickname(){
         user.setNickname(nickname);
         Retrofit retrofit = NetworkClient2.getRetrofitClient(this);
