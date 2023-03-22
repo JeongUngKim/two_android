@@ -478,6 +478,8 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString("imgUrl",userArrayList.get(0).getProfileImgUrl());
                 editor.putString("nickname",userArrayList.get(0).getNickname());
+                editor.putString("email",userArrayList.get(0).getUserEmail());
+                editor.putString("password",userArrayList.get(0).getPassword());
                 editor.apply();
 
             }
