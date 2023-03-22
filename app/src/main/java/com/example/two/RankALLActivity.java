@@ -25,6 +25,7 @@ import com.example.two.model.MovieRank;
 import com.example.two.model.MovieRankList;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import retrofit2.Call;
 import retrofit2.Callback;

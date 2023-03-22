@@ -48,8 +48,8 @@ public class RankAllAdapter extends RecyclerView.Adapter<RankAllAdapter.ViewHold
         holder.titleSearchMovie1.setText(movieRank.getTitle());
         holder.rateSearchMovie1.setText(movieRank.getContentRating());
         String genre1 = movieRank.getGenre().replace("'","");
-        String [] genre_list = genre1.substring(1,genre1.length()-1).split(",");
-        holder.textView7.setText(genre_list[0]);
+        String [] genre2 = genre1.split(",");
+        holder.textView7.setText(genre2[0]);
         holder.textView46.setText(movieRank.getCreatedYear().substring(0,4));
 
 
