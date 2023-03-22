@@ -77,7 +77,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                 public void onClick(View view) {
                     int index = getAdapterPosition();
                     Log.i("INDEX", String.valueOf(index));
-                    ((MainActivity)context).isDetail(index);
+                    //((MainActivity)context).isDetail(index);
                 }
             });
         }

@@ -3,8 +3,11 @@ package com.example.two;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -19,10 +22,12 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toolbar;
 
 import com.example.two.Api.NetworkClient2;
 import com.example.two.Api.UserApi;
 import com.example.two.adapter.ChatAdapter;
+import com.example.two.adapter.DrawerAdapter;
 import com.example.two.config.Config;
 import com.example.two.fragment.PartyFragment;
 import com.example.two.model.MessageItem;
@@ -37,6 +42,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.HashSet;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,7 +51,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class PartyChatActivity extends AppCompatActivity {
-
 
     EditText editMsg;
     ListView listView;
@@ -64,6 +70,10 @@ public class PartyChatActivity extends AppCompatActivity {
 
     int index;
     User user;
+    RecyclerView drawerRecyclerView;
+    DrawerAdapter drawerAdapter;
+
+    HashSet<HashMap<String,String>> hash = new HashSet<>();
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,13 +83,18 @@ public class PartyChatActivity extends AppCompatActivity {
 
             getSupportActionBar().setTitle(getIntent().getStringExtra("title"));
         }
+
         Intent intent = getIntent();
 
         SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
+
         user = new User();
         user.setProfileImgUrl(sp.getString("imgUrl", ""));
         user.setNickname(sp.getString("nickname", ""));
-
+        HashMap<String,String> data = new HashMap<>();
+        data.put("nickname",user.getNickname());
+        data.put("profileUrl",user.getProfileImgUrl());
+        hash.add(data);
 
         editMsg = findViewById(R.id.editMsg);
         listView = findViewById(R.id.listview);
@@ -89,6 +104,11 @@ public class PartyChatActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         drawerView = findViewById(R.id.drawer);
 
+        drawerRecyclerView = findViewById(R.id.drawerRecyclerView);
+        drawerRecyclerView.setHasFixedSize(true);
+        drawerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        drawerAdapter = new DrawerAdapter(PartyChatActivity.this,hash);
+        drawerRecyclerView.setAdapter(drawerAdapter);
 
         btn = findViewById(R.id.btn);
         adapter = new ChatAdapter(messageItems,getLayoutInflater(),user);
@@ -104,7 +124,11 @@ public class PartyChatActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
                 listView.setSelection(messageItems.size()-1); //리스트뷰의 마지막 위치로 스크롤 위치 이동
 
-
+                HashMap<String,String> data = new HashMap<>();
+                data.put("nickname",messageItem.getNickname());
+                data.put("profileUrl",messageItem.getProfileUrl());
+                hash.add(data);
+                drawerAdapter.updatedata(hash);
             }
 
             @Override
@@ -149,10 +173,6 @@ public class PartyChatActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
     }
 
     @Override
@@ -163,15 +183,10 @@ public class PartyChatActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-
         if (item.getItemId() == R.id.btnCheck){
             drawerLayout.openDrawer(drawerView);
         }
-
-
         return super.onOptionsItemSelected(item);
-
     }
 
     @Override
