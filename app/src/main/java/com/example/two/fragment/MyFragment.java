@@ -8,6 +8,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
@@ -28,6 +32,7 @@ import com.example.two.MainActivity;
 import com.example.two.MyReviewActivity;
 import com.example.two.R;
 import com.example.two.UseOTTActivity;
+import com.example.two.UserUpdateActivity;
 import com.example.two.config.Config;
 import com.example.two.model.User;
 import com.example.two.model.UserList;
@@ -56,6 +61,7 @@ public class MyFragment extends Fragment {
     ImageButton btnMy;
     CircleImageView imgProfile;
     TextView txtNickname;
+    ImageView imgUpdate;
 
     CardView cvChoice;
     CardView cvMyReview;
@@ -119,6 +125,18 @@ public class MyFragment extends Fragment {
         }
     }
 
+    public ActivityResultLauncher<Intent> launcher =
+            registerForActivityResult( new ActivityResultContracts.StartActivityForResult(),
+                    new ActivityResultCallback<ActivityResult>(){
+                        @Override
+                        public void onActivityResult(ActivityResult result){
+                            if(result.getResultCode() == 0){
+                                activity.onFragmentChange(3);
+                            }
+                        }
+                    }
+            );
+
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -137,6 +155,8 @@ public class MyFragment extends Fragment {
         btnMy = view.findViewById(R.id.btnMy);
         txtNickname = view.findViewById(R.id.txtNickname);
         imgProfile = view.findViewById(R.id.imgProfile);
+        imgUpdate = view.findViewById(R.id.imgUpdate);
+
 
 
 
@@ -148,11 +168,29 @@ public class MyFragment extends Fragment {
 
         // 닉네임과 프로필 주소 가져옴
         String pofileUrl = sp.getString("imgUrl","");
+        Log.i("bb",sp.getString("imgUrl",""));
         String nickName = sp.getString("nickname","");
+        String password = sp.getString("password","");
+        String email = sp.getString("email","");
 
         // 프로필 사진과 닉네임 세팅
         Glide.with(getActivity()).load(pofileUrl).into(imgProfile);
         txtNickname.setText(nickName);
+
+        // 유저 정보 업데이트 액티비티 넘어가기
+        imgUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), UserUpdateActivity.class);
+                intent.putExtra("profile",pofileUrl);
+                intent.putExtra("nickname",nickName);
+                intent.putExtra("password",password);
+                intent.putExtra("email",email);
+                launcher.launch(intent);
+
+
+            }
+        });
 
         // 메인 액티비티 넘어가기
         btnHome.setOnClickListener(new View.OnClickListener() {
