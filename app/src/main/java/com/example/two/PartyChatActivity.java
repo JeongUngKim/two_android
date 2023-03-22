@@ -65,12 +65,13 @@ public class PartyChatActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     View drawerView;
 
+    int partyBoardId;
     RecyclerView drawerRecyclerView;
     DrawerAdapter drawerAdapter;
 
     HashSet<HashMap<String,String>> hash = new HashSet<>();
 
-    int partyBoardId;
+
 
     int index;
     User user;
@@ -100,6 +101,7 @@ public class PartyChatActivity extends AppCompatActivity {
         editMsg = findViewById(R.id.editMsg);
         listView = findViewById(R.id.listview);
         partyBoardId = getIntent().getIntExtra("partyBoardId",0);
+
         // 사이드 바 연결
         drawerLayout = findViewById(R.id.drawer_layout);
         drawerView = findViewById(R.id.drawer);
@@ -116,7 +118,6 @@ public class PartyChatActivity extends AppCompatActivity {
 
         firebaseDatabase= firebaseDatabase.getInstance();
         chatRef = firebaseDatabase.getReference("chatroom"+"/"+partyBoardId);
-
         chatRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
