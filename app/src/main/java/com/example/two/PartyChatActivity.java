@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toolbar;
 
+import com.example.two.Api.ChatApi;
 import com.example.two.Api.NetworkClient2;
 import com.example.two.Api.UserApi;
 import com.example.two.adapter.ChatAdapter;
@@ -31,6 +32,7 @@ import com.example.two.adapter.DrawerAdapter;
 import com.example.two.config.Config;
 import com.example.two.fragment.PartyFragment;
 import com.example.two.model.MessageItem;
+import com.example.two.model.PartyCheckRes;
 import com.example.two.model.User;
 import com.example.two.model.UserList;
 import com.google.android.gms.tasks.Task;
@@ -73,6 +75,10 @@ public class PartyChatActivity extends AppCompatActivity {
     RecyclerView drawerRecyclerView;
     DrawerAdapter drawerAdapter;
 
+    Button btnId;
+    Button btnPay;
+
+    PartyCheckRes partyCheckRes;
     HashSet<HashMap<String,String>> hash = new HashSet<>();
     @SuppressLint("WrongViewCast")
     @Override
@@ -97,6 +103,7 @@ public class PartyChatActivity extends AppCompatActivity {
         listView = findViewById(R.id.listview);
         partyBoardId = getIntent().getIntExtra("partyBoardId",0);
 
+
         // 사이드 바 연결
         drawerLayout = findViewById(R.id.drawer_layout);
         drawerView = findViewById(R.id.drawer);
@@ -104,8 +111,11 @@ public class PartyChatActivity extends AppCompatActivity {
         drawerRecyclerView = findViewById(R.id.drawerRecyclerView);
         drawerRecyclerView.setHasFixedSize(true);
         drawerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        drawerAdapter = new DrawerAdapter(PartyChatActivity.this,hash);
+        drawerAdapter = new DrawerAdapter(PartyChatActivity.this,hash,user);
         drawerRecyclerView.setAdapter(drawerAdapter);
+
+        btnId = findViewById(R.id.btnId);
+        btnPay = findViewById(R.id.btnPay);
 
         btn = findViewById(R.id.btn);
         adapter = new ChatAdapter(messageItems,getLayoutInflater(),user);
@@ -126,6 +136,7 @@ public class PartyChatActivity extends AppCompatActivity {
                 data.put("profileUrl",messageItem.getProfileUrl());
                 hash.add(data);
                 drawerAdapter.updatedata(hash);
+                partycheked();
             }
 
             @Override
@@ -169,7 +180,24 @@ public class PartyChatActivity extends AppCompatActivity {
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
             }
         });
+        btnId.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String [] memberlist = partyCheckRes.getMemberEmail();
+                Boolean paychecker;
+                for(String member : memberlist){
+                    if(user.getUserEmail().equals(member)){
 
+                    }
+                }
+            }
+        });
+        btnPay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     @Override
@@ -192,5 +220,27 @@ public class PartyChatActivity extends AppCompatActivity {
         Intent intent = new Intent();
         setResult(100,intent);
         finish();
+    }
+
+    public void partycheked(){
+        Retrofit retrofit = NetworkClient2.getRetrofitClient(getApplicationContext());
+
+        ChatApi api = retrofit.create(ChatApi.class);
+
+        Call<PartyCheckRes> call = api.getCheckParty(partyBoardId);
+        call.enqueue(new Callback<PartyCheckRes>() {
+            @Override
+            public void onResponse(Call<PartyCheckRes> call, Response<PartyCheckRes> response) {
+                if(response.code() == 200 ){
+                    partyCheckRes = response.body();
+                    drawerAdapter.setPartyCheckRes(partyCheckRes);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PartyCheckRes> call, Throwable t) {
+
+            }
+        });
     }
 }
