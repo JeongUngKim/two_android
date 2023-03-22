@@ -64,19 +64,15 @@ public class PartyChatActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     View drawerView;
 
-    public static Context context;
-    HashSet<HashMap<String,String>> set = new HashSet<>();
-
     int index;
     User user;
 
-
     Button btnPay;
     Button btnId;
+    RecyclerView drawerRecyclerView;
+    DrawerAdapter drawerAdapter;
 
-    RecyclerView recyclerView;
-    DrawerAdapter Draweradapter;
-
+    HashSet<HashMap<String,String>> hashdata = new HashSet<>();
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -91,12 +87,9 @@ public class PartyChatActivity extends AppCompatActivity {
 
         SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
 
-        context = this;
-
         user = new User();
         user.setProfileImgUrl(sp.getString("imgUrl", ""));
         user.setNickname(sp.getString("nickname", ""));
-
 
         editMsg = findViewById(R.id.editMsg);
         listView = findViewById(R.id.listview);
@@ -104,6 +97,29 @@ public class PartyChatActivity extends AppCompatActivity {
         // 사이드 바 연결
         drawerLayout = findViewById(R.id.drawer_layout);
         drawerView = findViewById(R.id.drawer);
+
+        btnId = findViewById(R.id.btnId);
+        btnPay = findViewById(R.id.btnPay);
+
+        drawerRecyclerView = findViewById(R.id.drawerRecyclerView);
+        drawerRecyclerView.setHasFixedSize(true);
+        drawerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        HashMap<String, String> data = new HashMap<>();
+        data.put("nickname","바봉");
+        data.put("profileUrl","https://ungjk-test.s3.ap-northeast-2.amazonaws.com/rrc0777@naver.com_profileImg.jpg");
+        hashdata.add(data);
+        drawerAdapter = new DrawerAdapter(PartyChatActivity.this,hashdata);
+        drawerRecyclerView.setAdapter(drawerAdapter);
+        drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                drawerAdapter.notifyDataSetChanged();
+            }
+        });
+
+
 
         btn = findViewById(R.id.btn);
         adapter = new ChatAdapter(messageItems,getLayoutInflater(),user);
@@ -119,10 +135,7 @@ public class PartyChatActivity extends AppCompatActivity {
                 messageItems.add(messageItem);
                 adapter.notifyDataSetChanged();
                 listView.setSelection(messageItems.size()-1); //리스트뷰의 마지막 위치로 스크롤 위치 이동
-                HashMap<String,String> data = new HashMap<>();
-                data.put("nickname",messageItem.getNickname());
-                data.put("profileUrl",messageItem.getProfileUrl());
-                set.add(data);
+
             }
 
             @Override
@@ -167,7 +180,19 @@ public class PartyChatActivity extends AppCompatActivity {
             }
         });
 
+        btnId.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("btnId","정상작동됩니다.");
+            }
+        });
 
+        btnPay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("btnPay","정상작동됩니다.");
+            }
+        });
 
     }
 
@@ -179,11 +204,10 @@ public class PartyChatActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
         if (item.getItemId() == R.id.btnCheck){
             drawerLayout.openDrawer(drawerView);
-        }
 
+        }
         return super.onOptionsItemSelected(item);
     }
 

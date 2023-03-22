@@ -8,7 +8,7 @@
     android:layout_gravity="end"
     android:background="#3C3C3C"
     android:orientation="vertical"
-    tools:context=".drawerActivity">
+    tools:context=".PartyChatActivity">
 
 
     <TextView
@@ -20,18 +20,12 @@
         android:textColor="#FFFFFF"
         android:textSize="25sp" />
 
-    <FrameLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/drawerRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/drawerRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-        </androidx.recyclerview.widget.RecyclerView>
-    </FrameLayout>
+    </androidx.recyclerview.widget.RecyclerView>
 
     <Button
         android:id="@+id/btnId"

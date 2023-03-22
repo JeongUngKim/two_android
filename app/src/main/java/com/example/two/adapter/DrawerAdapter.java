@@ -22,11 +22,12 @@ import java.util.HashSet;
 public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder> {
 
     Context context;
-    ArrayList<HashMap<String,String>> set;
-
-    public DrawerAdapter(Context context , ArrayList<HashMap<String,String>> set){
+    ArrayList<HashMap<String,String>> set=new ArrayList<>();
+    HashMap<String, String> data = new HashMap<>();
+    public DrawerAdapter(Context context ,HashSet<HashMap<String,String>> hashdata){
         this.context = context;
-        this.set=set;
+        data.put("nickname","바봉");
+        data.put("profileUrl","https://ungjk-test.s3.ap-northeast-2.amazonaws.com/rrc0777@naver.com_profileImg.jpg");
 
     }
 
@@ -40,7 +41,6 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull DrawerAdapter.ViewHolder holder, int position) {
-        HashMap<String,String> data = set.get(position);
 
         String profileUrl = data.get("profileUrl");
         String nickname = data.get("nickname");
