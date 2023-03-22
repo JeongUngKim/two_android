@@ -65,7 +65,6 @@ public class PartyChatActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     View drawerView;
 
-
     int partyBoardId;
 
 
