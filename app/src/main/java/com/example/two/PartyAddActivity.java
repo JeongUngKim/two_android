@@ -138,13 +138,9 @@ public class PartyAddActivity extends AppCompatActivity {
             public void onClick(View view) {
                 saveData();
 //                getPartyData();
-                Intent intent = new Intent(PartyAddActivity.this , PartyChatActivity.class);
-                intent.putExtra("user",user);
-                intent.putExtra("partyBoardId",partyBoardId);
-                intent.putExtra("title",partyName);
+                Intent intent = new Intent();
+                setResult(100,intent);
                 finish();
-
-
 
             }
         });
@@ -182,7 +178,7 @@ public class PartyAddActivity extends AppCompatActivity {
             public void onResponse(Call<ChatRoomList> call, Response<ChatRoomList> response) {
                 if (response.isSuccessful()) {
 
-                    finish();
+                    return;
 
 
 

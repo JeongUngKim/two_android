@@ -161,10 +161,8 @@ public class PartyFragment extends Fragment {
 
                 Intent intent = new Intent(getActivity(), PartyAddActivity.class);
                 intent.putExtra("user",user);
-
                 startActivity(intent);
 
-                getActivity().finish();
             }
         });
 
