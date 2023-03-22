@@ -79,54 +79,6 @@
             </RelativeLayout>
         </ScrollView>
 
-        <LinearLayout
-            android:id="@+id/layoutBottom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="#000000"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/btnHome"
-                android:layout_width="82dp"
-                android:layout_height="50dp"
-                android:background="#000000"
-                android:scaleType="fitCenter"
-                android:src="@drawable/home" />
-
-            <ImageButton
-                android:id="@+id/btnCommunity"
-                android:layout_width="82dp"
-                android:layout_height="50dp"
-                android:background="#000000"
-                android:scaleType="fitCenter"
-                android:src="@drawable/chat" />
-
-            <ImageButton
-                android:id="@+id/btnParty"
-                android:layout_width="82dp"
-                android:layout_height="50dp"
-                android:backgroundTint="#000000"
-                android:scaleType="centerCrop"
-                android:src="@drawable/party" />
-
-            <ImageButton
-                android:id="@+id/btnFilter"
-                android:layout_width="82dp"
-                android:layout_height="50dp"
-                android:backgroundTint="#000000"
-                android:scaleType="fitCenter"
-                android:src="@drawable/search" />
-
-            <ImageButton
-                android:id="@+id/btnMy"
-                android:layout_width="82dp"
-                android:layout_height="50dp"
-                android:backgroundTint="#000000"
-                android:scaleType="fitXY"
-                android:src="@drawable/mymenu" />
-        </LinearLayout>
     </LinearLayout>
 
 </FrameLayout>

@@ -85,12 +85,9 @@ public class PartyChatActivity extends AppCompatActivity {
         }
 
         Intent intent = getIntent();
-
+        user = (User) intent.getSerializableExtra("user");
         SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
 
-        user = new User();
-        user.setProfileImgUrl(sp.getString("imgUrl", ""));
-        user.setNickname(sp.getString("nickname", ""));
         HashMap<String,String> data = new HashMap<>();
         data.put("nickname",user.getNickname());
         data.put("profileUrl",user.getProfileImgUrl());

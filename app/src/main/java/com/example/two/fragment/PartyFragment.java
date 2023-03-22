@@ -39,6 +39,7 @@ import com.example.two.model.Movie;
 import com.example.two.model.MovieList;
 import com.example.two.model.User;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -53,13 +54,7 @@ import retrofit2.Retrofit;
  */
 public class PartyFragment extends Fragment {
     MainActivity activity;
-    SharedPreferences sp;
-    SharedPreferences.Editor editor;
-    ImageButton btnCommunity;
-    ImageButton btnHome;
-    ImageButton btnFilter;
-    ImageButton btnParty;
-    ImageButton btnMy;
+
     Button partyBtn;
 
     RecyclerView recyclerView;
@@ -70,6 +65,8 @@ public class PartyFragment extends Fragment {
     Context context;
 
     int page = 0;
+    int partyBoardSize;
+    User user;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -118,10 +115,14 @@ public class PartyFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(savedInstanceState == null){
+            getChatNetworkData();
+        }
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @SuppressLint("MissingInflatedId")
@@ -133,22 +134,22 @@ public class PartyFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_party, container, false);
 
-        btnCommunity = view.findViewById(R.id.btnCommunity);
-        btnHome = view.findViewById(R.id.btnHome);
-        btnParty = view.findViewById(R.id.btnParty);
-        btnFilter = view.findViewById(R.id.btnFilter);
-        btnMy = view.findViewById(R.id.btnMy);
+        Bundle bundle = getArguments();
+        user = bundle.getParcelable("user");
+        Log.i("user",user.getUserEmail());
         partyBtn = view.findViewById(R.id.partyBtn);
 
 
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        getChatNetworkData();
+
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
+
+
             }
 
             @Override
@@ -160,72 +161,27 @@ public class PartyFragment extends Fragment {
                 int lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
                 int totalCount = recyclerView.getAdapter().getItemCount();
 
+                Log.i("lastPosition" , String.valueOf(lastPosition));
+                Log.i("totalcount", String.valueOf(totalCount));
+
                 // 스크롤을 데이터 맨 끝까지 한 상태.
-                if (lastPosition + 1 == totalCount) {
+                if (lastPosition + 1 == totalCount && partyBoardSize == 10) {
                     // 네트워크 통해서 데이터를 받아오고, 화면에 표시!
-
+                    page +=1;
                     addChatNetworkData();
-
-
                 }
             }
         });
 
-        context = getActivity().getApplicationContext();
-        sp = context.getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
-        User user = new User();
-        user.setProfileImgUrl(sp.getString("imgUrl",""));
-        user.setNickname(sp.getString("nickname",""));
-
         partyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-
-
-
                 Intent intent = new Intent(getActivity(), PartyAddActivity.class);
-                intent.putExtra("user",user);
+                intent.putExtra("user",(Serializable) user);
                 startActivity(intent);
 
             }
         });
-
-        btnHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
-                getActivity().finish();
-            }
-        });
-
-        // 커뮤니티 프래그먼트 넘어가기
-        btnCommunity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activity.onFragmentChange(0);
-            }
-        });
-
-
-        // 검색 프래그먼트 넘어가기
-        btnFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activity.onFragmentChange(2);
-            }
-        });
-
-        // 내 정보 프래그먼트 넘어가기
-        btnMy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activity.onFragmentChange(3);
-            }
-        });
-
 
         return view;
 
@@ -256,9 +212,10 @@ public class PartyFragment extends Fragment {
                     chatArrayList.addAll(response.body().getPartyBoard());
 
                     // 오프셋 처리하는 코드
-
-
-                    adapter = new ChatRoomAdapter(getActivity(),chatArrayList);
+                    int pageNum = Integer.parseInt(response.body().getPageNum());
+                    page = pageNum;
+                    partyBoardSize = Integer.parseInt(response.body().getPartyBoardSize());
+                    adapter = new ChatRoomAdapter(getActivity(),chatArrayList,user);
                     recyclerView.setAdapter(adapter);
                     Log.i("RECYCLE", adapter.toString());
 
@@ -283,9 +240,9 @@ public class PartyFragment extends Fragment {
 
         ChatApi api = retrofit.create(ChatApi.class);
 
-        Log.i("AAA", api.toString());
+        Log.i("bbb", api.toString());
 
-        Call<ChatRoomList> call = api.getChatingList(page+1);
+        Call<ChatRoomList> call = api.getChatingList(page);
 
         call.enqueue(new Callback<ChatRoomList>() {
             @Override
@@ -297,15 +254,16 @@ public class PartyFragment extends Fragment {
 
 
                     // 데이터를 받았으니 리사이클러 표시
-
+                    int pageNum = Integer.parseInt(response.body().getPageNum());
                     chatArrayList.addAll(response.body().getPartyBoard());
 
+                    partyBoardSize = Integer.parseInt(response.body().getPartyBoardSize());
                     // 오프셋 처리하는 코드
 
 
-                    adapter = new ChatRoomAdapter(getActivity(),chatArrayList);
+                    adapter = new ChatRoomAdapter(getActivity(),chatArrayList,user);
                     recyclerView.setAdapter(adapter);
-                    page=page+1;
+                    page = pageNum;
                     Log.i("RECYCLE", adapter.toString());
 
                 } else {

@@ -146,11 +146,6 @@ public class SearchFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
-        btnCommunity = view.findViewById(R.id.btnCommunity);
-        btnHome = view.findViewById(R.id.btnHome);
-        btnParty = view.findViewById(R.id.btnParty);
-        btnFilter = view.findViewById(R.id.btnFilter);
-        btnMy = view.findViewById(R.id.btnMy);
         btntitleSearch = view.findViewById(R.id.btntitleSearch);
         txtSearch = view.findViewById(R.id.txtSearch);
         movieListView = view.findViewById(R.id.movieListView);
@@ -200,50 +195,6 @@ public class SearchFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), TvALLActivity.class);
                 intent.putExtra("keyword",Keyword);
                 startActivity(intent);
-            }
-        });
-
-
-
-
-
-
-
-        // 메인 액티비티 넘어가기
-        btnHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
-                getActivity().finish();
-            }
-        });
-
-        // 커뮤니티 프래그먼트 넘어가기
-        btnCommunity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                activity.onFragmentChange(0);
-
-            }
-        });
-
-
-        // 파티매칭 프래그먼트 넘어가기
-        btnParty.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                activity.onFragmentChange(1);
-            }
-        });
-
-        // 내정보 프래그먼트 넘어가기
-        btnMy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activity.onFragmentChange(3);
             }
         });
 

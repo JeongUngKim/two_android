@@ -162,54 +162,5 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/layoutBottom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="#000000"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/btnHome"
-                android:src="@drawable/home"
-                android:layout_width="82dp"
-                android:layout_height="50dp"
-                android:background="#000000"
-                android:scaleType="fitCenter" />
-
-            <ImageButton
-                android:id="@+id/btnCommunity"
-                android:src="@drawable/chat"
-                android:layout_width="82dp"
-                android:layout_height="50dp"
-                android:background="#000000"
-                android:scaleType="fitCenter" />
-
-            <ImageButton
-                android:id="@+id/btnParty"
-                android:src="@drawable/party"
-                android:layout_width="82dp"
-                android:layout_height="50dp"
-                android:backgroundTint="#000000"
-                android:scaleType="centerCrop" />
-
-            <ImageButton
-                android:id="@+id/btnFilter"
-                android:src="@drawable/search"
-                android:layout_width="82dp"
-                android:layout_height="50dp"
-                android:backgroundTint="#000000"
-                android:scaleType="fitCenter" />
-
-            <ImageButton
-                android:id="@+id/btnMy"
-                android:src="@drawable/mymenu"
-                android:layout_width="82dp"
-                android:layout_height="50dp"
-                android:backgroundTint="#000000"
-                android:scaleType="fitXY" />
-        </LinearLayout>
-
     </RelativeLayout>
 </FrameLayout>

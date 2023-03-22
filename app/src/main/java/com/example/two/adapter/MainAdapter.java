@@ -1,6 +1,5 @@
 package com.example.two.adapter;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,20 +11,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.two.MainActivity;
 import com.example.two.R;
+import com.example.two.fragment.HomeFragment;
 import com.example.two.model.Movie;
 
 import java.util.ArrayList;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
-    Context context;
+    HomeFragment homeFragment;
 
     ArrayList<Movie> movieArrayList;
 
-    public MainAdapter(Context context, ArrayList<Movie> movieArrayList) {
-        this.context = context;
+    public MainAdapter( HomeFragment homeFragment, ArrayList<Movie> movieArrayList) {
+        this.homeFragment=homeFragment;
         this.movieArrayList = movieArrayList;
     }
 
@@ -45,7 +44,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         holder.textView10.setText(movie.getTitle());
         holder.textView11.setText(movie.getVote_average());
 
-        Glide.with(context)
+        Glide.with(homeFragment)
                 .load("https://image.tmdb.org/t/p/w342"+movie.getPoster_path())
                 .placeholder(R.drawable.baseline_person_outline_24)
                 .override(300,300)
@@ -77,7 +76,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                 public void onClick(View view) {
                     int index = getAdapterPosition();
                     Log.i("INDEX", String.valueOf(index));
-                    ((MainActivity)context).isDetail(index);
+                    homeFragment.isDetail(index);
                 }
             });
         }

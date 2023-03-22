@@ -124,8 +124,24 @@ public class UserUpdateActivity extends AppCompatActivity {
         btnCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nickname = editNickname.getText().toString().trim();
-                Log.i("cc",nickname.toString().trim());
+                String txtNickname = editNickname.getText().toString().trim();
+
+                if ( nickname.equals(txtNickname)) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(UserUpdateActivity.this);
+                    builder.setTitle("닉네임 중복체크");
+                    builder.setMessage("기존 닉네임 입니다.");
+                    builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+
+                        }
+                    });
+                    nicknamecheck = true;
+                    AlertDialog ad = builder.create();
+                    ad.show();
+                    return;
+                }else{
+                    nicknamecheck =false;
+                }
                 if(nickname.equals("")){
                     return;
                 }
@@ -169,12 +185,6 @@ public class UserUpdateActivity extends AppCompatActivity {
                     throw new RuntimeException(e);
                 }
 
-
-                // 내정보에 다시 전달
-                Intent intent = new Intent();
-                intent.putExtra("nickname",nickname);
-                intent.putExtra("profile",profileImg);
-                setResult(0,intent);
             }
         });
 
@@ -372,6 +382,7 @@ public class UserUpdateActivity extends AppCompatActivity {
                     }else{
                         nicknamecheck = false;
                     }
+
                     AlertDialog.Builder builder = new AlertDialog.Builder(UserUpdateActivity.this);
                     builder.setTitle("닉네임 중복체크");
                     builder.setMessage(result);
