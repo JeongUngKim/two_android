@@ -97,7 +97,7 @@ public class MovieALLActivity extends AppCompatActivity {
         map.put("rating","");
         map.put("year","");
         map.put("offset","");
-        map.put("filtering","");
+        map.put("filtering","title");
         map.put("sort","");
 
 
@@ -119,7 +119,6 @@ public class MovieALLActivity extends AppCompatActivity {
                     // 데이터를 받았으니 리사이클러 표시
 
                     seachArrayList1.addAll(response.body().getMovie());
-
 
 
 
@@ -165,7 +164,7 @@ public class MovieALLActivity extends AppCompatActivity {
         map.put("rating","");
         map.put("year","");
         map.put("offset", String.valueOf(offset+10));
-        map.put("filtering","");
+        map.put("filtering","title");
         map.put("sort","");
 
 
@@ -190,11 +189,11 @@ public class MovieALLActivity extends AppCompatActivity {
 
 
 
-
+                    recyclerViewState = recyclerView.getLayoutManager().onSaveInstanceState();
                     adapter = new SeachAdapter(MovieALLActivity.this,seachArrayList1);
-
+                    offset = offset + 10;
                     recyclerView.setAdapter(adapter);
-
+                    recyclerView.getLayoutManager().onRestoreInstanceState(recyclerViewState);
 
 
 

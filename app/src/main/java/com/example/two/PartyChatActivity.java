@@ -59,7 +59,7 @@ public class PartyChatActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     View drawerView;
 
-
+    int partyBoardId;
 
 
     int index;
@@ -83,6 +83,7 @@ public class PartyChatActivity extends AppCompatActivity {
 
         editMsg = findViewById(R.id.editMsg);
         listView = findViewById(R.id.listview);
+        partyBoardId = getIntent().getIntExtra("partyBoardId",0);
 
         // 사이드 바 연결
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -94,7 +95,7 @@ public class PartyChatActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         firebaseDatabase= firebaseDatabase.getInstance();
-        chatRef = firebaseDatabase.getReference("chatroom"+"/"+intent.getIntExtra("partyBoardId",0));
+        chatRef = firebaseDatabase.getReference("chatroom"+"/"+partyBoardId);
         chatRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
