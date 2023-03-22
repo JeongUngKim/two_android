@@ -69,6 +69,8 @@ public class PartyFragment extends Fragment {
 
     Context context;
 
+    int page = 0;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -140,10 +142,34 @@ public class PartyFragment extends Fragment {
 
 
         recyclerView = view.findViewById(R.id.recyclerView);
-        getChatNetworkData();
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        getChatNetworkData();
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
 
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                // 맨 마지막 데이터가 화면에 보이면!!!!
+                // 네트워크 통해서 데이터를 추가로 받아와라!!
+                int lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
+                int totalCount = recyclerView.getAdapter().getItemCount();
+
+                // 스크롤을 데이터 맨 끝까지 한 상태.
+                if (lastPosition + 1 == totalCount) {
+                    // 네트워크 통해서 데이터를 받아오고, 화면에 표시!
+
+                    addChatNetworkData();
+
+
+                }
+            }
+        });
 
         context = getActivity().getApplicationContext();
         sp = context.getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
@@ -214,7 +240,7 @@ public class PartyFragment extends Fragment {
 
         Log.i("AAA", api.toString());
 
-        Call<ChatRoomList> call = api.getChatingList(0);
+        Call<ChatRoomList> call = api.getChatingList(page);
 
         call.enqueue(new Callback<ChatRoomList>() {
             @Override
@@ -234,6 +260,52 @@ public class PartyFragment extends Fragment {
 
                     adapter = new ChatRoomAdapter(getActivity(),chatArrayList);
                     recyclerView.setAdapter(adapter);
+                    Log.i("RECYCLE", adapter.toString());
+
+                } else {
+                    Toast.makeText(getActivity(), "문제가 있습니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ChatRoomList> call, Throwable t) {
+
+
+            }
+
+
+        });
+    }
+
+    private void addChatNetworkData() {
+        Retrofit retrofit = NetworkClient2.getRetrofitClient(getActivity());
+
+        ChatApi api = retrofit.create(ChatApi.class);
+
+        Log.i("AAA", api.toString());
+
+        Call<ChatRoomList> call = api.getChatingList(page+1);
+
+        call.enqueue(new Callback<ChatRoomList>() {
+            @Override
+            public void onResponse(Call<ChatRoomList> call, Response<ChatRoomList> response) {
+
+                if (response.isSuccessful()) {
+                    // getNetworkData는 항상처음에 데이터를 가져오는 동작 이므로
+                    // 초기화 코드가 필요
+
+
+                    // 데이터를 받았으니 리사이클러 표시
+
+                    chatArrayList.addAll(response.body().getPartyBoard());
+
+                    // 오프셋 처리하는 코드
+
+
+                    adapter = new ChatRoomAdapter(getActivity(),chatArrayList);
+                    recyclerView.setAdapter(adapter);
+                    page=page+1;
                     Log.i("RECYCLE", adapter.toString());
 
                 } else {
