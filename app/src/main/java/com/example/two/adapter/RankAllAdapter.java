@@ -47,7 +47,9 @@ public class RankAllAdapter extends RecyclerView.Adapter<RankAllAdapter.ViewHold
         Glide.with(context).load(movieRank.getImgUrl()).into(holder.poster1);
         holder.titleSearchMovie1.setText(movieRank.getTitle());
         holder.rateSearchMovie1.setText(movieRank.getContentRating());
-        holder.textView7.setText(movieRank.getGenre().substring(2,11));
+        String genre1 = movieRank.getGenre().replace("'","");
+        String [] genre2 = genre1.split(",");
+        holder.textView7.setText(genre2[0]);
         holder.textView46.setText(movieRank.getCreatedYear().substring(0,4));
 
 
