@@ -15,6 +15,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -67,6 +68,7 @@ public class MyFragment extends Fragment {
     CardView cvUseOTT;
 
     User user;
+
     RecyclerView recyclerView;
     MyAdapter adapter;
     ArrayList<ContentWatch> contentWatchArrayList = new ArrayList<>();
@@ -74,6 +76,7 @@ public class MyFragment extends Fragment {
     String AccessToken;
 
     int page;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
