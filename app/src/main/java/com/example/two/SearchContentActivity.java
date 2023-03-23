@@ -84,7 +84,7 @@ public class SearchContentActivity extends AppCompatActivity {
     }
 
     public void isLike(){
-        //되라라
+        
     }
 
 
