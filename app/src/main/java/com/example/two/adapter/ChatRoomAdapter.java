@@ -29,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHolder> {
@@ -37,10 +38,12 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
 
     ArrayList<Chat> chatArrayList;
 
+    User user;
 
-    public ChatRoomAdapter(Context context, ArrayList<Chat> chatArrayList) {
+    public ChatRoomAdapter(Context context, ArrayList<Chat> chatArrayList,User user) {
         this.context = context;
         this.chatArrayList = chatArrayList;
+        this.user=user;
     }
 
     @NonNull
@@ -107,7 +110,9 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
                     intent.putExtra("partyBoardId",chat.getPartyBoardId());
                     intent.putExtra("index", index);
                     intent.putExtra("title",chat.getTitle());
-                    ((MainActivity)context).launcher.launch(intent);
+                    intent.putExtra("user",(Serializable) user);
+                    context.startActivity(intent);
+
 
 
                 }

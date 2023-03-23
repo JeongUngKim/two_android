@@ -1,8 +1,13 @@
 package com.example.two.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 
-public class User implements Serializable {
+public class User implements Serializable , Parcelable {
 
 
     private String name;
@@ -15,6 +20,31 @@ public class User implements Serializable {
     private int gender;
 
     private int age;
+
+    protected User(Parcel in) {
+        name = in.readString();
+        nickname = in.readString();
+        userEmail = in.readString();
+        password = in.readString();
+        gender = in.readInt();
+        age = in.readInt();
+        questionNum = in.readInt();
+        questionAnswer = in.readString();
+        profileImgUrl = in.readString();
+        createdAt = in.readString();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     public int getAge() {
         return age;
@@ -141,5 +171,24 @@ public class User implements Serializable {
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeString(nickname);
+        parcel.writeString(userEmail);
+        parcel.writeString(password);
+        parcel.writeInt(gender);
+        parcel.writeInt(age);
+        parcel.writeInt(questionNum);
+        parcel.writeString(questionAnswer);
+        parcel.writeString(profileImgUrl);
+        parcel.writeString(createdAt);
     }
 }

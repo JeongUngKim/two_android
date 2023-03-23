@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.two.R;
+import com.example.two.model.PartyCheckRes;
 import com.example.two.model.User;
 
 import java.sql.Array;
@@ -26,13 +27,22 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
     Context context;
     ArrayList<HashMap<String,String>> set;
 
-    public DrawerAdapter(Context context ,HashSet<HashMap<String,String>> hashdata){
+    PartyCheckRes partyCheckRes;
+
+    User user;
+
+    public DrawerAdapter(Context context ,HashSet<HashMap<String,String>> hashdata ,User user){
         this.context = context;
         set = new ArrayList<>(hashdata);
-        Log.i("setdata",set.get(0).get("nickname"));
+        this.user = user;
+
     }
     public void updatedata(HashSet<HashMap<String,String>> hashdata){
         set = new ArrayList<>(hashdata);
+        notifyDataSetChanged();
+    }
+    public void setPartyCheckRes(PartyCheckRes partyCheckRes){
+        this.partyCheckRes = partyCheckRes;
         notifyDataSetChanged();
     }
     @NonNull
@@ -51,6 +61,14 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
         String nickname = dataset.get("nickname");
         holder.textView22.setText(nickname);
         Glide.with(context).load(profileUrl).into(holder.imgProfile);
+
+        if (partyCheckRes != null) {
+            String[] partyEmail = partyCheckRes.getMemberEmail();
+            for(String mail : partyEmail){
+
+            }
+            holder.checkpay.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -62,13 +80,13 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
 
         ImageView imgProfile;
         TextView textView22;
-        CheckBox checkBox;
+        ImageView checkpay;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imgProfile = itemView.findViewById(R.id.imgProfile);
             textView22 = itemView.findViewById(R.id.textView22);
-            checkBox = itemView.findViewById(R.id.checkBox);
+            checkpay = itemView.findViewById(R.id.checkpay);
 
         }
     }

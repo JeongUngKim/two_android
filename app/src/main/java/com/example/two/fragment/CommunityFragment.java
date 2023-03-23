@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.ImageButton;
 
 import com.example.two.MainActivity;
 import com.example.two.R;
+import com.example.two.model.User;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +30,8 @@ public class CommunityFragment extends Fragment {
     ImageButton btnFilter;
     ImageButton btnParty;
     ImageButton btnMy;
+
+    User user;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -64,7 +68,7 @@ public class CommunityFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-        activity = (MainActivity) getActivity();
+
     }
 
     @Override
@@ -88,47 +92,44 @@ public class CommunityFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_community, container, false);
-
-        btnCommunity = view.findViewById(R.id.btnCommunity);
-        btnHome = view.findViewById(R.id.btnHome);
-        btnParty = view.findViewById(R.id.btnParty);
-        btnFilter = view.findViewById(R.id.btnFilter);
-        btnMy = view.findViewById(R.id.btnMy);
-
-        btnHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
-                getActivity().finish();
-            }
-        });
-
-        // 검색 프래그먼트 넘어가기
-        btnFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activity.onFragmentChange(2);
-            }
-        });
+        //Bundle bundle = getArguments();
+       // user = bundle.getParcelable("user");
 
 
-        // 내 정보 프래그먼트 넘어가기
-        btnMy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activity.onFragmentChange(3);
-            }
-        });
-
-        // 파티매칭 프래그먼트 넘어가기
-        btnParty.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                activity.onFragmentChange(1);
-            }
-        });
+//        btnHome.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getActivity(), MainActivity.class);
+//                startActivity(intent);
+//                getActivity().finish();
+//            }
+//        });
+//
+//        // 검색 프래그먼트 넘어가기
+//        btnFilter.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                activity.onFragmentChange(2);
+//            }
+//        });
+//
+//
+//        // 내 정보 프래그먼트 넘어가기
+//        btnMy.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                activity.onFragmentChange(3);
+//            }
+//        });
+//
+//        // 파티매칭 프래그먼트 넘어가기
+//        btnParty.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                activity.onFragmentChange(1);
+//            }
+//        });
 
 
 

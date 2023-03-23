@@ -2,12 +2,14 @@ package com.example.two.Api;
 
 import com.example.two.model.Chat;
 import com.example.two.model.ChatRoomList;
+import com.example.two.model.PartyCheckRes;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ChatApi {
@@ -21,4 +23,7 @@ public interface ChatApi {
     @GET("party")
     Call<ChatRoomList>getMyChatingList(@Header("Authorization") String token,
                                        @Query("page") int page);
+
+    @GET("party/{partyBoardId}/check")
+    Call<PartyCheckRes> getCheckParty(@Path("partyBoardId") int partyBoardId);
 }

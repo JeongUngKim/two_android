@@ -85,7 +85,7 @@ public class PartyAddActivity extends AppCompatActivity {
         btnCreateParty=findViewById(R.id.btnCreateParty);
         txtEndDate = findViewById(R.id.txtEndDate);
 
-
+        user = (User) getIntent().getSerializableExtra("user");
 
 
         txtEndDate.setOnClickListener(new View.OnClickListener() {
@@ -132,8 +132,6 @@ public class PartyAddActivity extends AppCompatActivity {
         });
 
 
-
-        user = (User) getIntent().getSerializableExtra("user");
         // 파이어베이스 연결항목.
         btnCreateParty.setOnClickListener(new View.OnClickListener() {
             @Override

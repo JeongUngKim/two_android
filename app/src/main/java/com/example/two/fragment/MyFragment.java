@@ -68,8 +68,6 @@ import retrofit2.Retrofit;
 public class MyFragment extends Fragment {
     private Parcelable recyclerViewState;
 
-    MainActivity activity;
-
     ImageButton btnCommunity;
     ImageButton btnHome;
     ImageButton btnFilter;
@@ -78,7 +76,7 @@ public class MyFragment extends Fragment {
     CircleImageView imgProfile;
     TextView txtNickname;
     ImageView imgUpdate;
-
+    User user;
     CardView cvChoice;
     CardView cvMyReview;
     CardView cvUseOTT;
@@ -127,7 +125,7 @@ public class MyFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-        activity = (MainActivity) getActivity();
+       // activity = (MainActivity) getActivity();
 
 
 
@@ -137,7 +135,6 @@ public class MyFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
 
-        activity = null;
     }
 
     @Override
@@ -155,7 +152,7 @@ public class MyFragment extends Fragment {
                         @Override
                         public void onActivityResult(ActivityResult result){
                             if(result.getResultCode() == 0){
-                                activity.onFragmentChange(3);
+
                             }
                         }
                     }
@@ -168,15 +165,14 @@ public class MyFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_my, container, false);
 
+        Bundle bundle = getArguments();
+        user = bundle.getParcelable("user");
+
+        Log.i("몇번 호출","1");
         cvChoice = view.findViewById(R.id.cvChoice);
         cvMyReview = view.findViewById(R.id.cvMyReview);
         cvUseOTT = view.findViewById(R.id.cvUseOTT);
 
-        btnCommunity = view.findViewById(R.id.btnCommunity);
-        btnHome = view.findViewById(R.id.btnHome);
-        btnParty = view.findViewById(R.id.btnParty);
-        btnFilter = view.findViewById(R.id.btnFilter);
-        btnMy = view.findViewById(R.id.btnMy);
         txtNickname = view.findViewById(R.id.txtNickname);
         imgProfile = view.findViewById(R.id.imgProfile);
         imgUpdate = view.findViewById(R.id.imgUpdate);
@@ -221,16 +217,15 @@ public class MyFragment extends Fragment {
         ((MainActivity) getActivity()).getUserData();
 
         // 쉐어드 객체 생성
-        SharedPreferences sp = activity.getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
+        SharedPreferences sp = this.getActivity().getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
 
         // 닉네임과 프로필 주소 가져옴
-        String pofileUrl = sp.getString("imgUrl","");
-
-        String nickName = sp.getString("nickname","");
-        String password = sp.getString("password","");
-        String email = sp.getString("email","");
+        String pofileUrl = user.getProfileImgUrl();
+        String nickName = user.getNickname();
+        String password = user.getPassword();
+        String email = user.getUserEmail();
         String token = sp.getString("AccessToken","");
-        Log.i("bb",sp.getString("AccessToken",""));
+
 
         // 프로필 사진과 닉네임 세팅
         Glide.with(getActivity()).load(pofileUrl).into(imgProfile);
@@ -249,68 +244,6 @@ public class MyFragment extends Fragment {
                 launcher.launch(intent);
 
 
-            }
-        });
-
-        // 메인 액티비티 넘어가기
-        btnHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(),MainActivity.class);
-                startActivity(intent);
-                getActivity().finish();
-            }
-        });
-
-        // 커뮤니티 액티비티 넘어가기
-        btnCommunity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activity.onFragmentChange(0);
-            }
-        });
-
-
-        // 검색 액티비티 넘어가기
-        btnFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activity.onFragmentChange(2);
-            }
-        });
-
-        // 파티매칭 액티비티 넘어가기
-        btnParty.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activity.onFragmentChange(1);
-            }
-        });
-
-        // 찜한 작품 관리 넘어가기
-        cvChoice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ChoiceActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        // 작성한 리뷰 관리 넘어가기
-        cvMyReview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), MyReviewActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        // 이용중인 서비스 넘어가기
-        cvUseOTT.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), UseOTTActivity.class);
-                startActivity(intent);
             }
         });
 
