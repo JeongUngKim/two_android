@@ -15,6 +15,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -66,6 +67,13 @@ public class MyFragment extends Fragment {
     CardView cvUseOTT;
 
     User user;
+    RecyclerView recyclerView;
+    MyAdapter adapter;
+    ArrayList<ContentWatch> contentWatchArrayList = new ArrayList<>();
+
+    String AccessToken;
+
+    int page;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -153,6 +161,45 @@ public class MyFragment extends Fragment {
         txtNickname = view.findViewById(R.id.txtNickname);
         imgProfile = view.findViewById(R.id.imgProfile);
         imgUpdate = view.findViewById(R.id.imgUpdate);
+
+        recyclerView = view.findViewById(R.id.recyclerView);
+        getMyList();
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                // 맨 마지막 데이터가 화면에 보이면!!!!
+                // 네트워크 통해서 데이터를 추가로 받아와라!!
+                int lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
+                int totalCount = recyclerView.getAdapter().getItemCount();
+
+                // 스크롤을 데이터 맨 끝까지 한 상태.
+                if (lastPosition + 1 == totalCount) {
+                    // 네트워크 통해서 데이터를 받아오고, 화면에 표시!
+
+                    addMyList();
+
+                }
+            }
+        });
+
+
+
+
+
+
+        // 메인 액티비티 유저 데이터 가져오는 메서드 호출
+        ((MainActivity) getActivity()).getUserData();
 
         // 쉐어드 객체 생성
         SharedPreferences sp = this.getActivity().getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
