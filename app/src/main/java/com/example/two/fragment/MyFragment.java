@@ -62,12 +62,10 @@ public class MyFragment extends Fragment {
     CircleImageView imgProfile;
     TextView txtNickname;
     ImageView imgUpdate;
-
+    User user;
     CardView cvChoice;
     CardView cvMyReview;
     CardView cvUseOTT;
-
-    User user;
 
     RecyclerView recyclerView;
     MyAdapter adapter;
