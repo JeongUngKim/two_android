@@ -8,7 +8,7 @@
     android:layout_gravity="end"
     android:background="#3C3C3C"
     android:orientation="vertical"
-    tools:context=".drawerActivity">
+   >
 
 
     <TextView
@@ -35,7 +35,8 @@
         android:layout_gravity="bottom"
         android:backgroundTint="#FFC107"
         android:text="공유 아이디 보기"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btnPay"
@@ -45,5 +46,17 @@
         android:backgroundTint="#000000"
         android:text="결제하기"
         android:textColor="#FFFFFF"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnfinish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:backgroundTint="#000000"
+        android:text="파티 모집 완료"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:visibility="gone" />
 </LinearLayout>

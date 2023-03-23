@@ -30,20 +30,23 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
     PartyCheckRes partyCheckRes;
 
     User user;
-
-    public DrawerAdapter(Context context ,HashSet<HashMap<String,String>> hashdata ,User user){
+    String captainEmail;
+    public DrawerAdapter(Context context ,HashSet<HashMap<String,String>> hashdata ,User user,String captainEmail){
         this.context = context;
         set = new ArrayList<>(hashdata);
         this.user = user;
+        this.captainEmail = captainEmail;
 
     }
     public void updatedata(HashSet<HashMap<String,String>> hashdata){
         set = new ArrayList<>(hashdata);
         notifyDataSetChanged();
+        Log.i("setList",set.toString());
     }
     public void setPartyCheckRes(PartyCheckRes partyCheckRes){
         this.partyCheckRes = partyCheckRes;
         notifyDataSetChanged();
+
     }
     @NonNull
     @Override
@@ -56,17 +59,33 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull DrawerAdapter.ViewHolder holder, int position) {
         HashMap<String,String> dataset = set.get(position);
-        Log.i("data",dataset.get("nickname"));
+
         String profileUrl = dataset.get("profileUrl");
         String nickname = dataset.get("nickname");
+        String userEmail = dataset.get("userEmail");
+        userEmail.replaceAll("\"","");
+
         holder.textView22.setText(nickname);
         Glide.with(context).load(profileUrl).into(holder.imgProfile);
-
+        Boolean checker=false;
         if (partyCheckRes != null) {
             String[] partyEmail = partyCheckRes.getMemberEmail();
-            for(String mail : partyEmail){
-
+            for(int i = 0 ; i < partyEmail.length; i++){
+                String mail = partyEmail[i];
+                if(userEmail.equals(mail) ){
+                    checker = true;
+                }
             }
+            if (checker){
+                holder.checkpay.setVisibility(View.VISIBLE);
+            } else {
+                if(userEmail.equals(captainEmail)){
+                    holder.checkpay.setVisibility(View.VISIBLE);
+                }else {
+                    holder.checkpay.setVisibility(View.GONE);
+                }
+            }
+        }else{
             holder.checkpay.setVisibility(View.GONE);
         }
     }

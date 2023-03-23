@@ -15,15 +15,6 @@ public class PartyCheckRes {
 
     private String finishedAt;
 
-    private int ispayed;
-
-    public int getIspayed() {
-        return ispayed;
-    }
-
-    public void setIspayed(int ispayed) {
-        this.ispayed = ispayed;
-    }
 
     public String getResult ()
     {
