@@ -255,7 +255,7 @@ public class MyFragment extends Fragment {
 
         ContentApi api = retrofit.create(ContentApi.class);
 
-        SharedPreferences sp = activity.getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
+        SharedPreferences sp = getActivity().getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
         AccessToken = sp.getString("AccessToken","");
 
         Call<ContentWatchList> call = api.getContentWatch("Bearer "+AccessToken,0);
@@ -305,7 +305,7 @@ public class MyFragment extends Fragment {
 
         ContentApi api = retrofit.create(ContentApi.class);
 
-        SharedPreferences sp = activity.getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
+        SharedPreferences sp = getActivity().getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
         AccessToken = sp.getString("AccessToken","");
 
         Call<ContentWatchList> call = api.getContentWatch("Bearer "+AccessToken,page+1);

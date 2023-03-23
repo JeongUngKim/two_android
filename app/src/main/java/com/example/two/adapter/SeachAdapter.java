@@ -19,7 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.two.Api.ContentApi;
 import com.example.two.Api.NetworkClient2;
+import com.example.two.MainActivity;
 import com.example.two.R;
+import com.example.two.SearchContentActivity;
 import com.example.two.config.Config;
 import com.example.two.fragment.MyFragment;
 import com.example.two.model.ContentWatch;
@@ -105,6 +107,16 @@ public class SeachAdapter extends RecyclerView.Adapter<SeachAdapter.ViewHolder> 
                 public void onClick(View view) {
                     int index = getAdapterPosition();
                     selectSearch = seachArrayList.get(index);
+                    Intent intent = new Intent(context, SearchContentActivity.class);
+                    intent.putExtra("Id",seachArrayList.get(index).getId());
+                    intent.putExtra("ImgUrl",seachArrayList.get(index).getImgUrl());
+                    intent.putExtra("title",seachArrayList.get(index).getTitle());
+                    intent.putExtra("content",seachArrayList.get(index).getContent());
+                    intent.putExtra("year",seachArrayList.get(index).getCreatedYear());
+                    intent.putExtra("rating",seachArrayList.get(index).getContentRating());
+                    intent.putExtra("genre",seachArrayList.get(index).getGenre());
+                    (context).startActivity(intent);
+
                     path = selectSearch.getId();
                     Log.i("path", String.valueOf(selectSearch.getId()));
 
