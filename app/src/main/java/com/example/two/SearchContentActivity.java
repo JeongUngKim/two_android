@@ -61,6 +61,13 @@ public class SearchContentActivity extends AppCompatActivity {
                 .placeholder(R.drawable.baseline_person_outline_24)
                 .into(posterView);
 
+        btnChoice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isLike();
+            }
+        });
+
         btnReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,4 +82,10 @@ public class SearchContentActivity extends AppCompatActivity {
         });
 
     }
+
+    public void isLike(){
+        //되라
+    }
+
+
 }
