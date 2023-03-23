@@ -1,6 +1,10 @@
 package com.example.two.adapter;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,16 +17,31 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.two.Api.ContentApi;
+import com.example.two.Api.NetworkClient2;
 import com.example.two.R;
+import com.example.two.config.Config;
+import com.example.two.fragment.MyFragment;
+import com.example.two.model.ContentWatch;
 import com.example.two.model.Movie;
 import com.example.two.model.Seach;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+
 public class SeachAdapter extends RecyclerView.Adapter<SeachAdapter.ViewHolder> {
     Context context;
 
     ArrayList<Seach> seachArrayList;
+
+    Seach selectSearch;
+    String AccessToken;
+
+    int path;
 
     public SeachAdapter(Context context, ArrayList<Seach> seachArrayList) {
         this.context = context;
@@ -84,6 +103,34 @@ public class SeachAdapter extends RecyclerView.Adapter<SeachAdapter.ViewHolder> 
             layoutMovie1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    int index = getAdapterPosition();
+                    selectSearch = seachArrayList.get(index);
+                    path = selectSearch.getId();
+                    Log.i("path", String.valueOf(selectSearch.getId()));
+
+                    Retrofit retrofit = NetworkClient2.getRetrofitClient(context);
+
+                    ContentApi api = retrofit.create(ContentApi.class);
+
+                    SharedPreferences sp = context.getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
+                    AccessToken = sp.getString("AccessToken","");
+                    Call<ContentWatch> call = api.contentWatch("Bearer " + AccessToken, path);
+
+                    call.enqueue(new Callback<ContentWatch>() {
+                        @Override
+                        public void onResponse(Call<ContentWatch> call, Response<ContentWatch> response) {
+
+                            SharedPreferences.Editor editor = sp.edit();
+                            editor.putInt("path",path);
+                            editor.apply();
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<ContentWatch> call, Throwable t) {
+
+                        }
+                    });
 
                 }
             });

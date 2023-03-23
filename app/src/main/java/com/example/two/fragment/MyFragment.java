@@ -15,17 +15,24 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.two.Api.ContentApi;
 import com.example.two.Api.NetworkClient2;
+import com.example.two.Api.SearchApi;
 import com.example.two.Api.UserApi;
 import com.example.two.ChoiceActivity;
 import com.example.two.MainActivity;
@@ -33,11 +40,19 @@ import com.example.two.MyReviewActivity;
 import com.example.two.R;
 import com.example.two.UseOTTActivity;
 import com.example.two.UserUpdateActivity;
+import com.example.two.adapter.MyAdapter;
+import com.example.two.adapter.SeachAdapter;
 import com.example.two.config.Config;
+import com.example.two.model.ContentWatch;
+import com.example.two.model.ContentWatchList;
+import com.example.two.model.Seach;
+import com.example.two.model.SeachList;
 import com.example.two.model.User;
 import com.example.two.model.UserList;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -51,6 +66,7 @@ import retrofit2.Retrofit;
  * create an instance of this fragment.
  */
 public class MyFragment extends Fragment {
+    private Parcelable recyclerViewState;
 
     MainActivity activity;
 
@@ -66,6 +82,14 @@ public class MyFragment extends Fragment {
     CardView cvChoice;
     CardView cvMyReview;
     CardView cvUseOTT;
+
+    RecyclerView recyclerView;
+    MyAdapter adapter;
+    ArrayList<ContentWatch> contentWatchArrayList = new ArrayList<>();
+
+    String AccessToken;
+
+    int page;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -156,6 +180,39 @@ public class MyFragment extends Fragment {
         txtNickname = view.findViewById(R.id.txtNickname);
         imgProfile = view.findViewById(R.id.imgProfile);
         imgUpdate = view.findViewById(R.id.imgUpdate);
+
+        recyclerView = view.findViewById(R.id.recyclerView);
+        getMyList();
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                // 맨 마지막 데이터가 화면에 보이면!!!!
+                // 네트워크 통해서 데이터를 추가로 받아와라!!
+                int lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
+                int totalCount = recyclerView.getAdapter().getItemCount();
+
+                // 스크롤을 데이터 맨 끝까지 한 상태.
+                if (lastPosition + 1 == totalCount) {
+                    // 네트워크 통해서 데이터를 받아오고, 화면에 표시!
+
+                    addMyList();
+
+                }
+            }
+        });
+
+
 
 
 
@@ -258,6 +315,109 @@ public class MyFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void getMyList() {
+        Retrofit retrofit = NetworkClient2.getRetrofitClient(getActivity());
+
+        ContentApi api = retrofit.create(ContentApi.class);
+
+        SharedPreferences sp = activity.getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
+        AccessToken = sp.getString("AccessToken","");
+
+        Call<ContentWatchList> call = api.getContentWatch("Bearer "+AccessToken,0);
+
+        call.enqueue(new Callback<ContentWatchList>() {
+            @Override
+            public void onResponse(Call<ContentWatchList> call, Response<ContentWatchList> response) {
+
+                if (response.isSuccessful()) {
+                    // getNetworkData는 항상처음에 데이터를 가져오는 동작 이므로
+                    // 초기화 코드가 필요
+                    contentWatchArrayList.clear();
+
+                    Log.i("SIGN","OK");
+
+                    // 데이터를 받았으니 리사이클러 표시
+
+                    contentWatchArrayList.addAll(response.body().getContentWatch_list());
+
+
+
+
+                    adapter = new MyAdapter(getActivity(),contentWatchArrayList);
+
+                    recyclerView.setAdapter(adapter);
+
+
+
+                } else {
+                    Toast.makeText(getActivity(), "문제가 있습니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ContentWatchList> call, Throwable t) {
+                Log.i("ERRER", String.valueOf(t));
+
+            }
+
+
+        });
+    }
+
+    private void addMyList() {
+        Retrofit retrofit = NetworkClient2.getRetrofitClient(getActivity());
+
+        ContentApi api = retrofit.create(ContentApi.class);
+
+        SharedPreferences sp = activity.getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
+        AccessToken = sp.getString("AccessToken","");
+
+        Call<ContentWatchList> call = api.getContentWatch("Bearer "+AccessToken,page+1);
+
+        call.enqueue(new Callback<ContentWatchList>() {
+            @Override
+            public void onResponse(Call<ContentWatchList> call, Response<ContentWatchList> response) {
+
+                if (response.isSuccessful()) {
+
+                    // 데이터를 받았으니 리사이클러 표시
+
+                    contentWatchArrayList.addAll(response.body().getContentWatch_list());
+
+
+                    // 리사이클러뷰 고정하는 코드 1
+                    recyclerViewState = recyclerView.getLayoutManager().onSaveInstanceState();
+
+
+
+                    adapter = new MyAdapter(getActivity(),contentWatchArrayList);
+                    page = page + 1;
+                    recyclerView.setAdapter(adapter);
+
+                    // 리사이클러뷰 고정하는 코드 2
+                    recyclerView.getLayoutManager().onRestoreInstanceState(recyclerViewState);
+
+
+
+
+
+                } else {
+                    Toast.makeText(getActivity(), "문제가 있습니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ContentWatchList> call, Throwable t) {
+                Log.i("ERRER", String.valueOf(t));
+
+            }
+
+
+        });
     }
 
 
