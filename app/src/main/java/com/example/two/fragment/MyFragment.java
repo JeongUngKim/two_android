@@ -198,6 +198,7 @@ public class MyFragment extends Fragment {
                 int lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
                 int totalCount = recyclerView.getAdapter().getItemCount();
 
+
                 // 스크롤을 데이터 맨 끝까지 한 상태.
                 if (lastPosition + 1 == totalCount) {
                     // 네트워크 통해서 데이터를 받아오고, 화면에 표시!

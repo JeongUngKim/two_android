@@ -136,7 +136,7 @@ public class PartyFragment extends Fragment {
 
         Bundle bundle = getArguments();
         user = bundle.getParcelable("user");
-        Log.i("user",user.getUserEmail());
+//        Log.i("user",user.getUserEmail());
         partyBtn = view.findViewById(R.id.partyBtn);
 
 
