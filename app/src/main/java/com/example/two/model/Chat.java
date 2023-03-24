@@ -13,11 +13,20 @@ public class Chat {
 
    private String serviceId;
 
-   private int servicePassword;
+   private String servicePassword;
 
    private String finishedAt;
+   private String userEmail;
 
-    public Chat(String service, String title, String serviceId, int servicePassword, String finishedAt) {
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public Chat(String service, String title, String serviceId, String servicePassword, String finishedAt) {
         this.service = service;
         this.title = title;
         this.serviceId = serviceId;
@@ -73,11 +82,11 @@ public class Chat {
         this.serviceId = serviceId;
     }
 
-    public int getServicePassword() {
+    public String getServicePassword() {
         return servicePassword;
     }
 
-    public void setServicePassword(int servicePassword) {
+    public void setServicePassword(String servicePassword) {
         this.servicePassword = servicePassword;
     }
 

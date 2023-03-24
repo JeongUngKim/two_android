@@ -7,14 +7,22 @@ public class MessageItem {
     String time;
     String profileUrl;
 
+    String Email;
 
+    public String getEmail() {
+        return Email;
+    }
 
+    public void setEmail(String email) {
+        Email = email;
+    }
 
-    public MessageItem(String nickname, String message, String time, String profileUrl) {
+    public MessageItem(String nickname, String message, String time, String profileUrl, String Email) {
         this.nickname = nickname;
         this.message = message;
         this.time = time;
         this.profileUrl = profileUrl;
+        this.Email = Email;
     }
 
 

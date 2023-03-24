@@ -4,6 +4,7 @@ package com.example.two;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -77,9 +78,13 @@ public class PartyChatActivity extends AppCompatActivity {
 
     Button btnId;
     Button btnPay;
-
+    Button btnfinish;
     PartyCheckRes partyCheckRes;
     HashSet<HashMap<String,String>> hash = new HashSet<>();
+    String captainEmail;
+
+    String serviceId;
+    String servicePassword;
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,12 +96,16 @@ public class PartyChatActivity extends AppCompatActivity {
         }
 
         Intent intent = getIntent();
+        captainEmail = intent.getStringExtra("captainEmail");
+        serviceId = intent.getStringExtra("serviceId");
+        servicePassword = intent.getStringExtra("servicePassword");
         user = (User) intent.getSerializableExtra("user");
         SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
 
         HashMap<String,String> data = new HashMap<>();
         data.put("nickname",user.getNickname());
         data.put("profileUrl",user.getProfileImgUrl());
+        data.put("userEmail",user.getUserEmail());
         hash.add(data);
 
         editMsg = findViewById(R.id.editMsg);
@@ -111,12 +120,12 @@ public class PartyChatActivity extends AppCompatActivity {
         drawerRecyclerView = findViewById(R.id.drawerRecyclerView);
         drawerRecyclerView.setHasFixedSize(true);
         drawerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        drawerAdapter = new DrawerAdapter(PartyChatActivity.this,hash,user);
+        drawerAdapter = new DrawerAdapter(PartyChatActivity.this,hash,user,captainEmail);
         drawerRecyclerView.setAdapter(drawerAdapter);
 
         btnId = findViewById(R.id.btnId);
         btnPay = findViewById(R.id.btnPay);
-
+        btnfinish = findViewById(R.id.btnfinish);
         btn = findViewById(R.id.btn);
         adapter = new ChatAdapter(messageItems,getLayoutInflater(),user);
         listView.setAdapter(adapter);
@@ -134,6 +143,7 @@ public class PartyChatActivity extends AppCompatActivity {
                 HashMap<String,String> data = new HashMap<>();
                 data.put("nickname",messageItem.getNickname());
                 data.put("profileUrl",messageItem.getProfileUrl());
+                data.put("userEmail",messageItem.getEmail());
                 hash.add(data);
                 drawerAdapter.updatedata(hash);
                 partycheked();
@@ -167,11 +177,11 @@ public class PartyChatActivity extends AppCompatActivity {
                 String nickName= user.getNickname();
                 String message= editMsg.getText().toString();
                 String pofileUrl= user.getProfileImgUrl();
-
+                String userEmail = user.getUserEmail();
                 Calendar calendar= Calendar.getInstance(); //현재 시간을 가지고 있는 객체
                 String time=calendar.get(Calendar.HOUR_OF_DAY)+":"+calendar.get(Calendar.MINUTE); //14:16
 
-                MessageItem messageItem= new MessageItem(nickName,message,time,pofileUrl);
+                MessageItem messageItem= new MessageItem(nickName,message,time,pofileUrl,userEmail);
                 //'char'노드에 MessageItem객체를 통해
                 chatRef.push().setValue(messageItem);
                 editMsg.setText("");
@@ -180,16 +190,16 @@ public class PartyChatActivity extends AppCompatActivity {
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
             }
         });
+
         btnId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String [] memberlist = partyCheckRes.getMemberEmail();
-                Boolean paychecker;
-                for(String member : memberlist){
-                    if(user.getUserEmail().equals(member)){
-
-                    }
-                }
+                AlertDialog.Builder builder = new AlertDialog.Builder(PartyChatActivity.this);
+                builder.setTitle("서비스 계정 확인");
+                builder.setMessage("서비스 ID :"+serviceId+"\n서비스 PW :"+servicePassword);
+                builder.setPositiveButton("확인",null);
+                AlertDialog ad = builder.create();
+                ad.show();
             }
         });
         btnPay.setOnClickListener(new View.OnClickListener() {
@@ -198,6 +208,41 @@ public class PartyChatActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    private void payedcheck() {
+        String[] partymemeber = partyCheckRes.getMemberEmail();
+        int memCnt = Integer.parseInt(partyCheckRes.getMemberCnt());
+        if(memCnt<3) {
+
+            if ( !user.getUserEmail().equals(captainEmail)){
+                Boolean check = false;
+
+                for (int i = 0; i < partymemeber.length; i++) {
+                    String member = partymemeber[i].replaceAll("\"", "");
+
+                    if (user.getUserEmail().equals(member)) {
+                        check = true;
+                    }
+                }
+
+                if (check) {
+                    btnPay.setVisibility(View.GONE);
+                    btnId.setVisibility(View.VISIBLE);
+                    btnfinish.setVisibility(View.GONE);
+                } else {
+                    btnPay.setVisibility(View.VISIBLE);
+                    btnId.setVisibility(View.GONE);
+                    btnfinish.setVisibility(View.GONE);
+                }
+            }
+
+        }else {
+                btnfinish.setVisibility(View.VISIBLE);
+                btnPay.setVisibility(View.GONE);
+                btnId.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -234,6 +279,7 @@ public class PartyChatActivity extends AppCompatActivity {
                 if(response.code() == 200 ){
                     partyCheckRes = response.body();
                     drawerAdapter.setPartyCheckRes(partyCheckRes);
+                    payedcheck();
                 }
             }
 

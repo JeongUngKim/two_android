@@ -111,6 +111,9 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
                     intent.putExtra("index", index);
                     intent.putExtra("title",chat.getTitle());
                     intent.putExtra("user",(Serializable) user);
+                    intent.putExtra("captainEmail",chat.getUserEmail());
+                    intent.putExtra("serviceId",chat.getServiceId());
+                    intent.putExtra("servicePassword",chat.getServicePassword());
                     context.startActivity(intent);
 
 
