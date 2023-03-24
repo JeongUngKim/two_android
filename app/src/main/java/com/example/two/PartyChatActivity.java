@@ -48,10 +48,18 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import kr.co.bootpay.android.*;
+import kr.co.bootpay.android.events.BootpayEventListener;
+import kr.co.bootpay.android.models.BootExtra;
+import kr.co.bootpay.android.models.BootItem;
+import kr.co.bootpay.android.models.BootUser;
+import kr.co.bootpay.android.models.Payload;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+
+
 
 public class PartyChatActivity extends AppCompatActivity {
 
@@ -107,6 +115,9 @@ public class PartyChatActivity extends AppCompatActivity {
         data.put("profileUrl",user.getProfileImgUrl());
         data.put("userEmail",user.getUserEmail());
         hash.add(data);
+
+        //부트패이 초기화
+        BootpayAnalytics.init(this, Config.access_key);
 
         editMsg = findViewById(R.id.editMsg);
         listView = findViewById(R.id.listview);
@@ -205,10 +216,85 @@ public class PartyChatActivity extends AppCompatActivity {
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                payment();
             }
         });
 
+    }
+
+    private void payment() {
+        String service = partyCheckRes.getService();
+        String[] list = getResources().getStringArray(R.array.ott);
+        double price;
+        String id;
+        if(list[0].equals(service)){
+            price = 4750d;
+            id = "1";
+        }else if (list[1].equals(service)){
+            price = 4500d;
+            id = "2";
+        }else if(list[2].equals(service)){
+            price =4750d;
+            id = "3";
+        }else{
+            price = 3000d;
+            id = "4";
+        }
+
+        //유저 정보
+        BootUser bootUser = new BootUser();
+        bootUser.setUsername(user.getName());
+        bootUser.setEmail(user.getUserEmail());
+       //아이템 정보
+        BootItem bootItem = new BootItem();
+        bootItem.setName(service);
+        bootItem.setPrice(price);
+        bootItem.setId(id);
+
+        Payload payload = new Payload();
+        payload.setApplicationId(Config.access_key);
+        payload.setOrderName("Two payment");
+        payload.setPg("다날");
+        payload.setMethod("카드수기");
+        payload.setOrderName(bootItem.getName());
+        payload.setPrice(bootItem.getPrice());
+        payload.setUser(bootUser);
+        payload.setOrderId(bootItem.getId());
+        Bootpay.init(getSupportFragmentManager(),PartyChatActivity.this)
+                .setPayload(payload)
+                .setEventListener(new BootpayEventListener() {
+                    @Override
+                    public void onCancel(String data) {
+                        Log.i("payment","cancel");
+                        Bootpay.removePaymentWindow();
+                    }
+
+                    @Override
+                    public void onError(String data) {
+                        Log.i("bootpay_error",data);
+                    }
+
+                    @Override
+                    public void onClose() {
+                        Log.i("bootpay_close","닫힘!");
+
+                    }
+
+                    @Override
+                    public void onIssued(String data) {
+                        Log.i("bootpay_issued",data);
+                    }
+
+                    @Override
+                    public boolean onConfirm(String data) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onDone(String data) {
+                        Log.i("bootpay_done",data);
+                    }
+                }).requestPayment();
     }
 
     private void payedcheck() {

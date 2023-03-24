@@ -17,6 +17,15 @@ public class Chat {
 
    private String finishedAt;
    private String userEmail;
+   private String profileImgUrl;
+
+    public String getProfileImgUrl() {
+        return profileImgUrl;
+    }
+
+    public void setProfileImgUrl(String profileImgUrl) {
+        this.profileImgUrl = profileImgUrl;
+    }
 
     public String getUserEmail() {
         return userEmail;
