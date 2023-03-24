@@ -27,12 +27,14 @@ import android.widget.Toolbar;
 
 import com.example.two.Api.ChatApi;
 import com.example.two.Api.NetworkClient2;
+import com.example.two.Api.PartyApi;
 import com.example.two.Api.UserApi;
 import com.example.two.adapter.ChatAdapter;
 import com.example.two.adapter.DrawerAdapter;
 import com.example.two.config.Config;
 import com.example.two.fragment.PartyFragment;
 import com.example.two.model.MessageItem;
+import com.example.two.model.Party;
 import com.example.two.model.PartyCheckRes;
 import com.example.two.model.User;
 import com.example.two.model.UserList;
@@ -42,6 +44,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -93,6 +98,10 @@ public class PartyChatActivity extends AppCompatActivity {
 
     String serviceId;
     String servicePassword;
+    String AccessToken;
+    int captainId;
+    String finishedAt;
+    double price;
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,8 +117,9 @@ public class PartyChatActivity extends AppCompatActivity {
         serviceId = intent.getStringExtra("serviceId");
         servicePassword = intent.getStringExtra("servicePassword");
         user = (User) intent.getSerializableExtra("user");
-        SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
-
+        captainId = intent.getIntExtra("userId",0);
+        Log.i("captain", String.valueOf(captainId));
+        finishedAt = intent.getStringExtra("finishedAt");
         HashMap<String,String> data = new HashMap<>();
         data.put("nickname",user.getNickname());
         data.put("profileUrl",user.getProfileImgUrl());
@@ -225,7 +235,7 @@ public class PartyChatActivity extends AppCompatActivity {
     private void payment() {
         String service = partyCheckRes.getService();
         String[] list = getResources().getStringArray(R.array.ott);
-        double price;
+
         String id;
         if(list[0].equals(service)){
             price = 4750d;
@@ -277,7 +287,11 @@ public class PartyChatActivity extends AppCompatActivity {
                     @Override
                     public void onClose() {
                         Log.i("bootpay_close","닫힘!");
-
+                        try {
+                            savepayment();
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
 
                     @Override
@@ -295,6 +309,53 @@ public class PartyChatActivity extends AppCompatActivity {
                         Log.i("bootpay_done",data);
                     }
                 }).requestPayment();
+    }
+
+    private void savepayment() throws JSONException {
+        SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
+        AccessToken = sp.getString("AccessToken", "");
+
+        Party party = new Party();
+        party.setPartyBoardId(String.valueOf(partyBoardId));
+        party.setCaptain(String.valueOf(captainId));
+        party.setPay(String.valueOf(price));
+        party.setFinishedAt(finishedAt);
+
+        Retrofit retrofit = NetworkClient2.getRetrofitClient(PartyChatActivity.this);
+        PartyApi api = retrofit.create(PartyApi.class);
+        Call<HashMap<String,String>> call = api.setParty("Bearer "+AccessToken,party);
+        call.enqueue(new Callback<HashMap<String, String>>() {
+            @Override
+            public void onResponse(Call<HashMap<String, String>> call, Response<HashMap<String, String>> response) {
+                if(response.code() == 200){
+                    String[] list = partyCheckRes.getMemberEmail();
+                    String useremail = user.getUserEmail();
+                    String[] emailist = new String[list.length+1];
+                    for(int i = 0;i<list.length;i++){
+                        emailist[i] = list[i];
+                    }
+                    emailist[list.length] = useremail;
+                    partyCheckRes.setMemberEmail(emailist);
+
+                    drawerAdapter.setPartyCheckRes(partyCheckRes);
+                    payedcheck();
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(PartyChatActivity.this);
+                    builder.setTitle("완료");
+                    builder.setMessage("결제가 완료되었습니다.");
+                    builder.setPositiveButton("확인",null);
+
+                    AlertDialog ad = builder.create();
+                    ad.show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<HashMap<String, String>> call, Throwable t) {
+
+            }
+        });
     }
 
     private void payedcheck() {

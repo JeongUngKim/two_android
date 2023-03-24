@@ -72,6 +72,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
             String[] partyEmail = partyCheckRes.getMemberEmail();
             for(int i = 0 ; i < partyEmail.length; i++){
                 String mail = partyEmail[i];
+                Log.i("drawermail",mail);
                 if(userEmail.equals(mail) ){
                     checker = true;
                 }
