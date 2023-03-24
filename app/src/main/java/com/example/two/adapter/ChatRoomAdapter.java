@@ -61,6 +61,7 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
             Chat chat = chatArrayList.get(position);
             holder.partyName.setText(chat.getTitle());
             holder.tag.setText(chat.getService());
+
     }
 
     @Override
@@ -114,6 +115,8 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
                     intent.putExtra("captainEmail",chat.getUserEmail());
                     intent.putExtra("serviceId",chat.getServiceId());
                     intent.putExtra("servicePassword",chat.getServicePassword());
+                    intent.putExtra("userId",chat.getUserId());
+                    intent.putExtra("finishedAt",chat.getFinishedAt());
                     context.startActivity(intent);
 
 

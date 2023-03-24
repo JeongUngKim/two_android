@@ -72,6 +72,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
             String[] partyEmail = partyCheckRes.getMemberEmail();
             for(int i = 0 ; i < partyEmail.length; i++){
                 String mail = partyEmail[i];
+                Log.i("drawermail",mail);
                 if(userEmail.equals(mail) ){
                     checker = true;
                 }
@@ -80,7 +81,9 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
                 holder.checkpay.setVisibility(View.VISIBLE);
             } else {
                 if(userEmail.equals(captainEmail)){
+                    // 방장
                     holder.checkpay.setVisibility(View.VISIBLE);
+
                 }else {
                     holder.checkpay.setVisibility(View.GONE);
                 }

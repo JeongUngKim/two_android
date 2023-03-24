@@ -27,12 +27,14 @@ import android.widget.Toolbar;
 
 import com.example.two.Api.ChatApi;
 import com.example.two.Api.NetworkClient2;
+import com.example.two.Api.PartyApi;
 import com.example.two.Api.UserApi;
 import com.example.two.adapter.ChatAdapter;
 import com.example.two.adapter.DrawerAdapter;
 import com.example.two.config.Config;
 import com.example.two.fragment.PartyFragment;
 import com.example.two.model.MessageItem;
+import com.example.two.model.Party;
 import com.example.two.model.PartyCheckRes;
 import com.example.two.model.User;
 import com.example.two.model.UserList;
@@ -43,15 +45,26 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import kr.co.bootpay.android.*;
+import kr.co.bootpay.android.events.BootpayEventListener;
+import kr.co.bootpay.android.models.BootExtra;
+import kr.co.bootpay.android.models.BootItem;
+import kr.co.bootpay.android.models.BootUser;
+import kr.co.bootpay.android.models.Payload;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+
+
 
 public class PartyChatActivity extends AppCompatActivity {
 
@@ -85,6 +98,10 @@ public class PartyChatActivity extends AppCompatActivity {
 
     String serviceId;
     String servicePassword;
+    String AccessToken;
+    int captainId;
+    String finishedAt;
+    double price;
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,13 +117,17 @@ public class PartyChatActivity extends AppCompatActivity {
         serviceId = intent.getStringExtra("serviceId");
         servicePassword = intent.getStringExtra("servicePassword");
         user = (User) intent.getSerializableExtra("user");
-        SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME, MODE_PRIVATE);
-
+        captainId = intent.getIntExtra("userId",0);
+        Log.i("captain", String.valueOf(captainId));
+        finishedAt = intent.getStringExtra("finishedAt");
         HashMap<String,String> data = new HashMap<>();
         data.put("nickname",user.getNickname());
         data.put("profileUrl",user.getProfileImgUrl());
         data.put("userEmail",user.getUserEmail());
         hash.add(data);
+
+        //부트패이 초기화
+        BootpayAnalytics.init(this, Config.access_key);
 
         editMsg = findViewById(R.id.editMsg);
         listView = findViewById(R.id.listview);
@@ -205,10 +226,136 @@ public class PartyChatActivity extends AppCompatActivity {
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                payment();
             }
         });
 
+    }
+
+    private void payment() {
+        String service = partyCheckRes.getService();
+        String[] list = getResources().getStringArray(R.array.ott);
+
+        String id;
+        if(list[0].equals(service)){
+            price = 4750d;
+            id = "1";
+        }else if (list[1].equals(service)){
+            price = 4500d;
+            id = "2";
+        }else if(list[2].equals(service)){
+            price =4750d;
+            id = "3";
+        }else{
+            price = 3000d;
+            id = "4";
+        }
+
+        //유저 정보
+        BootUser bootUser = new BootUser();
+        bootUser.setUsername(user.getName());
+        bootUser.setEmail(user.getUserEmail());
+       //아이템 정보
+        BootItem bootItem = new BootItem();
+        bootItem.setName(service);
+        bootItem.setPrice(price);
+        bootItem.setId(id);
+
+        Payload payload = new Payload();
+        payload.setApplicationId(Config.access_key);
+        payload.setOrderName("Two payment");
+        payload.setPg("다날");
+        payload.setMethod("카드수기");
+        payload.setOrderName(bootItem.getName());
+        payload.setPrice(bootItem.getPrice());
+        payload.setUser(bootUser);
+        payload.setOrderId(bootItem.getId());
+        Bootpay.init(getSupportFragmentManager(),PartyChatActivity.this)
+                .setPayload(payload)
+                .setEventListener(new BootpayEventListener() {
+                    @Override
+                    public void onCancel(String data) {
+                        Log.i("payment","cancel");
+                        Bootpay.removePaymentWindow();
+                    }
+
+                    @Override
+                    public void onError(String data) {
+                        Log.i("bootpay_error",data);
+                    }
+
+                    @Override
+                    public void onClose() {
+                        Log.i("bootpay_close","닫힘!");
+                        try {
+                            savepayment();
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+
+                    @Override
+                    public void onIssued(String data) {
+                        Log.i("bootpay_issued",data);
+                    }
+
+                    @Override
+                    public boolean onConfirm(String data) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onDone(String data) {
+                        Log.i("bootpay_done",data);
+                    }
+                }).requestPayment();
+    }
+
+    private void savepayment() throws JSONException {
+        SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
+        AccessToken = sp.getString("AccessToken", "");
+
+        Party party = new Party();
+        party.setPartyBoardId(String.valueOf(partyBoardId));
+        party.setCaptain(String.valueOf(captainId));
+        party.setPay(String.valueOf(price));
+        party.setFinishedAt(finishedAt);
+
+        Retrofit retrofit = NetworkClient2.getRetrofitClient(PartyChatActivity.this);
+        PartyApi api = retrofit.create(PartyApi.class);
+        Call<HashMap<String,String>> call = api.setParty("Bearer "+AccessToken,party);
+        call.enqueue(new Callback<HashMap<String, String>>() {
+            @Override
+            public void onResponse(Call<HashMap<String, String>> call, Response<HashMap<String, String>> response) {
+                if(response.code() == 200){
+                    String[] list = partyCheckRes.getMemberEmail();
+                    String useremail = user.getUserEmail();
+                    String[] emailist = new String[list.length+1];
+                    for(int i = 0;i<list.length;i++){
+                        emailist[i] = list[i];
+                    }
+                    emailist[list.length] = useremail;
+                    partyCheckRes.setMemberEmail(emailist);
+
+                    drawerAdapter.setPartyCheckRes(partyCheckRes);
+                    payedcheck();
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(PartyChatActivity.this);
+                    builder.setTitle("완료");
+                    builder.setMessage("결제가 완료되었습니다.");
+                    builder.setPositiveButton("확인",null);
+
+                    AlertDialog ad = builder.create();
+                    ad.show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<HashMap<String, String>> call, Throwable t) {
+
+            }
+        });
     }
 
     private void payedcheck() {
