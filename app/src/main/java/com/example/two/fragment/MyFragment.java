@@ -177,6 +177,14 @@ public class MyFragment extends Fragment {
         imgProfile = view.findViewById(R.id.imgProfile);
         imgUpdate = view.findViewById(R.id.imgUpdate);
 
+        cvChoice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),ChoiceActivity.class);
+                startActivity(intent);
+            }
+        });
+
         recyclerView = view.findViewById(R.id.recyclerView);
         getMyList();
         recyclerView.setHasFixedSize(true);
