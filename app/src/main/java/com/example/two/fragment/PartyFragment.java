@@ -260,9 +260,7 @@ public class PartyFragment extends Fragment {
                     partyBoardSize = Integer.parseInt(response.body().getPartyBoardSize());
                     // 오프셋 처리하는 코드
 
-
-                    adapter = new ChatRoomAdapter(getActivity(),chatArrayList,user);
-                    recyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
                     page = pageNum;
                     Log.i("RECYCLE", adapter.toString());
 

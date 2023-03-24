@@ -163,7 +163,7 @@ public class PartyAddActivity extends AppCompatActivity {
         String imgUri =user.getProfileImgUrl();
         String nickname=user.getNickname();
         String serviceEmail = txtOttName.getText().toString().trim();
-        int servicePassword = Integer.parseInt(txtOttPassword.getText().toString().trim());
+        String servicePassword = txtOttPassword.getText().toString().trim();
         Chat chat = new Chat(service,partyName,serviceEmail,servicePassword,date);
         Retrofit retrofit = NetworkClient2.getRetrofitClient(PartyAddActivity.this);
 
