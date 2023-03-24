@@ -193,12 +193,12 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        imgLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getLogout();
-            }
-        });
+//        imgLogout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                getLogout();
+//            }
+//        });
         return view;
     }
     public void getrankMovieData() {
@@ -360,30 +360,30 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    public void getLogout(){
-        Retrofit retrofit = NetworkClient2.getRetrofitClient(getActivity());
-        LoginApi api = retrofit.create(LoginApi.class);
-
-        Call<UserRes> call = api.Logout("Bearer "+AccessToken);
-        call.enqueue(new Callback<UserRes>() {
-            @Override
-            public void onResponse(Call<UserRes> call, Response<UserRes> response) {
-
-                SharedPreferences sp = ((MainActivity)getActivity()).getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
-                SharedPreferences.Editor editor = sp.edit();
-                editor.putString("AccessToken",null);
-                editor.apply();
-                Intent intent = new Intent(((MainActivity)getActivity()), LoginActivity.class);
-                startActivity(intent);
-                ((MainActivity)getActivity()).finish();
-            }
-
-            @Override
-            public void onFailure(Call<UserRes> call, Throwable t) {
-
-            }
-        });
-    }
+//    public void getLogout(){
+//        Retrofit retrofit = NetworkClient2.getRetrofitClient(getActivity());
+//        LoginApi api = retrofit.create(LoginApi.class);
+//
+//        Call<UserRes> call = api.Logout("Bearer "+AccessToken);
+//        call.enqueue(new Callback<UserRes>() {
+//            @Override
+//            public void onResponse(Call<UserRes> call, Response<UserRes> response) {
+//
+//                SharedPreferences sp = ((MainActivity)getActivity()).getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
+//                SharedPreferences.Editor editor = sp.edit();
+//                editor.putString("AccessToken",null);
+//                editor.apply();
+//                Intent intent = new Intent(((MainActivity)getActivity()), LoginActivity.class);
+//                startActivity(intent);
+//                ((MainActivity)getActivity()).finish();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<UserRes> call, Throwable t) {
+//
+//            }
+//        });
+//    }
     public void isDetail(int index){
         selectedMovie = movieArrayList.get(index);
         int Id = movieArrayList.get(index).getId();

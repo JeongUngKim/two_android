@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.two.Api.ChatApi;
@@ -38,6 +39,8 @@ public class RankALLActivity extends AppCompatActivity {
     ArrayList<MovieRank> movieArrayList = new ArrayList<>();
     RankAllAdapter adapter;
 
+
+
     ImageView imgBack;
 
     String language = "ko-KR";
@@ -48,6 +51,8 @@ public class RankALLActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rank_allactivity);
+
+
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -87,6 +92,7 @@ public class RankALLActivity extends AppCompatActivity {
                     // 데이터를 받았으니 리사이클러 표시
 
                     movieArrayList.addAll(response.body().getRank());
+
 
                     // 오프셋 처리하는 코드
 
