@@ -3,13 +3,30 @@ package com.example.two;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.two.Api.ChatApi;
+import com.example.two.Api.ContentApi;
+import com.example.two.Api.NetworkClient2;
+import com.example.two.config.Config;
+import com.example.two.model.ChatRoomList;
+import com.example.two.model.Res;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class SearchContentActivity extends AppCompatActivity {
     ImageView posterView;
@@ -28,8 +45,14 @@ public class SearchContentActivity extends AppCompatActivity {
 
     String gerne;
 
+    String token;
+
     ImageButton btnChoice;
     ImageButton btnReview;
+
+    FrameLayout frame1;
+
+    int count=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +66,7 @@ public class SearchContentActivity extends AppCompatActivity {
         txtRate = findViewById(R.id.txtRate);
         btnChoice = findViewById(R.id.btnChoice);
         btnReview = findViewById(R.id.btnReview);
+        frame1= findViewById(R.id.frame1);
 
         Id = getIntent().getIntExtra("Id",0);
         title =getIntent().getStringExtra("title");
@@ -64,10 +88,29 @@ public class SearchContentActivity extends AppCompatActivity {
         btnChoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                isLike();
+
+                    if (count == 0) {
+
+                        isLike();
+                        Toast.makeText(SearchContentActivity.this, "찜했습니다", Toast.LENGTH_SHORT).show();
+                        frame1.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF737E")));
+                        btnChoice.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF737E")));
+                        btnChoice.setImageResource(R.drawable.baseline_bookmark_24);
+                        count = 1;
+
+                    }else{
+
+                        disLike();
+                        Toast.makeText(SearchContentActivity.this, "찜취소했습니다", Toast.LENGTH_SHORT).show();
+                        frame1.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+                        btnChoice.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+                        btnChoice.setImageResource(R.drawable.baseline_bookmark_border_24);
+                        count=0;
+                    }
+
+
             }
         });
-
         btnReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,7 +127,69 @@ public class SearchContentActivity extends AppCompatActivity {
     }
 
     public void isLike(){
-        
+        Retrofit retrofit = NetworkClient2.getRetrofitClient(SearchContentActivity.this);
+
+        ContentApi api = retrofit.create(ContentApi.class);
+
+        Log.i("AAA", api.toString());
+        SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
+        token = sp.getString("AccessToken","");
+        Call<Res> call =api.contentLike("Bearer "+token,Id);
+
+        call.enqueue(new Callback<Res>() {
+            @Override
+            public void onResponse(Call<Res> call, Response<Res> response) {
+                if (response.isSuccessful()) {
+                    return;
+
+
+
+                } else {
+                    Toast.makeText(SearchContentActivity.this, "문제가 있습니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Res> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void disLike(){
+
+        Retrofit retrofit = NetworkClient2.getRetrofitClient(SearchContentActivity.this);
+
+        ContentApi api = retrofit.create(ContentApi.class);
+
+        Log.i("AAA", api.toString());
+        SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
+        token = sp.getString("AccessToken","");
+        Call<Res> call =api.contentDisLike("Bearer "+token,Id);
+
+        call.enqueue(new Callback<Res>() {
+            @Override
+            public void onResponse(Call<Res> call, Response<Res> response) {
+                if (response.isSuccessful()) {
+                    return;
+
+
+
+                } else {
+                    Toast.makeText(SearchContentActivity.this, "문제가 있습니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Res> call, Throwable t) {
+
+            }
+        });
+
+
+
     }
 
 
