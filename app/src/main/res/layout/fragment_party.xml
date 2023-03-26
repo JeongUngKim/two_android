@@ -5,7 +5,7 @@
     android:id="@+id/fragment_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#7F8C8D"
+    android:background="#000000"
     tools:context=".fragment.PartyFragment">
 
     <LinearLayout
@@ -32,7 +32,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:background="#3C3C3C"
+                        android:background="#323232"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -80,7 +80,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
-            android:backgroundTint="#3C3C3C"
+            android:backgroundTint="#323232"
             android:text="파티방 생성"
             android:textColor="#FFFFFF"
             android:textSize="20sp" />

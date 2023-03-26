@@ -1,6 +1,8 @@
 package com.example.two.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +26,8 @@ public class RankAllAdapter extends RecyclerView.Adapter<RankAllAdapter.ViewHold
 
     Context context;
     ArrayList<MovieRank> movieArrayList;
+
+
 
 
     public RankAllAdapter(Context context, ArrayList<MovieRank> movieArrayList) {
@@ -52,6 +56,26 @@ public class RankAllAdapter extends RecyclerView.Adapter<RankAllAdapter.ViewHold
         holder.textView7.setText(genre2[0]);
         holder.textView46.setText(movieRank.getCreatedYear().substring(0,4));
 
+        String rank = String.valueOf(position+1);
+
+        if ( position == 0){
+            holder.txtRank.setText(rank);
+            holder.txtRank.setTextSize(25);
+            holder.txtRank.setTextColor( Color.parseColor("#FF0000"));
+        }else if ( position == 1){
+            holder.txtRank.setText(rank);
+            holder.txtRank.setTextSize(25);
+            holder.txtRank.setTextColor( Color.parseColor("#FF0000"));
+        }else if ( position == 2){
+            holder.txtRank.setText(rank);
+            holder.txtRank.setTextSize(25);
+            holder.txtRank.setTextColor( Color.parseColor("#FF0000"));
+        }else {
+            holder.txtRank.setText(rank);
+        }
+
+
+
 
     }
 
@@ -70,6 +94,8 @@ public class RankAllAdapter extends RecyclerView.Adapter<RankAllAdapter.ViewHold
         // 출시년도
         TextView textView46;
 
+        TextView txtRank;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -79,6 +105,7 @@ public class RankAllAdapter extends RecyclerView.Adapter<RankAllAdapter.ViewHold
             rateSearchMovie1 = itemView.findViewById(R.id.rateSearchMovie1);
             textView7 = itemView.findViewById(R.id.textView7);
             textView46 = itemView.findViewById(R.id.textView46);
+            txtRank = itemView.findViewById(R.id.txtRank);
 
 
         }

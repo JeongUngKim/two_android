@@ -31,10 +31,12 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.two.Api.ContentApi;
+import com.example.two.Api.LoginApi;
 import com.example.two.Api.NetworkClient2;
 import com.example.two.Api.SearchApi;
 import com.example.two.Api.UserApi;
 import com.example.two.ChoiceActivity;
+import com.example.two.LoginActivity;
 import com.example.two.MainActivity;
 import com.example.two.MyReviewActivity;
 import com.example.two.R;
@@ -49,6 +51,7 @@ import com.example.two.model.Seach;
 import com.example.two.model.SeachList;
 import com.example.two.model.User;
 import com.example.two.model.UserList;
+import com.example.two.model.UserRes;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -67,15 +70,10 @@ import retrofit2.Retrofit;
  */
 public class MyFragment extends Fragment {
     private Parcelable recyclerViewState;
-
-    ImageButton btnCommunity;
-    ImageButton btnHome;
-    ImageButton btnFilter;
-    ImageButton btnParty;
-    ImageButton btnMy;
     CircleImageView imgProfile;
     TextView txtNickname;
     ImageView imgUpdate;
+    ImageView imgLogout;
     User user;
     CardView cvChoice;
     CardView cvMyReview;
@@ -176,6 +174,7 @@ public class MyFragment extends Fragment {
         txtNickname = view.findViewById(R.id.txtNickname);
         imgProfile = view.findViewById(R.id.imgProfile);
         imgUpdate = view.findViewById(R.id.imgUpdate);
+        imgLogout = view.findViewById(R.id.imgLogout);
 
         cvChoice.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -214,6 +213,13 @@ public class MyFragment extends Fragment {
                     addMyList();
 
                 }
+            }
+        });
+
+        imgLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getLogout();
             }
         });
 
@@ -306,6 +312,31 @@ public class MyFragment extends Fragment {
             }
 
 
+        });
+    }
+
+    public void getLogout(){
+        Retrofit retrofit = NetworkClient2.getRetrofitClient(getActivity());
+        LoginApi api = retrofit.create(LoginApi.class);
+
+        Call<UserRes> call = api.Logout("Bearer "+AccessToken);
+        call.enqueue(new Callback<UserRes>() {
+            @Override
+            public void onResponse(Call<UserRes> call, Response<UserRes> response) {
+
+                SharedPreferences sp = ((MainActivity)getActivity()).getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putString("AccessToken",null);
+                editor.apply();
+                Intent intent = new Intent(((MainActivity)getActivity()), LoginActivity.class);
+                startActivity(intent);
+                ((MainActivity)getActivity()).finish();
+            }
+
+            @Override
+            public void onFailure(Call<UserRes> call, Throwable t) {
+
+            }
         });
     }
 
