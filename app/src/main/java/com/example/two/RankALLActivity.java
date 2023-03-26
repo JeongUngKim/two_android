@@ -64,8 +64,7 @@ public class RankALLActivity extends AppCompatActivity {
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(RankALLActivity.this,MainActivity.class);
-                startActivity(intent);
+
                 finish();
             }
         });

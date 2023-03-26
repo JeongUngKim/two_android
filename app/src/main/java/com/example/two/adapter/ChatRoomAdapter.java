@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.two.MainActivity;
 import com.example.two.PartyChatActivity;
 import com.example.two.R;
@@ -32,6 +33,8 @@ import com.google.firebase.storage.StorageReference;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHolder> {
 
     Context context;
@@ -40,10 +43,12 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
 
     User user;
 
+
     public ChatRoomAdapter(Context context, ArrayList<Chat> chatArrayList,User user) {
         this.context = context;
         this.chatArrayList = chatArrayList;
         this.user=user;
+
     }
 
     @NonNull
@@ -61,6 +66,7 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
             Chat chat = chatArrayList.get(position);
             holder.partyName.setText(chat.getTitle());
             holder.tag.setText(chat.getService());
+            Glide.with(context).load(chat.getProfileImgUrl()).into(holder.circleImageView);
 
     }
 
@@ -79,7 +85,7 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
 
         CardView cardView;
 
-
+        CircleImageView circleImageView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -87,7 +93,7 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
             cardView = itemView.findViewById(R.id.cardView);
             headCount = itemView.findViewById(R.id.headCount);
             tag = itemView.findViewById(R.id.tag);
-
+            circleImageView = itemView.findViewById(R.id.imgProfile);
 
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override

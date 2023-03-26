@@ -71,6 +71,7 @@
                     </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/communityRecyclerView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
 
@@ -78,6 +79,20 @@
 
             </RelativeLayout>
         </ScrollView>
+
+        <Button
+            android:id="@+id/communityBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="#323232"
+            android:text="글 작성"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
 
     </LinearLayout>
 

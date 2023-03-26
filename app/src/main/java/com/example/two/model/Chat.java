@@ -1,6 +1,8 @@
 package com.example.two.model;
 
-public class Chat {
+import java.io.Serializable;
+
+public class Chat implements Serializable {
    private int partyBoardId;
 
    private String service;

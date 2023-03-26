@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -68,6 +69,7 @@ public class PartyAddActivity extends AppCompatActivity {
     int partyBoardId;
     String token;
 
+    Chat chat;
 
     boolean isFirst= true; // 첫 실행을 구분하기위한 멤버변수
     boolean isChanged= false; //프로필 변경 확인을 위한 멤버변수
@@ -138,10 +140,10 @@ public class PartyAddActivity extends AppCompatActivity {
             public void onClick(View view) {
                 saveData();
 //                getPartyData();
-                Intent intent = new Intent();
-                setResult(100,intent);
-                finish();
+               Intent intent = new Intent();
 
+               setResult(100,intent);
+               finish();
             }
         });
 
@@ -164,7 +166,7 @@ public class PartyAddActivity extends AppCompatActivity {
         String nickname=user.getNickname();
         String serviceEmail = txtOttName.getText().toString().trim();
         String servicePassword = txtOttPassword.getText().toString().trim();
-        Chat chat = new Chat(service,partyName,serviceEmail,servicePassword,date);
+        chat = new Chat(service,partyName,serviceEmail,servicePassword,date);
         Retrofit retrofit = NetworkClient2.getRetrofitClient(PartyAddActivity.this);
 
         ChatApi api = retrofit.create(ChatApi.class);

@@ -8,7 +8,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -68,6 +73,11 @@ public class PartyFragment extends Fragment {
     int partyBoardSize;
     User user;
 
+    Chat chat;
+
+    public PartyFragment partyFragment = this;
+
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -101,15 +111,12 @@ public class PartyFragment extends Fragment {
 
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-
-        activity = (MainActivity) getActivity();
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
 
-        activity = null;
     }
 
     @Override
@@ -125,6 +132,17 @@ public class PartyFragment extends Fragment {
 
     }
 
+    ActivityResultLauncher<Intent> launcher =
+            registerForActivityResult( new ActivityResultContracts.StartActivityForResult(),
+                    new ActivityResultCallback<ActivityResult>(){
+                        @Override
+                        public void onActivityResult(ActivityResult result){
+                            if(result.getResultCode() == 100){
+			                    Intent intent = result.getData();
+
+                            }
+                        }
+                    });
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -134,9 +152,14 @@ public class PartyFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_party, container, false);
 
-        Bundle bundle = getArguments();
-        user = bundle.getParcelable("user");
+        Bundle bundle = this.getArguments();
+
+        if (bundle != null ) {
+
+            user = bundle.getParcelable("user");
 //        Log.i("user",user.getUserEmail());
+
+        }
         partyBtn = view.findViewById(R.id.partyBtn);
 
 
@@ -165,7 +188,7 @@ public class PartyFragment extends Fragment {
                 Log.i("totalcount", String.valueOf(totalCount));
 
                 // 스크롤을 데이터 맨 끝까지 한 상태.
-                if (lastPosition + 1 == totalCount && partyBoardSize == 10) {
+                if (lastPosition + 1 == totalCount) {
                     // 네트워크 통해서 데이터를 받아오고, 화면에 표시!
                     page +=1;
                     addChatNetworkData();
@@ -178,15 +201,12 @@ public class PartyFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), PartyAddActivity.class);
                 intent.putExtra("user",(Serializable) user);
-                startActivity(intent);
+                launcher.launch(intent);
 
             }
         });
 
         return view;
-
-
-
     }
 
     private void getChatNetworkData() {
