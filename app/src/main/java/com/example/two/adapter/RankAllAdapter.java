@@ -58,21 +58,19 @@ public class RankAllAdapter extends RecyclerView.Adapter<RankAllAdapter.ViewHold
 
         String rank = String.valueOf(position+1);
 
-        if ( position == 0){
+
+        Log.i("position 1", String.valueOf(position));
+
+        if (position == 0 || position == 1 || position == 2) {
             holder.txtRank.setText(rank);
             holder.txtRank.setTextSize(25);
-            holder.txtRank.setTextColor( Color.parseColor("#FF0000"));
-        }else if ( position == 1){
+            holder.txtRank.setTextColor(Color.parseColor("#FF0000"));
+        } else {
             holder.txtRank.setText(rank);
-            holder.txtRank.setTextSize(25);
-            holder.txtRank.setTextColor( Color.parseColor("#FF0000"));
-        }else if ( position == 2){
-            holder.txtRank.setText(rank);
-            holder.txtRank.setTextSize(25);
-            holder.txtRank.setTextColor( Color.parseColor("#FF0000"));
-        }else {
-            holder.txtRank.setText(rank);
+            holder.txtRank.setTextSize(18);
+            holder.txtRank.setTextColor(Color.parseColor("#FFFFFF"));
         }
+
 
 
 
@@ -106,6 +104,8 @@ public class RankAllAdapter extends RecyclerView.Adapter<RankAllAdapter.ViewHold
             textView7 = itemView.findViewById(R.id.textView7);
             textView46 = itemView.findViewById(R.id.textView46);
             txtRank = itemView.findViewById(R.id.txtRank);
+
+
 
 
         }

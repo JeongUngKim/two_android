@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="#303030"
             android:divider="#ffffff"
             android:dividerHeight="0dp" />
 
@@ -46,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:backgroundTint="#4368F1"
+                android:backgroundTint="#F4DE1D"
                 android:onClick="clickSend"
                 android:text="send" />
         </LinearLayout>

@@ -30,13 +30,15 @@
         android:maxWidth="250dp"
         android:background="@drawable/othermsgbox"
         android:textColor="#333333"/>
+
     <TextView
         android:id="@+id/txtTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="13:35"
-        android:textSize="12sp"
-        android:layout_toRightOf="@+id/txtMsg"
+        android:layout_alignBottom="@id/txtMsg"
         android:layout_marginLeft="8dp"
-        android:layout_alignBottom="@id/txtMsg"/>
+        android:layout_toRightOf="@+id/txtMsg"
+        android:text="13:35"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp" />
 </RelativeLayout>

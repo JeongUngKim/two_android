@@ -18,9 +18,11 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.two.Api.LoginApi;
 import com.example.two.Api.NetworkClient2;
 import com.example.two.Api.RegisterApi;
 import com.example.two.Api.UserApi;
@@ -69,6 +71,8 @@ public class UserUpdateActivity extends AppCompatActivity {
     Boolean nicknamecheck = false;
     String AccessToken;
 
+    ImageView imgLogout;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -84,6 +88,7 @@ public class UserUpdateActivity extends AppCompatActivity {
         btnDelete = findViewById(R.id.btnDelete);
         btnSave = findViewById(R.id.btnSave);
         btnCheck = findViewById(R.id.btnCheck);
+        imgLogout = findViewById(R.id.imgLogout);
 
         String profile = getIntent().getStringExtra("profile");
         userEmail = getIntent().getStringExtra("email");
@@ -101,6 +106,13 @@ public class UserUpdateActivity extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
                 startActivityForResult(intent,0);
+            }
+        });
+
+        imgLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getLogout();
             }
         });
 
@@ -412,6 +424,31 @@ public class UserUpdateActivity extends AppCompatActivity {
 
         AlertDialog ad = builder.create();
         ad.show();
+    }
+
+    public void getLogout(){
+        Retrofit retrofit = NetworkClient2.getRetrofitClient(UserUpdateActivity.this);
+        LoginApi api = retrofit.create(LoginApi.class);
+
+        Call<UserRes> call = api.Logout("Bearer "+AccessToken);
+        call.enqueue(new Callback<UserRes>() {
+            @Override
+            public void onResponse(Call<UserRes> call, Response<UserRes> response) {
+
+                SharedPreferences sp = (UserUpdateActivity.this).getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putString("AccessToken",null);
+                editor.apply();
+                Intent intent = new Intent(UserUpdateActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<UserRes> call, Throwable t) {
+
+            }
+        });
     }
 
 }
