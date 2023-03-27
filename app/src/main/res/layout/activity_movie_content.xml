@@ -75,6 +75,14 @@
                         android:maxLength="3"
                         android:text="평점"
                         android:textColor="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/txtProvider"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="회사"
+                        android:textColor="@color/white" />
                 </LinearLayout>
 
             </LinearLayout>

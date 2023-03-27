@@ -2,6 +2,7 @@ package com.example.two.Api;
 
 import com.example.two.model.ActorList;
 import com.example.two.model.DetailList;
+import com.example.two.model.providerList;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -18,4 +19,9 @@ public interface DetailApi {
     Call<ActorList> getActor(@Path("movie_id") int Id,
                              @Query("api_key") String keys,
                              @Query("language")String language);
+
+    @GET("movie/{movie_id}/watch/providers")
+    Call<providerList> getProvier(@Path("movie_id") int Id,
+                                  @Query("api_key") String keys,
+                                  @Query("language")String language);
 }
