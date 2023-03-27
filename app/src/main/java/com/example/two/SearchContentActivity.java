@@ -1,5 +1,6 @@
 package com.example.two;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -67,6 +68,8 @@ public class SearchContentActivity extends AppCompatActivity {
     ReviewAdapter adapter;
 
     ArrayList<reView> reViewArrayList = new ArrayList<>();
+
+    int page = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +87,30 @@ public class SearchContentActivity extends AppCompatActivity {
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(SearchContentActivity.this));
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                // 맨 마지막 데이터가 화면에 보이면!!!!
+                // 네트워크 통해서 데이터를 추가로 받아와라!!
+                int lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
+                int totalCount = recyclerView.getAdapter().getItemCount();
+
+                // 스크롤을 데이터 맨 끝까지 한 상태.
+                if (lastPosition + 1 == totalCount) {
+                    // 네트워크 통해서 데이터를 받아오고, 화면에 표시!
+
+                    addgetReview(Id);
+
+                }
+            }
+        });
 
         Id = getIntent().getIntExtra("Id",0);
         title =getIntent().getStringExtra("title");
@@ -228,6 +255,35 @@ public class SearchContentActivity extends AppCompatActivity {
                 adapter = new ReviewAdapter(SearchContentActivity.this,reViewArrayList);
 
                 recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<reViewList> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void addgetReview(int id){
+        Retrofit retrofit = NetworkClient2.getRetrofitClient(SearchContentActivity.this);
+
+        ReviewApi api = retrofit.create(ReviewApi.class);
+
+        Call<reViewList> call = api.getReview(Id,page+1);
+
+        call.enqueue(new Callback<reViewList>() {
+            @Override
+            public void onResponse(Call<reViewList> call, Response<reViewList> response) {
+
+
+
+                reViewArrayList.addAll(response.body().getContentReviewList());
+
+                adapter = new ReviewAdapter(SearchContentActivity.this,reViewArrayList);
+
+                recyclerView.setAdapter(adapter);
+
+                page=page+1;
             }
 
             @Override

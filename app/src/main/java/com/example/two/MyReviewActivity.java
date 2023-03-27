@@ -1,5 +1,6 @@
 package com.example.two;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,6 +37,8 @@ public class MyReviewActivity extends AppCompatActivity {
 
     ReviewAdapter adapter;
 
+    int page=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +47,32 @@ public class MyReviewActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(MyReviewActivity.this));
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                // 맨 마지막 데이터가 화면에 보이면!!!!
+                // 네트워크 통해서 데이터를 추가로 받아와라!!
+                int lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
+                int totalCount = recyclerView.getAdapter().getItemCount();
+
+                // 스크롤을 데이터 맨 끝까지 한 상태.
+                if (lastPosition + 1 == totalCount) {
+                    // 네트워크 통해서 데이터를 받아오고, 화면에 표시!
+
+                    addgetMyreview();
+
+                }
+            }
+        });
+
         getMyreview();
 
 
@@ -75,6 +104,38 @@ public class MyReviewActivity extends AppCompatActivity {
                 adapter = new ReviewAdapter(MyReviewActivity.this,reViewArrayList);
 
                 recyclerView.setAdapter(adapter);
+
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<MyReviewList> call, Throwable t) {
+                Log.i("원인", String.valueOf(t));
+            }
+        });
+    }
+
+    public void addgetMyreview(){
+        Retrofit retrofit = NetworkClient2.getRetrofitClient(MyReviewActivity.this);
+
+        ReviewApi api = retrofit.create(ReviewApi.class);
+
+        SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
+        token = sp.getString("AccessToken","");
+        Call<MyReviewList> call = api.myReview("Bearer "+token,page+1);
+
+        call.enqueue(new Callback<MyReviewList>() {
+            @Override
+            public void onResponse(Call<MyReviewList> call, Response<MyReviewList> response) {
+
+
+
+                reViewArrayList.addAll(response.body().getReviewList());
+
+                adapter = new ReviewAdapter(MyReviewActivity.this,reViewArrayList);
+
+                recyclerView.setAdapter(adapter);
+                page=page+1;
 
                 adapter.notifyDataSetChanged();
             }
