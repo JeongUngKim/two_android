@@ -40,6 +40,7 @@ import com.example.two.LoginActivity;
 import com.example.two.MainActivity;
 import com.example.two.MyReviewActivity;
 import com.example.two.R;
+import com.example.two.ReviewUpdateActivity;
 import com.example.two.UseOTTActivity;
 import com.example.two.UserUpdateActivity;
 import com.example.two.adapter.MyAdapter;
@@ -184,6 +185,13 @@ public class MyFragment extends Fragment {
             }
         });
 
+        cvMyReview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MyReviewActivity.class);
+                startActivity(intent);
+            }
+        });
         recyclerView = view.findViewById(R.id.recyclerView);
         getMyList();
         recyclerView.setHasFixedSize(true);
@@ -215,6 +223,7 @@ public class MyFragment extends Fragment {
                 }
             }
         });
+
 
 
 

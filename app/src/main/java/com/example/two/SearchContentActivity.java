@@ -1,6 +1,8 @@
 package com.example.two;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,9 +21,15 @@ import com.bumptech.glide.Glide;
 import com.example.two.Api.ChatApi;
 import com.example.two.Api.ContentApi;
 import com.example.two.Api.NetworkClient2;
+import com.example.two.Api.ReviewApi;
+import com.example.two.adapter.ReviewAdapter;
 import com.example.two.config.Config;
 import com.example.two.model.ChatRoomList;
 import com.example.two.model.Res;
+import com.example.two.model.reView;
+import com.example.two.model.reViewList;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -52,8 +60,13 @@ public class SearchContentActivity extends AppCompatActivity {
 
     FrameLayout frame1;
 
+    RecyclerView recyclerView;
+
     int count=0;
 
+    ReviewAdapter adapter;
+
+    ArrayList<reView> reViewArrayList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +80,10 @@ public class SearchContentActivity extends AppCompatActivity {
         btnChoice = findViewById(R.id.btnChoice);
         btnReview = findViewById(R.id.btnReview);
         frame1= findViewById(R.id.frame1);
+        recyclerView = findViewById(R.id.recyclerView);
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(SearchContentActivity.this));
 
         Id = getIntent().getIntExtra("Id",0);
         title =getIntent().getStringExtra("title");
@@ -76,6 +93,7 @@ public class SearchContentActivity extends AppCompatActivity {
         imgurl = getIntent().getStringExtra("ImgUrl");
         gerne = getIntent().getStringExtra("genre");
 
+        getReview(Id);
         txtTitle.setText(title);
         txtDate.setText(date);
         txtContent.setText(content);
@@ -190,6 +208,33 @@ public class SearchContentActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public void getReview(int id){
+        Retrofit retrofit = NetworkClient2.getRetrofitClient(SearchContentActivity.this);
+
+        ReviewApi api = retrofit.create(ReviewApi.class);
+
+        Call<reViewList> call = api.getReview(Id,0);
+
+        call.enqueue(new Callback<reViewList>() {
+            @Override
+            public void onResponse(Call<reViewList> call, Response<reViewList> response) {
+
+                reViewArrayList.clear();
+
+                reViewArrayList.addAll(response.body().getContentReviewList());
+
+                adapter = new ReviewAdapter(SearchContentActivity.this,reViewArrayList);
+
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<reViewList> call, Throwable t) {
+
+            }
+        });
     }
 
 
