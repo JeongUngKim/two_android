@@ -12,14 +12,15 @@
         android:src="@mipmap/ic_launcher"
         android:layout_alignParentRight="true"
         tools:ignore="MissingClass" />
+
     <TextView
         android:id="@+id/txtName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="name"
-        android:textColor="#333333"
+        android:layout_marginRight="16dp"
         android:layout_toLeftOf="@+id/imgProfile"
-        android:layout_marginRight="16dp"/>
+        android:text="name"
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/txtMsg"
