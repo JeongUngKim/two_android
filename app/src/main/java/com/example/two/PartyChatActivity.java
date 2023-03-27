@@ -53,9 +53,10 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import kr.co.bootpay.android.*;
+
+import kr.co.bootpay.android.Bootpay;
+import kr.co.bootpay.android.BootpayAnalytics;
 import kr.co.bootpay.android.events.BootpayEventListener;
-import kr.co.bootpay.android.models.BootExtra;
 import kr.co.bootpay.android.models.BootItem;
 import kr.co.bootpay.android.models.BootUser;
 import kr.co.bootpay.android.models.Payload;

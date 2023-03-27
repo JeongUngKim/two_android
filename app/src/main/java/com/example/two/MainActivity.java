@@ -40,6 +40,7 @@ import com.example.two.fragment.HomeFragment;
 import com.example.two.fragment.MyFragment;
 import com.example.two.fragment.PartyFragment;
 import com.example.two.fragment.SearchFragment;
+import com.example.two.model.Chat;
 import com.example.two.model.Movie;
 import com.example.two.model.MovieList;
 import com.example.two.model.MovieRank;
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    BottomNavigationView navigationView;
+    public BottomNavigationView navigationView;
     Fragment homeFragment;
     Fragment communityFragment;
     Fragment partyFragment;
@@ -71,15 +72,14 @@ public class MainActivity extends AppCompatActivity {
     String AccessToken;
     ArrayList<User> userArrayList = new ArrayList<>();
     User user;
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getUserData();
-
         navigationView = findViewById(R.id.bottomNavigationView);
+        navigationView.setSelectedItemId(R.id.homeFragment);
         navigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -139,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getUserData(){
+
         Retrofit retrofit = NetworkClient2.getRetrofitClient(getApplicationContext());
 
         UserApi api = retrofit.create(UserApi.class);
