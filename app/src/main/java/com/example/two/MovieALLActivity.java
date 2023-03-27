@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.two.Api.NetworkClient2;
@@ -29,6 +31,8 @@ import retrofit2.Retrofit;
 public class MovieALLActivity extends AppCompatActivity {
     RecyclerView recyclerView;
 
+    ImageView imageView9;
+
     SeachAdapter adapter;
 
     private Parcelable recyclerViewState;
@@ -40,6 +44,8 @@ public class MovieALLActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_all);
+
+        imageView9 = findViewById(R.id.imageView9);
         recyclerView = findViewById(R.id.recyclerView);
 
         recyclerView.setHasFixedSize(true);
@@ -49,6 +55,16 @@ public class MovieALLActivity extends AppCompatActivity {
         Keyword=getIntent().getStringExtra("keyword");
         Log.i("STRING",Keyword);
         getNetworkSearchMovieData(Keyword);
+
+        // 백 이미지 처리
+        imageView9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                setResult(100,intent);
+                finish();
+            }
+        });
 
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

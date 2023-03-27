@@ -112,6 +112,7 @@
                         android:layout_height="30sp"
                         android:layout_gravity="center"
                         android:layout_marginRight="10dp"
+                        android:visibility="gone"
                         app:srcCompat="@drawable/baseline_favorite_24" />
 
                     <ImageView
@@ -120,6 +121,7 @@
                         android:layout_height="30sp"
                         android:layout_gravity="center"
                         android:scaleType="centerCrop"
+                        android:visibility="gone"
                         app:srcCompat="@drawable/chat" />
                 </LinearLayout>
             </LinearLayout>

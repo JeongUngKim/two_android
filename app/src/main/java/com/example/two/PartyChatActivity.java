@@ -153,15 +153,19 @@ public class PartyChatActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         firebaseDatabase= firebaseDatabase.getInstance();
+        // 채팅 메세지 저장
         chatRef = firebaseDatabase.getReference("chatroom"+"/"+partyBoardId);
         chatRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                // 메세지 아이템 추가
                 MessageItem messageItem= snapshot.getValue(MessageItem.class);
                 messageItems.add(messageItem);
+                // 어댑터 데이터 다시 받아오기
                 adapter.notifyDataSetChanged();
                 listView.setSelection(messageItems.size()-1); //리스트뷰의 마지막 위치로 스크롤 위치 이동
 
+                // 채팅 메시지를 작성한 사용자의 닉네임, 프로필 사진 URL, 이메일 정보를 HashMap 객체에 저장
                 HashMap<String,String> data = new HashMap<>();
                 data.put("nickname",messageItem.getNickname());
                 data.put("profileUrl",messageItem.getProfileUrl());

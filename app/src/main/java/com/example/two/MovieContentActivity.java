@@ -1,6 +1,7 @@
 package com.example.two;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -18,6 +19,7 @@ import com.example.two.Api.DetailApi;
 import com.example.two.Api.NetworkClient1;
 import com.example.two.config.Config;
 import com.example.two.Api.DetailApi;
+import com.example.two.fragment.HomeFragment;
 import com.example.two.model.Actor;
 import com.example.two.model.ActorList;
 import com.example.two.model.DetailList;
@@ -39,7 +41,11 @@ import retrofit2.Retrofit;
 
 public class MovieContentActivity extends AppCompatActivity {
 
+    HomeFragment homeFragment = new HomeFragment();
+
     ImageView posterView;
+
+    ImageView imgback;
 
     TextView txtTitle;
     TextView txtContent;
@@ -85,6 +91,7 @@ public class MovieContentActivity extends AppCompatActivity {
         circle2 = findViewById(R.id.circle2);
         circle3 = findViewById(R.id.circle3);
         circle4 = findViewById(R.id.circle4);
+        imgback = findViewById(R.id.imgback);
 
         Intent intent = getIntent();
         Id = intent.getIntExtra("id",0);
@@ -93,6 +100,16 @@ public class MovieContentActivity extends AppCompatActivity {
         getDetailActor();
         getmoviePovider();
 
+
+        // 백 이미지 처리
+        imgback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                setResult(100,intent);
+                finish();
+            }
+        });
 
         // 찜했어요 버튼 클릭 처리
         btnChoice.setOnClickListener(new View.OnClickListener() {
