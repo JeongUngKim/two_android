@@ -52,7 +52,7 @@ public class TvALLActivity extends AppCompatActivity {
         Log.i("STRING",Keyword);
         getNetworkSearchTvData(Keyword);
 
-        // 백 이미지 처리 
+        // 백 이미지 처리
         imageView9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
