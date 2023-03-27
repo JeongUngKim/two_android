@@ -21,8 +21,15 @@ import com.example.two.Api.DetailApi;
 import com.example.two.model.Actor;
 import com.example.two.model.ActorList;
 import com.example.two.model.DetailList;
+import com.example.two.model.proVider;
+import com.example.two.model.providerList;
+import com.example.two.model.reGion;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -38,6 +45,8 @@ public class MovieContentActivity extends AppCompatActivity {
     TextView txtContent;
     TextView txtDate;
     TextView txtRate;
+
+    TextView txtProvider;
 
     ImageButton btnChoice;
     ImageButton btnReview;
@@ -69,6 +78,7 @@ public class MovieContentActivity extends AppCompatActivity {
         txtContent = findViewById(R.id.txtContent);
         txtDate = findViewById(R.id.txtDate);
         txtRate = findViewById(R.id.txtRate);
+        txtProvider = findViewById(R.id.txtProvider);
         btnChoice = findViewById(R.id.btnChoice);
         btnReview = findViewById(R.id.btnReview);
         circle1 = findViewById(R.id.circle1);
@@ -81,6 +91,7 @@ public class MovieContentActivity extends AppCompatActivity {
         Log.i("ID",String.valueOf(Id));
         getDetail();
         getDetailActor();
+        getmoviePovider();
 
 
         // 찜했어요 버튼 클릭 처리
@@ -220,5 +231,45 @@ public class MovieContentActivity extends AppCompatActivity {
 
         });
 
+    }
+
+    private void getmoviePovider() {
+        Retrofit retrofit = NetworkClient1.getRetrofitClient(MovieContentActivity.this);
+
+        DetailApi api = retrofit.create(DetailApi.class);
+
+        Log.i("AAA", api.toString());
+
+        Call<providerList> call = api.getProvier(Id,Config.key,language);
+
+        call.enqueue(new Callback<providerList>() {
+            @Override
+            public void onResponse(Call<providerList> call, Response<providerList> response) {
+
+                if (response.isSuccessful()) {
+                    // getNetworkData는 항상처음에 데이터를 가져오는 동작 이므로
+                    // 초기화 코드가 필요
+
+
+
+                        txtProvider.setText("애플 티비");
+
+
+
+
+                } else {
+                    Toast.makeText(MovieContentActivity.this, "문제가 있습니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<providerList> call, Throwable t) {
+                Log.i("SIBA", String.valueOf(t));
+
+            }
+
+
+        });
     }
 }
