@@ -96,7 +96,9 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="40dp"
                 android:background="@color/white"
-                android:backgroundTint="#C6FFFFFF" />
+                android:backgroundTint="#C6FFFFFF"
+                android:numStars="5"
+                android:max="5"/>
 
             <EditText
                 android:id="@+id/editReview"
