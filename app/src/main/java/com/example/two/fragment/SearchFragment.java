@@ -183,6 +183,9 @@ public class SearchFragment extends Fragment {
         btnIntoMovie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if ( Keyword == null ) {
+                    return;
+                }
                 Intent intent = new Intent(getActivity(), MovieALLActivity.class);
                 intent.putExtra("keyword",Keyword);
                 startActivity(intent);
@@ -192,6 +195,9 @@ public class SearchFragment extends Fragment {
         btnIntoTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if ( Keyword == null ) {
+                    return;
+                }
                 Intent intent = new Intent(getActivity(), TvALLActivity.class);
                 intent.putExtra("keyword",Keyword);
                 startActivity(intent);
