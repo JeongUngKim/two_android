@@ -224,17 +224,6 @@ public class MyFragment extends Fragment {
             }
         });
 
-
-
-
-
-
-
-
-
-        // 메인 액티비티 유저 데이터 가져오는 메서드 호출
-        ((MainActivity) getActivity()).getUserData();
-
         // 쉐어드 객체 생성
         SharedPreferences sp = this.getActivity().getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
 
@@ -373,5 +362,6 @@ public class MyFragment extends Fragment {
         });
     }
 
-
+    //        // 메인 액티비티 유저 데이터 가져오는 메서드 호출
+//        ((MainActivity) getActivity()).getUserData();
 }
