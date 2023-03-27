@@ -224,6 +224,9 @@ public class MyFragment extends Fragment {
             }
         });
 
+
+
+
         // 쉐어드 객체 생성
         SharedPreferences sp = this.getActivity().getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
 
