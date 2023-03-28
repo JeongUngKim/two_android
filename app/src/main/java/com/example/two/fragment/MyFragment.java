@@ -31,6 +31,7 @@ import com.bumptech.glide.Glide;
 import com.example.two.Api.ContentApi;
 import com.example.two.Api.NetworkClient2;
 import com.example.two.ChoiceActivity;
+import com.example.two.MyReviewActivity;
 import com.example.two.R;
 import com.example.two.UserUpdateActivity;
 import com.example.two.adapter.MyAdapter;
@@ -167,7 +168,13 @@ public class MyFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
+        cvMyReview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MyReviewActivity.class);
+                startActivity(intent);
+            }
+        });
         recyclerView = view.findViewById(R.id.recyclerView);
         getMyList();
         recyclerView.setHasFixedSize(true);

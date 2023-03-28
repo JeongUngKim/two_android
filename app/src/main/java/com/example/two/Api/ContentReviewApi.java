@@ -3,6 +3,7 @@ package com.example.two.Api;
 import com.example.two.model.ContentReview;
 import com.example.two.model.ContentReviewRes;
 import com.example.two.model.reView;
+import com.example.two.model.reViewList;
 
 import java.util.Map;
 
@@ -31,5 +32,8 @@ public interface ContentReviewApi {
     Call<reView> DeleteReview(@Header("Authorization") String token,
                               @Path("contentId") int Id,
                               @Path("contentReviewId") int reviewId);
+    @GET("content/review/me")
+    Call<reView> myReview(@Header("Authorization") String token,
+                                @Query("page") int page);
 
 }
