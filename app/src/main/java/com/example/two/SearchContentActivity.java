@@ -373,7 +373,7 @@ public class SearchContentActivity extends AppCompatActivity {
                     contentReviewArrayList.addAll(contentReviewList);
                     contentReviewAdapter = new ContentReviewAdapter(SearchContentActivity.this,contentReviewArrayList,user);
                     ReviewRecyclerView.setAdapter(contentReviewAdapter);
-                    contentReviewAdapter.notifyDataSetChanged();
+
                     }
                 }
             }
@@ -395,8 +395,7 @@ public class SearchContentActivity extends AppCompatActivity {
                     List<ContentReview> contentReviewList = response.body().getContentReviewList();
                     if ( contentReviewList != null) {
                         contentReviewArrayList.addAll(contentReviewList);
-
-
+                        contentReviewAdapter.notifyDataSetChanged();
                     }
                 }
             }
