@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,11 +20,9 @@ import com.bumptech.glide.Glide;
 import com.example.two.Api.ContentApi;
 import com.example.two.Api.NetworkClient2;
 import com.example.two.R;
-import com.example.two.SearchContentActivity;
 import com.example.two.config.Config;
 import com.example.two.model.Choice;
 import com.example.two.model.Res;
-import com.example.two.model.Seach;
 
 import java.util.ArrayList;
 

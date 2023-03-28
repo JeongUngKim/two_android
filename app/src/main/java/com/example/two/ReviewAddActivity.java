@@ -19,8 +19,10 @@ import com.bumptech.glide.Glide;
 import com.example.two.Api.NetworkClient2;
 import com.example.two.Api.ReviewApi;
 import com.example.two.config.Config;
+import com.example.two.model.ContentReview;
 import com.example.two.model.reView;
 
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -61,7 +63,7 @@ public class ReviewAddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_review_add);
 
         reviewPoster = findViewById(R.id.reviewPoster);
-        reviewTitle = findViewById(R.id.reviewTitle);
+        reviewTitle = findViewById(R.id.title);
         reviewInfo = findViewById(R.id.reviewInfo);
         btnSave = findViewById(R.id.btnSave);
         editReview= findViewById(R.id.editReview);
@@ -86,7 +88,7 @@ public class ReviewAddActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 makeUserReView();
-                finish();
+
             }
         });
     }
@@ -128,9 +130,14 @@ public class ReviewAddActivity extends AppCompatActivity {
         call.enqueue(new Callback<reView>() {
             @Override
             public void onResponse(Call<reView> call, Response<reView> response) {
-                if (response.isSuccessful()) {
+                if (response.code() == 200) {
 
-                    return;
+                    ContentReview contentReview = response.body().getContentReviewList().get(0);
+                    Log.i("정상적 작동 여부..",contentReview.getContent());
+                    Intent intent1 = new Intent();
+                    intent1.putExtra("contentReview",(Serializable) contentReview);
+                    setResult(100,intent1);
+                    finish();
 
 
 

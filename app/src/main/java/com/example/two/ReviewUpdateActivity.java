@@ -5,23 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.example.two.Api.ContentApi;
+import com.bumptech.glide.Glide;
+import com.example.two.Api.ContentReviewApi;
 import com.example.two.Api.NetworkClient2;
-import com.example.two.Api.ReviewApi;
 import com.example.two.config.Config;
-import com.example.two.model.Res;
+import com.example.two.model.ContentReview;
 import com.example.two.model.reView;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,128 +25,79 @@ import retrofit2.Retrofit;
 
 public class ReviewUpdateActivity extends AppCompatActivity {
 
-    TextView reviewTitle;
-    EditText editContent;
+    CircleImageView circleImageView;
 
-    Button btnSave;
-    Button btnDelete;
+    TextView textView;
 
-    RatingBar ratingBar4;
+    EditText editText;
 
-    int Id;
-    int contentId;
+    Button button;
 
-    int reviewId;
-    String title;
-    String content;
-
-    String reviewContent;
+    ContentReview contentReview;
 
     String token;
 
-    float rating;
-    float ratingscore;
+    int position;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_update);
 
-        reviewTitle = findViewById(R.id.reviewTitle);
-        editContent = findViewById(R.id.editContent);
-        btnSave = findViewById(R.id.btnSave);
-        btnDelete = findViewById(R.id.btnDelete);
-        ratingBar4 = findViewById(R.id.ratingBar4);
-        Id = getIntent().getIntExtra("Id",0);
-        contentId = getIntent().getIntExtra("contentId",0);
-        reviewId = getIntent().getIntExtra("reviewId",0);
-        Log.i("NUMBER",String.valueOf(reviewId));
-        title =getIntent().getStringExtra("title");
-        content = getIntent().getStringExtra("content");
-        rating = getIntent().getFloatExtra("rating",0);
+        circleImageView = findViewById(R.id.updateprofile);
+        textView = findViewById(R.id.txttitle);
+        editText = findViewById(R.id.editcontent);
+        button = findViewById(R.id.btnupdate);
 
-        reviewTitle.setText(title);
-        editContent.setText(content);
-        ratingBar4.setRating(rating);
-        ratingBar4.setOnRatingBarChangeListener(new ReviewUpdateActivity.Listener());
+        Intent intent = getIntent();
+        contentReview = (ContentReview) intent.getSerializableExtra("contentReview");
+        position = intent.getIntExtra("contentReviewPosition",0);
+        textView.setText(contentReview.getTitle());
+        editText.setText(contentReview.getContent());
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
+        Glide.with(ReviewUpdateActivity.this)
+                .load(contentReview.getProfileImgUrl())
+                .into(circleImageView);
+
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                reviewContent = editContent.getText().toString().trim();
-
-                reviewUpdate(reviewContent);
-
-                finish();
+                reviewUpdate();
             }
         });
 
-        btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                reviewDelete();
-
-                finish();
-            }
-        });
-
-
     }
 
-    class Listener implements RatingBar.OnRatingBarChangeListener
-    {
-        @Override
-        public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-            ratingBar4.setRating(rating);
-            ratingscore =rating;
-            Log.i("RANK", String.valueOf(rating));
+    public void reviewUpdate(){
 
-        }
-    }
+        int contentId = Integer.parseInt(contentReview.getContentId());
+        int reviewId = Integer.parseInt(contentReview.getContentReviewId());
 
-    public void reviewUpdate(String review){
+        String title = textView.getText().toString().trim();
+        String content = editText.getText().toString().trim();
 
-        Map<String, String> map = new LinkedHashMap<>();
-        map.put("title", title );
-        map.put("content", reviewContent);
-        map.put("userRating", String.valueOf(ratingscore));
+        contentReview.setTitle(title);
+        contentReview.setContent(content);
 
         SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
         token = sp.getString("AccessToken","");
 
         Retrofit retrofit = NetworkClient2.getRetrofitClient(ReviewUpdateActivity.this);
 
-        ReviewApi api = retrofit.create(ReviewApi.class);
+        ContentReviewApi api = retrofit.create(ContentReviewApi.class);
 
-        Call<reView> call =api.UpdateReview("Bearer "+token,contentId,reviewId,map);
-
-        call.enqueue(new Callback<reView>() {
-            @Override
-            public void onResponse(Call<reView> call, Response<reView> response) {
-                    return;
-            }
-
-            @Override
-            public void onFailure(Call<reView> call, Throwable t) {
-                    return;
-            }
-        });
-    }
-
-    public void reviewDelete(){
-
-        SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
-        token = sp.getString("AccessToken","");
-
-        Retrofit retrofit = NetworkClient2.getRetrofitClient(ReviewUpdateActivity.this);
-
-        ReviewApi api = retrofit.create(ReviewApi.class);
-
-        Call<reView> call =api.DeleteReview("Bearer "+token,contentId,reviewId);
+        Call<reView> call =api.UpdateReview("Bearer "+token,contentId,reviewId,contentReview);
 
         call.enqueue(new Callback<reView>() {
             @Override
             public void onResponse(Call<reView> call, Response<reView> response) {
-                return;
+
+                ContentReview contentReview = response.body().getContentReviewList().get(0);
+
+                Intent intent = new Intent();
+                intent.putExtra("contentReview",contentReview);
+                intent.putExtra("contentReviewPosition",position);
+                setResult(101,intent);
+                finish();
             }
 
             @Override
@@ -158,6 +105,5 @@ public class ReviewUpdateActivity extends AppCompatActivity {
                 return;
             }
         });
-
     }
 }

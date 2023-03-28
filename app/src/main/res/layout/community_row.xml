@@ -40,7 +40,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@drawable/baseline_person_outline_24" />
 
                 <TextView
                     android:id="@+id/profileNickname"
@@ -95,7 +95,7 @@
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
-                        tools:srcCompat="@tools:sample/avatars" />
+                        />
                 </androidx.cardview.widget.CardView>
 
                 <LinearLayout
@@ -112,7 +112,6 @@
                         android:layout_height="30sp"
                         android:layout_gravity="center"
                         android:layout_marginRight="10dp"
-                        android:visibility="gone"
                         app:srcCompat="@drawable/baseline_favorite_24" />
 
                     <ImageView
@@ -121,7 +120,6 @@
                         android:layout_height="30sp"
                         android:layout_gravity="center"
                         android:scaleType="centerCrop"
-                        android:visibility="gone"
                         app:srcCompat="@drawable/chat" />
                 </LinearLayout>
             </LinearLayout>

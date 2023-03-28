@@ -1,11 +1,8 @@
 package com.example.two.fragment;
 
-import static android.content.Context.MODE_PRIVATE;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResult;
@@ -13,35 +10,25 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.example.two.Api.NetworkClient1;
 import com.example.two.Api.NetworkClient2;
 import com.example.two.MainActivity;
 import com.example.two.PartyAddActivity;
 import com.example.two.R;
-import com.example.two.UserRegisterActivity;
 import com.example.two.adapter.ChatRoomAdapter;
-import com.example.two.adapter.MainAdapter;
 import com.example.two.Api.ChatApi;
-import com.example.two.config.Config;
-import com.example.two.Api.MovieApi;
 import com.example.two.model.Chat;
 import com.example.two.model.ChatRoomList;
-import com.example.two.model.Movie;
-import com.example.two.model.MovieList;
 import com.example.two.model.User;
 
 import java.io.Serializable;
@@ -75,7 +62,6 @@ public class PartyFragment extends Fragment {
 
     Chat chat;
 
-    public PartyFragment partyFragment = this;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -138,8 +124,11 @@ public class PartyFragment extends Fragment {
                         @Override
                         public void onActivityResult(ActivityResult result){
                             if(result.getResultCode() == 100){
-			                    Intent intent = result.getData();
-
+                                Intent intent = result.getData();
+                                chat = (Chat) intent.getSerializableExtra("chat");
+                                Log.i("여기서 ",chat.getTitle());
+                                chatArrayList.add(0,chat);
+                                adapter.notifyDataSetChanged();
                             }
                         }
                     });
