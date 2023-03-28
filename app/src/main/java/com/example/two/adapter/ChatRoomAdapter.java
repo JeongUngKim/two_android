@@ -63,10 +63,10 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            Chat chat = chatArrayList.get(position);
-            holder.partyName.setText(chat.getTitle());
-            holder.tag.setText(chat.getService());
-            Glide.with(context).load(chat.getProfileImgUrl()).into(holder.circleImageView);
+        Chat chat = chatArrayList.get(position);
+        holder.partyName.setText(chat.getTitle());
+        holder.tag.setText(chat.getService());
+        Glide.with(context).load(chat.getProfileImgUrl()).into(holder.circleImageView);
 
     }
 
@@ -123,6 +123,8 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
                     intent.putExtra("servicePassword",chat.getServicePassword());
                     intent.putExtra("userId",chat.getUserId());
                     intent.putExtra("finishedAt",chat.getFinishedAt());
+                    intent.putExtra("captainnickname",chat.getNickname());
+                    intent.putExtra("captainprofileImgUrl",chat.getProfileImgUrl());
                     context.startActivity(intent);
 
 
@@ -138,4 +140,3 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
 
 
 }
-

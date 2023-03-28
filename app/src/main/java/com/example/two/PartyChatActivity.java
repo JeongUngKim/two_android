@@ -121,12 +121,18 @@ public class PartyChatActivity extends AppCompatActivity {
         captainId = intent.getIntExtra("userId",0);
         Log.i("captain", String.valueOf(captainId));
         finishedAt = intent.getStringExtra("finishedAt");
+
+        HashMap<String,String> captaindata = new HashMap<>();
+        captaindata.put("nickname",intent.getStringExtra("captainnickname"));
+        captaindata.put("profileUrl",intent.getStringExtra("captainprofileImgUrl"));
+        captaindata.put("userEmail",captainEmail);
+        hash.add(captaindata);
+
         HashMap<String,String> data = new HashMap<>();
         data.put("nickname",user.getNickname());
         data.put("profileUrl",user.getProfileImgUrl());
         data.put("userEmail",user.getUserEmail());
         hash.add(data);
-
         //부트패이 초기화
         BootpayAnalytics.init(this, Config.access_key);
 
@@ -153,19 +159,15 @@ public class PartyChatActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         firebaseDatabase= firebaseDatabase.getInstance();
-        // 채팅 메세지 저장
         chatRef = firebaseDatabase.getReference("chatroom"+"/"+partyBoardId);
         chatRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                // 메세지 아이템 추가
                 MessageItem messageItem= snapshot.getValue(MessageItem.class);
                 messageItems.add(messageItem);
-                // 어댑터 데이터 다시 받아오기
                 adapter.notifyDataSetChanged();
                 listView.setSelection(messageItems.size()-1); //리스트뷰의 마지막 위치로 스크롤 위치 이동
 
-                // 채팅 메시지를 작성한 사용자의 닉네임, 프로필 사진 URL, 이메일 정보를 HashMap 객체에 저장
                 HashMap<String,String> data = new HashMap<>();
                 data.put("nickname",messageItem.getNickname());
                 data.put("profileUrl",messageItem.getProfileUrl());
@@ -260,7 +262,7 @@ public class PartyChatActivity extends AppCompatActivity {
         BootUser bootUser = new BootUser();
         bootUser.setUsername(user.getName());
         bootUser.setEmail(user.getUserEmail());
-       //아이템 정보
+        //아이템 정보
         BootItem bootItem = new BootItem();
         bootItem.setName(service);
         bootItem.setPrice(price);
@@ -268,13 +270,12 @@ public class PartyChatActivity extends AppCompatActivity {
 
         Payload payload = new Payload();
         payload.setApplicationId(Config.access_key);
-        payload.setOrderName("Two payment");
-        payload.setPg("다날");
-        payload.setMethod("카드수기");
         payload.setOrderName(bootItem.getName());
         payload.setPrice(bootItem.getPrice());
         payload.setUser(bootUser);
         payload.setOrderId(bootItem.getId());
+
+
         Bootpay.init(getSupportFragmentManager(),PartyChatActivity.this)
                 .setPayload(payload)
                 .setEventListener(new BootpayEventListener() {
@@ -391,9 +392,9 @@ public class PartyChatActivity extends AppCompatActivity {
             }
 
         }else {
-                btnfinish.setVisibility(View.VISIBLE);
-                btnPay.setVisibility(View.GONE);
-                btnId.setVisibility(View.GONE);
+            btnfinish.setVisibility(View.VISIBLE);
+            btnPay.setVisibility(View.GONE);
+            btnId.setVisibility(View.GONE);
         }
     }
 
