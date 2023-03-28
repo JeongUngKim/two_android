@@ -38,6 +38,7 @@ public class MovieContentActivity extends AppCompatActivity {
     TextView txtContent;
     TextView txtDate;
     TextView txtRate;
+    ImageView imgback;
 
     ImageButton btnChoice;
     ImageButton btnReview;
@@ -75,12 +76,22 @@ public class MovieContentActivity extends AppCompatActivity {
         circle2 = findViewById(R.id.circle2);
         circle3 = findViewById(R.id.circle3);
         circle4 = findViewById(R.id.circle4);
-
+        imgback = findViewById(R.id.imgback);
         Intent intent = getIntent();
         Id = intent.getIntExtra("id",0);
         Log.i("ID",String.valueOf(Id));
         getDetail();
         getDetailActor();
+
+        // 백 이미지 처리
+        imgback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                setResult(100,intent);
+                finish();
+            }
+        });
 
 
         // 찜했어요 버튼 클릭 처리
