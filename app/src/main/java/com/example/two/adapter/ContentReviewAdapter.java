@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.two.Api.ContentReviewApi;
 import com.example.two.Api.NetworkClient2;
+import com.example.two.MyReviewActivity;
 import com.example.two.R;
 import com.example.two.ReviewAddActivity;
 import com.example.two.ReviewUpdateActivity;
@@ -50,10 +51,15 @@ public class ContentReviewAdapter extends RecyclerView.Adapter<ContentReviewAdap
 
     ContentReview contentReview;
 
-    public ContentReviewAdapter(Context context , ArrayList<ContentReview> contentReviewArrayList, User user){
+    int activityNum;
+
+    public ContentReviewAdapter(Context context , ArrayList<ContentReview> contentReviewArrayList, User user,int activityNum){
         this.context = context;
         this.contentReviewArrayList = contentReviewArrayList;
         this.user = user;
+        this.activityNum = activityNum;
+        // 0 : SearchContentActivity
+        // 1 : MyReviewActivity
     }
 
     @NonNull
@@ -136,7 +142,11 @@ public class ContentReviewAdapter extends RecyclerView.Adapter<ContentReviewAdap
                                     Intent intent = new Intent(context, ReviewUpdateActivity.class);
                                     intent.putExtra("contentReview",(Serializable) contentReview);
                                     intent.putExtra("contentReviewPosition",index);
-                                    ((SearchContentActivity)context).launcher.launch(intent);
+                                    if(activityNum == 0) {
+                                        ((SearchContentActivity) context).launcher.launch(intent);
+                                    }else if (activityNum == 1){
+                                        ((MyReviewActivity)context).launcher.launch(intent);
+                                    }
                                 }else if(pos == 1){
                                     reviewDelete(Integer.parseInt(contentReview.getContentId()),
                                             Integer.parseInt(contentReview.getContentReviewId()),index);

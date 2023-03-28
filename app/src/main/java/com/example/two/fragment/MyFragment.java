@@ -33,6 +33,7 @@ import com.example.two.Api.NetworkClient2;
 import com.example.two.ChoiceActivity;
 import com.example.two.MyReviewActivity;
 import com.example.two.R;
+import com.example.two.UseOTTActivity;
 import com.example.two.UserUpdateActivity;
 import com.example.two.adapter.MyAdapter;
 import com.example.two.config.Config;
@@ -40,6 +41,7 @@ import com.example.two.model.ContentWatch;
 import com.example.two.model.ContentWatchList;
 import com.example.two.model.User;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -172,6 +174,15 @@ public class MyFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), MyReviewActivity.class);
+                intent.putExtra("user",(Serializable) user);
+                startActivity(intent);
+            }
+        });
+        cvUseOTT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), UseOTTActivity.class);
+                intent.putExtra("user",(Serializable) user);
                 startActivity(intent);
             }
         });

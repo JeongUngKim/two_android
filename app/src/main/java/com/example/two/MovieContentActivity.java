@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,7 +16,6 @@ import com.bumptech.glide.Glide;
 import com.example.two.Api.DetailApi;
 import com.example.two.Api.NetworkClient1;
 import com.example.two.config.Config;
-import com.example.two.Api.DetailApi;
 import com.example.two.model.Actor;
 import com.example.two.model.ActorList;
 import com.example.two.model.DetailList;
@@ -66,7 +64,7 @@ public class MovieContentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_movie_content);
 
         posterView = findViewById(R.id.posterView);
-        txtTitle = findViewById(R.id.txtTitle);
+        txtTitle = findViewById(R.id.txtOtt);
         txtContent = findViewById(R.id.txtContent);
         txtDate = findViewById(R.id.txtDate);
         txtRate = findViewById(R.id.txtRate);
