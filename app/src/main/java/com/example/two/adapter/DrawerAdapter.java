@@ -36,7 +36,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
         set = new ArrayList<>(hashdata);
         this.user = user;
         this.captainEmail = captainEmail;
-
+        Log.i("captain",captainEmail);
     }
     public void updatedata(HashSet<HashMap<String,String>> hashdata){
         set = new ArrayList<>(hashdata);
@@ -89,7 +89,13 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
                 }
             }
         }else{
-            holder.checkpay.setVisibility(View.GONE);
+            if(user.getUserEmail().equals(captainEmail)){
+                // 방장
+                holder.checkpay.setVisibility(View.VISIBLE);
+
+            }else {
+                holder.checkpay.setVisibility(View.GONE);
+            }
         }
     }
 

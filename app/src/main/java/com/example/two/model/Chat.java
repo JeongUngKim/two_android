@@ -3,24 +3,24 @@ package com.example.two.model;
 import java.io.Serializable;
 
 public class Chat implements Serializable {
-    private int partyBoardId;
+   private int partyBoardId;
 
-    private String service;
+   private String service;
 
-    private String title;
+   private String title;
 
-    private String createdAt;
+   private String createdAt;
 
-    private int userId;
+   private int userId;
 
-    private String serviceId;
+   private String serviceId;
 
-    private String servicePassword;
+   private String servicePassword;
 
-    private String finishedAt;
-    private String userEmail;
-    private String profileImgUrl;
-    private String nickname;
+   private String finishedAt;
+   private String userEmail;
+   private String profileImgUrl;
+   private String nickname;
 
     public String getNickname() {
         return nickname;

@@ -16,8 +16,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -77,14 +75,6 @@
                         android:maxLength="3"
                         android:text="평점"
                         android:textColor="#FFFFFF" />
-
-                    <TextView
-                        android:id="@+id/txtProvider"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="회사"
-                        android:textColor="@color/white" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -93,8 +83,7 @@
                 android:id="@+id/posterView"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/baseline_person_outline_24" />
+                android:scaleType="fitXY" />
 
         </LinearLayout>
 
@@ -170,7 +159,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:maxLines="3"
                 android:text="영화 줄거리"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />

@@ -1,4 +1,4 @@
-package com.example.two.fragment;
+package com.example.two.model;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -27,11 +27,6 @@ import com.example.two.MovieALLActivity;
 import com.example.two.R;
 import com.example.two.TvALLActivity;
 import com.example.two.adapter.SeachAdapter;
-import com.example.two.model.Seach;
-import com.example.two.model.SeachData;
-import com.example.two.model.SeachList;
-import com.example.two.model.SeachList2;
-import com.example.two.model.User;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -269,7 +264,7 @@ public class SearchFragment extends Fragment {
 
             @Override
             public void onFailure(Call<SeachList> call, Throwable t) {
-                Log.i("ERRER", String.valueOf(t));
+            Log.i("ERRER", String.valueOf(t));
 
             }
 

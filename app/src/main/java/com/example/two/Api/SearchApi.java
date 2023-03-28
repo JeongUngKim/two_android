@@ -21,7 +21,7 @@ public interface SearchApi {
 
     @POST("search")
     Call<SeachList2> getSeachTv(@Query("type") String type,
-                              @Body Map<String, String> map);
+                                @Body Map<String, String> map);
 
 //    @GET("search/tv")
 //    Call<SeachList> getSeachTv(@Query("api_key") String keys,

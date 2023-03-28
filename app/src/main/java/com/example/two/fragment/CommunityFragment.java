@@ -18,7 +18,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 
 import com.example.two.Api.CommunityApi;
 import com.example.two.Api.NetworkClient2;
@@ -26,13 +25,11 @@ import com.example.two.CommunityAddActivity;
 import com.example.two.MainActivity;
 import com.example.two.R;
 import com.example.two.adapter.CommunityAdapter;
-import com.example.two.model.Chat;
 import com.example.two.model.Community;
 import com.example.two.model.CommunityRes;
 import com.example.two.model.User;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -122,7 +119,11 @@ public class CommunityFragment extends Fragment {
                         @Override
                         public void onActivityResult(ActivityResult result){
                             if(result.getResultCode() == 101){
-
+                                Intent intent = result.getData();
+                                community = (Community) intent.getSerializableExtra("community");
+                                Log.i("정상작동?2",community.getNickname());
+                                communityList.add(0,community);
+                                communityAdapter.notifyDataSetChanged();
                             }
                         }
                     });
@@ -133,7 +134,7 @@ public class CommunityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_community, container, false);
         Bundle bundle = getArguments();
         if(bundle != null ){
-        user = bundle.getParcelable("user");}
+            user = bundle.getParcelable("user");}
         communityBtn = view.findViewById(R.id.communityBtn);
         communityRecyclerView = view.findViewById(R.id.communityRecyclerView);
         communityRecyclerView.setHasFixedSize(true);

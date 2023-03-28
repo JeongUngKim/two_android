@@ -8,8 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.two.Api.NetworkClient2;
@@ -18,6 +16,7 @@ import com.example.two.adapter.SeachAdapter;
 import com.example.two.model.Seach;
 import com.example.two.model.SeachList;
 import com.example.two.model.SeachList2;
+import com.example.two.model.User;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -30,37 +29,27 @@ import retrofit2.Retrofit;
 
 public class TvALLActivity extends AppCompatActivity {
     RecyclerView recyclerView;
-    ImageView imageView9;
 
     SeachAdapter adapter;
     ArrayList<Seach> seachArrayList2 = new ArrayList<>();
     String Keyword;
 
     int offset= 0;
+    User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tv_all);
-        imageView9 = findViewById(R.id.imageView9);
         recyclerView = findViewById(R.id.recyclerView);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(TvALLActivity.this));
 
         Intent intent = new Intent();
+        user = (User)getIntent().getSerializableExtra("user");
         Keyword=getIntent().getStringExtra("keyword");
         Log.i("STRING",Keyword);
         getNetworkSearchTvData(Keyword);
-
-        // 백 이미지 처리
-        imageView9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                setResult(100,intent);
-                finish();
-            }
-        });
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -132,7 +121,7 @@ public class TvALLActivity extends AppCompatActivity {
 
 
 
-                    adapter = new SeachAdapter(TvALLActivity.this,seachArrayList2);
+                    adapter = new SeachAdapter(TvALLActivity.this,seachArrayList2,user);
 
                     recyclerView.setAdapter(adapter);
 
@@ -200,7 +189,7 @@ public class TvALLActivity extends AppCompatActivity {
 
 
 
-                    adapter = new SeachAdapter(TvALLActivity.this,seachArrayList2);
+                    adapter = new SeachAdapter(TvALLActivity.this,seachArrayList2,user);
 
                     recyclerView.setAdapter(adapter);
 

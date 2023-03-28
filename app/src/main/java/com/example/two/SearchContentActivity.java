@@ -1,6 +1,9 @@
 package com.example.two;
 
-import androidx.annotation.NonNull;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,17 +24,25 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.two.Api.ChatApi;
 import com.example.two.Api.ContentApi;
+import com.example.two.Api.ContentReviewApi;
+import com.example.two.Api.DetailApi;
+import com.example.two.Api.NetworkClient1;
 import com.example.two.Api.NetworkClient2;
-import com.example.two.Api.ReviewApi;
-import com.example.two.adapter.ReviewAdapter;
+import com.example.two.adapter.ContentReviewAdapter;
 import com.example.two.config.Config;
+import com.example.two.model.Actor;
+import com.example.two.model.ActorList;
 import com.example.two.model.ChatRoomList;
+import com.example.two.model.Community;
+import com.example.two.model.ContentReview;
+import com.example.two.model.ContentReviewRes;
 import com.example.two.model.Res;
-import com.example.two.model.reView;
-import com.example.two.model.reViewList;
+import com.example.two.model.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -61,15 +72,51 @@ public class SearchContentActivity extends AppCompatActivity {
 
     FrameLayout frame1;
 
-    RecyclerView recyclerView;
-
     int count=0;
+    ArrayList<Actor> actorArrayList = new ArrayList<>();
 
-    ReviewAdapter adapter;
+    CircleImageView circle1;
 
-    ArrayList<reView> reViewArrayList = new ArrayList<>();
+    CircleImageView circle2;
+
+    CircleImageView circle3;
+
+    CircleImageView circle4;
+
+    String language = "ko-KR";
+    int tmdbcontentId;
+
+    RecyclerView ReviewRecyclerView;
 
     int page = 0;
+
+
+
+    ArrayList<ContentReview> contentReviewArrayList=new ArrayList<>();
+    ContentReviewAdapter contentReviewAdapter;
+    User user;
+    ContentReview contentReview;
+    public ActivityResultLauncher<Intent> launcher =
+            registerForActivityResult( new ActivityResultContracts.StartActivityForResult(),
+                    new ActivityResultCallback<ActivityResult>(){
+                        @Override
+                        public void onActivityResult(ActivityResult result){
+                            if(result.getResultCode() == 100){
+                                Intent intent = result.getData();
+                                contentReview =(ContentReview) intent.getSerializableExtra("contentReview");
+                                Log.i("asdasasd",contentReview.getContent());
+                                contentReviewArrayList.add(contentReview);
+                                contentReviewAdapter.notifyDataSetChanged();
+                            }else if(result.getResultCode() == 101){
+                                Intent intent = result.getData();
+                                contentReview =(ContentReview) intent.getSerializableExtra("contentReview");
+                                int posion = intent.getIntExtra("contentReviewPosition",0);
+                                contentReviewArrayList.remove(posion);
+                                contentReviewArrayList.add(posion,contentReview);
+                                contentReviewAdapter.notifyDataSetChanged();
+                            }
+                        }
+                    });
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,34 +130,17 @@ public class SearchContentActivity extends AppCompatActivity {
         btnChoice = findViewById(R.id.btnChoice);
         btnReview = findViewById(R.id.btnReview);
         frame1= findViewById(R.id.frame1);
-        recyclerView = findViewById(R.id.recyclerView);
 
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(SearchContentActivity.this));
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
+        ReviewRecyclerView = findViewById(R.id.reviewRecyclerview);
+        ReviewRecyclerView.setHasFixedSize(true);
+        ReviewRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
+        user = (User)getIntent().getSerializableExtra("user");
 
-                // 맨 마지막 데이터가 화면에 보이면!!!!
-                // 네트워크 통해서 데이터를 추가로 받아와라!!
-                int lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
-                int totalCount = recyclerView.getAdapter().getItemCount();
-
-                // 스크롤을 데이터 맨 끝까지 한 상태.
-                if (lastPosition + 1 == totalCount) {
-                    // 네트워크 통해서 데이터를 받아오고, 화면에 표시!
-
-                    addgetReview(Id);
-
-                }
-            }
-        });
+        circle1 = findViewById(R.id.circle1);
+        circle2 = findViewById(R.id.circle2);
+        circle3 = findViewById(R.id.circle3);
+        circle4 = findViewById(R.id.circle4);
 
         Id = getIntent().getIntExtra("Id",0);
         title =getIntent().getStringExtra("title");
@@ -119,8 +149,8 @@ public class SearchContentActivity extends AppCompatActivity {
         rating = getIntent().getStringExtra("rating");
         imgurl = getIntent().getStringExtra("ImgUrl");
         gerne = getIntent().getStringExtra("genre");
-
-        getReview(Id);
+        tmdbcontentId = getIntent().getIntExtra("tmdbcontentId",0);
+        getDetailActor();
         txtTitle.setText(title);
         txtDate.setText(date);
         txtContent.setText(content);
@@ -165,10 +195,11 @@ public class SearchContentActivity extends AppCompatActivity {
                 intent.putExtra("date",date);
                 intent.putExtra("imgUrl",imgurl);
                 intent.putExtra("genre",gerne);
-                startActivity(intent);
+                launcher.launch(intent);
             }
         });
 
+        getReviewData();
     }
 
     public void isLike(){
@@ -237,61 +268,100 @@ public class SearchContentActivity extends AppCompatActivity {
 
     }
 
-    public void getReview(int id){
-        Retrofit retrofit = NetworkClient2.getRetrofitClient(SearchContentActivity.this);
+    private void getDetailActor(){
 
-        ReviewApi api = retrofit.create(ReviewApi.class);
+        Retrofit retrofit = NetworkClient1.getRetrofitClient(SearchContentActivity.this);
 
-        Call<reViewList> call = api.getReview(Id,0);
+        DetailApi api = retrofit.create(DetailApi.class);
 
-        call.enqueue(new Callback<reViewList>() {
+        Log.i("AAA", api.toString());
+
+        Call<ActorList> call = api.getActor(tmdbcontentId,Config.key,language);
+
+        call.enqueue(new Callback<ActorList>() {
             @Override
-            public void onResponse(Call<reViewList> call, Response<reViewList> response) {
+            public void onResponse(Call<ActorList> call, Response<ActorList> response) {
 
-                reViewArrayList.clear();
+                if (response.isSuccessful()) {
+                    // getNetworkData는 항상처음에 데이터를 가져오는 동작 이므로
+                    // 초기화 코드가 필요
 
-                reViewArrayList.addAll(response.body().getContentReviewList());
+                    // 데이터를 받았으니 리사이클러 표시
 
-                adapter = new ReviewAdapter(SearchContentActivity.this,reViewArrayList);
+                    actorArrayList.addAll(response.body().getCast());
 
-                recyclerView.setAdapter(adapter);
+                    Actor actor1 = actorArrayList.get(0);
+                    Glide.with(SearchContentActivity.this)
+                            .load("https://image.tmdb.org/t/p/w45"+actor1.getProfile_path())
+                            .placeholder(R.drawable.baseline_person_outline_24)
+                            .into(circle1);
+
+                    Actor actor2 = actorArrayList.get(1);
+                    Glide.with(SearchContentActivity.this)
+                            .load("https://image.tmdb.org/t/p/w45"+actor2.getProfile_path())
+                            .placeholder(R.drawable.baseline_person_outline_24)
+                            .into(circle2);
+
+                    Actor actor3 = actorArrayList.get(2);
+                    Glide.with(SearchContentActivity.this)
+                            .load("https://image.tmdb.org/t/p/w45"+actor3.getProfile_path())
+                            .placeholder(R.drawable.baseline_person_outline_24)
+                            .into(circle3);
+
+                    Actor actor4 = actorArrayList.get(3);
+                    Glide.with(SearchContentActivity.this)
+                            .load("https://image.tmdb.org/t/p/w45"+actor4.getProfile_path())
+                            .placeholder(R.drawable.baseline_person_outline_24)
+                            .into(circle4);
+
+
+
+
+
+                    // 오프셋 처리하는 코드
+
+
+
+
+                } else {
+                    Toast.makeText(SearchContentActivity.this, "문제가 있습니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
             }
 
             @Override
-            public void onFailure(Call<reViewList> call, Throwable t) {
+            public void onFailure(Call<ActorList> call, Throwable t) {
+
+
+            }
+
+
+        });
+
+    }
+
+    public void getReviewData(){
+        Retrofit retrofit = NetworkClient2.getRetrofitClient(SearchContentActivity.this);
+        ContentReviewApi api = retrofit.create(ContentReviewApi.class);
+        Call<ContentReviewRes> call = api.getAllReview(Id,page);
+        call.enqueue(new Callback<ContentReviewRes>() {
+            @Override
+            public void onResponse(Call<ContentReviewRes> call, Response<ContentReviewRes> response) {
+                if(response.code()==200){
+                    List<ContentReview> contentReviewList = response.body().getContentReviewList();
+                    if ( contentReviewList != null) {
+                    contentReviewArrayList.addAll(contentReviewList);
+                    contentReviewAdapter = new ContentReviewAdapter(SearchContentActivity.this,contentReviewArrayList,user);
+                    ReviewRecyclerView.setAdapter(contentReviewAdapter);
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ContentReviewRes> call, Throwable t) {
 
             }
         });
     }
-
-    public void addgetReview(int id){
-        Retrofit retrofit = NetworkClient2.getRetrofitClient(SearchContentActivity.this);
-
-        ReviewApi api = retrofit.create(ReviewApi.class);
-
-        Call<reViewList> call = api.getReview(Id,page+1);
-
-        call.enqueue(new Callback<reViewList>() {
-            @Override
-            public void onResponse(Call<reViewList> call, Response<reViewList> response) {
-
-
-
-                reViewArrayList.addAll(response.body().getContentReviewList());
-
-                adapter = new ReviewAdapter(SearchContentActivity.this,reViewArrayList);
-
-                recyclerView.setAdapter(adapter);
-
-                page=page+1;
-            }
-
-            @Override
-            public void onFailure(Call<reViewList> call, Throwable t) {
-
-            }
-        });
-    }
-
-
 }

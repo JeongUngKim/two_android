@@ -19,7 +19,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/baseline_person_outline_24" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"

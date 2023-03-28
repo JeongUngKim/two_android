@@ -20,12 +20,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.two.Api.LoginApi;
 import com.example.two.Api.MovieApi;
 import com.example.two.Api.NetworkClient1;
 import com.example.two.Api.NetworkClient2;
-import com.example.two.LoginActivity;
-import com.example.two.MainActivity;
 import com.example.two.MovieContentActivity;
 import com.example.two.R;
 import com.example.two.RankALLActivity;
@@ -36,7 +33,6 @@ import com.example.two.model.MovieList;
 import com.example.two.model.MovieRank;
 import com.example.two.model.MovieRankList;
 import com.example.two.model.User;
-import com.example.two.model.UserRes;
 
 import java.util.ArrayList;
 
@@ -226,21 +222,18 @@ public class HomeFragment extends Fragment {
                     // 오프셋 처리하는 코드
                     Glide.with(getActivity())
                             .load(movierankArrayList.get(0).getImgUrl())
-                            .placeholder(R.drawable.baseline_person_outline_24)
                             .into(rankPoster1);
                     rankTitle1.setText(movierankArrayList.get(0).getTitle());
                     rankRate1.setText(movierankArrayList.get(0).getContentRating());
 
                     Glide.with(getActivity())
                             .load(movierankArrayList.get(1).getImgUrl())
-                            .placeholder(R.drawable.baseline_person_outline_24)
                             .into(rankPoster2);
                     rankTitle2.setText(movierankArrayList.get(1).getTitle());
                     rankRate2.setText(movierankArrayList.get(1).getContentRating());
 
                     Glide.with(getActivity())
                             .load(movierankArrayList.get(2).getImgUrl())
-                            .placeholder(R.drawable.baseline_person_outline_24)
                             .into(rankPoster3);
                     rankTitle3.setText(movierankArrayList.get(2).getTitle());
                     rankRate3.setText(movierankArrayList.get(2).getContentRating());
@@ -287,8 +280,8 @@ public class HomeFragment extends Fragment {
                     movieArrayList.addAll(response.body().getResults());
                     Log.i("정상적으로 실행은 하니?", String.valueOf(response.code()));
 
-                   movieArrayList.get(page);
-                   Log.i("page",String.valueOf(page));
+                    movieArrayList.get(page);
+                    Log.i("page",String.valueOf(page));
                     // 오프셋 처리하는 코드
 
 
@@ -360,7 +353,7 @@ public class HomeFragment extends Fragment {
         });
     }
 
-//    public void getLogout(){
+    //    public void getLogout(){
 //        Retrofit retrofit = NetworkClient2.getRetrofitClient(getActivity());
 //        LoginApi api = retrofit.create(LoginApi.class);
 //

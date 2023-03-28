@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
     tools:context=".TvALLActivity">
 
     <LinearLayout
@@ -27,7 +26,7 @@
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                app:srcCompat="@drawable/baseline_arrow_back_ios_24" />
+                app:srcCompat="@drawable/baseline_arrow_back_ios_new_24" />
 
             <TextView
                 android:id="@+id/textView45"
@@ -36,7 +35,6 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="TV 프로그램"
-                android:textColor="#FFFFFF"
                 android:textSize="25sp" />
 
         </LinearLayout>

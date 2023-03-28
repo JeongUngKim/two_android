@@ -46,7 +46,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
         Glide.with(homeFragment)
                 .load("https://image.tmdb.org/t/p/w342"+movie.getPoster_path())
-                .placeholder(R.drawable.baseline_person_outline_24)
                 .override(300,300)
                 .into(holder.imageView6);
 

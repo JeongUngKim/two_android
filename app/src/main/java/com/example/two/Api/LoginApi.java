@@ -31,5 +31,5 @@ public interface LoginApi {
 
     @POST("userGenre")
     Call<HashMap<String,String>> userGenre(@Header("Authorization") String token,
-                                            @Body HashMap<String,ArrayList<String>> genre);
+                                           @Body HashMap<String,ArrayList<String>> genre);
 }

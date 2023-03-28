@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.provider.OpenableColumns;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +22,7 @@ import com.example.two.Api.CommunityApi;
 import com.example.two.Api.NetworkClient2;
 import com.example.two.config.Config;
 import com.example.two.model.Community;
+import com.example.two.model.CommunityRes;
 import com.example.two.model.User;
 import com.google.android.gms.common.util.IOUtils;
 import com.squareup.picasso.Picasso;
@@ -31,6 +33,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -93,36 +96,41 @@ public class CommunityAddActivity extends AppCompatActivity {
         if ( communityImg != null ){
             RequestBody requestBody = RequestBody.create(communityImg, MediaType.parse("image/jpg"));
             MultipartBody.Part uploadImgFile = MultipartBody.Part.createFormData("photo", communityImg.getName(),requestBody);
-            Call<HashMap<String,String>> call = api.createCommunity("Bearer "+AccessToken,uploadImgFile,requestTitle,requestContent);
-            call.enqueue(new Callback<HashMap<String, String>>() {
+            Call<CommunityRes> call = api.createCommunity("Bearer "+AccessToken,uploadImgFile,requestTitle,requestContent);
+            call.enqueue(new Callback<CommunityRes>() {
                 @Override
-                public void onResponse(Call<HashMap<String, String>> call, Response<HashMap<String, String>> response) {
+                public void onResponse(Call<CommunityRes> call, Response<CommunityRes> response) {
                     if(response.code() == 200){
+                        List<Community> newdata = response.body().getCommunityList();
                         Intent intent = new Intent();
+                        intent.putExtra("community",newdata.get(0));
+                        Log.i("정상작동?1",newdata.get(0).getNickname());
                         setResult(101,intent);
                         finish();
                     }
                 }
 
                 @Override
-                public void onFailure(Call<HashMap<String, String>> call, Throwable t) {
+                public void onFailure(Call<CommunityRes> call, Throwable t) {
 
                 }
             });
         }else {
-            Call<HashMap<String, String>> call = api.createCommunityNoImage("Bearer "+AccessToken,requestTitle,requestContent);
-            call.enqueue(new Callback<HashMap<String, String>>() {
+            Call<CommunityRes> call = api.createCommunityNoImage("Bearer "+AccessToken,requestTitle,requestContent);
+            call.enqueue(new Callback<CommunityRes>() {
                 @Override
-                public void onResponse(Call<HashMap<String, String>> call, Response<HashMap<String, String>> response) {
+                public void onResponse(Call<CommunityRes> call, Response<CommunityRes> response) {
                     if(response.code() == 200 ){
+                        List<Community> newdata = response.body().getCommunityList();
                         Intent intent = new Intent();
+                        intent.putExtra("community",newdata.get(0));
                         setResult(101,intent);
                         finish();
                     }
                 }
 
                 @Override
-                public void onFailure(Call<HashMap<String, String>> call, Throwable t) {
+                public void onFailure(Call<CommunityRes> call, Throwable t) {
 
                 }
             });

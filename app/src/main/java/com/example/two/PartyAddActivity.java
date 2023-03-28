@@ -31,6 +31,7 @@ import com.example.two.config.Config;
 import com.example.two.fragment.PartyFragment;
 import com.example.two.model.Chat;
 import com.example.two.model.ChatRoomList;
+import com.example.two.model.PartyRes;
 import com.example.two.model.User;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -140,10 +141,7 @@ public class PartyAddActivity extends AppCompatActivity {
             public void onClick(View view) {
                 saveData();
 //                getPartyData();
-               Intent intent = new Intent();
 
-               setResult(100,intent);
-               finish();
             }
         });
 
@@ -174,16 +172,18 @@ public class PartyAddActivity extends AppCompatActivity {
         Log.i("AAA", api.toString());
         SharedPreferences sp = getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
         token = sp.getString("AccessToken","");
-        Call<ChatRoomList> call =api.makeChating("Bearer "+token,chat);
+        Call<PartyRes> call =api.makeChating("Bearer "+token,chat);
 
-        call.enqueue(new Callback<ChatRoomList>() {
+        call.enqueue(new Callback<PartyRes>() {
             @Override
-            public void onResponse(Call<ChatRoomList> call, Response<ChatRoomList> response) {
-                if (response.isSuccessful()) {
-
-                    return;
-
-
+            public void onResponse(Call<PartyRes> call, Response<PartyRes> response) {
+                if (response.code() == 200) {
+                    Chat addChat = response.body().getParty();
+                    Log.i("asdasd",addChat.getTitle());
+                    Intent intent = new Intent();
+                    intent.putExtra("chat",addChat);
+                    setResult(100,intent);
+                    finish();
 
                 } else {
                     Toast.makeText(PartyAddActivity.this, "문제가 있습니다.", Toast.LENGTH_SHORT).show();
@@ -192,7 +192,7 @@ public class PartyAddActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ChatRoomList> call, Throwable t) {
+            public void onFailure(Call<PartyRes> call, Throwable t) {
 
             }
         });

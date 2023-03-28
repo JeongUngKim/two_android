@@ -15,5 +15,9 @@
         <item>여자</item>
         <item>남자</item>
     </string-array>
+    <string-array name="ud">
+        <item>수정하기</item>
+        <item>삭제하기</item>
+    </string-array>
 
 </resources>

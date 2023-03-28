@@ -19,15 +19,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.two.Api.ContentApi;
 import com.example.two.Api.NetworkClient2;
-import com.example.two.MainActivity;
 import com.example.two.R;
 import com.example.two.SearchContentActivity;
 import com.example.two.config.Config;
-import com.example.two.fragment.MyFragment;
 import com.example.two.model.ContentWatch;
-import com.example.two.model.Movie;
 import com.example.two.model.Seach;
+import com.example.two.model.User;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -45,9 +44,12 @@ public class SeachAdapter extends RecyclerView.Adapter<SeachAdapter.ViewHolder> 
 
     int path;
 
-    public SeachAdapter(Context context, ArrayList<Seach> seachArrayList) {
+    User user;
+
+    public SeachAdapter(Context context, ArrayList<Seach> seachArrayList,User user) {
         this.context = context;
         this.seachArrayList = seachArrayList;
+        this.user = user;
     }
 
     @NonNull
@@ -115,6 +117,8 @@ public class SeachAdapter extends RecyclerView.Adapter<SeachAdapter.ViewHolder> 
                     intent.putExtra("year",seachArrayList.get(index).getCreatedYear());
                     intent.putExtra("rating",seachArrayList.get(index).getContentRating());
                     intent.putExtra("genre",seachArrayList.get(index).getGenre());
+                    intent.putExtra("tmdbcontentId",seachArrayList.get(index).getTmdbcontentId());
+                    intent.putExtra("user",(Serializable) user);
                     (context).startActivity(intent);
 
                     path = selectSearch.getId();

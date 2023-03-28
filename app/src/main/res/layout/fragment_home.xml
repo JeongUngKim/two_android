@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="#000000"
     tools:context=".fragment.HomeFragment"
-    android:id="@+id/framelayout"
     >
 
     <LinearLayout
@@ -96,8 +95,7 @@
                             <ImageView
                                 android:id="@+id/rankPoster1"
                                 android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                app:srcCompat="@drawable/baseline_person_outline_24" />
+                                android:layout_height="100dp" />
 
                             <TextView
                                 android:id="@+id/rankTitle1"
@@ -107,7 +105,6 @@
                                 android:layout_weight="1"
                                 android:ellipsize="end"
                                 android:maxLines="1"
-                                android:text="영화 제목"
                                 android:textColor="#FFFFFF"
                                 android:textSize="17sp"
                                 app:layout_constrainedWidth="true" />
@@ -125,7 +122,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:text="평점"
                                 android:textColor="#FFFFFF" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
@@ -143,8 +139,7 @@
                             <ImageView
                                 android:id="@+id/rankPoster2"
                                 android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                app:srcCompat="@drawable/baseline_person_outline_24" />
+                                android:layout_height="100dp" />
 
                             <TextView
                                 android:id="@+id/rankTitle2"
@@ -154,7 +149,6 @@
                                 android:layout_weight="1"
                                 android:ellipsize="end"
                                 android:maxLines="1"
-                                android:text="영화 제목"
                                 android:textColor="#FFFFFF"
                                 android:textSize="17sp"
                                 app:layout_constrainedWidth="true" />
@@ -172,7 +166,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:text="평점"
                                 android:textColor="#FFFFFF" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
@@ -191,8 +184,7 @@
                             <ImageView
                                 android:id="@+id/rankPoster3"
                                 android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                app:srcCompat="@drawable/baseline_person_outline_24" />
+                                android:layout_height="100dp" />
 
                             <TextView
                                 android:id="@+id/rankTitle3"
@@ -202,7 +194,6 @@
                                 android:layout_weight="1"
                                 android:ellipsize="end"
                                 android:maxLines="1"
-                                android:text="영화 제목"
                                 android:textColor="#FFFFFF"
                                 android:textSize="17sp"
                                 app:layout_constrainedWidth="true" />
@@ -220,7 +211,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:text="평점"
                                 android:textColor="#FFFFFF" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
