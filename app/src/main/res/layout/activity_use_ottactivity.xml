@@ -48,15 +48,11 @@
 
                 <TextView
                     android:id="@+id/textView8"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="TextView" />
+                    android:gravity="right"
+                    android:text="포인트 : 0" />
 
-                <Button
-                    android:id="@+id/button7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Button" />
             </LinearLayout>
 
             <TextView
@@ -65,12 +61,12 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="내가 방장"
-                android:textSize="15sp" />
+                android:textSize="16sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/capRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="250dp" />
 
             <TextView
                 android:id="@+id/textView20"
@@ -78,12 +74,12 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="내가 멤버"
-                android:textSize="15sp" />
+                android:textSize="16sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/memRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="250dp" />
         </LinearLayout>
 
     </RelativeLayout>
