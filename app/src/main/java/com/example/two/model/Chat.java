@@ -21,6 +21,16 @@ public class Chat implements Serializable {
    private String userEmail;
    private String profileImgUrl;
    private String nickname;
+   private int memberCnt;
+
+
+    public int getMemberCnt() {
+        return memberCnt;
+    }
+
+    public void setMemberCnt(int memberCnt) {
+        this.memberCnt = memberCnt;
+    }
 
     public String getNickname() {
         return nickname;

@@ -23,7 +23,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.two.Api.ChatApi;
 import com.example.two.Api.ContentApi;
 import com.example.two.Api.ContentReviewApi;
 import com.example.two.Api.DetailApi;
@@ -33,8 +32,6 @@ import com.example.two.adapter.ContentReviewAdapter;
 import com.example.two.config.Config;
 import com.example.two.model.Actor;
 import com.example.two.model.ActorList;
-import com.example.two.model.ChatRoomList;
-import com.example.two.model.Community;
 import com.example.two.model.ContentReview;
 import com.example.two.model.ContentReviewRes;
 import com.example.two.model.Res;
@@ -124,7 +121,7 @@ public class SearchContentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_content);
 
         posterView = findViewById(R.id.posterView);
-        txtTitle = findViewById(R.id.txtTitle);
+        txtTitle = findViewById(R.id.txtOtt);
         txtContent = findViewById(R.id.txtContent);
         txtDate = findViewById(R.id.txtDate);
         txtRate = findViewById(R.id.txtRate);
@@ -371,7 +368,7 @@ public class SearchContentActivity extends AppCompatActivity {
                     List<ContentReview> contentReviewList = response.body().getContentReviewList();
                     if ( contentReviewList != null) {
                     contentReviewArrayList.addAll(contentReviewList);
-                    contentReviewAdapter = new ContentReviewAdapter(SearchContentActivity.this,contentReviewArrayList,user);
+                    contentReviewAdapter = new ContentReviewAdapter(SearchContentActivity.this,contentReviewArrayList,user,0);
                     ReviewRecyclerView.setAdapter(contentReviewAdapter);
 
                     }
