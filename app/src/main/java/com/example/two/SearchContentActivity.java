@@ -4,6 +4,7 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -135,6 +136,22 @@ public class SearchContentActivity extends AppCompatActivity {
         ReviewRecyclerView.setHasFixedSize(true);
         ReviewRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        ReviewRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                int lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
+                int totalCount = recyclerView.getAdapter().getItemCount();
+                if (lastPosition + 1 == totalCount) {
+                    // 네트워크 통해서 데이터를 받아오고, 화면에 표시!
+                    page +=1;
+                    addReviewData();
+                }
+
+            }
+        });
+
         user = (User)getIntent().getSerializableExtra("user");
 
         circle1 = findViewById(R.id.circle1);
@@ -200,7 +217,10 @@ public class SearchContentActivity extends AppCompatActivity {
         });
 
         getReviewData();
+
     }
+
+
 
     public void isLike(){
         Retrofit retrofit = NetworkClient2.getRetrofitClient(SearchContentActivity.this);
@@ -354,6 +374,28 @@ public class SearchContentActivity extends AppCompatActivity {
                     contentReviewAdapter = new ContentReviewAdapter(SearchContentActivity.this,contentReviewArrayList,user);
                     ReviewRecyclerView.setAdapter(contentReviewAdapter);
 
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ContentReviewRes> call, Throwable t) {
+
+            }
+        });
+    }
+    private void addReviewData() {
+        Retrofit retrofit = NetworkClient2.getRetrofitClient(SearchContentActivity.this);
+        ContentReviewApi api = retrofit.create(ContentReviewApi.class);
+        Call<ContentReviewRes> call = api.getAllReview(Id,page);
+        call.enqueue(new Callback<ContentReviewRes>() {
+            @Override
+            public void onResponse(Call<ContentReviewRes> call, Response<ContentReviewRes> response) {
+                if(response.code()==200){
+                    List<ContentReview> contentReviewList = response.body().getContentReviewList();
+                    if ( contentReviewList != null) {
+                        contentReviewArrayList.addAll(contentReviewList);
+                        contentReviewAdapter.notifyDataSetChanged();
                     }
                 }
             }
