@@ -157,7 +157,7 @@ public class PartyChatActivity extends AppCompatActivity {
         btn = findViewById(R.id.btn);
         adapter = new ChatAdapter(messageItems,getLayoutInflater(),user);
         listView.setAdapter(adapter);
-
+        partycheked();
         firebaseDatabase= firebaseDatabase.getInstance();
         chatRef = firebaseDatabase.getReference("chatroom"+"/"+partyBoardId);
         chatRef.addChildEventListener(new ChildEventListener() {

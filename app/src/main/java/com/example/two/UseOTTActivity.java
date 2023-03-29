@@ -99,6 +99,9 @@ public class UseOTTActivity extends AppCompatActivity {
                         capArrayList.addAll(list);
                         capAdapter = new OttAdapter(UseOTTActivity.this, capArrayList, user);
                         capRecyclerView.setAdapter(capAdapter);
+
+
+
                     }
                 }
             }
