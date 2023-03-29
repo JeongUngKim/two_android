@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.two.Api.ContentApi;
@@ -34,6 +35,8 @@ import retrofit2.Retrofit;
 
 public class ChoiceActivity extends AppCompatActivity {
 
+    ImageView imageView;
+
 
     RecyclerView recyclerView;
 
@@ -48,6 +51,7 @@ public class ChoiceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choice);
+        imageView = findViewById(R.id.imageView);
 
         recyclerView = findViewById(R.id.recyclerView);
         getLikeData();
@@ -80,6 +84,15 @@ public class ChoiceActivity extends AppCompatActivity {
                     page +=1;
                     addLikeData();
                 }
+            }
+        });
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                setResult(100,intent);
+                finish();
             }
         });
 

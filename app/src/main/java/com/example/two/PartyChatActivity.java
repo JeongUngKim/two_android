@@ -262,7 +262,7 @@ public class PartyChatActivity extends AppCompatActivity {
         BootUser bootUser = new BootUser();
         bootUser.setUsername(user.getName());
         bootUser.setEmail(user.getUserEmail());
-       //아이템 정보
+        //아이템 정보
         BootItem bootItem = new BootItem();
         bootItem.setName(service);
         bootItem.setPrice(price);
@@ -270,13 +270,12 @@ public class PartyChatActivity extends AppCompatActivity {
 
         Payload payload = new Payload();
         payload.setApplicationId(Config.access_key);
-        payload.setOrderName("Two payment");
-        payload.setPg("다날");
-        payload.setMethod("카드수기");
         payload.setOrderName(bootItem.getName());
         payload.setPrice(bootItem.getPrice());
         payload.setUser(bootUser);
         payload.setOrderId(bootItem.getId());
+
+
         Bootpay.init(getSupportFragmentManager(),PartyChatActivity.this)
                 .setPayload(payload)
                 .setEventListener(new BootpayEventListener() {

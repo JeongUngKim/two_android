@@ -48,6 +48,7 @@ import retrofit2.Retrofit;
 
 public class SearchContentActivity extends AppCompatActivity {
     ImageView posterView;
+    ImageView imgback;
 
     TextView txtTitle;
     TextView txtContent;
@@ -120,6 +121,8 @@ public class SearchContentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_content);
 
+        imgback = findViewById(R.id.imgback);
+
         posterView = findViewById(R.id.posterView);
         txtTitle = findViewById(R.id.txtOtt);
         txtContent = findViewById(R.id.txtContent);
@@ -173,6 +176,15 @@ public class SearchContentActivity extends AppCompatActivity {
                 .load(imgurl)
                 .placeholder(R.drawable.baseline_person_outline_24)
                 .into(posterView);
+
+        imgback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                setResult(100,intent);
+                finish();
+            }
+        });
 
         btnChoice.setOnClickListener(new View.OnClickListener() {
             @Override
