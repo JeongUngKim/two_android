@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.two.Api.ContentReviewApi;
 import com.example.two.Api.NetworkClient2;
@@ -33,6 +34,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class MyReviewActivity extends AppCompatActivity {
+
+    ImageView imageView24;
 
     RecyclerView ruRecyclerview;
     String token;
@@ -66,6 +69,7 @@ public class MyReviewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_review);
+        imageView24 = findViewById(R.id.imageView24);
 
         ruRecyclerview = findViewById(R.id.RUrecyclerview);
         ruRecyclerview.setHasFixedSize(true);
@@ -89,6 +93,15 @@ public class MyReviewActivity extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra("user");
 
         getMyReviewData();
+
+        imageView24.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                setResult(100,intent);
+                finish();
+            }
+        });
     }
 
     public void getMyReviewData(){
