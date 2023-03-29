@@ -96,8 +96,9 @@
                 android:layout_height="45dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="40dp"
-                android:background="@color/white"
-                android:backgroundTint="#C6FFFFFF" />
+                android:backgroundTint="#F21E1E1E"
+                android:progressBackgroundTint="#333131"
+                android:progressTint="#FFEB3B" />
 
             <EditText
                 android:id="@+id/editReview"
@@ -115,8 +116,10 @@
                 android:id="@+id/btnSave"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_marginBottom="100dp"
-                android:backgroundTint="#AEB0B2"
+                android:backgroundTint="#F21E1E1E"
                 android:text="작성완료"
                 android:textColor="#FFFFFF" />
 
