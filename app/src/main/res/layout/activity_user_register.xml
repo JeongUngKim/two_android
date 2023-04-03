@@ -14,8 +14,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="141dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="130dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -56,8 +56,7 @@
                 android:src="@drawable/baseline_person_outline_24"
                 app:civ_border_color="#F8F8F8"
                 app:civ_border_overlay="true"
-                app:civ_border_width="5dp"
-                />
+                app:civ_border_width="5dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -69,25 +68,26 @@
 
                 <EditText
                     android:id="@+id/editTextTextEmailAddress"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="260dp"
+                    android:layout_height="35dp"
                     android:layout_gravity="center|center_vertical"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:background="@drawable/editborder"
+                    android:background="@drawable/botton_round"
                     android:ems="10"
                     android:hint="이메일 입력"
                     android:inputType="textEmailAddress"
                     android:textColor="#000000"
                     android:textColorHint="#000000"
-                    android:textSize="22sp" />
+                    android:textSize="20sp" />
 
                 <Button
                     android:id="@+id/button5"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center|center_vertical"
-                    android:backgroundTint="#FF0000"
+                    android:layout_height="35dp"
+                    android:background="@drawable/botton_round"
+                    android:backgroundTint="@color/colorRed"
+                    android:gravity="center"
                     android:text="중복확인"
                     android:textColor="#FFFFFF" />
             </LinearLayout>
@@ -95,17 +95,17 @@
             <EditText
                 android:id="@+id/editTextTextPassword"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/editborder"
+                android:background="@drawable/botton_round"
                 android:ems="10"
                 android:hint="비밀번호 입력"
                 android:inputType="textPassword"
                 android:textColor="#000000"
                 android:textColorHint="#000000"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -117,26 +117,27 @@
 
                 <EditText
                     android:id="@+id/editTextTextNickName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="260dp"
+                    android:layout_height="35dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:background="@drawable/editborder"
+                    android:background="@drawable/botton_round"
                     android:ems="10"
                     android:hint="닉네임 입력"
                     android:inputType="textPersonName"
                     android:textColor="#000000"
                     android:textColorHint="#000000"
-                    android:textSize="22sp" />
+                    android:textSize="20sp" />
 
                 <Button
                     android:id="@+id/button6"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_height="35dp"
                     android:layout_weight="1"
-                    android:backgroundTint="#FF0000"
+                    android:background="@drawable/botton_round"
+                    android:backgroundTint="@color/colorRed"
+                    android:gravity="center"
                     android:text="중복확인"
                     android:textColor="#FFFFFF" />
 
@@ -145,17 +146,17 @@
             <EditText
                 android:id="@+id/editName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/editborder"
+                android:background="@drawable/botton_round"
                 android:ems="10"
                 android:hint="이름을 입력하세요"
                 android:inputType="textPersonName"
                 android:textColor="#000000"
                 android:textColorHint="#000000"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -168,60 +169,69 @@
                 <EditText
                     android:id="@+id/editAge"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/editborder"
+                    android:background="@drawable/botton_round"
                     android:ems="10"
                     android:hint="나이를 입력하세요"
                     android:inputType="number"
                     android:textColor="#000000"
-                    android:textColorHint="#000000" />
+                    android:textColorHint="#000000"
+                    android:textSize="20sp" />
 
                 <Spinner
                     android:id="@+id/genderSp"
                     android:layout_width="50dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/editborder"
+                    android:background="@drawable/convert_spinner_arrow"
+                    android:textSize="20sp"
                     android:entries="@array/gender" />
             </LinearLayout>
 
             <Spinner
                 android:id="@+id/questionSp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/editborder"
+                android:background="@drawable/convert_spinner_arrow"
+                android:textSize="20sp"
                 android:entries="@array/find" />
 
             <EditText
                 android:id="@+id/editAnswer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/editborder"
+                android:background="@drawable/botton_round"
                 android:ems="10"
                 android:hint="본인 확인 질문 답변"
                 android:inputType="textPersonName"
                 android:textColor="#000000"
-                android:textColorHint="#000000" />
+                android:textColorHint="#000000"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/buttonRegister"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginRight="5dp"
-                android:text="가입하기" />
+                android:background="@drawable/botton_round"
+                android:backgroundTint="@android:color/darker_gray"
+                android:gravity="center"
+                android:text="가입하기"
+                android:textSize="20sp" />
 
         </LinearLayout>
     </ScrollView>

@@ -13,5 +13,4 @@ public class ActorList {
     public void setCast(List<Actor> cast) {
         this.cast = cast;
     }
-
 }

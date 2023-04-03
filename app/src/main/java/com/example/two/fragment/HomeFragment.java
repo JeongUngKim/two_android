@@ -23,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.example.two.Api.MovieApi;
 import com.example.two.Api.NetworkClient1;
 import com.example.two.Api.NetworkClient2;
+import com.example.two.Api.NetworkClient3;
 import com.example.two.MovieContentActivity;
 import com.example.two.R;
 import com.example.two.RankALLActivity;
@@ -258,13 +259,15 @@ public class HomeFragment extends Fragment {
     }
 
     public void getNetworkData() {
-        Retrofit retrofit = NetworkClient1.getRetrofitClient(getActivity());
+        Retrofit retrofit = NetworkClient3.getRetrofitClient(getActivity());
 
         MovieApi api = retrofit.create(MovieApi.class);
 
         Log.i("AAA", api.toString());
+        SharedPreferences sp = getActivity().getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
+        AccessToken = sp.getString("AccessToken","");
 
-        Call<MovieList> call = api.getMovie(Config.key,language,1,desc);
+        Call<MovieList> call = api.getRecommendMovie("Bearer "+AccessToken);
 
         call.enqueue(new Callback<MovieList>() {
             @Override
@@ -277,11 +280,11 @@ public class HomeFragment extends Fragment {
 
                     // 데이터를 받았으니 리사이클러 표시
 
-                    movieArrayList.addAll(response.body().getResults());
+                    movieArrayList.addAll(response.body().getRecommendList());
                     Log.i("정상적으로 실행은 하니?", String.valueOf(response.code()));
 
-                    movieArrayList.get(page);
-                    Log.i("page",String.valueOf(page));
+//                    movieArrayList.get(page);
+//                    Log.i("page",String.valueOf(page));
                     // 오프셋 처리하는 코드
 
 
@@ -297,7 +300,7 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<MovieList> call, Throwable t) {
-
+                Log.i("error", String.valueOf(t));
 
             }
 
@@ -306,7 +309,7 @@ public class HomeFragment extends Fragment {
     }
 
     public void addNetworkData() {
-        Retrofit retrofit = NetworkClient1.getRetrofitClient(getActivity());
+        Retrofit retrofit = NetworkClient3.getRetrofitClient(getActivity());
 
         MovieApi api = retrofit.create(MovieApi.class);
 
@@ -316,7 +319,10 @@ public class HomeFragment extends Fragment {
         }else{
             page = page+1;
         }
-        Call<MovieList> call = api.getMovie(Config.key,language,page+1,desc);
+        SharedPreferences sp = getActivity().getSharedPreferences(Config.PREFERENCE_NAME,MODE_PRIVATE);
+        AccessToken = sp.getString("AccessToken","");
+
+        Call<MovieList> call = api.getRecommendMovie("Bearer "+AccessToken);
 
         call.enqueue(new Callback<MovieList>() {
             @Override
@@ -328,7 +334,7 @@ public class HomeFragment extends Fragment {
 
                     // 데이터를 받았으니 리사이클러 표시
 
-                    movieArrayList.addAll(response.body().getResults());
+                    movieArrayList.addAll(response.body().getRecommendList());
                     movieArrayList.get(page);
                     Log.i("page",String.valueOf(page));
 
@@ -377,13 +383,13 @@ public class HomeFragment extends Fragment {
 //            }
 //        });
 //    }
-    public void isDetail(int index){
-        selectedMovie = movieArrayList.get(index);
-        int Id = movieArrayList.get(index).getId();
-        Log.i("ID",String.valueOf(Id));
-        Intent intent = new Intent(getActivity(), MovieContentActivity.class);
-        intent.putExtra("id",Id);
-        startActivity(intent);
-
-    }
+//    public void isDetail(int index){
+//        selectedMovie = movieArrayList.get(index);
+//        int Id = movieArrayList.get(index).getId();
+//        Log.i("ID",String.valueOf(Id));
+//        Intent intent = new Intent(getActivity(), MovieContentActivity.class);
+//        intent.putExtra("id",Id);
+//        startActivity(intent);
+//
+//    }
 }
