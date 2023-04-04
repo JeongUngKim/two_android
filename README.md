@@ -9,6 +9,10 @@
 ![화면 캡처 2023-04-04 113442](https://user-images.githubusercontent.com/120348468/229672111-89462ed7-7613-4142-8f6a-d89cb8c2d5ed.png)
 그에 따른 불만사항을 조사한 결과 가격부담이 가장 컸다 <br/> 이를 토대로 OTT 서비스를 이용할때 분할결제를 통하여 가격 부담을 완화하고 <br/>  좋아하는 컨텐츠를 추천 받을수있는 앱을 개발하였다
 
+# 프로젝트 팀원
+정가을 :  프로젝트 기획 , 화면기획서 작성 , 안드로이드 개발 <br/>
+김정웅 :  테이블 및 API 설계 , Flask Framework로 백앤드 개발 <br/>
+김대연 :  데이터 분석 및 안드로이드 개발 <br/>
 
 # ⚒️ Tools
 <img src="https://img.shields.io/badge/Github-181717?style=for-the-badge&logo=GitHub&logoColor=white"/> <img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=Slack&logoColor=white"> <img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=for-the-badge&logo=Visual Studio Code&logoColor=white"/> <img src="https://img.shields.io/badge/Jupyter notebook-F37626?style=for-the-badge&logo=Jupyter&logoColor=white"/><br/><img src="https://img.shields.io/badge/Amazon AWS-232F3E?style=for-the-badge&logo=Amazon AWS&logoColor=white"/>  <img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=Android&logoColor=white"> <img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white"> <img src="https://img.shields.io/badge/Google Colab-F9AB00?style=for-the-badge&logo=Google Colab&logoColor=white">
