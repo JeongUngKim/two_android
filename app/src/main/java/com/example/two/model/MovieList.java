@@ -4,15 +4,14 @@ import java.util.List;
 
 public class MovieList {
 
-    private List<Movie> results;
+    private List<Movie> recommendList;
 
 
-
-    public List<Movie> getResults() {
-        return results;
+    public List<Movie> getRecommendList() {
+        return recommendList;
     }
 
-    public void setResults(List<Movie> results) {
-        this.results = results;
+    public void setRecommendList(List<Movie> recommendList) {
+        this.recommendList = recommendList;
     }
 }

@@ -11,12 +11,13 @@ public class Movie {
    private String poster_path;
    private String vote_average;
    private String cratedYear;
+   private String createdYear;
    private int tmdbcontentId;
    private String type;
 
     private String imgUrl;
 
-    private int contentRating;
+    private String contentRating;
 
     public int getId() {
         return id;
@@ -98,11 +99,19 @@ public class Movie {
         this.imgUrl = imgUrl;
     }
 
-    public int getContentRating() {
+    public String getContentRating() {
         return contentRating;
     }
 
-    public void setContentRating(int contentRating) {
+    public void setContentRating(String contentRating) {
         this.contentRating = contentRating;
+    }
+
+    public String getCreatedYear() {
+        return createdYear;
+    }
+
+    public void setCreatedYear(String createdYear) {
+        this.createdYear = createdYear;
     }
 }

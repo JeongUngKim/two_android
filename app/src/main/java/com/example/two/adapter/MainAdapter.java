@@ -1,5 +1,7 @@
 package com.example.two.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.two.R;
+import com.example.two.SearchContentActivity;
 import com.example.two.fragment.HomeFragment;
 import com.example.two.model.Movie;
+import com.example.two.model.User;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
@@ -23,7 +28,12 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     ArrayList<Movie> movieArrayList;
 
-    public MainAdapter( HomeFragment homeFragment, ArrayList<Movie> movieArrayList) {
+    Context context;
+
+    User user;
+
+    public MainAdapter(HomeFragment homeFragment, ArrayList<Movie> movieArrayList) {
+        this.context = context;
         this.homeFragment=homeFragment;
         this.movieArrayList = movieArrayList;
     }
@@ -42,10 +52,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull MainAdapter.ViewHolder holder, int position) {
         Movie movie = movieArrayList.get(position);
         holder.textView10.setText(movie.getTitle());
-        holder.textView11.setText(movie.getVote_average());
+        holder.textView11.setText(movie.getContentRating());
 
         Glide.with(homeFragment)
-                .load("https://image.tmdb.org/t/p/w342"+movie.getPoster_path())
+                .load(movie.getImgUrl())
                 .override(300,300)
                 .into(holder.imageView6);
 
@@ -75,7 +85,18 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                 public void onClick(View view) {
                     int index = getAdapterPosition();
                     Log.i("INDEX", String.valueOf(index));
-                    homeFragment.isDetail(index);
+                    Intent intent = new Intent(homeFragment.getContext(), SearchContentActivity.class);
+                    intent.putExtra("Id",movieArrayList.get(index).getId());
+                    intent.putExtra("ImgUrl",movieArrayList.get(index).getImgUrl());
+                    intent.putExtra("title",movieArrayList.get(index).getTitle());
+                    intent.putExtra("content",movieArrayList.get(index).getContent());
+                    intent.putExtra("year",movieArrayList.get(index).getCreatedYear());
+//                    Log.i("YEAR",movieArrayList.get(index).getCratedYear());
+                    intent.putExtra("rating",movieArrayList.get(index).getContentRating());
+                    intent.putExtra("genre",movieArrayList.get(index).getGenre());
+                    intent.putExtra("tmdbcontentId",movieArrayList.get(index).getTmdbcontentId());
+                    intent.putExtra("user",(Serializable) user);
+                    homeFragment.startActivity(intent);
                 }
             });
         }
